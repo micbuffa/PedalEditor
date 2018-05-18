@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <style>
+        canvas {
+            border: solid 2px black;
+            position: absolute;
+            left: 50%;
+            top: 15%;
+        }
+
+        body {
+
+            background: -webkit-linear-gradient(90deg, rgb(46, 4, 65), rgb(2, 80, 158));
+            background: linear-gradient(90deg, rgb(46, 4, 65), rgb(2, 80, 158));
+
+        }
+
+        #pedal2 {
+            top: 0px;
+        }
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+    <link rel="import" href="functional_pedals/functionalPedal.html">
+
+    <title>JS Bin</title>
+</head>
+
+<body>
+    <audio src="http://127.0.0.1:8887/soun.mp3" crossorigin="anonymous" id="player" controls loop></audio>
+    <functional-pedal id="pedal"></functional-pedal>
+
+    <p>
+
+        <canvas id="myCanvas" width=800 height=500></canvas>
+
+</body>
+
+</html>
+
+<script>
+    var waveshaper;
+    var audioCtx = window.AudioContext || window.webkitAudioContext;
+    var canvas, canvasContext, ctx;
+    var canvasContext;
+    var width, height, analyser, convolverNode, decodedImpulse;
+    var impulseURL = "https://mainline.i3s.unice.fr/mooc/Scala-Milan-Opera-Hall.wav";
+
+    var bufferLength, dataArray, gainNode;
+
+    window.onload = function () {
+        ctx = new audioCtx();
+
+
+        // prepare eveything for the canvas
+        canvas = document.querySelector("#myCanvas");
+        width = canvas.width;
+        height = canvas.height;
+        canvasContext = canvas.getContext('2d');
+
+
+        loadImpulse(impulseURL, function () {
+            // we get here only when the impulse has finished
+            // loading
+
+            buildAudioGraph();
+            requestAnimationFrame(visualize);
+
+        });
+
+
+        //console.log(ws.input.value);
+        //console.log(ws.output.value);
+
+
+    };
+
+    function buildAudioGraph() {
+
+        var player = document.getElementById("player");
+        var pedal = document.getElementById('pedal');
+        var mediaSource = ctx.createMediaElementSource(player);
+
+
+        analyser = ctx.createAnalyser();
+
+        // set its properties
+        analyser.fftSize = 64;
+        // its size is always the fftSize / 2
+        bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+        console.log(bufferLength);
+
+        var ws = createDistortion();
+        var volume = createVolume();
+        var reverb = createReverb();
+        var ballance = createBallance();
+        var filterHigh = createFilterHigh();
+
+        mediaSource.connect(filterHigh.input);
+        filterHigh.output.connect(ws.input);
+        ws.output.connect(volume.input);
+        volume.output.connect(reverb.dry);
+        volume.output.connect(reverb.convolver);
+
+        reverb.dry.connect(ballance.ballanceNode);
+        reverb.wet.connect(ballance.ballanceNode);
+
+        ballance.ballanceNode.connect(analyser);
+
+        analyser.connect(ctx.destination);
+
+        let plug = [];
+        plug.push(ws);
+        plug.push(volume);
+        plug.push(reverb);
+        plug.push(ballance);
+        plug.push(filterHigh);
+
+        pedal.setPlug(plug);
+    }
+
+    function createDistortion() {
+        if (!waveshaper)
+            waveshaper = new WaveShaper(ctx);
+
+        waveshaper.setDrive(150.0);
+        return waveshaper;
+    }
+
+    function createVolume() {
+        return new Volume(ctx);
+    }
+
+    function createDelay() {
+
+        return new Delay(ctx);
+    }
+
+    function createReverb() {
+        return new Reverb(ctx);
+    }
+
+    function createBallance() {
+        return new Ballance(ctx);
+    }
+
+    function createFilterHigh() {
+        return new FilterHigh(ctx);
+    }
+
+    //-------------------
+    // waveshaper.js
+    var threshold = -27; // dB
+    var headroom = 21; // dB
+
+    function e4(x, k) {
+        return 1.0 - Math.exp(-k * x);
+    }
+
+    function dBToLinear(db) {
+        return Math.pow(10.0, 0.05 * db);
+    }
+
+    function shape(x) {
+        var linearThreshold = dBToLinear(threshold);
+        var linearHeadroom = dBToLinear(headroom);
+
+        var maximum = 1.05 * linearHeadroom * linearThreshold;
+        var kk = (maximum - linearThreshold);
+
+        var sign = x < 0 ? -1 : +1;
+        var absx = Math.abs(x);
+
+        var shapedInput = absx < linearThreshold ? absx : linearThreshold + kk * e4(absx - linearThreshold, 1.0 / kk);
+        shapedInput *= sign;
+
+        return shapedInput;
+    }
+
+    function generateColortouchCurve(curve) {
+        var n = 65536;
+        var n2 = n / 2;
+
+        for (var i = 0; i < n2; ++i) {
+            x = i / n2;
+            x = shape(x);
+
+            curve[n2 + i] = x;
+            curve[n2 - i - 1] = -x;
+        }
+
+        return curve;
+    }
+
+    function Volume(context) {
+        this.context = context;
+        this.volumeNode = context.createGain();
+        this.input = this.volumeNode;
+        this.output = this.volumeNode;
+    }
+
+    Volume.prototype.setVolume = function (value) {
+        this.volumeNode.gain.value = value;
+    }
+
+    function Ballance(context) {
+        this.context = context;
+        this.ballanceNode = context.createStereoPanner();
+        // this.input = this.ballanceNode;
+        //this.output = this.ballanceNode;
+    }
+
+    Ballance.prototype.setBallance = function (value) {
+        this.ballanceNode.pan.value = value;
+    }
+
+
+    function FilterHigh(context) {
+        this.filterNode = context.createBiquadFilter();
+        this.filterNode.type = 'highpass'
+        this.input = this.filterNode;
+        this.output = this.filterNode;
+    }
+
+    FilterHigh.prototype.setFrequency = function (value) {
+        this.filterNode.frequency.value = value;
+    }
+
+    FilterHigh.prototype.setDetune = function (value) {
+        this.filterNode.detune.value = value;
+    }
+
+    FilterHigh.prototype.setQ = function (value) {
+        this.filterNode.Q.value = value;
+    }
+
+
+    function Reverb(context) {
+        this.context = context;
+        this.convolver = context.createConvolver();
+        this.convolver.buffer = decodedImpulse;
+        this.dry = context.createGain();
+        this.dry.gain.value = 1;
+        this.wet = context.createGain();
+        this.wet.gain.value = 0;
+
+        this.convolver.connect(this.wet);
+
+
+    }
+
+    Reverb.prototype.setReveb = function (reveb) {
+        this.wet.gain.value = parseFloat(reveb);
+        this.dry.gain.value = 1 - this.wet.gain.value;
+    }
+
+
+    function loadImpulse(url, callback) {
+
+        ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.open('GET', url, true);
+        ajaxRequest.responseType = 'arraybuffer';
+
+        ajaxRequest.onload = function () {
+            var impulseData = ajaxRequest.response;
+
+            ctx.decodeAudioData(impulseData, function (buffer) {
+                decodedImpulse = buffer;
+                callback();
+            });
+        };
+
+        ajaxRequest.onerror = function (e) {
+            console.log("Error with decoding audio data" + e.err);
+        };
+
+        ajaxRequest.send();
+    }
+
+
+    function WaveShaper(context) {
+        this.context = context;
+        var waveshaper = context.createWaveShaper();
+        var preGain = context.createGain();
+        var postGain = context.createGain();
+        preGain.connect(waveshaper);
+        waveshaper.connect(postGain);
+        this.input = preGain;
+        this.output = postGain;
+
+
+        var curve = new Float32Array(65536); // FIXME: share across instances
+        generateColortouchCurve(curve);
+        waveshaper.curve = curve;
+    }
+
+    WaveShaper.prototype.setDrive = function (drive) {
+        if (drive < 0.01) drive = 0.01;
+        this.input.gain.value = drive;
+        var postDrive = Math.pow(1 / drive, 0.6);
+        this.output.gain.value = postDrive;
+    }
+
+    WaveShaper.prototype.setOutputGain = function (value) {
+        //this.input.gain.value = value;
+        console.log("oooo");
+    }
+
+    WaveShaper.prototype.getOutput = function () {
+        console.log(this.output.gain.value);
+    }
+
+
+    function visualize() {
+        // clear the canvas
+        canvasContext.clearRect(0, 0, width, height);
+
+        // Or use rgba fill to give a slight blur effect
+        //canvasContext.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        //canvasContext.fillRect(0, 0, width, height);
+
+        // Get the analyser data
+        analyser.getByteFrequencyData(dataArray);
+
+        var barWidth = width / bufferLength;
+        var barHeight;
+        var x = 0;
+
+        // values go from 0 to 256 and the canvas heigt is 100. Let's rescale
+        // before drawing. This is the scale factor
+        heightScale = height / 128;
+
+        for (var i = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i];
+
+
+            canvasContext.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
+            barHeight *= heightScale;
+            canvasContext.fillRect(x, height - barHeight / 2, barWidth, barHeight / 2);
+
+            // 2 is the number of pixels between bars
+            x += barWidth + 1;
+        }
+
+        // call again the visualize function at 60 frames/s
+        requestAnimationFrame(visualize);
+    }
+
+</script>

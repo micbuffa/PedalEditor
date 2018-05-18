@@ -1,0 +1,341 @@
+<template>
+    <style>
+        .pedal {
+            display: block;
+            background-color: #808080;
+            background-image: url("https://www.transparenttextures.com/patterns/light-paper-fibers.png");
+            width: 400px;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: inset -3px -3px 3px 5px rgba(0, 0, 0, 0.6), inset 3px 3px 3px 5px rgba( 255, 255, 255, 0.5);
+            position: fixed;
+            top: 42%;
+            left: 30%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
+        }
+
+        #background-image {
+            /*border: solid 2px black;*/
+            left: 30px;
+            width: 300px;
+            height: 400px;
+            opacity: 1;
+        }
+
+
+        #background-image1 {
+            /*border: solid 2px black;*/
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+        }
+
+        #background-image2 {
+            /*border: solid 2px black;*/
+            position: absolute;
+            left: 330px;
+            top: 10px;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+        }
+
+        #background-image3 {
+            /*border: solid 2px black;*/
+            position: absolute;
+            left: 10px;
+            top: 430px;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+        }
+
+        #background-image4 {
+            /*border: solid 2px black;*/
+            position: absolute;
+            left: 330px;
+            top: 430px;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+        }
+
+        #background-image5 {
+            /*border: solid 2px black;*/
+            position: absolute;
+            left: 60px;
+            top: 120px;
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+        }
+
+        .knob,
+        .switch,
+        .icon {
+            position: absolute;
+            cursor: pointer;
+        }
+
+
+
+        .selected {
+            border: 1px dashed black;
+            cursor: move;
+        }
+
+        .selected:hover {
+            border: 1px dashed black;
+            cursor: move;
+        }
+
+        .selected webaudio-knob {
+            cursor: move;
+        }
+
+        .selected:hover webaudio-knob {
+            cursor: move;
+        }
+
+
+        #switch1 {
+            bottom: 10px;
+            left: 145px;
+        }
+
+        #knob_0 {
+            left: 60px;
+            top: 90px;
+        }
+
+        #knob_0 div {
+            color: #000000;
+            font-family: "Comic Sans MS";
+            font-size: 14px;
+
+        }
+
+        #knob_1 {
+            left: 180px;
+            top: 70px;
+        }
+
+        #knob_1 div {
+            color: #000000;
+            font-family: "Comic Sans MS";
+            font-size: 14px;
+
+        }
+
+        #knob_2 {
+            left: 15px;
+            top: 180px;
+        }
+
+        #knob_2 div {
+            color: #000000;
+            font-family: "Comic Sans MS";
+            font-size: 14px;
+
+        }
+
+        #knob_3 {
+            left: 300px;
+            top: 164px;
+        }
+
+        #knob_4 {
+            left: 20px;
+            top: 280px;
+        }
+
+        #knob_5 {
+            left: 150px;
+            top: 280px;
+        }
+
+        #knob_6 {
+            left: 280px;
+            top: 280px;
+        }
+
+        #knob_3 div {
+            color: #000000;
+            font-family: "Comic Sans MS";
+            font-size: 14px;
+
+        }
+
+        #switch_2 {
+            top: 30px;
+            left: 150px;
+        }
+
+        .pedalLabel {
+            position: absolute;
+            top: 225px;
+            font-size: 25px;
+            font-family: Sansita;
+            /*{font}*/
+            text-align: center;
+            line-height: 30px;
+            /*{pedalfontsize}*/
+            width: 150px;
+            color: #6B0000;
+            /*{fontcolor}*/
+        }
+
+        .knob-label {
+            position: absolute;
+            font-size: 12px;
+            /*{knobfontsize}*/
+            line-height: 12px;
+            width: 64px;
+            max-width: 64px;
+            overflow: hidden;
+            text-align: center;
+            font-family: Sansita;
+            /*{font}*/
+            color: #6B0000;
+            /*{fontcolor}*/
+        }
+
+        #knob1-label {
+            top: 84px;
+            left: 43px;
+        }
+    </style>
+    <div class="pedal">
+
+        <!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
+        <div class="switchCont" id="switch1">
+            <!--img id="background-image" src="./img/background/grig-me.png" alt="Mountain View"-->
+            <webaudio-switch src="../img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
+            <img id="background-image" src="./img/background/grid-me.png" alt="Mountain view">
+            <img id="background-image1" src="./img/background/screw1.png" alt="Screw 01">
+            <img id="background-image2" src="./img/background/screw2.png" alt="Screw 02">
+            <img id="background-image3" src="./img/background/screw3.png" alt="Screw 03">
+            <img id="background-image4" src="./img/background/screw4.png" alt="Screw 04">
+            <img id="background-image5" src="./img/background/draw.png" alt="sqlt">
+            <webaudio-switch src="../img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
+        </div>
+
+        <div class="knob  " id="knob_0">
+            <webaudio-knob sprites="100" value="20" step="1" src="../img/knobs/simplegray.png"></webaudio-knob>
+            <div>Drive</div>
+        </div>
+
+        <div class="knob  " id="knob_1">
+            <webaudio-knob sprites="100" value="20" step="1" src="../img/knobs/MiniMoog_Main.png"></webaudio-knob>
+            <div>Volume</div>
+        </div>
+
+        <div class="knob  " id="knob_2">
+            <webaudio-knob sprites="100" value="20" step="1" src="../img/knobs/simplegray.png"></webaudio-knob>
+            <div>Reverb</div>
+        </div>
+
+        <div class="knob  " id="knob_3">
+            <webaudio-knob sprites="100" value="20" step="1" src="../img/knobs/simplegray.png"></webaudio-knob>
+            <div>Ballance</div>
+        </div>
+
+
+        <div class="knob  " id="knob_4">
+            <webaudio-knob sprites="100" value="20" step="1" src="../img/knobs/lineshadow2.png"></webaudio-knob>
+            <div>Frequency</div>
+        </div>
+
+        <div class="knob  " id="knob_5">
+            <webaudio-knob sprites="100" value="0" step="1" src="../img/knobs/lineshadow2.png"></webaudio-knob>
+            <div>Detune</div>
+        </div>
+
+        <div class="knob  " id="knob_6">
+            <webaudio-knob sprites="100" value="0" step="1" src="../img/knobs/lineshadow2.png"></webaudio-knob>
+            <div>Q</div>
+        </div>
+
+
+    </div>
+</template>
+
+<script>
+    var thatDoc = document;
+
+    var thisDoc = (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+    var template = thisDoc.querySelector('template');
+
+
+    if (window.ShadowDOMPolyfill) {
+        WebComponents.ShadowCSS.shimStyling(template.content, 'pedal');
+    }
+    class FunctionalPedal extends HTMLElement {
+
+
+        constructor(plug) {
+
+            super();
+            this.plug = plug;
+
+        }
+
+        setKnobs() {
+
+            console.log(this.shadowRoot.querySelectorAll('.knob')[0].childNodes);
+
+            let driveKnob = this.shadowRoot.querySelectorAll('.knob')[0].childNodes[1].addEventListener('input', (e) => {
+                this.plug[0].setDrive((e.target.value / 100) * 150);
+            });
+
+            let volumeKnob = this.shadowRoot.querySelectorAll('.knob')[1].childNodes[1].addEventListener('input', (e) => {
+                this.plug[1].setVolume((e.target.value / 100) * 1);
+            });
+
+            let revebKnob = this.shadowRoot.querySelectorAll('.knob')[2].childNodes[1].addEventListener('input', (e) => {
+                this.plug[2].setReveb((e.target.value / 100) * 1);
+            });
+
+            let ballanceKnob = this.shadowRoot.querySelectorAll('.knob')[3].childNodes[1].addEventListener('input', (e) => {
+                this.plug[3].setBallance((e.target.value / 100) * 1);
+            });
+
+            let frequencyKnob = this.shadowRoot.querySelectorAll('.knob')[4].childNodes[1].addEventListener('input', (e) => {
+                this.plug[4].setFrequency((e.target.value / 100) * 22050);
+            });
+
+            let detuneKnob = this.shadowRoot.querySelectorAll('.knob')[5].childNodes[1].addEventListener('input', (e) => {
+                this.plug[4].setDetune((e.target.value / 100) * 100);
+            });
+
+            let qKnob = this.shadowRoot.querySelectorAll('.knob')[6].childNodes[1].addEventListener('input', (e) => {
+                this.plug[4].setQ((e.target.value / 100) * 1000);
+            });
+
+        }
+
+
+
+        setPlug(plug) {
+
+            this.plug = plug;
+        }
+
+
+        connectedCallback() {
+
+            var shadowRoot = this.attachShadow({ mode: 'open' });
+
+            var clone = thatDoc.importNode(template.content, true);
+            shadowRoot.appendChild(clone);
+            this.setKnobs();
+
+        }
+    }
+    window.customElements.define("functional-pedal", FunctionalPedal);
+</script>

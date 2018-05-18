@@ -1,0 +1,112 @@
+<html>
+
+    <head>
+      <link rel="stylesheet" href="lib/codemirror.css">
+    </head>
+
+    <body id="bodyId">
+        Sélectionnez un fichier : <select id="mySelect" onchange="loadFile()" >
+            <option value="/editor/pedals_generated/pedale_FLANGER.html">Flanger</option>
+            <option value="/editor/pedals_generated/pedale_VINTAGE.html">VINTAGE</option>
+        </select>
+        <button style="float:right" onclick="saveFile()">Sauvegarder</button>
+        <br/>
+        <br/>
+        <textarea id="sourceCode" >
+        </textarea>
+
+    </body>
+
+<script src="lib/codemirror.js"></script>
+<script src="lib/xml.js"></script>
+<script>
+    var editor;
+
+
+
+    getPedals = function () {
+      var select = document.getElementById("mySelect");
+
+      var callback = function (pedals) {
+        var pedals2 = JSON.parse(pedals);
+        for (var i=0;i<pedals2.length;i++) {
+          select.innerHTML += "<option value='"+pedals2[i].path+"'>"+pedals2[i].name+"</option>";
+        }
+      };
+
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          if (callback)
+            callback(xmlHttp.responseText);
+          }
+          else if (xmlHttp.status == 400) {
+            console.log("error");
+            console.log(xmlHttp.responseText);
+          }
+      }
+      xmlHttp.open("GET", "/pedale", true);
+      xmlHttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+      xmlHttp.withCredentials = true;
+      xmlHttp.send(null);
+    }
+
+    loadFile = function(){
+        var pathFile = document.getElementById("mySelect").value;
+        console.log();
+        client = new XMLHttpRequest();
+        client.open('GET', pathFile);
+        client.onreadystatechange = function() {
+            //console.log(client.responseText);
+            document.getElementById('sourceCode').innerHTML = client.responseText;
+            document.getElementById('sourceCode').value = client.responseText;
+               editor = CodeMirror.fromTextArea(sourceCode, {
+                mode : "xml",
+                htmlMode: true,
+                lineNumbers: true,
+                  tabSize:8
+              });
+
+            while(document.querySelectorAll('.CodeMirror').length >1)
+            {
+                document.getElementById("bodyId").removeChild(document.getElementById("bodyId").lastChild);
+            }
+        }
+        client.send();
+    }
+    saveFile = function(){
+
+        editor.toTextArea();
+
+        client = new XMLHttpRequest();
+
+        console.log(editor.getValue());
+        console.log(document.getElementById("sourceCode").value);
+        console.log(document.getElementById("sourceCode").innerHTML);
+
+
+        var params = JSON.stringify({
+            "path" : document.getElementById("mySelect").value,
+            "source" : editor.getValue()
+        });
+
+
+
+        client.open('POST', '/pedale/code', true);
+        client.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        client.onreadystatechange = function() {
+                //console.log(client.responseText);
+            while(document.querySelectorAll('.CodeMirror').length >0)
+            {
+                document.getElementById("bodyId").removeChild(document.getElementById("bodyId").lastChild);
+            }
+            loadFile();
+         }
+        client.send(params);
+
+    }
+
+    getPedals();
+    
+</script>
+</html>

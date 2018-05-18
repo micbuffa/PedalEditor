@@ -1,0 +1,37 @@
+{
+  "name": "webaudio-controls",
+  "authors": [
+    "Tatsuya Shinyagaito <gaito@g200kg.com>"
+  ],
+  "description": "GUI parts library for Web Music Apps",
+  "main": "webaudio-controls.js",
+  "keywords": [
+    "gui",
+    "web",
+    "music",
+    "knob",
+    "webcomponents"
+  ],
+  "license": "Apache License, Version 2.0",
+  "homepage": "https://github.com/g200kg/webaudio-controls",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.1.0"
+  },
+  "_release": "6418e2f7c0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "6418e2f7c0b69ebd746c2428ba2cdae17e623e35"
+  },
+  "_source": "https://github.com/g200kg/webaudio-controls.git",
+  "_target": "*",
+  "_originalSource": "g200kg/webaudio-controls",
+  "_direct": true
+}

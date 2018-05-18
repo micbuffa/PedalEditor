@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+    <link rel="stylesheet" href="StyleSheet.css">
+    <link rel="import" href="pedal_models/pedal.html">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    
+    <!-- Latest compiled JavaScript -->
+    <link rel="import" href="blue.html">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="jscolor.js"></script>
+    <script src="pedal_models/functionalPedalGenerator.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Pedal Creator 0.1</title>
+</head>
+<body>
+    <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button>
+    <button class="buttonDownload" onclick="savePedal()">Save</button>
+    <button class="buttonDownload" onclick="newPedal()">New</button>
+    Load :
+    <select id="load-pedal" onchange="loadPedalConfig(value)">
+        <option value="Georgia"></option>
+    </select>
+
+<div class="wrapper">    
+<section class="content">
+<div class="columns">
+
+    <!-- Pedal section -->
+<main class="pedalSection">
+
+</main>
+
+<!-- Inspector -->
+<aside class="container-fluid componentSection">
+    <h2 class="component-title">Inspector<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i></span>
+    </h2>
+
+    <div hidden id="inspector" class="menuOptions">
+        <!--<label>Id: </label><span id="inspector-id"></span>
+        
+        <br>-->
+
+        <label>Label: </label>
+        <input id="inspector-label" type="text" onkeyup="setSelectedElementLabel(this.value)" class="maininput">
+
+        <br>
+
+        <label>Label Color: </label>
+        <input id="inspector-label-color" class="jscolor maininput" onchange="setSelectedElementLabelColor(value)">
+
+        <br>
+
+        <label>Label Font Family: </label>
+        <select id="inspector-label-font-family" onchange="setSelectedElementLabelFontfamily(value)" class="maininput"> 
+            <option value="Georgia">Georgia</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Impact">Impact</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Lucida Console">Lucida Console</option>
+        </select>
+
+        <br>
+
+        <label>Label size: </label>
+        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number"
+               min="0" max="600" onchange="setSelectedElementLabelFontsize(value)"> px
+
+        <br>
+
+        <label>X position: </label>
+        <input id="inspector-x-position" class="maininput" type="number"
+            onchange="setSelectedElementXPosition(value)">
+        
+        <br>
+
+        <label>Y position: </label>
+        <input id="inspector-y-position" class="maininput" type="number"
+            onchange="setSelectedElementYPosition(value)">
+        
+        <br>
+
+        <label>Width: </label>
+        <input id="inspector-width" class="maininput" type="number"
+            onchange="setSelectedElementWidth(value)">
+        
+        <br>
+
+        <label>Height: </label>
+        <input id="inspector-height" class="maininput" type="number"
+            onchange="setSelectedElementHeight(value)">
+        
+        <br>
+        <br>
+
+        <label>Model: </label>
+        <select id="inspector-model" onchange="setSelectedElementModel(value)" class="maininput">
+            <option value="knob2.png">Knob2</option>
+            <option value="Carbon.png">Carbon</option>
+            <option value="JP8000.png">JP8000</option>
+            <option value="Jambalaya.png">Jambalaya</option>
+            <option value="MiniMoog_Main.png">MiniMoog_Main</option>
+            <option value="SimpleFlat3.png">SimpleFlat3</option>
+            <option value="Vintage_Knob.png">Vintage_Knob</option>
+            <option value="lineshadow.png">lineshadow</option>
+            <option value="lineshadow2.png">lineshadow2</option>
+        </select>
+        
+        <br>
+
+        <webaudio-knob id="inspector-preview" sprites="100" min="0" max="100" onchange="setSelectedElementValue(this.value)"></webaudio-knob>
+    </div>
+
+
+</aside>
+
+
+<!-- Main section -->
+<aside class="componentSection-right">
+
+    <br>
+
+    <div class="menuOptions">
+
+        <label>Name: </label>
+        <input id="pedal-name" onkeyup="setPedalName(this.value)" class="maininput">
+        
+        <br>
+
+        <label>Background color: #</label>
+        <input id="background-color-picker" class="jscolor" onchange="setPedalColor(this.value)">
+
+        <br>
+
+        <label>Image opacity: </label>
+        <input id="opacity" class="maininput"  type="number" name="opacity" onchange="setPedalBackgroundImageOpacity(this.value)"
+            min="0" max="1">
+
+        <br>
+
+        <label>Width: </label>
+        <input id="width" class="maininput" type="number" name="width" onchange="setPedalWidth(this.value)"
+               min="0" max="600"> px
+
+        <br>
+
+        <label>Height: </label>
+        <input id="height" class="maininput" type="number" name="height" onchange="setPedalHeight(this.value)"
+               min="0" max="600"> px
+
+        <br>
+
+        <label>Radius: </label>
+        <input id="radius" class="maininput" type="number" name="radius" onchange="setPedalRadius(this.value)"
+                min="0" max="25"> px
+                
+        <br>
+
+        <button class="maininput" onclick="toggleBackgrounds()">Backgrounds</button>
+        <div id="backgrounds">
+            <img class="menu-img" src="./img/background/image2.png" alt="image2.png" onclick="setPedalBackgroundImage(this.alt)" />
+            <img class="menu-img" src="./img/background/1.png" alt="1.png" onclick="setPedalBackgroundImage(this.alt)" />
+            <img class="menu-img" src="./img/background/2.jpg" alt="2.jpg" onclick="setPedalBackgroundImage(this.alt)" />
+        </div>
+
+        <br>    
+
+        <button class="maininput" onclick="toggleIcons()">Icons</button>
+        <div id="icons" >
+            <img class="menu-img" src="./img/icons/icon.png" alt="icon.png" onclick="addIcon(this.alt)" />
+            <img class="menu-img" src="./img/icons/1.png" alt="1.png" onclick="addIcon(this.alt)" />
+        </div>
+
+        <br>
+
+        <button class="maininput" onclick="addKnob()">Add Knob</button>
+
+
+        <br>
+
+    </div>
+
+    <!-- Pedal font color menu -->
+    <h2 class="component-title">
+        Knobs<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
+    </h2>
+
+    <div id="knobs_section" class="menuOptions">
+    </div>
+
+    <!-- Knob font size menu -->
+    <h2 class="component-title">Icons<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
+    </h2>
+
+    <div id="icons_section" class="menuOptions">
+    </div>
+
+    <h2 class="component-title">Labels<i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i></h2>
+
+    <div class="menuOptions">
+    </div>
+
+    <!-- Other pedal elements that are not labels, knobs or switch. -->
+    <h2 class="component-title">Other<i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i></h2>
+
+    <div class="menuOptions">
+    </div>
+
+</aside>
+
+</div></section></div>
+
+</body>
+<script>
+
+    var url = "http://localhost:8085";
+    let serverUrl = 'http://localhost:3000';
+
+    var http = new XMLHttpRequest();
+    var path = "/pedale";
+
+    var section = document.getElementsByClassName("pedalSection")[0];
+    var pedal = getFirstChild(section);
+    var knobSprite;
+    var switchSprite;
+    var defaultPedalColor = "755E5E";
+    var pedalFontColor;
+    var knobFontSize;
+    var pedalFontSize;
+    var pedalFont;
+    var defaultWidth = 400;
+    var defaultHeight = 500;
+    var defaultRadius = 10;
+    var defaultOpacity = 1;
+    let savedPedalsConfigs;
+    let funcitonalPedalGenerator;
+    
+    window.onload = initialize();
+
+    function initialize() {
+        
+        displaySavedPedalsIds();
+        
+    }
+
+    function newPedal() {
+        
+        section.innerHTML = '';
+        pedal = null;
+        let pedalElem = document.createElement('my-pedal');
+        section.appendChild(pedalElem);
+        pedal = pedalElem;
+
+        pedal.addEventListener('select-knob', function(e) {
+            selectKnob(e.detail);
+            updateInspector();
+        });
+        
+        initialize();
+
+        document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
+        document.getElementById("width").value = defaultWidth;
+        document.getElementById("height").value = defaultHeight;
+        document.getElementById("radius").value = defaultRadius;
+        document.getElementById('opacity').value = defaultOpacity;
+
+        setPedalColor(defaultPedalColor);
+        setPedalWidth(defaultWidth);
+        setPedalHeight(defaultHeight);
+        setPedalRadius(defaultRadius);
+        setPedalBackgroundImageOpacity(defaultOpacity);
+    }
+
+    function savePedal() {
+
+        let pedalName = document.querySelector('#pedal-name').value;
+        if(pedalName == '') {
+            alert('You should enter the pedal name before saving !');
+            return;
+        }
+
+        let config = pedal.getConfig();
+
+        let http = new XMLHttpRequest();
+        let url = serverUrl + '/pedals';
+        let params = config;
+        http.open("POST", url, true);
+
+        http.setRequestHeader("Content-type", "application/json");
+
+        http.onreadystatechange = function() {
+            if(http.readyState == 4 && http.status == 200) {
+                alert('Saved successfully!');
+                pedal.pedalId = JSON.parse(http.responseText).id;
+                displaySavedPedalsIds();
+            }
+        }
+        http.send(JSON.stringify(params));
+
+    }
+
+    function refreshSavedPedalsConfigs() {
+        let request = new XMLHttpRequest();
+        request.open('GET', serverUrl + '/pedals', false);
+        request.send(null);
+        let pedalConfigs = JSON.parse(request.responseText);
+        savedPedalsConfigs = pedalConfigs;
+    }
+
+    function displaySavedPedalsIds() {
+        refreshSavedPedalsConfigs();
+        let loadPedalElem = document.querySelector('#load-pedal');
+        
+        let oldVal = loadPedalElem.value;
+
+        loadPedalElem.innerHTML = '';
+        let none = document.createElement('option');
+        none.setAttribute('value', 'none');
+        loadPedalElem.appendChild(none);
+
+        for(let savedPedalConfig of savedPedalsConfigs) {
+            let savedPedalIdElem = document.createElement('option');
+            savedPedalIdElem.setAttribute('value', savedPedalConfig.id);
+            savedPedalIdElem.innerHTML = savedPedalConfig.id;
+
+            loadPedalElem.appendChild(savedPedalIdElem);
+        }
+        
+        loadPedalElem.value = oldVal;
+
+    }
+
+
+    function setSelectedElementLabel(value) {
+        let element = pedal.getSelectedKnob();
+        element.label = value;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementLabelColor(value) {
+        let element = pedal.getSelectedKnob();
+        element.label_color = value;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementLabelFontfamily(value) {
+        let element = pedal.getSelectedKnob();
+        element.label_fontfamily = value;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementLabelFontsize(value) {
+        let element = pedal.getSelectedKnob();
+        element.label_fontsize = value;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementValue(value) {
+        let element = pedal.getSelectedKnob();
+        element.value = value;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementModel(value) {
+        let element = pedal.getSelectedKnob();
+        element.model = value;
+        pedal.updateStyle_();
+        selectKnob(pedal.getSelectedKnob());
+    }
+
+    function setSelectedElementXPosition(xPosition) {
+        let element = pedal.getSelectedKnob();
+        element.x = xPosition;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementYPosition(yPosition) {
+        let element = pedal.getSelectedKnob();
+        element.y = yPosition;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementWidth(width) {
+        let element = pedal.getSelectedKnob();
+        element.width = width;
+        pedal.updateStyle_();
+    }
+
+    function setSelectedElementHeight(height) {
+        let element = pedal.getSelectedKnob();
+        element.height = height;
+        pedal.updateStyle_();
+    }
+
+
+    function updateKnobsSection() {
+        var knobsSection = document.getElementById('knobs_section');
+        var iconsSection = document.getElementById('icons_section');
+
+        while(document.getElementById('knobs_section').firstChild) {
+            knobsSection.removeChild(knobsSection.firstChild);
+        }
+
+        while(document.getElementById('icons_section').firstChild) {
+            iconsSection.removeChild(iconsSection.firstChild);
+        }
+
+        for(var knob of pedal.getKnobs()) {
+
+            var knobId = document.createElement('div');
+            knobId.className = 'knob_id';
+            knobId.innerHTML = knob.id;
+            knobId.onclick = (e) => {
+                selectKnob(e.target.innerHTML);
+            }
+            
+            knobsSection.appendChild(knobId);
+        }
+
+        for(var icon of pedal.getIcons()) {
+
+            var iconId = document.createElement('div');
+            iconId.className = 'knob_id';
+            iconId.innerHTML = icon.id;
+            iconId.onclick = (e) => {
+                selectKnob(e.target.innerHTML);
+            }
+
+            iconsSection.appendChild(iconId);
+        }
+        
+        if(pedal.getSelectedKnob())
+            selectKnob(pedal.getSelectedKnob().id);
+    }
+
+    function updateInspector() {
+        pedal.getSelectedKnob();
+    }
+
+    function selectKnob(knobId) {
+
+        var knobs = document.getElementById('knobs_section').childNodes;
+        var icons = document.getElementById('icons_section').childNodes;
+
+        for(let knob of knobs) {
+            // TODO: Remove.
+            if(knob.className)
+                knob.className = knob.className.replace('selected', '');
+            if(knob.innerHTML === knobId) {
+                knob.className += ' selected';
+            }
+        }
+
+        for(let icon of icons) {
+            // TODO: Remove.
+            if(icon.className)
+            icon.className = icon.className.replace('selected', '');
+            if(icon.innerHTML === knobId) {
+                icon.className += ' selected';
+            }
+        }
+
+        if(pedal.getSelectedKnob().id != knobId) {
+            pedal.selectKnob(knobId);
+        }
+        
+
+        let knob = pedal.getSelectedKnob();
+        let inspectorId = document.getElementById('inspector-id');
+        let inspectorLabel = document.getElementById('inspector-label');
+        let inspectorLabelColor = document.getElementById('inspector-label-color');
+        let inspectorLabelFontFamily = document.getElementById('inspector-label-font-family');
+        let inspectorLabelSize = document.getElementById('inspector-label-font-size');
+        let inspectorXPosition = document.getElementById('inspector-x-position');
+        let inspectorYPosition = document.getElementById('inspector-y-position');
+        let inspectorWidth = document.getElementById('inspector-width');
+        let inspectorHeight = document.getElementById('inspector-height');
+
+        let inspectorModel = document.getElementById('inspector-model');
+        let inspectorPreview = document.getElementById('inspector-preview');
+
+
+        
+        //inspectorId.innerHTML = knobId;
+        inspectorLabel.value = knob.label;
+        inspectorLabelColor.value = knob.label_color;
+        inspectorLabelFontFamily.value = knob.label_fontfamily;
+        inspectorLabelSize.value = knob.label_fontsize;
+        inspectorXPosition.value = knob.x;
+        inspectorYPosition.value = knob.y;
+        inspectorWidth.value = knob.width || 0;
+        inspectorHeight.value = knob.height || 0;
+
+        inspectorModel.value = knob.model;
+        inspectorPreview.value = knob.value;
+        inspectorPreview.src = 'img/knobs/' + knob.model;
+
+        let inspector = document.getElementById('inspector');
+        inspector.hidden = false;
+    }
+
+
+    function addKnob() {
+        pedal.addKnob();
+        updateKnobsSection();
+    }
+
+    function addIcon(name) {
+        pedal.addIcon(name);
+        updateKnobsSection();
+    }
+
+    function addSwitch() {
+        pedal.addSwitch();
+    }
+
+    function changePedal(type){
+        section.removeChild(pedal);
+        var newPedal = document.createElement("PEDAL-"+type);
+        section.appendChild(newPedal);
+        pedal=getFirstChild(section);
+        pedal.style.zoom="1.5";
+
+        document.getElementById("fontColor-picker");
+
+    }
+
+    function setPedalName(value) {
+        pedal.name = value;
+    }
+
+    function setPedalColor(value) {
+        pedal.setAttribute("color", "#" + value);
+    }
+
+    function setPedalBackgroundImage(value) {
+        console.log("The background image is: " + value);
+        pedal.setBackgroundImage(value);
+    }
+
+    function setPedalWidth(width) {
+        pedal.setAttribute("width", width);
+    }
+
+    function setPedalHeight(height) {
+        pedal.setAttribute("height", height);
+    }
+
+    function setPedalRadius(radius) {
+        pedal.setAttribute("radius", radius);
+    }
+
+    function setPedalBackgroundImageOpacity(opacity) {
+        pedal.setAttribute("opacity", opacity);
+    }
+
+    function setPedalFontColor(value) {
+        pedal.changeFontColor(value);
+        pedalFontColor = value;
+    }
+
+    function loadPedalConfig(value) {
+        newPedal();
+        for(let pedalConfig of savedPedalsConfigs) {
+            if(pedalConfig.id == value) {
+                console.log("ok");
+                pedal.loadConfig(pedalConfig);
+                document.getElementById('pedal-name').value = pedalConfig.name;
+                document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
+                document.getElementById("width").value = pedalConfig.width;
+                document.getElementById("height").value = pedalConfig.height;
+                document.getElementById("radius").value = pedalConfig.radius;
+                let loadPedal = document.querySelector('#load-pedal');
+                loadPedal.value = value;
+            }
+        }
+        
+        updateKnobsSection();
+    }
+
+    function getFirstChild(el) {
+        var firstChild = el.firstChild;
+
+        while (firstChild != null && firstChild.nodeType == 3) { // skip TextNodes
+            firstChild = firstChild.nextSibling;
+        }
+
+        return firstChild;
+    }
+
+    function setBackgroundColor(value){
+        document.body.style.backgroundColor = "#"+value;
+    }
+
+    function generateCodeFunctionalPedal() {
+        //pedal.generateCodeFunctionalPedal();
+        console.log(funcitonalPedalGenerator.generateFunctionalPedalCode());
+    }
+
+    function toggleBackgrounds() {
+        let elem = document.querySelector('#backgrounds');
+        toggleHidden(elem);
+
+    }
+
+    function toggleKnobs() {
+        let elem = document.querySelector('#knobs');
+        toggleHidden(elem);
+    }
+
+    function toggleIcons() {
+        let elem = document.querySelector('#icons');
+        toggleHidden(elem);
+    }
+
+    function toggleHidden(elem) {
+        if(elem.style.display === 'none') {
+            elem.style.display = 'block';
+        } else {
+            elem.style.display = 'none';
+        }
+    }
+
+</script>
+</html>
