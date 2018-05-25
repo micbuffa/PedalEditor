@@ -68,11 +68,13 @@
 			
 			/********************************* Deleting Pedal Elements ************************************/
 
-			deletePedalElement() {
+			deleteSelectedElement() {
+				this.pedalElementManager.deleteElement(this.selectedElement.id);
+				this.selectedElement = null;
 			}
 			
 			getElements() {
-				return this.kobs.concat(this.icons.concat(this.switches.concat(this.sliders)));
+				return this.knobs.concat(this.icons.concat(this.switches.concat(this.sliders)));
 			}
 
 			getKnobs() {
@@ -148,22 +150,22 @@
 				var shadow = this.shadowRoot;
 				
 				for(let i = 0; i < this.knobs.length; i++) {
-					let knob = shadow.querySelector('#knob_' + i);
+					let knob = shadow.querySelectorAll('.knob')[i];
 					knob.className = knob.className.replace('selected', '');
 				}
 
 				for(let i = 0; i < this.icons.length; i++) {
-					let icon = shadow.querySelector('#icon_' + i);
+					let icon = shadow.querySelectorAll('.icon')[i];
 					icon.className = icon.className.replace('selected', '');
 				}
 
 				for(let i = 0; i < this.switches.length; i++) {
-					let s = shadow.querySelector('#switch_' + i);
+					let s = shadow.querySelectorAll('.switch')[i];
 					s.className = s.className.replace('selected', '');
 				}
 
 				for(let i = 0; i < this.sliders.length; i++) {
-					let slider = shadow.querySelector('#slider_' + i);
+					let slider = shadow.querySelectorAll('.slider')[i];
 					slider.className = slider.className.replace('selected', '');
 				}
 				
@@ -294,7 +296,7 @@
 						}
 					`
 					let knobContainer = this.shadowRoot.querySelector('#'+knob.id);
-
+					console.log(knob.id);
 					let knobElem = knobContainer.childNodes[0];
 					knobElem.value = knob.value;
 					knobElem.setAttribute('value', knob.value);
@@ -399,7 +401,6 @@
 					
 					if(element.type == 'knob') {
 						let knob = this.addElement('knob');
-						knob.id = element.id;
 						knob.x = element.x;
 						knob.y = element.y;
 						knob.model = element.model;
@@ -411,7 +412,6 @@
 						knob.type = element.type;
 					} else if(element.type === 'icon') {
 						let icon = this.addElement('icon', element.file);
-						icon.id = element.id;
 						icon.x = element.x;
 						icon.y = element.y;
 						icon.width = element.width;

@@ -54,13 +54,14 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of the knob. */
     addKnobConfigDefault(filename) {
+        let uid = Math.floor(Math.random() * 1000) 
         var knob = {
-            id: "knob_" + this.pedal.knobs.length,
+            id: "knob_" + uid,
             x: 43,
             y: 30,
             model: 'knob2.png',
             value: 20,
-            label: 'knbo_' + this.pedal.knobs.length,
+            label: 'knbo_' + uid,
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '14',
             label_color: '000000',
@@ -73,12 +74,13 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of a switch. */
     addSwitchConfigDefault(filename) {
+        let uid = Date.now();
         var _switch = {
-            id: "switch_" + this.pedal.switches.length,
+            id: "switch_" + uid,
             x: 43,
             y: 30,
             model: 'switch_2.png',
-            label: 'switch_' + this.pedal.switches.length,
+            label: 'switch_' + uid,
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '14',
             label_color: '000000',
@@ -91,12 +93,13 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of a slider. */
     addSliderConfigDefault(filename) {
+        let uid = Date.now();
         var slider = {
-            id: "slider_" + this.pedal.sliders.length,
+            id: "slider_" + uid,
             x: 43,
             y: 30,
             model: 'slider1.png',
-            label: 'slider_' + this.pedal.sliders.length,
+            label: 'slider_' + uid,
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '14',
             label_color: '000000',
@@ -109,8 +112,9 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of an icon. */
     addIconConfigDefault(filename) {
+        let uid = Math.floor(Math.random() * 1000); 
         var icon = {
-            id: "icon_" + this.pedal.icons.length,
+            id: "icon_" + uid,
             x: 10,
             y: 10,
             width: 45,
@@ -274,16 +278,61 @@ class PedalElementManager {
     /********************************* Deleting Pedal Elements ************************************/
     
     /* Deleting a pedal element */
-    deleteElement(pedalElementConfig) {
+    deleteElement(elementId) {
+        this.deleteElementConfig(elementId);
+        this.deleteElementHtml(elementId);
+        this.pedal.updateStyle(this.pedal);
     }
     
-    /* Deleting the configuration of the pedal element. */
-    deleteElementConfig(pedalElementConfig) {
+    /* Deleting the configuration of the element. */
+    deleteElementConfig(elementId) {
+        var arr;
+        
+        arr = pedal.icons;
+        for(let elem of arr) {
+            if(elem.id == elementId) {
+                var i = arr.indexOf(elem);
+                if(i != -1) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
 
+        arr = pedal.knobs;
+        for(let elem of arr) {
+            if(elem.id == elementId) {
+                var i = arr.indexOf(elem);
+                if(i != -1) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
+
+        arr = pedal.sliders;
+        for(let elem of arr) {
+            if(elem.id == elementId) {
+                var i = arr.indexOf(elem);
+                if(i != -1) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
+
+        arr = pedal.switches;
+        for(let elem of arr) {
+            if(elem.id == elementId) {
+                var i = arr.indexOf(elem);
+                if(i != -1) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
+        
     }
     
-    /* Removing the pedal element from the html. */
-    deleteElementHtml(pedalElementConfig) {
-
+    /* Removing the element from the html. */
+    deleteElementHtml(elementId) {
+        let elem = this.pedal.shadowRoot.querySelector('#'+elementId);
+        elem.parentElement.removeChild(elem);
     }
 }

@@ -56,6 +56,9 @@
         <!--<label>Id: </label><span id="inspector-id"></span>
         
         <br>-->
+        <button class="maininput" onclick="deleteSelectedElement()">Delete</button>
+
+        <br>
 
         <label>Label: </label>
         <input id="inspector-label" type="text" onkeyup="setSelectedElementLabel(this.value)" class="maininput">
@@ -529,6 +532,9 @@
         inspector.hidden = false;
     }
 
+    function deleteSelectedElement() {
+        pedal.deleteSelectedElement();
+    }
 
     function addKnob() {
         pedal.addElement('knob');
