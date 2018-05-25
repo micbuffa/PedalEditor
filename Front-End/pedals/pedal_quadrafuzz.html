@@ -1,0 +1,99 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/webaudio-controls/webaudio-controls.html">
+
+
+<dom-module name="pedal-four">
+    <style>
+        :host{
+            display: block;
+            background-color: #f91a18;
+            width: 175px;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: inset -3px -3px 3px 5px rgba(0, 0, 0, 0.6), inset 3px 3px 3px 5px rgba( 255, 255, 255, 0.5);
+        }
+        .knob, .switch{
+            position: absolute;
+        }
+        #knob1{
+            top: 10px;
+            left: 10px;
+        }
+        #knob2{
+            top: 10px;
+            left: 100px;
+        }
+        #knob3{
+            top: 100px;
+            left: 10px;
+        }
+        #knob4{
+            top: 100px;
+            left: 100px;
+        }
+        #switch1{
+            top: 175px;
+            left: 22px;
+        }
+        .pedalLabel{
+            position: absolute;
+            top: 225px;
+            font-size: 25px;
+            font-family: Lemon\/Milk;
+            text-align: center;
+            line-height: 30px;
+            width: 175px;
+            color: white;
+        }
+        .knob-label{
+            position: absolute;
+            font-size: 12px;
+            line-height: 12px;
+            width:64px;
+            max-width:64px;
+            overflow: hidden;
+            text-align: center;
+            font-family: Lemon\/Milk;
+            color: white;
+        }
+
+        .knob-label[contenteditable=true], .pedalLabel[contenteditable=true]{
+            border: 1px solid white;
+        }
+        #knob1-label{
+            top: 64px;
+            left: 10px;
+        }
+        #knob2-label{
+            top: 64px;
+            left: 100px;
+        }
+        #knob3-label{
+            top: 150px;
+            left: 10px;
+        }
+        #knob4-label{
+            top: 150px;
+            left: 100px;
+        }
+
+    </style>
+    <template>
+
+        <webaudio-knob sprites="99" value="0" step="1" src="../img/knobs/nux_black_white_stripe.png" class="knob" id="knob1"></webaudio-knob>
+        <p class="knob-label" id="knob1-label" contenteditable="true">LOWGAIN</p>
+        <webaudio-knob sprites="99" value="0" step="1" src="../img/knobs/nux_black_white_stripe.png" class="knob" id="knob2"></webaudio-knob>
+        <p class="knob-label" id="knob2-label" contenteditable="true">MIDLOWGAIN</p>
+        <webaudio-knob sprites="99" value="0" step="1" src="../img/knobs/nux_black_white_stripe.png" class="knob" id="knob3"></webaudio-knob>
+        <p class="knob-label" id="knob3-label" contenteditable="true">MIDHIGHGAIN</p>
+        <webaudio-knob sprites="99" value="0" step="1" src="../img/knobs/nux_black_white_stripe.png" class="knob" id="knob4"></webaudio-knob>
+        <p class="knob-label" id="knob4-label" contenteditable="true">HIGHGAIN</p>
+        <webaudio-switch src="../img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
+        <p class="pedalLabel" contenteditable="true">QUADRA FUZZ</p>
+    </template>
+    <script>
+        Polymer({
+            is: 'pedal-four'
+        });
+    </script>
+</dom-module>

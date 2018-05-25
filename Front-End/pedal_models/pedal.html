@@ -153,7 +153,91 @@
 
 				return knob;
 			}
+			
+			/* Make the element scalable with the mouse. */
+			makeScalable(element) {
 
+			}
+
+			/* Make the element movable with the mouse. */
+			/*makeMovable(elem) {
+				var that = this;
+
+				elem.addEventListener('mousedown', function(e) {
+					e.stopPropagation();
+					e.preventDefault();
+
+					let initialX = e.pageX;
+					let initialY = e.pageY;
+
+					let posX = elem.x;
+					let posY = elem.y;
+
+					function move(x, y) {
+						let cursorOffsetX = x - initialX;
+						let cursorOffsetY = y - initialY;
+
+						knob.x = posX + cursorOffsetX;
+						knob.y = posY + cursorOffsetY;
+
+						that.updateStyle(that);
+					}
+
+					function onMouseMove(e) {
+						if(that.selectedKnob === elem) {
+							move(e.pageX, e.pageY);
+						}
+					}
+
+					function onMouseUp(e) {
+						document.removeEventListener('onmousemove', onMouseMove);
+						document.onmouseup = null;
+					}
+
+					document.addEventListener('mousemove', onMouseMove);			
+					document.addEventListener('onmouseup', onMouseUp);
+
+				}, true);
+			}*/
+
+			moveOnMouseDown(e, elem, that) {
+				//e.stopPropagation();
+				//e.preventDefault();
+
+				let initialX = e.pageX;
+				let initialY = e.pageY;
+
+				let posX = elem.x;
+				let posY = elem.y;
+
+				function move(x, y) {
+					let cursorOffsetX = x - initialX;
+					let cursorOffsetY = y - initialY;
+
+					elem.x = posX + cursorOffsetX;
+					elem.y = posY + cursorOffsetY;
+
+					that.updateStyle(that);
+				}
+
+				function onMouseMove(e) {
+					if(that.selectedKnob === elem) {
+						move(e.pageX, e.pageY);
+					}
+				}
+
+				function onMouseUp(e) {
+					console.log("Entered here.");
+					document.removeEventListener('mousemove', onMouseMove);
+					document.onmouseup = null;
+				}
+				
+				e.preventDefault();
+
+				document.addEventListener('mousemove', onMouseMove);			
+				document.addEventListener('mouseup', onMouseUp);
+			}
+			
 			addKnob() {
 				var knob = {
 					id: "knob_" + this.knobs.length,
@@ -174,7 +258,7 @@
 				var knobContainer = thatDoc.createElement("div");
 				knobContainer.setAttribute('class', 'knob');
 				knobContainer.setAttribute('id', knob.id);
-
+				
 				var knobElem = thatDoc.createElement("webaudio-knob");
 				knobElem.setAttribute('sprites', 100);
 				knobElem.setAttribute('value', 0);
@@ -186,8 +270,22 @@
 				var label = thatDoc.createElement('div');
 				label.innerHTML = knob.id;
 				knobContainer.appendChild(label);
+				
+				//makeMovable(knobContainer);
+				knobContainer.addEventListener('mousedown', 
+				
+				function(e) {
+					e.stopPropagation();
 
-				knobContainer.addEventListener('mousedown', function(event) {
+					//if(this.selectedKnob === knob) {
+					//	console.log("hell yeah");
+						that.moveOnMouseDown(e, knob, that);
+					//}
+				}
+				
+				, true);
+
+				/*knobContainer.addEventListener('mousedown', function(event) {
 					event.stopPropagation();
 				
 				//	console.log(knob.x + " " + knob.y);
@@ -223,15 +321,7 @@
 						document.onmouseup = null;
 					};
 
-				}, true);
-
-				
-				
-
-				function onMouseMove(e) {
-					e.preventDefault();
-					move(e.pageX, e.pageY);
-				}
+				}, true);*/
 
 				knobContainer.onclick = function(e) {
 					let knobId = e.target.parentElement.parentElement.id;
