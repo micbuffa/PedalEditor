@@ -11,7 +11,7 @@ class PedalElementManager {
         /* The configuration of the pedal element. */
         let pedalElementConfig = this.addElementConfigDefault(type, filename);
         
-        /* The html container of the knob. */
+        /* The html container of the element. */
         let pedalElementContainer = this.addElementHtml(pedalElementConfig);
         
         /* For the listeners. */
@@ -26,19 +26,13 @@ class PedalElementManager {
         
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function(e) {
-            let knobId = e.target.parentElement.parentElement ? e.target.parentElement.parentElement.id : e.target.id;
-            /*if(!knobId) {
-                that.pedal.selectKnob(e.target.parentElement.id);
-                return;
-            } else */
-            console.log(knobId);
-            that.pedal.selectKnob(knobId);
+            let elemId = e.target.parentElement.parentElement ? e.target.parentElement.parentElement.id : e.target.id;
+            that.pedal.selectElement(elemId);
 
         });
         
-
-        this.pedal.selectKnob(pedalElementConfig.id);
-        this.pedal.updateStyle(this.pedal)
+        /* Selecting the element just after it has been added. */
+        this.pedal.selectElement(pedalElementConfig.id);
 
         return pedalElementConfig;
     }
@@ -79,6 +73,20 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of a switch. */
     addSwitchConfigDefault(filename) {
+        var _switch = {
+            id: "switch_" + this.pedal.switches.length,
+            x: 43,
+            y: 30,
+            model: 'switch_2.png',
+            label: 'switch_' + this.pedal.switches.length,
+            label_fontfamily: 'Comic Sans MS',
+            label_fontsize: '14',
+            label_color: '000000',
+            type: 'switch'
+        };
+        this.pedal.switches.push(_switch);
+
+        return _switch;
     }
 
     /* Creating and adding the default configuration of an icon. */
@@ -138,7 +146,22 @@ class PedalElementManager {
     
     /* Creating and adding the html of the switch from its config. */
     addSwitchHtml(switchConfig) {
+        var switchContainer = this.doc.createElement("div");
+        switchContainer.setAttribute('class', 'knob');
+        switchContainer.setAttribute('id', switchConfig.id);
+        
+        var switchElem = this.doc.createElement("webaudio-switch");
+        switchElem.setAttribute('src', '../img/switches/' + switchConfig.model);
+        
+        switchContainer.appendChild(switchElem);
 
+        var label = this.doc.createElement('div');
+        label.innerHTML = switchConfig.id;
+        switchContainer.appendChild(label);
+        
+        this.pedal.shadowRoot.querySelector('.pedal').appendChild(switchContainer);
+
+        return switchContainer;
     }
 
     /* Creating and adding the html of the icon from its config. */
@@ -179,7 +202,7 @@ class PedalElementManager {
         }
 
         function onMouseMove(e) {
-            if(that.selectedKnob === elem) {
+            if(that.selectedElement === elem) {
                 move(e.pageX, e.pageY);
             }
         }

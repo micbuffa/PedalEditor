@@ -51,8 +51,9 @@
                 super();
 				this.knobs = [];
 				this.icons = [];
+				this.switches = [];
 				this.backgroundImageSrc = null;
-				this.selectedKnob = null;
+				this.selectedElement = null;
 				this.pedalId = null;
 				this.name = null;
 				this.pedalElementManager = new PedalElementManager(this, thatDoc);
@@ -60,8 +61,8 @@
 			
 			/********************************* Add Pedal Elements Config ************************************/
 
-			addElement(type) {
-				return this.pedalElementManager.addElement(type);
+			addElement(type, filename) {
+				return this.pedalElementManager.addElement(type, filename);
 			}
 			
 			/********************************* Deleting Pedal Elements ************************************/
@@ -77,86 +78,6 @@
 			/* Removing the pedal element from the html. */
 			deletePedalElementHtml(pedalElementConfig) {
 
-			}
-
-			addIcon(name) {
-				/*var icon = {
-					id: "icon_" + this.icons.length,
-					x: 10,
-					y: 10,
-					width: 45,
-					height: 45,
-					file: name,
-					type: 'icon'
-				};
-				this.icons.push(icon);
-				
-				var that = this;
-				
-				var iconContainer = thatDoc.createElement("img");
-				iconContainer.setAttribute('class', 'icon');
-				iconContainer.setAttribute('id', icon.id);
-				iconContainer.setAttribute('src', '../img/icons/' + icon.file);
-
-				iconContainer.addEventListener('mousedown', function(event) {
-					event.stopPropagation();
-				
-					let initialX = event.pageX;
-					let initialY = event.pageY;
-
-					let posX = icon.x;
-					let posY = icon.y;
-
-
-					function move(x, y) {
-						let finalX = x - initialX;
-						let finalY = y - initialY;
-
-						icon.x = posX + finalX;
-						icon.y = posY + finalY;
-						that.updateStyle(that);
-					}
-					
-					function onMouseMove(e) {
-						if(that.selectedKnob === icon) {
-							move(e.pageX, e.pageY);
-						}
-					}
-					
-					event.preventDefault();
-					document.addEventListener('mousemove', onMouseMove);
-
-					document.onmouseup = function(e) {
-						document.removeEventListener('mousemove', onMouseMove);
-						document.onmouseup = null;
-					};
-
-				}, true);
-
-				
-				
-
-				function onMouseMove(e) {
-					e.preventDefault();
-					move(e.pageX, e.pageY);
-				}
-
-				iconContainer.onclick = function(e) {
-					let iconId = e.target.parentElement.id;
-					if(!iconId) {
-						that.selectKnob(e.target.id);
-						return;
-					} else 
-						that.selectKnob(iconId);
-
-				};
-
-				this.shadowRoot.querySelector('.pedal').appendChild(iconContainer);
-
-				this.selectKnob(icon.id);
-				this.updateStyle(this)*/
-
-				return this.pedalElementManager.addElement('icon', name);
 			}
 
 			getKnobs() {
@@ -190,31 +111,39 @@
 			}
 
 
-			getSelectedKnob() {
-				return this.selectedKnob;
+			getSelectedElement() {
+				return this.selectedElement;
 			}
 
-			selectKnob(knobId) {
-				console.log("Selected eleme id: " + knobId)
+			selectElement(elementId) {
+				console.log("Selected eleme id: " + elementId)
 				for(let knob of this.knobs) {
-					if(knob.id === knobId) {
-						this.selectedKnob = knob;
-						this.highlightKnob(knobId);
+					if(knob.id === elementId) {
+						this.selectedElement = knob;
 					}
 				}
 
 				for(let icon of this.icons) {
-					if(icon.id === knobId) {
-						this.selectedKnob = icon;
-						this.highlightKnob(knobId);
+					if(icon.id === elementId) {
+						this.selectedElement = icon;
 					}
 				}
+
+				for(let s of this.switches) {
+					if(s.id === elementId) {
+						this.selectedElement = s;
+					}
+				}
+
+				this.highlightElement(elementId);
 				
-				let evt = new CustomEvent('select-knob', {detail: knobId});
-          		this.dispatchEvent(evt);
+				this.updateStyle(this);
+				let evt = new CustomEvent('select-knob', {detail: elementId});
+				this.dispatchEvent(evt);
+				  
 			}
 
-			highlightKnob(knobId) {
+			highlightElement(elementId) {
 				var shadow = this.shadowRoot;
 				
 				for(let i = 0; i < this.knobs.length; i++) {
@@ -227,8 +156,8 @@
 					icon.className = icon.className.replace('selected', '');
 				}
 				
-				let selectedKnob = shadow.querySelector('#' + knobId);
-				selectedKnob.className += " selected";
+				let selectedElement = shadow.querySelector('#' + elementId);
+				selectedElement.className += " selected";
 			}
 
 			updateStyle(elem) {
@@ -290,7 +219,7 @@
 								bottom: 10px;
 								right: 0px;
 							}
-							${this.generateKnobsStyles()}
+							${this.generateElementsStyles()}
 							
 							.pedalLabel{
 								position: absolute;
@@ -321,7 +250,7 @@
 				}
 			}
 
-			generateKnobsStyles() {
+			generateElementsStyles() {
 				let ret = '';
 				for(let knob of this.knobs) {
 					ret += `
@@ -348,6 +277,34 @@
 
 					let labelElem = knobContainer.childNodes[1];
 					labelElem.innerHTML = knob.label;
+					
+				}
+
+				for(let s of this.switches) {
+					ret += `
+						#${s.id} {
+							left: ${s.x}px;
+							top: ${s.y}px;
+						}
+
+						#${s.id} div {
+							color: #${s.label_color};
+							font-family: "${s.label_fontfamily}";
+							font-size: ${s.label_fontsize}px;
+							
+						}
+					`
+					let switchContainer = this.shadowRoot.querySelector('#'+s.id);
+
+					let switchElem = switchContainer.childNodes[0];
+					switchElem.value = s.value;
+					switchElem.setAttribute('value', s.value);
+
+					switchElem.src = '../img/switches/' + s.model;
+					switchElem.setAttribute('src', '../img/switches/' + s.model);
+
+					let labelElem = switchContainer.childNodes[1];
+					labelElem.innerHTML = s.label;
 					
 				}
 
@@ -400,7 +357,7 @@
 						knob.label_color = element.label_color;
 						knob.type = element.type;
 					} else if(element.type === 'icon') {
-						let icon = this.addIcon(element.file);
+						let icon = this.addElement('icon', element.file);
 						icon.id = element.id;
 						icon.x = element.x;
 						icon.y = element.y;

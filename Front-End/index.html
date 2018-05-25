@@ -355,62 +355,62 @@
 
 
     function setSelectedElementLabel(value) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.label = value;
         pedal.updateStyle_();
     }
 
     function setSelectedElementLabelColor(value) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.label_color = value;
         pedal.updateStyle_();
     }
 
     function setSelectedElementLabelFontfamily(value) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.label_fontfamily = value;
         pedal.updateStyle_();
     }
 
     function setSelectedElementLabelFontsize(value) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.label_fontsize = value;
         pedal.updateStyle_();
     }
 
     function setSelectedElementValue(value) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.value = value;
         pedal.updateStyle_();
     }
 
     function setSelectedElementModel(value) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.model = value;
         pedal.updateStyle_();
-        selectKnob(pedal.getSelectedKnob());
+        selectKnob(pedal.getSelectedElement());
     }
 
     function setSelectedElementXPosition(xPosition) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.x = xPosition;
         pedal.updateStyle_();
     }
 
     function setSelectedElementYPosition(yPosition) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.y = yPosition;
         pedal.updateStyle_();
     }
 
     function setSelectedElementWidth(width) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.width = width;
         pedal.updateStyle_();
     }
 
     function setSelectedElementHeight(height) {
-        let element = pedal.getSelectedKnob();
+        let element = pedal.getSelectedElement();
         element.height = height;
         pedal.updateStyle_();
     }
@@ -452,12 +452,12 @@
             iconsSection.appendChild(iconId);
         }
         
-        if(pedal.getSelectedKnob())
-            selectKnob(pedal.getSelectedKnob().id);
+        if(pedal.getSelectedElement())
+            selectKnob(pedal.getSelectedElement().id);
     }
 
     function updateInspector() {
-        pedal.getSelectedKnob();
+        pedal.getSelectedElement();
     }
 
     function selectKnob(knobId) {
@@ -483,12 +483,12 @@
             }
         }
 
-        if(pedal.getSelectedKnob().id != knobId) {
-            pedal.selectKnob(knobId);
+        if(pedal.getSelectedElement().id != knobId) {
+            pedal.selectElement(knobId);
         }
         
 
-        let knob = pedal.getSelectedKnob();
+        let knob = pedal.getSelectedElement();
         let inspectorId = document.getElementById('inspector-id');
         let inspectorLabel = document.getElementById('inspector-label');
         let inspectorLabelColor = document.getElementById('inspector-label-color');
