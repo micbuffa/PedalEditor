@@ -71,14 +71,8 @@
 			deletePedalElement() {
 			}
 			
-			/* Deleting the configuration of the pedal element. */
-			deletePedalElementConfig(pedalElementConfig) {
-
-			}
-			
-			/* Removing the pedal element from the html. */
-			deletePedalElementHtml(pedalElementConfig) {
-
+			getElements() {
+				return this.kobs.concat(this.icons.concat(this.switches.concat(this.sliders)));
 			}
 
 			getKnobs() {
@@ -136,6 +130,12 @@
 					}
 				}
 
+				for(let slider of this.sliders) {
+					if(slider.id === elementId) {
+						this.selectedElement = slider;
+					}
+				}
+
 				this.highlightElement(elementId);
 				
 				this.updateStyle(this);
@@ -160,6 +160,11 @@
 				for(let i = 0; i < this.switches.length; i++) {
 					let s = shadow.querySelector('#switch_' + i);
 					s.className = s.className.replace('selected', '');
+				}
+
+				for(let i = 0; i < this.sliders.length; i++) {
+					let slider = shadow.querySelector('#slider_' + i);
+					slider.className = slider.className.replace('selected', '');
 				}
 				
 				let selectedElement = shadow.querySelector('#' + elementId);
@@ -220,6 +225,10 @@
 								cursor: move;
 							}
 
+							.selected  webaudio-slider{
+								cursor: move;
+							}
+
 							.selected:hover webaudio-knob{
 								cursor: move;
 							}
@@ -228,6 +237,9 @@
 								cursor: move;
 							}
 							
+							.selected:hover webaudio-slider{
+								cursor: move;
+							}
 
 
 							#switch1 {
