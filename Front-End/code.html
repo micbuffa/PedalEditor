@@ -22,7 +22,83 @@
 <script>
     var editor;
 
+addKnobHtml(knobConfig) {
+				var knobContainer = thatDoc.createElement("div");
+				knobContainer.setAttribute('class', 'knob');
+				knobContainer.setAttribute('id', knobConfig.id);
+				
+				var knobElem = thatDoc.createElement("webaudio-knob");
+				knobElem.setAttribute('sprites', 100);
+				knobElem.setAttribute('value', 0);
+				knobElem.setAttribute('step', 1);
+				knobElem.setAttribute('src', '../img/knobs/' + knobConfig.model);
+				
+				knobContainer.appendChild(knobElem);
 
+				var label = thatDoc.createElement('div');
+				label.innerHTML = knobConfig.id;
+				knobContainer.appendChild(label);
+
+				return knobContainer;
+			}
+
+			addSwitchHtml(switchConfig) {
+
+			}
+
+			addIconHtml(iconConfig) {
+
+			}
+
+			addPedalElementHtml(pedalElementConfig) {
+				switch(pedalElementConfig.type) {
+					case 'switch':
+						return this.addSwitchHtml(pedalElementConfig);
+					case 'knob':
+						return this.addKnobHtml(pedalElementConfig);
+					case 'icon':
+						return this.addIconHtml(pedalElementConfig);
+				}
+			}
+
+			addPedalElementConfigDefault(type) {
+				switch(type) {
+					case 'switch':
+						return this.addSwitchConfigDefault();
+					case 'knob':
+						return this.addKnobConfigDefault();
+					case 'icon':
+						return this.addIconConfigDefault();
+				}
+			}
+			
+			/* Creating and adding the default configuration of the knob. */
+			addKnobConfigDefault() {
+				var knob = {
+					id: "knob_" + this.knobs.length,
+					x: 43,
+					y: 30,
+					model: 'knob2.png',
+					value: 20,
+					label: 'knbo_' + this.knobs.length,
+					label_fontfamily: 'Comic Sans MS',
+					label_fontsize: '14',
+					label_color: '000000',
+					type: 'knob'
+				};
+				this.knobs.push(knob);
+
+				return knob;
+			}
+
+			/* Creating and adding the default configuration of a switch. */
+			addSwitchConfigDefault() {
+			}
+
+			/* Creating and adding the default configuration of an icon. */
+			addIconConfigDefault() {
+			}
+            
 
     getPedals = function () {
       var select = document.getElementById("mySelect");

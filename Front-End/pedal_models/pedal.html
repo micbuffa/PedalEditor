@@ -159,50 +159,7 @@
 
 			}
 
-			/* Make the element movable with the mouse. */
-			/*makeMovable(elem) {
-				var that = this;
-
-				elem.addEventListener('mousedown', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
-
-					let initialX = e.pageX;
-					let initialY = e.pageY;
-
-					let posX = elem.x;
-					let posY = elem.y;
-
-					function move(x, y) {
-						let cursorOffsetX = x - initialX;
-						let cursorOffsetY = y - initialY;
-
-						knob.x = posX + cursorOffsetX;
-						knob.y = posY + cursorOffsetY;
-
-						that.updateStyle(that);
-					}
-
-					function onMouseMove(e) {
-						if(that.selectedKnob === elem) {
-							move(e.pageX, e.pageY);
-						}
-					}
-
-					function onMouseUp(e) {
-						document.removeEventListener('onmousemove', onMouseMove);
-						document.onmouseup = null;
-					}
-
-					document.addEventListener('mousemove', onMouseMove);			
-					document.addEventListener('onmouseup', onMouseUp);
-
-				}, true);
-			}*/
-
-			moveOnMouseDown(e, elem, that) {
-				//e.stopPropagation();
-				//e.preventDefault();
+			dragAndDropElementListener(e, elem, that) {
 
 				let initialX = e.pageX;
 				let initialY = e.pageY;
@@ -232,13 +189,104 @@
 					document.onmouseup = null;
 				}
 				
-				e.preventDefault();
+				//e.preventDefault();
 
 				document.addEventListener('mousemove', onMouseMove);			
 				document.addEventListener('mouseup', onMouseUp);
 			}
+
+			selectElementListener() {
+
+			}
 			
 			addKnob() {
+				let pedalElement = this.addKnobConfigDefault();
+				
+				/* The html container of the knob. */
+				let pedalElementContainer = this.addKnobHtml(pedalElement);
+				
+				var that = this;
+
+				/* Drag and drop listener. */
+				pedalElementContainer.addEventListener('mousedown', function(e) {
+					e.stopPropagation();
+					e.preventDefault();
+					that.dragAndDropElementListener(e, pedalElement, that);
+				}, true);
+				
+				/* Selection listener. */
+				pedalElementContainer.addEventListener('click', function(e) {
+					let knobId = e.target.parentElement.parentElement.id;
+					if(!knobId) {
+						that.selectKnob(e.target.parentElement.id);
+						return;
+					} else 
+						that.selectKnob(knobId);
+
+				});
+				
+
+				this.selectKnob(pedalElement.id);
+				this.updateStyle(this)
+
+				return pedalElement;
+			}
+
+			addKnobHtml(knobConfig) {
+				var knobContainer = thatDoc.createElement("div");
+				knobContainer.setAttribute('class', 'knob');
+				knobContainer.setAttribute('id', knobConfig.id);
+				
+				var knobElem = thatDoc.createElement("webaudio-knob");
+				knobElem.setAttribute('sprites', 100);
+				knobElem.setAttribute('value', 0);
+				knobElem.setAttribute('step', 1);
+				knobElem.setAttribute('src', '../img/knobs/' + knobConfig.model);
+				
+				knobContainer.appendChild(knobElem);
+
+				var label = thatDoc.createElement('div');
+				label.innerHTML = knobConfig.id;
+				knobContainer.appendChild(label);
+				
+				this.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
+
+				return knobContainer;
+			}
+			
+
+			addSwitchHtml(switchConfig) {
+
+			}
+
+			addIconHtml(iconConfig) {
+
+			}
+
+			addPedalElementHtml(pedalElementConfig) {
+				switch(pedalElementConfig.type) {
+					case 'switch':
+						return this.addSwitchHtml(pedalElementConfig);
+					case 'knob':
+						return this.addKnobHtml(pedalElementConfig);
+					case 'icon':
+						return this.addIconHtml(pedalElementConfig);
+				}
+			}
+
+			addPedalElementConfigDefault(type) {
+				switch(type) {
+					case 'switch':
+						return this.addSwitchConfigDefault();
+					case 'knob':
+						return this.addKnobConfigDefault();
+					case 'icon':
+						return this.addIconConfigDefault();
+				}
+			}
+			
+			/* Creating and adding the default configuration of the knob. */
+			addKnobConfigDefault() {
 				var knob = {
 					id: "knob_" + this.knobs.length,
 					x: 43,
@@ -252,93 +300,16 @@
 					type: 'knob'
 				};
 				this.knobs.push(knob);
-				
-				var that = this;
-				
-				var knobContainer = thatDoc.createElement("div");
-				knobContainer.setAttribute('class', 'knob');
-				knobContainer.setAttribute('id', knob.id);
-				
-				var knobElem = thatDoc.createElement("webaudio-knob");
-				knobElem.setAttribute('sprites', 100);
-				knobElem.setAttribute('value', 0);
-				knobElem.setAttribute('step', 1);
-				knobElem.setAttribute('src', '../img/knobs/' + knob.model);
-				
-				knobContainer.appendChild(knobElem);
-
-				var label = thatDoc.createElement('div');
-				label.innerHTML = knob.id;
-				knobContainer.appendChild(label);
-				
-				//makeMovable(knobContainer);
-				knobContainer.addEventListener('mousedown', 
-				
-				function(e) {
-					e.stopPropagation();
-
-					//if(this.selectedKnob === knob) {
-					//	console.log("hell yeah");
-						that.moveOnMouseDown(e, knob, that);
-					//}
-				}
-				
-				, true);
-
-				/*knobContainer.addEventListener('mousedown', function(event) {
-					event.stopPropagation();
-				
-				//	console.log(knob.x + " " + knob.y);
-
-					let initialX = event.pageX;
-					let initialY = event.pageY;
-
-					let posX = knob.x;
-					let posY = knob.y;
-
-
-					function move(x, y) {
-						let finalX = x - initialX;
-						let finalY = y - initialY;
-						
-						//console.log( posX + " " + posY);
-						knob.x = posX + finalX;
-						knob.y = posY + finalY;
-						that.updateStyle(that);
-					}
-					
-					function onMouseMove(e) {
-						if(that.selectedKnob === knob) {
-							move(e.pageX, e.pageY);
-						}
-					}
-					
-					event.preventDefault();
-					document.addEventListener('mousemove', onMouseMove);
-
-					document.onmouseup = function(e) {
-						document.removeEventListener('mousemove', onMouseMove);
-						document.onmouseup = null;
-					};
-
-				}, true);*/
-
-				knobContainer.onclick = function(e) {
-					let knobId = e.target.parentElement.parentElement.id;
-					if(!knobId) {
-						that.selectKnob(e.target.parentElement.id);
-						return;
-					} else 
-						that.selectKnob(knobId);
-
-				};
-
-				this.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
-
-				this.selectKnob(knob.id);
-				this.updateStyle(this)
 
 				return knob;
+			}
+
+			/* Creating and adding the default configuration of a switch. */
+			addSwitchConfigDefault() {
+			}
+
+			/* Creating and adding the default configuration of an icon. */
+			addIconConfigDefault() {
 			}
 			
 
