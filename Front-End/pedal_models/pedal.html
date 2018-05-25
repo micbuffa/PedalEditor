@@ -155,6 +155,11 @@
 					let icon = shadow.querySelector('#icon_' + i);
 					icon.className = icon.className.replace('selected', '');
 				}
+
+				for(let i = 0; i < this.switches.length; i++) {
+					let s = shadow.querySelector('#switch_' + i);
+					s.className = s.className.replace('selected', '');
+				}
 				
 				let selectedElement = shadow.querySelector('#' + elementId);
 				selectedElement.className += " selected";
@@ -210,9 +215,18 @@
 								cursor: move;
 							}
 
+							.selected  webaudio-switch{
+								cursor: move;
+							}
+
 							.selected:hover webaudio-knob{
 								cursor: move;
 							}
+
+							.selected:hover webaudio-switch{
+								cursor: move;
+							}
+							
 
 
 							#switch1 {

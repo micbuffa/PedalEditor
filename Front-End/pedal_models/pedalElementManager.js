@@ -24,12 +24,13 @@ class PedalElementManager {
             that.dragAndDropElementListener(e, pedalElementConfig, that.pedal);
         }, true);
         
+        console.log(pedalElementContainer);
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function(e) {
-            let elemId = e.target.parentElement.parentElement ? e.target.parentElement.parentElement.id : e.target.id;
-            that.pedal.selectElement(elemId);
+            that.pedal.selectElement(pedalElementConfig.id);
+            //console.log(elemId);
 
-        });
+        }, true);
         
         /* Selecting the element just after it has been added. */
         this.pedal.selectElement(pedalElementConfig.id);
@@ -147,16 +148,19 @@ class PedalElementManager {
     /* Creating and adding the html of the switch from its config. */
     addSwitchHtml(switchConfig) {
         var switchContainer = this.doc.createElement("div");
-        switchContainer.setAttribute('class', 'knob');
+        switchContainer.setAttribute('class', 'switch');
         switchContainer.setAttribute('id', switchConfig.id);
         
         var switchElem = this.doc.createElement("webaudio-switch");
         switchElem.setAttribute('src', '../img/switches/' + switchConfig.model);
+        switchElem.setAttribute('height', 64);
+        switchElem.setAttribute('width', 128);
         
         switchContainer.appendChild(switchElem);
 
         var label = this.doc.createElement('div');
         label.innerHTML = switchConfig.id;
+
         switchContainer.appendChild(label);
         
         this.pedal.shadowRoot.querySelector('.pedal').appendChild(switchContainer);

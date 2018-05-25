@@ -196,7 +196,12 @@
 
         <br>
 
-        <button class="maininput" onclick="addPedalElement()">Add Knob</button>
+        <button class="maininput" onclick="addKnob()">Add Knob</button>
+        
+        <br>
+
+        <button class="maininput" onclick="addSwitch()">Add Switch</button>
+
 
 
         <br>
@@ -523,18 +528,18 @@
     }
 
 
-    function addPedalElement() {
+    function addKnob() {
         pedal.addElement('knob');
         updateKnobsSection();
     }
 
     function addIcon(name) {
-        pedal.addIcon(name);
+        pedal.addElement('icon', name);
         updateKnobsSection();
     }
 
     function addSwitch() {
-        pedal.addSwitch();
+        pedal.addElement('switch');
     }
 
     function changePedal(type){
