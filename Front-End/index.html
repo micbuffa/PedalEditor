@@ -202,7 +202,9 @@
 
         <button class="maininput" onclick="addSwitch()">Add Switch</button>
 
+        <br>
 
+        <button class="maininput" onclick="addSlider()">Add Slider</button>
 
         <br>
 
@@ -542,15 +544,8 @@
         pedal.addElement('switch');
     }
 
-    function changePedal(type){
-        section.removeChild(pedal);
-        var newPedal = document.createElement("PEDAL-"+type);
-        section.appendChild(newPedal);
-        pedal=getFirstChild(section);
-        pedal.style.zoom="1.5";
-
-        document.getElementById("fontColor-picker");
-
+    function addSlider() {
+        pedal.addElement('slider');
     }
 
     function setPedalName(value) {

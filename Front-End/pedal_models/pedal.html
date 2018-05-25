@@ -52,6 +52,7 @@
 				this.knobs = [];
 				this.icons = [];
 				this.switches = [];
+				this.sliders = [];
 				this.backgroundImageSrc = null;
 				this.selectedElement = null;
 				this.pedalId = null;
@@ -311,14 +312,40 @@
 					let switchContainer = this.shadowRoot.querySelector('#'+s.id);
 
 					let switchElem = switchContainer.childNodes[0];
-					switchElem.value = s.value;
-					switchElem.setAttribute('value', s.value);
 
 					switchElem.src = '../img/switches/' + s.model;
 					switchElem.setAttribute('src', '../img/switches/' + s.model);
 
 					let labelElem = switchContainer.childNodes[1];
 					labelElem.innerHTML = s.label;
+					
+				}
+
+				for(let slider of this.sliders) {
+					ret += `
+						#${slider.id} {
+							left: ${slider.x}px;
+							top: ${slider.y}px;
+						}
+
+						#${slider.id} div {
+							color: #${slider.label_color};
+							font-family: "${slider.label_fontfamily}";
+							font-size: ${slider.label_fontsize}px;
+							
+						}
+					`
+					let sliderContainer = this.shadowRoot.querySelector('#'+slider.id);
+
+					let sliderElem = sliderContainer.childNodes[0];
+					sliderElem.value = slider.value;
+					sliderElem.setAttribute('value', slider.value);
+
+					sliderElem.src = '../img/sliders/' + slider.model;
+					sliderElem.setAttribute('src', '../img/sliders/' + slider.model);
+
+					let labelElem = sliderContainer.childNodes[1];
+					labelElem.innerHTML = slider.label;
 					
 				}
 

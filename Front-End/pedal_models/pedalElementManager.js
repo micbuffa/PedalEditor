@@ -24,12 +24,9 @@ class PedalElementManager {
             that.dragAndDropElementListener(e, pedalElementConfig, that.pedal);
         }, true);
         
-        console.log(pedalElementContainer);
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function(e) {
             that.pedal.selectElement(pedalElementConfig.id);
-            //console.log(elemId);
-
         }, true);
         
         /* Selecting the element just after it has been added. */
@@ -40,7 +37,7 @@ class PedalElementManager {
 
     /********************************* Add Pedal Elements Config ************************************/
     
-    /* Creating and adding the default configuration of the pedal element by providing its type. */
+    /* Creating and adding the default configuration of the element by providing its type. */
     addElementConfigDefault(type, filename) {
         switch(type) {
             case 'switch':
@@ -49,6 +46,8 @@ class PedalElementManager {
                 return this.addKnobConfigDefault(filename);
             case 'icon':
                 return this.addIconConfigDefault(filename);
+            case 'slider':
+                return this.addSliderConfigDefault(filename);
         }
     }
     
@@ -90,6 +89,24 @@ class PedalElementManager {
         return _switch;
     }
 
+    /* Creating and adding the default configuration of a slider. */
+    addSliderConfigDefault(filename) {
+        var slider = {
+            id: "slider_" + this.pedal.sliders.length,
+            x: 43,
+            y: 30,
+            model: 'slider1.png',
+            label: 'slider_' + this.pedal.sliders.length,
+            label_fontfamily: 'Comic Sans MS',
+            label_fontsize: '14',
+            label_color: '000000',
+            type: 'slider'
+        };
+        this.pedal.sliders.push(slider);
+
+        return slider;
+    }
+
     /* Creating and adding the default configuration of an icon. */
     addIconConfigDefault(filename) {
         var icon = {
@@ -118,6 +135,8 @@ class PedalElementManager {
                 return this.addKnobHtml(pedalElementConfig);
             case 'icon':
                 return this.addIconHtml(pedalElementConfig);
+            case 'slider':
+                return this.addSliderHtml(pedalElementConfig);
         }
     }
     
@@ -167,6 +186,31 @@ class PedalElementManager {
 
         return switchContainer;
     }
+
+    /* Creating and adding the html of the slider from its config. */
+    addSliderHtml(sliderConfig) {
+        var sliderContainer = this.doc.createElement("div");
+        sliderContainer.setAttribute('class', 'switch');
+        sliderContainer.setAttribute('id', sliderConfig.id);
+        
+        var switchElem = this.doc.createElement("webaudio-slider");
+        switchElem.setAttribute('src', '../img/sliders/' + sliderConfig.model);
+        switchElem.setAttribute('height', 64);
+        switchElem.setAttribute('width', 128);
+        
+        sliderContainer.appendChild(switchElem);
+
+        var label = this.doc.createElement('div');
+        label.innerHTML = sliderConfig.id;
+
+        sliderContainer.appendChild(label);
+        
+        this.pedal.shadowRoot.querySelector('.pedal').appendChild(sliderContainer);
+
+        return sliderContainer;
+    }
+
+
 
     /* Creating and adding the html of the icon from its config. */
     addIconHtml(iconConfig) {
@@ -220,11 +264,6 @@ class PedalElementManager {
 
         document.addEventListener('mousemove', onMouseMove);			
         document.addEventListener('mouseup', onMouseUp);
-    }
-    
-    /* Listener for selecting the pedal element with the mouse. */
-    selectElementListener() {
-
     }
 
     /* Listener for rescaling the pedal element with the mouse. */
