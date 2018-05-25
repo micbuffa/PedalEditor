@@ -5,12 +5,11 @@ class PedalElementManager {
         this.doc = document;
     }
 
-    /********************************* Add Pedal Elements Config ************************************/
 
-    addElement() {
+    addElement(type, filename) {
         
         /* The configuration of the pedal element. */
-        let pedalElementConfig = this.addElementConfigDefault('knob');
+        let pedalElementConfig = this.addElementConfigDefault(type, filename);
         
         /* The html container of the knob. */
         let pedalElementContainer = this.addElementHtml(pedalElementConfig);
@@ -27,11 +26,12 @@ class PedalElementManager {
         
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function(e) {
-            let knobId = e.target.parentElement.parentElement.id;
-            if(!knobId) {
+            let knobId = e.target.parentElement.parentElement ? e.target.parentElement.parentElement.id : e.target.id;
+            /*if(!knobId) {
                 that.pedal.selectKnob(e.target.parentElement.id);
                 return;
-            } else 
+            } else */
+            console.log(knobId);
             that.pedal.selectKnob(knobId);
 
         });
@@ -42,22 +42,24 @@ class PedalElementManager {
 
         return pedalElementConfig;
     }
+
+    /********************************* Add Pedal Elements Config ************************************/
     
     /* Creating and adding the default configuration of the pedal element by providing its type. */
-    addElementConfigDefault(type) {
+    addElementConfigDefault(type, filename) {
         switch(type) {
             case 'switch':
-                return this.addSwitchConfigDefault();
+                return this.addSwitchConfigDefault(filename);
             case 'knob':
-                return this.addKnobConfigDefault();
+                return this.addKnobConfigDefault(filename);
             case 'icon':
-                return this.addIconConfigDefault();
+                return this.addIconConfigDefault(filename);
         }
     }
     
 
     /* Creating and adding the default configuration of the knob. */
-    addKnobConfigDefault() {
+    addKnobConfigDefault(filename) {
         var knob = {
             id: "knob_" + this.pedal.knobs.length,
             x: 43,
@@ -76,11 +78,24 @@ class PedalElementManager {
     }
 
     /* Creating and adding the default configuration of a switch. */
-    addSwitchConfigDefault() {
+    addSwitchConfigDefault(filename) {
     }
 
     /* Creating and adding the default configuration of an icon. */
-    addIconConfigDefault() {
+    addIconConfigDefault(filename) {
+        var icon = {
+            id: "icon_" + this.pedal.icons.length,
+            x: 10,
+            y: 10,
+            width: 45,
+            height: 45,
+            file: filename,
+            type: 'icon'
+        };
+
+        this.pedal.icons.push(icon);
+
+        return icon;
     }
 
     /********************************* Add Pedal Elements Html ************************************/
@@ -128,6 +143,18 @@ class PedalElementManager {
 
     /* Creating and adding the html of the icon from its config. */
     addIconHtml(iconConfig) {
+        //var iconContainer = this.doc.createElement("div");
+        //iconContainer.setAttribute('id', iconConfig.id);
+        
+        var iconImg = this.doc.createElement("img");
+		iconImg.setAttribute('class', 'icon');
+		iconImg.setAttribute('id', iconConfig.id);
+        iconImg.setAttribute('src', '../img/icons/' + iconConfig.file);
+        
+        //iconContainer.appendChild(iconImg);
+        this.pedal.shadowRoot.querySelector('.pedal').appendChild(iconImg);
+
+        return iconImg;
     }
     
     /********************************* Pedal Elements Listeners ************************************/
@@ -158,7 +185,6 @@ class PedalElementManager {
         }
 
         function onMouseUp(e) {
-            console.log("Entered here.");
             document.removeEventListener('mousemove', onMouseMove);
             document.onmouseup = null;
         }
@@ -181,7 +207,8 @@ class PedalElementManager {
     
     /********************************* Deleting Pedal Elements ************************************/
     
-    deleteElement() {
+    /* Deleting a pedal element */
+    deleteElement(pedalElementConfig) {
     }
     
     /* Deleting the configuration of the pedal element. */

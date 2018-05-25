@@ -60,144 +60,8 @@
 			
 			/********************************* Add Pedal Elements Config ************************************/
 
-			addElement() {
-				return this.pedalElementManager.addElement();
-			}
-			
-			/* Creating and adding the default configuration of the pedal element by providing its type. */
-			addPedalElementConfigDefault(type) {
-				switch(type) {
-					case 'switch':
-						return this.addSwitchConfigDefault();
-					case 'knob':
-						return this.addKnobConfigDefault();
-					case 'icon':
-						return this.addIconConfigDefault();
-				}
-			}
-			
-
-			/* Creating and adding the default configuration of the knob. */
-			addKnobConfigDefault() {
-				var knob = {
-					id: "knob_" + this.knobs.length,
-					x: 43,
-					y: 30,
-					model: 'knob2.png',
-					value: 20,
-					label: 'knbo_' + this.knobs.length,
-					label_fontfamily: 'Comic Sans MS',
-					label_fontsize: '14',
-					label_color: '000000',
-					type: 'knob'
-				};
-				this.knobs.push(knob);
-
-				return knob;
-			}
-
-			/* Creating and adding the default configuration of a switch. */
-			addSwitchConfigDefault() {
-			}
-
-			/* Creating and adding the default configuration of an icon. */
-			addIconConfigDefault() {
-			}
-
-			/********************************* Add Pedal Elements Html ************************************/
-
-			/* Creating and adding the html of the pedal element from its config. */
-			addPedalElementHtml(pedalElementConfig) {
-				switch(pedalElementConfig.type) {
-					case 'switch':
-						return this.addSwitchHtml(pedalElementConfig);
-					case 'knob':
-						return this.addKnobHtml(pedalElementConfig);
-					case 'icon':
-						return this.addIconHtml(pedalElementConfig);
-				}
-			}
-			
-
-			/* Creating and adding the html of the knob from its config. */
-			addKnobHtml(knobConfig) {
-				var knobContainer = thatDoc.createElement("div");
-				knobContainer.setAttribute('class', 'knob');
-				knobContainer.setAttribute('id', knobConfig.id);
-				
-				var knobElem = thatDoc.createElement("webaudio-knob");
-				knobElem.setAttribute('sprites', 100);
-				knobElem.setAttribute('value', 0);
-				knobElem.setAttribute('step', 1);
-				knobElem.setAttribute('src', '../img/knobs/' + knobConfig.model);
-				
-				knobContainer.appendChild(knobElem);
-
-				var label = thatDoc.createElement('div');
-				label.innerHTML = knobConfig.id;
-				knobContainer.appendChild(label);
-				
-				this.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
-
-				return knobContainer;
-			}
-			
-			/* Creating and adding the html of the switch from its config. */
-			addSwitchHtml(switchConfig) {
-
-			}
-
-			/* Creating and adding the html of the icon from its config. */
-			addIconHtml(iconConfig) {
-			}
-			
-			/********************************* Pedal Elements Listeners ************************************/
-
-			/* Listener for draging and droping the pedal element with the mouse. */
-			dragAndDropPedalElementListener(e, elem, that) {
-
-				let initialX = e.pageX;
-				let initialY = e.pageY;
-
-				let posX = elem.x;
-				let posY = elem.y;
-
-				function move(x, y) {
-					let cursorOffsetX = x - initialX;
-					let cursorOffsetY = y - initialY;
-
-					elem.x = posX + cursorOffsetX;
-					elem.y = posY + cursorOffsetY;
-
-					that.updateStyle(that);
-				}
-
-				function onMouseMove(e) {
-					if(that.selectedKnob === elem) {
-						move(e.pageX, e.pageY);
-					}
-				}
-
-				function onMouseUp(e) {
-					console.log("Entered here.");
-					document.removeEventListener('mousemove', onMouseMove);
-					document.onmouseup = null;
-				}
-				
-				//e.preventDefault();
-
-				document.addEventListener('mousemove', onMouseMove);			
-				document.addEventListener('mouseup', onMouseUp);
-			}
-			
-			/* Listener for selecting the pedal element with the mouse. */
-			selectPedalElementListener() {
-
-			}
-
-			/* Listener for rescaling the pedal element with the mouse. */
-			rescalePedalElementListener() {
-				// TODO
+			addElement(type) {
+				return this.pedalElementManager.addElement(type);
 			}
 			
 			/********************************* Deleting Pedal Elements ************************************/
@@ -216,7 +80,7 @@
 			}
 
 			addIcon(name) {
-				var icon = {
+				/*var icon = {
 					id: "icon_" + this.icons.length,
 					x: 10,
 					y: 10,
@@ -290,9 +154,9 @@
 				this.shadowRoot.querySelector('.pedal').appendChild(iconContainer);
 
 				this.selectKnob(icon.id);
-				this.updateStyle(this)
+				this.updateStyle(this)*/
 
-				return icon;
+				return this.pedalElementManager.addElement('icon', name);
 			}
 
 			getKnobs() {
@@ -524,7 +388,7 @@
 				for(let element of config.elements) {
 					
 					if(element.type == 'knob') {
-						let knob = this.addElement();
+						let knob = this.addElement('knob');
 						knob.id = element.id;
 						knob.x = element.x;
 						knob.y = element.y;
