@@ -199,19 +199,22 @@
 
 			}
 			
-			addKnob() {
-				let pedalElement = this.addKnobConfigDefault();
+			addPedalElement() {
+				
+				/* The configuration of the pedal ele */
+				let pedalElementConfig = this.addPedalElementConfigDefault('knob');
 				
 				/* The html container of the knob. */
-				let pedalElementContainer = this.addKnobHtml(pedalElement);
+				let pedalElementContainer = this.addPedalElementHtml(pedalElementConfig);
 				
+				/* For the listeners. */
 				var that = this;
 
 				/* Drag and drop listener. */
 				pedalElementContainer.addEventListener('mousedown', function(e) {
 					e.stopPropagation();
 					e.preventDefault();
-					that.dragAndDropElementListener(e, pedalElement, that);
+					that.dragAndDropElementListener(e, pedalElementConfig, that);
 				}, true);
 				
 				/* Selection listener. */
@@ -226,12 +229,61 @@
 				});
 				
 
-				this.selectKnob(pedalElement.id);
+				this.selectKnob(pedalElementConfig.id);
 				this.updateStyle(this)
 
-				return pedalElement;
+				return pedalElementConfig;
 			}
 
+			addPedalElementConfigDefault(type) {
+				switch(type) {
+					case 'switch':
+						return this.addSwitchConfigDefault();
+					case 'knob':
+						return this.addKnobConfigDefault();
+					case 'icon':
+						return this.addIconConfigDefault();
+				}
+			}
+
+			addPedalElementHtml(pedalElementConfig) {
+				switch(pedalElementConfig.type) {
+					case 'switch':
+						return this.addSwitchHtml(pedalElementConfig);
+					case 'knob':
+						return this.addKnobHtml(pedalElementConfig);
+					case 'icon':
+						return this.addIconHtml(pedalElementConfig);
+				}
+			}
+
+
+			/* Creating and adding the default configuration of the knob. */
+			addKnobConfigDefault() {
+				var knob = {
+					id: "knob_" + this.knobs.length,
+					x: 43,
+					y: 30,
+					model: 'knob2.png',
+					value: 20,
+					label: 'knbo_' + this.knobs.length,
+					label_fontfamily: 'Comic Sans MS',
+					label_fontsize: '14',
+					label_color: '000000',
+					type: 'knob'
+				};
+				this.knobs.push(knob);
+
+				return knob;
+			}
+
+			/* Creating and adding the default configuration of a switch. */
+			addSwitchConfigDefault() {
+			}
+
+			/* Creating and adding the default configuration of an icon. */
+			addIconConfigDefault() {
+			}
 			addKnobHtml(knobConfig) {
 				var knobContainer = thatDoc.createElement("div");
 				knobContainer.setAttribute('class', 'knob');
@@ -261,55 +313,6 @@
 
 			addIconHtml(iconConfig) {
 
-			}
-
-			addPedalElementHtml(pedalElementConfig) {
-				switch(pedalElementConfig.type) {
-					case 'switch':
-						return this.addSwitchHtml(pedalElementConfig);
-					case 'knob':
-						return this.addKnobHtml(pedalElementConfig);
-					case 'icon':
-						return this.addIconHtml(pedalElementConfig);
-				}
-			}
-
-			addPedalElementConfigDefault(type) {
-				switch(type) {
-					case 'switch':
-						return this.addSwitchConfigDefault();
-					case 'knob':
-						return this.addKnobConfigDefault();
-					case 'icon':
-						return this.addIconConfigDefault();
-				}
-			}
-			
-			/* Creating and adding the default configuration of the knob. */
-			addKnobConfigDefault() {
-				var knob = {
-					id: "knob_" + this.knobs.length,
-					x: 43,
-					y: 30,
-					model: 'knob2.png',
-					value: 20,
-					label: 'knbo_' + this.knobs.length,
-					label_fontfamily: 'Comic Sans MS',
-					label_fontsize: '14',
-					label_color: '000000',
-					type: 'knob'
-				};
-				this.knobs.push(knob);
-
-				return knob;
-			}
-
-			/* Creating and adding the default configuration of a switch. */
-			addSwitchConfigDefault() {
-			}
-
-			/* Creating and adding the default configuration of an icon. */
-			addIconConfigDefault() {
 			}
 			
 
@@ -622,7 +625,7 @@
 				for(let element of config.elements) {
 					
 					if(element.type == 'knob') {
-						let knob = this.addKnob();
+						let knob = this.addPedalElement();
 						knob.id = element.id;
 						knob.x = element.x;
 						knob.y = element.y;
