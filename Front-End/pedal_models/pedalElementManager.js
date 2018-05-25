@@ -59,6 +59,8 @@ class PedalElementManager {
             id: "knob_" + uid,
             x: 43,
             y: 30,
+            width: 45,
+            height: 45,
             model: 'knob2.png',
             value: 20,
             label: 'knbo_' + uid,
@@ -74,11 +76,13 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of a switch. */
     addSwitchConfigDefault(filename) {
-        let uid = Date.now();
+        let uid = Math.floor(Math.random() * 1000); 
         var _switch = {
             id: "switch_" + uid,
             x: 43,
             y: 30,
+            width: 130,
+            height: 75,
             model: 'switch_2.png',
             label: 'switch_' + uid,
             label_fontfamily: 'Comic Sans MS',
@@ -93,11 +97,13 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of a slider. */
     addSliderConfigDefault(filename) {
-        let uid = Date.now();
+        let uid = Math.floor(Math.random() * 1000); 
         var slider = {
             id: "slider_" + uid,
             x: 43,
             y: 30,
+            width: 45,
+            height: 45,
             model: 'slider1.png',
             label: 'slider_' + uid,
             label_fontfamily: 'Comic Sans MS',
@@ -174,12 +180,12 @@ class PedalElementManager {
         switchContainer.setAttribute('class', 'switch');
         switchContainer.setAttribute('id', switchConfig.id);
         
-        var switchElem = this.doc.createElement("webaudio-switch");
+        /*var switchElem = this.doc.createElement("webaudio-switch");
         switchElem.setAttribute('src', '../img/switches/' + switchConfig.model);
-        switchElem.setAttribute('height', 64);
-        switchElem.setAttribute('width', 128);
+        switchElem.setAttribute('height', 400);
+        switchElem.setAttribute('width', 400);*/
         
-        switchContainer.appendChild(switchElem);
+        //switchContainer.appendChild(switchElem);
 
         var label = this.doc.createElement('div');
         label.innerHTML = switchConfig.id;

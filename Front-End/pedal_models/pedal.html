@@ -113,7 +113,6 @@
 			}
 
 			selectElement(elementId) {
-				console.log("Selected eleme id: " + elementId)
 				for(let knob of this.knobs) {
 					if(knob.id === elementId) {
 						this.selectedElement = knob;
@@ -160,7 +159,7 @@
 				}
 
 				for(let i = 0; i < this.switches.length; i++) {
-					let s = shadow.querySelectorAll('.switch')[i];
+					let s = shadow.querySelectorAll('.switch')[i+1];
 					s.className = s.className.replace('selected', '');
 				}
 
@@ -296,7 +295,6 @@
 						}
 					`
 					let knobContainer = this.shadowRoot.querySelector('#'+knob.id);
-					console.log(knob.id);
 					let knobElem = knobContainer.childNodes[0];
 					knobElem.value = knob.value;
 					knobElem.setAttribute('value', knob.value);
@@ -325,13 +323,19 @@
 					`
 					let switchContainer = this.shadowRoot.querySelector('#'+s.id);
 
-					let switchElem = switchContainer.childNodes[0];
+					switchContainer.innerHTML = '';
 
-					switchElem.src = '../img/switches/' + s.model;
-					switchElem.setAttribute('src', '../img/switches/' + s.model);
+					var switchElem = thatDoc.createElement("webaudio-switch");
+        			switchElem.setAttribute('src', '../img/switches/' + s.model);
+        			switchElem.setAttribute('height', s.height);
+					switchElem.setAttribute('width', s.width);
+					
+					switchContainer.appendChild(switchElem);
+				
 
-					let labelElem = switchContainer.childNodes[1];
+					let labelElem = thatDoc.createElement("p");
 					labelElem.innerHTML = s.label;
+					switchContainer.appendChild(labelElem);
 					
 				}
 
@@ -421,7 +425,6 @@
 						console.log('The file of the icon is : ' + icon.file);
 					}
 				}
-				console.log(this.knobs[0]);
 
 				this.setAttribute('width', config.width);
 				this.setAttribute('color', config.color);
