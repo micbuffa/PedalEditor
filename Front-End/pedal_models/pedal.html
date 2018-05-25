@@ -295,15 +295,26 @@
 						}
 					`
 					let knobContainer = this.shadowRoot.querySelector('#'+knob.id);
-					let knobElem = knobContainer.childNodes[0];
-					knobElem.value = knob.value;
-					knobElem.setAttribute('value', knob.value);
 
+					knobContainer.innerHTML = '';					
+
+
+					var knobElem = thatDoc.createElement("webaudio-knob");
 					knobElem.src = '../img/knobs/' + knob.model;
 					knobElem.setAttribute('src', '../img/knobs/' + knob.model);
-
-					let labelElem = knobContainer.childNodes[1];
+        			knobElem.setAttribute('height', knob.height);
+					knobElem.setAttribute('width', knob.width);
+					knobElem.setAttribute('sprites', 100);
+        			knobElem.setAttribute('step', 1);
+					knobElem.value = knob.value;
+					knobElem.setAttribute('value', knob.value);
+					
+					knobContainer.appendChild(knobElem);
+					
+					let labelElem = thatDoc.createElement("div");
 					labelElem.innerHTML = knob.label;
+					knobContainer.appendChild(labelElem);
+
 					
 				}
 
@@ -333,7 +344,7 @@
 					switchContainer.appendChild(switchElem);
 				
 
-					let labelElem = thatDoc.createElement("p");
+					let labelElem = thatDoc.createElement("div");
 					labelElem.innerHTML = s.label;
 					switchContainer.appendChild(labelElem);
 					
