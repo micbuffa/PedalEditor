@@ -77,6 +77,10 @@
 				return this.knobs.concat(this.icons.concat(this.switches.concat(this.sliders)));
 			}
 
+			getElementsTypes() {
+				return ['knob', 'icon', 'switch', 'slider'];
+			}
+
 			getKnobs() {
 				return this.knobs;
 			}

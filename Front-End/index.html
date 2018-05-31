@@ -425,45 +425,43 @@
         pedal.updateStyle_();
     }
 
-
-    function updateKnobsSection() {
-        var knobsSection = document.getElementById('knobs_section');
-        var iconsSection = document.getElementById('icons_section');
-
-        while(document.getElementById('knobs_section').firstChild) {
-            knobsSection.removeChild(knobsSection.firstChild);
-        }
-
-        while(document.getElementById('icons_section').firstChild) {
-            iconsSection.removeChild(iconsSection.firstChild);
-        }
-
-        for(var knob of pedal.getKnobs()) {
-
-            var knobId = document.createElement('div');
-            knobId.className = 'knob_id';
-            knobId.innerHTML = knob.id;
-            knobId.onclick = (e) => {
-                selectKnob(e.target.innerHTML);
+    function updatePedalElementsSection() {
+                
+        // Deleting the elements of all the sections.
+        for(let pedalElementType of pedal.getElementsTypes()) {
+            let section = getSectionByPedalElementType(pedalElementType);
+            let firstChild;
+            while(firstChild = section.firstChild) {
+                section.removeChild(firstChild);
             }
+        }
+
+        
+        // Populating the sections.
+        for(let pedalElement of pedal.getElements()) {
+            let section = getSectionByPedalElementType(pedalElement.type);
             
-            knobsSection.appendChild(knobId);
-        }
-
-        for(var icon of pedal.getIcons()) {
-
-            var iconId = document.createElement('div');
-            iconId.className = 'knob_id';
-            iconId.innerHTML = icon.id;
-            iconId.onclick = (e) => {
+            let idElem = document.createElement('div');
+            idElem.className = pedalElement.type + '_id';
+            idElem.onclick = (e) => {
                 selectKnob(e.target.innerHTML);
             }
 
-            iconsSection.appendChild(iconId);
+            section.appendChild(idElem);
         }
         
-        if(pedal.getSelectedElement())
-            selectKnob(pedal.getSelectedElement().id);
+        // Select the pedal's selected knob.
+        let selectedElement = pedal.getSelectedElement();
+        if(selectedElement) {
+            selectKnob(selectedElement);
+        }
+
+    }
+
+    function getSectionByPedalElementType(pedalElementType) {
+        let section = document.querySelector('#' + pedalElementType + '_section');
+
+        return section;
     }
 
     function updateInspector() {
@@ -534,16 +532,17 @@
 
     function deleteSelectedElement() {
         pedal.deleteSelectedElement();
+        updatePedalElementsSection();
     }
 
     function addKnob() {
         pedal.addElement('knob');
-        updateKnobsSection();
+        updatePedalElementsSection();
     }
 
     function addIcon(name) {
         pedal.addElement('icon', name);
-        updateKnobsSection();
+        updatePedalElementsSection();
     }
 
     function addSwitch() {
@@ -604,7 +603,7 @@
             }
         }
         
-        updateKnobsSection();
+        updatePedalElementsSection(();
     }
 
     function getFirstChild(el) {
