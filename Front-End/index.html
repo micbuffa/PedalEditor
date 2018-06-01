@@ -218,14 +218,14 @@
         Knobs<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
     </h2>
 
-    <div id="knobs_section" class="menuOptions">
+    <div id="knob_section" class="menuOptions">
     </div>
 
     <!-- Knob font size menu -->
     <h2 class="component-title">Icons<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
     </h2>
 
-    <div id="icons_section" class="menuOptions">
+    <div id="icon_section" class="menuOptions">
     </div>
 
     <h2 class="component-title">Labels<i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i></h2>
@@ -426,10 +426,15 @@
     }
 
     function updatePedalElementsSection() {
-                
+        
         // Deleting the elements of all the sections.
         for(let pedalElementType of pedal.getElementsTypes()) {
             let section = getSectionByPedalElementType(pedalElementType);
+            
+            if(!section) {
+                continue;
+            }
+
             let firstChild;
             while(firstChild = section.firstChild) {
                 section.removeChild(firstChild);
@@ -440,20 +445,24 @@
         // Populating the sections.
         for(let pedalElement of pedal.getElements()) {
             let section = getSectionByPedalElementType(pedalElement.type);
-            
+            if(!section) {
+                continue;
+            }
+
             let idElem = document.createElement('div');
             idElem.className = pedalElement.type + '_id';
+            idElem.innerHTML = pedalElement.id;
             idElem.onclick = (e) => {
                 selectKnob(e.target.innerHTML);
             }
-
+            
             section.appendChild(idElem);
         }
         
-        // Select the pedal's selected knob.
+        // Select the pedal's selected element.
         let selectedElement = pedal.getSelectedElement();
         if(selectedElement) {
-            selectKnob(selectedElement);
+            selectKnob(selectedElement.id);
         }
 
     }
@@ -470,8 +479,8 @@
 
     function selectKnob(knobId) {
 
-        var knobs = document.getElementById('knobs_section').childNodes;
-        var icons = document.getElementById('icons_section').childNodes;
+        var knobs = document.getElementById('knob_section').childNodes;
+        var icons = document.getElementById('icon_section').childNodes;
 
         for(let knob of knobs) {
             // TODO: Remove.
@@ -603,7 +612,7 @@
             }
         }
         
-        updatePedalElementsSection(();
+        updatePedalElementsSection();
     }
 
     function getFirstChild(el) {

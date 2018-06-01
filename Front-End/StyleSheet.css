@@ -94,6 +94,16 @@
     background: white;
 }
 
+.icon_id {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.icon_id.selected {
+    background: white;
+}
+
+
 .component-title {
     background-color: #999999;
     color: #0f0f0f;

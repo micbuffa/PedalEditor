@@ -179,13 +179,6 @@ class PedalElementManager {
         var switchContainer = this.doc.createElement("div");
         switchContainer.setAttribute('class', 'switch');
         switchContainer.setAttribute('id', switchConfig.id);
-        
-        /*var switchElem = this.doc.createElement("webaudio-switch");
-        switchElem.setAttribute('src', '../img/switches/' + switchConfig.model);
-        switchElem.setAttribute('height', 400);
-        switchElem.setAttribute('width', 400);*/
-        
-        //switchContainer.appendChild(switchElem);
 
         var label = this.doc.createElement('div');
         label.innerHTML = switchConfig.id;
@@ -285,6 +278,8 @@ class PedalElementManager {
     
     /* Deleting a pedal element */
     deleteElement(elementId) {
+        console.log('The number of remaining pedal elements are: ' + pedal.getElements());
+
         this.deleteElementConfig(elementId);
         this.deleteElementHtml(elementId);
         this.pedal.updateStyle(this.pedal);
