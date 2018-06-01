@@ -632,8 +632,25 @@
     }
 
     function generateCodeFunctionalPedal() {
-        //pedal.generateCodeFunctionalPedal();
+        
         console.log(funcitonalPedalGenerator.generateFunctionalPedalCode());
+
+        let http = new XMLHttpRequest();
+        let url = serverUrl + '/generate';
+
+        http.open("POST", url, true);
+
+        http.setRequestHeader("Content-type", "application/json");
+
+        http.onreadystatechange = function() {
+            if(http.readyState == 4 && http.status == 200) {
+                alert('Saved successfully!');
+                pedal.pedalId = JSON.parse(http.responseText).id;
+                displaySavedPedalsIds();
+            }
+        }
+        http.send({generated: funcitonalPedalGenerator.generateFunctionalPedalCode()});
+
     }
 
     function toggleBackgrounds() {

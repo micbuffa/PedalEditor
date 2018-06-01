@@ -6,7 +6,6 @@ class FunctionalPedalGenerator {
     constructor(editablePedal) {
         this.editablePedal = editablePedal;
 
-        console.log(this.generateFunctionalPedalCode());
     }
 
     /** 
@@ -86,7 +85,7 @@ class FunctionalPedalGenerator {
         `;
 
         // Generating and appending the class of the pedal.
-        functionalPedalCode += this.generateClass('FunctionalPedal', classContent);
+        functionalPedalCode += this.generateClass(this.editablePedal.name + 'Gui', classContent);
 
         // Custom element export statement.
         functionalPedalCode += '\nwindow.customElements.define("functional-pedal", FunctionalPedal);\n';
