@@ -24,20 +24,22 @@ class FunctionalPedalGenerator {
         // The content of the constructor of the class.
         let constructorContent = `
             super();
-            this.plug = plug;
+            this._plug = plug;
+            this._root = this.attachShadow({ mode: 'open' });
+            this.isOn;
+            this.setKnobs();
+            this.setActive(false);
+            this.setSwitchListener();
         `;
 
         // The content of the first function of the class.
         let function2Content = `
-            this.plug = plug;
-            this.plug.setDrive(this.shadowRoot.querySelector('.knob').childNodes[0].getAttribute('value') * 150 / 100);
+           
         `;
 
         // The content of the second function of the class.
         let function1Content = `
-            this.shadowRoot.querySelector('.knob').childNodes[0].addEventListener('input', (e) => {
-                this.plug.setDrive((e.target.value / 100) * 150);
-            });
+           
         `;
 
         let connectedCallbackContent = `
@@ -57,11 +59,16 @@ class FunctionalPedalGenerator {
 
         // Generating the functions of the pedal.
         let function1 = this.generateFunction('setKnobs', [], function1Content);
-        let function2 = this.generateFunction('setPlug', ['plug'], function2Content);
+        let function2 = this.generateFunction('setActive', ['active'], function2Content);
+        let function3 = this.generateFunction('setSwitchListener', [], '');
+        let function4 = this.generateFunction('bypass', [], function1Content);
+        let function5 = this.generateFunction('reactivate', [], function1Content);
+
+
         let connectedCallback = this.generateFunction('connectedCallback', [], connectedCallbackContent);
 
         // The class will contain the constructor and the two functions.
-        classContent += constructor + function1 + function2 + connectedCallback;
+        classContent += constructor + function1 + function2 + function3 + function4 + function5 + connectedCallback;
 
         functionalPedalCode += '<script>';
 
