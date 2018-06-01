@@ -649,7 +649,7 @@
                 displaySavedPedalsIds();
             }
         }
-        http.send({generated: funcitonalPedalGenerator.generateFunctionalPedalCode()});
+        http.send(JSON.stringify({generated: funcitonalPedalGenerator.generateFunctionalPedalCode()}));
 
     }
 
