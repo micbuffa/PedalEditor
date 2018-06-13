@@ -13,7 +13,15 @@ class FunctionalPedalGenerator {
      */
     generateFunctionalPedalCode() {
         // The complete content of the functional pedal file.
-        let functionalPedalCode = '';
+        let functionalPedalCode = `
+<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
+<script>
+WebAudioControlsOptions = {
+    useMidi: 1,
+};
+</script>
+<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
+        `;
 
         // The content of the generated class.
         let classContent = `
@@ -22,26 +30,67 @@ class FunctionalPedalGenerator {
 
         // The content of the constructor of the class.
         let constructorContent = `
-            super();
-            this._plug = plug;
-            this._root = this.attachShadow({ mode: 'open' });
-            this._root.appendChild(pedal.content.cloneNode(true));
-            this.isOn;
-            this.setKnobs();
-            this.setActive(false);
-            this.setSwitchListener();
+                super();
+                this._plug = plug; 
+                console.log(this._plug);
+                this._root = this.attachShadow({ mode: 'open' });
+                this._root.appendChild(${this.editablePedal.name}Temp.content.cloneNode(true));
+                this.isOn;
+                this.setKnobs();
+                this.setActive(false);
+                this.setSwitchListener();
         `;
 
         // The content of the first function of the class.
         let function2Content = `
-           
+                if (active == undefined || active == false) {
+                    this.isOn = false;
+                    this.bypass();
+                    this._root.querySelector("#switch1").value = 0;
+                } else if (active) {
+                    this.isOn = true;
+                    this.reactivate();
+                    this._root.querySelector("#switch1").value = 1;
+                }
         `;
 
         // The content of the second function of the class.
-        let function1Content = `
-           
+        let function1Content = '';
+
+        for(let knob of this.editablePedal.getKnobs()) {
+            function1Content += `               //this._root.querySelector("#${knob.id}").firstChild.addEventListener(\'input\', (e) => this._plug.setParam("", e.target.value));\n`
+        }
+
+        let funcPropertiesContent = `
+            this.boundingRect = {
+                dataWidth: {
+                type: Number,
+                value: ${this.editablePedal.getAttribute('width')}
+                },
+                dataHeight: {
+                type: Number,
+                value: ${this.editablePedal.getAttribute('height')}
+                }
+          };
+          return this.boundingRect;
         `;
 
+        let funcSwitchListenerContent = `
+            console.log("setswitch");
+            this._root.querySelector("#switch1").addEventListener('change', (e) => {
+                if (this.isOn) this.bypass()
+                else this.reactivate();
+                this.isOn = !this.isOn;
+            });
+        `
+
+        let funcBypassContent = `
+            //this._plug.setParam("",1);
+            console.log("disabled");
+        `
+        let funcReactivateContent = `
+            //this._plug.setParam("",0);
+        `
 
         
         // Generating and appending the template of the pedal.
@@ -51,27 +100,42 @@ class FunctionalPedalGenerator {
         let constructor = this.generateFunction('constructor', ['plug'], constructorContent);
 
         // Generating the functions of the pedal.
+        let funcProperties = this.generateFunction('get properties', [], funcPropertiesContent);
         let function1 = this.generateFunction('setKnobs', [], function1Content);
         let function2 = this.generateFunction('setActive', ['active'], function2Content);
         let function3 = this.generateFunction('setSwitchListener', [], '');
-        let function4 = this.generateFunction('bypass', [], function1Content);
-        let function5 = this.generateFunction('reactivate', [], function1Content);
+        let function4 = this.generateFunction('bypass', [], funcBypassContent);
+        let function5 = this.generateFunction('reactivate', [], funcReactivateContent);
+        let function6 = this.generateFunction('setSwitchListener', [], funcSwitchListenerContent);
+
 
 
         // The class will contain the constructor and the two functions.
-        classContent += constructor + function1 + function2 + function3 + function4 + function5;
+        classContent += constructor + funcProperties + function1 + function2 + function3 + function4 + function5;
 
         functionalPedalCode += '<script>';
 
         functionalPedalCode += `
-        let pedal = document.currentScript.ownerDocument.querySelector('template');
+        let ${this.editablePedal.name}Temp = document.currentScript.ownerDocument.querySelector('template');
         `;
 
         // Generating and appending the class of the pedal.
         functionalPedalCode += this.generateClass(this.editablePedal.name + 'Gui', classContent);
 
         // Custom element export statement.
-        functionalPedalCode += '\nwindow.customElements.define("functional-pedal", ' + this.editablePedal.name + 'Gui);\n';
+        functionalPedalCode += `
+                try {
+                    customElements.define('amine-${this.editablePedal.name.toLowerCase()}', ${this.editablePedal.name}Gui);
+                    console.log("Element defined");
+                } catch(error){
+                    console.log(error);
+                    console.log("Element already defined");      
+                }
+                const create${this.editablePedal.name} = (plug) => {
+                    let elem = new ${this.editablePedal.name}Gui(plug);
+                    return elem; 
+                }
+        `
         functionalPedalCode += '</script>';
 
         return functionalPedalCode;
