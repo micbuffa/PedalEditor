@@ -54,6 +54,21 @@ app.post('/pedals', function(req, res) {
 
 });
 
+app.post('/generate', function(req, res) {
+    console.log(req.body);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    
+    fs.writeFile('./functionalPedal.html', req.body.generated, err => {
+        if(err) {
+            res.error('An error occured saving the funcitonal pedal.');
+        } else {
+            res.json({message: 'Functional pedal generated successfully!'});
+        }
+    });
+
+});
+
 app.listen(3000, function() {
     console.log('Listening on port 3000!');
 });

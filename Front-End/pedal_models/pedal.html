@@ -175,28 +175,37 @@
 				let selectedElement = shadow.querySelector('#' + elementId);
 				selectedElement.className += " selected";
 			}
-
-			updateStyle(elem) {
-				var shadow = elem.shadowRoot;
-				var childNodes = shadow.childNodes;
-				
-				for(var childNode of childNodes) {
-					if(childNode.nodeName === 'STYLE') {				
-
-						childNode.textContent = `
+			
+			generateStyle(functional) {
+				let nonFuncitonalPedalStyle = `
 							.pedal{
 								display: block;
 								background-color: ${this.getAttribute('color')};
 								width: ${this.getAttribute('width')}px;
 								height: ${this.getAttribute('height')}px;
 								border-radius: ${this.getAttribute('radius')}px;
-								//box-shadow: inset -3px -3px 3px 5px rgba(0, 0, 0, 0.6), inset 3px 3px 3px 5px rgba( 255, 255, 255, 0.5);
 								position: fixed;
 								top: 40%;
 								left: 50%;
 								/* bring your own prefixes */
 								transform: translate(-50%, -50%);
+							}`;
+
+				let functionalPedalStyle = `
+							.pedal{
+								display: block;
+								background-color: ${this.getAttribute('color')};
+								width: ${this.getAttribute('width')}px;
+								height: ${this.getAttribute('height')}px;
+								border-radius: ${this.getAttribute('radius')}px;
+								position: relative;
+								/* bring your own prefixes */
 							}
+				`;
+
+
+
+				return `	${functional ? functionalPedalStyle : nonFuncitonalPedalStyle}
 							
 							#background-image {
 								//border: solid 2px black;
@@ -277,7 +286,17 @@
 							#knob1-label{
 								top: 84px;
 								left: 43px;
-							}`;
+							}`
+			}
+
+			updateStyle(elem) {
+				var shadow = elem.shadowRoot;
+				var childNodes = shadow.childNodes;
+				
+				for(var childNode of childNodes) {
+					if(childNode.nodeName === 'STYLE') {				
+
+						childNode.textContent = this.generateStyle(false);
 					}
 				}
 			}
@@ -488,7 +507,7 @@
 			 */
 			getStyle() {
 				let style = this.shadowRoot.childNodes[1].cloneNode(true);
-
+				style.innerHTML = this.generateStyle(true);	
 				return style;
 
 			}

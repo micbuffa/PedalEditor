@@ -25,6 +25,7 @@ class FunctionalPedalGenerator {
             super();
             this._plug = plug;
             this._root = this.attachShadow({ mode: 'open' });
+            this._root.appendChild(pedal.content.cloneNode(true));
             this.isOn;
             this.setKnobs();
             this.setActive(false);
@@ -41,13 +42,6 @@ class FunctionalPedalGenerator {
            
         `;
 
-        let connectedCallbackContent = `
-            var shadowRoot = this.attachShadow({mode:'open'});
-        
-            var clone = thatDoc.importNode( template.content, true );
-            shadowRoot.appendChild(clone);
-            this.setKnobs();
-        `;
 
         
         // Generating and appending the template of the pedal.
@@ -64,31 +58,20 @@ class FunctionalPedalGenerator {
         let function5 = this.generateFunction('reactivate', [], function1Content);
 
 
-        let connectedCallback = this.generateFunction('connectedCallback', [], connectedCallbackContent);
-
         // The class will contain the constructor and the two functions.
-        classContent += constructor + function1 + function2 + function3 + function4 + function5 + connectedCallback;
+        classContent += constructor + function1 + function2 + function3 + function4 + function5;
 
         functionalPedalCode += '<script>';
 
         functionalPedalCode += `
-            var thatDoc = document;
-            
-            var thisDoc = (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
-            
-            var template = thisDoc.querySelector( 'template' );
-            
-            
-            if (window.ShadowDOMPolyfill) {
-                WebComponents.ShadowCSS.shimStyling(template.content, 'pedal');
-            }
+        let pedal = document.currentScript.ownerDocument.querySelector('template');
         `;
 
         // Generating and appending the class of the pedal.
         functionalPedalCode += this.generateClass(this.editablePedal.name + 'Gui', classContent);
 
         // Custom element export statement.
-        functionalPedalCode += '\nwindow.customElements.define("functional-pedal", FunctionalPedal);\n';
+        functionalPedalCode += '\nwindow.customElements.define("functional-pedal", ' + this.editablePedal.name + 'Gui);\n';
         functionalPedalCode += '</script>';
 
         return functionalPedalCode;
