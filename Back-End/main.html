@@ -72,36 +72,36 @@
 								right: 0px;
 							}
 							
-						#knob_380 {
+						#knob_98 {
 							left: 113px;
 							top: 32px;
 						}
 
-						#knob_380 div {
+						#knob_98 div {
 							color: #000000;
 							font-family: "Comic Sans MS";
 							font-size: 14px;
 							
 						}
 					
-						#knob_328 {
+						#knob_587 {
 							left: 170px;
 							top: 254px;
 						}
 
-						#knob_328 div {
+						#knob_587 div {
 							color: #000000;
 							font-family: "Comic Sans MS";
 							font-size: 14px;
 							
 						}
 					
-						#knob_969 {
+						#knob_345 {
 							left: 75px;
 							top: 150px;
 						}
 
-						#knob_969 div {
+						#knob_345 div {
 							color: #000000;
 							font-family: "Comic Sans MS";
 							font-size: 14px;
@@ -141,7 +141,7 @@
 			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
 		</div>
 		
-	<div class="knob " id="knob_380"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_328"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_969"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template><script>
+	<div class="knob " id="knob_98"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_587"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_345"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template><script>
         let PingPongDelayTemp = document.currentScript.ownerDocument.querySelector('template');
         class PingPongDelayGui extends HTMLElement {
     
@@ -177,10 +177,32 @@
         
             }
         
+            static get observedAttributes() {
+               
+                return ['state'];
+        
+            }
+        
+            attributeChangedCallback() {
+               
+            this.state = JSON.parse(this.getAttribute('state'));
+            console.log(this.state);
+            if (this.state.status == "enable") {
+                this._root.querySelector("#switch1").querySelector("webaudio-switch").value = 1;
+                this.isOn = true;
+            }
+            this.knobs = this._root.querySelectorAll(".knob");
+            this.labels = this._root.querySelectorAll(".knob-label");
+            for (var i = 0; i < this.knobs.length; i++) {
+                this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
+            }
+        
+            }
+        
             setKnobs() {
-                              //this._root.querySelector("#knob_380").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_328").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_969").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+                              //this._root.querySelector("#knob_98").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_587").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_345").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
 
             }
         

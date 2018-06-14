@@ -131,6 +131,7 @@ class FunctionalPedalGenerator {
         // Generating the functions of the pedal.
         let funcProperties = this.generateFunction('get properties', [], funcPropertiesContent);
         let functionGetObservedAttributes = this.generateFunction('static get observedAttributes', [], funcGetObservedAttributes);
+        let functionAttributeChangedCallback = this.generateFunction('attributeChangedCallback', [], funcAttributeChangedCallback);
 
         let function1 = this.generateFunction('setKnobs', [], function1Content);
         let function3 = this.generateFunction('setSwitchListener', [], '');
@@ -139,9 +140,8 @@ class FunctionalPedalGenerator {
         let function6 = this.generateFunction('setSwitchListener', [], funcSwitchListenerContent);
 
 
-
         // The class will contain the constructor and the two functions.
-        classContent += constructor + funcProperties + function1 + function3 + function4 + function6 + function5;
+        classContent += constructor + funcProperties + functionGetObservedAttributes + functionAttributeChangedCallback + function1 + function3 + function4 + function6 + function5;
 
         functionalPedalCode += '<script>';
 
