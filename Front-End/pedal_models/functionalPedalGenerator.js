@@ -106,7 +106,7 @@ class FunctionalPedalGenerator {
 
         let funcSwitchListenerContent = `
             console.log("setswitch");
-            this._root.querySelector("#switch1").addEventListener('change', (e) => {
+            this._root.querySelector("#switch1").querySelector("webaudio-switch").addEventListener('change', (e) => {
                 if (this.isOn) this.bypass()
                 else this.reactivate();
                 this.isOn = !this.isOn;
