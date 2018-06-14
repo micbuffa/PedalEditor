@@ -456,7 +456,6 @@
 						icon.height = element.height;
 						icon.file = element.file;
 						icon.type = element.type;
-						console.log('The file of the icon is : ' + icon.file);
 					}
 				}
 
@@ -518,7 +517,6 @@
 			getHtml() {
 				let html = this.shadowRoot.childNodes[3].cloneNode(true);
 				
-				
 				for(let elem of html.querySelectorAll('webaudio-knob')) {
 					elem.innerHTML = '';
 
@@ -538,6 +536,7 @@
 						}
 					}
 				}
+
 				return html;
 			}
 

@@ -13,15 +13,25 @@ class FunctionalPedalGenerator {
      */
     generateFunctionalPedalCode() {
         // The complete content of the functional pedal file.
-        let functionalPedalCode = `
-<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
-<script>
-WebAudioControlsOptions = {
-    useMidi: 1,
-};
-</script>
-<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
+    let functionalPedalCode = `
+            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
+            <script>
+            WebAudioControlsOptions = {
+                useMidi: 1,
+            };
+            </script>
+            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
         `;
+
+        /*let functionalPedalCode = `
+        <script>
+        WebAudioControlsOptions = {
+            useMidi: 1,
+        };
+        </script>
+                `;*/
+
+
 
         // The content of the generated class.
         let classContent = `
@@ -31,13 +41,14 @@ WebAudioControlsOptions = {
         // The content of the constructor of the class.
         let constructorContent = `
                 super();
-                this._plug = plug; 
+                this._plug = plug;
+                //this._plug.gui = this;
                 console.log(this._plug);
                 this._root = this.attachShadow({ mode: 'open' });
                 this._root.appendChild(${this.editablePedal.name}Temp.content.cloneNode(true));
                 this.isOn;
+                this.state = new Object();
                 this.setKnobs();
-                this.setActive(false);
                 this.setSwitchListener();
         `;
 
@@ -54,11 +65,29 @@ WebAudioControlsOptions = {
                 }
         `;
 
+        let funcGetObservedAttributes = `
+                return ['state'];
+        `;
+
+        let funcAttributeChangedCallback = `
+            this.state = JSON.parse(this.getAttribute('state'));
+            console.log(this.state);
+            if (this.state.status == "enable") {
+                this._root.querySelector("#switch1").querySelector("webaudio-switch").value = 1;
+                this.isOn = true;
+            }
+            this.knobs = this._root.querySelectorAll(".knob");
+            this.labels = this._root.querySelectorAll(".knob-label");
+            for (var i = 0; i < this.knobs.length; i++) {
+                this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
+            }
+        `;
+
         // The content of the second function of the class.
         let function1Content = '';
 
         for(let knob of this.editablePedal.getKnobs()) {
-            function1Content += `               //this._root.querySelector("#${knob.id}").firstChild.addEventListener(\'input\', (e) => this._plug.setParam("", e.target.value));\n`
+            function1Content += `               //this._root.querySelector("#${knob.id}").querySelector("webaudio-knob").addEventListener(\'input\', (e) => this._plug.setParam("", e.target.value));\n`
         }
 
         let funcPropertiesContent = `
@@ -101,8 +130,9 @@ WebAudioControlsOptions = {
 
         // Generating the functions of the pedal.
         let funcProperties = this.generateFunction('get properties', [], funcPropertiesContent);
+        let functionGetObservedAttributes = this.generateFunction('static get observedAttributes', [], funcGetObservedAttributes);
+
         let function1 = this.generateFunction('setKnobs', [], function1Content);
-        let function2 = this.generateFunction('setActive', ['active'], function2Content);
         let function3 = this.generateFunction('setSwitchListener', [], '');
         let function4 = this.generateFunction('bypass', [], funcBypassContent);
         let function5 = this.generateFunction('reactivate', [], funcReactivateContent);
@@ -111,7 +141,7 @@ WebAudioControlsOptions = {
 
 
         // The class will contain the constructor and the two functions.
-        classContent += constructor + funcProperties + function1 + function2 + function3 + function4 + function5;
+        classContent += constructor + funcProperties + function1 + function3 + function4 + function6 + function5;
 
         functionalPedalCode += '<script>';
 
@@ -169,7 +199,7 @@ WebAudioControlsOptions = {
      */
     generateFunctionalPedalHtml() {
         let html = this.editablePedal.getHtml();
-
+        
         return html.outerHTML;
     }
 

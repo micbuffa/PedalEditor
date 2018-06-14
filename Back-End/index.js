@@ -59,7 +59,7 @@ app.post('/generate', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
-    fs.writeFile('./functionalPedal.html', req.body.generated, err => {
+    fs.writeFile('./main.html', req.body.generated, err => {
         if(err) {
             res.error('An error occured saving the funcitonal pedal.');
         } else {
