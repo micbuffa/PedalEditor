@@ -9,7 +9,7 @@
 		<!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
 		<div class="switchCont" id="switch1">
 			<img id="background-image" >
-			<webaudio-switch src="../img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
+			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
 		</div>
 		
 	</div>
@@ -92,7 +92,7 @@
 			setBackgroundImage(imageName) {
 				this.backgroundImageSrc = imageName;
 				let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
-				backgroundImageElem.setAttribute('src', './img/background/' + imageName);
+				backgroundImageElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/background/' + imageName);
 			}
 
 			setSrc(src) {
@@ -323,8 +323,8 @@
 
 
 					var knobElem = thatDoc.createElement("webaudio-knob");
-					knobElem.src = '../img/knobs/' + knob.model;
-					knobElem.setAttribute('src', '../img/knobs/' + knob.model);
+					knobElem.src = 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/' + knob.model;
+					knobElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/' + knob.model);
         			knobElem.setAttribute('height', knob.height);
 					knobElem.setAttribute('width', knob.width);
 					knobElem.setAttribute('sprites', 100);
@@ -360,7 +360,7 @@
 					switchContainer.innerHTML = '';
 
 					var switchElem = thatDoc.createElement("webaudio-switch");
-        			switchElem.setAttribute('src', '../img/switches/' + s.model);
+        			switchElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/' + s.model);
         			switchElem.setAttribute('height', s.height);
 					switchElem.setAttribute('width', s.width);
 					
@@ -393,8 +393,8 @@
 					sliderElem.value = slider.value;
 					sliderElem.setAttribute('value', slider.value);
 
-					sliderElem.src = '../img/sliders/' + slider.model;
-					sliderElem.setAttribute('src', '../img/sliders/' + slider.model);
+					sliderElem.src = 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/sliders/' + slider.model;
+					sliderElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/sliders/' + slider.model);
 
 					let labelElem = sliderContainer.childNodes[1];
 					labelElem.innerHTML = slider.label;

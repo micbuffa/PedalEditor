@@ -72,36 +72,36 @@
 								right: 0px;
 							}
 							
-						#knob_51 {
+						#knob_380 {
 							left: 113px;
 							top: 32px;
 						}
 
-						#knob_51 div {
+						#knob_380 div {
 							color: #000000;
 							font-family: "Comic Sans MS";
 							font-size: 14px;
 							
 						}
 					
-						#knob_798 {
+						#knob_328 {
 							left: 170px;
 							top: 254px;
 						}
 
-						#knob_798 div {
+						#knob_328 div {
 							color: #000000;
 							font-family: "Comic Sans MS";
 							font-size: 14px;
 							
 						}
 					
-						#knob_878 {
+						#knob_969 {
 							left: 75px;
 							top: 150px;
 						}
 
-						#knob_878 div {
+						#knob_969 div {
 							color: #000000;
 							font-family: "Comic Sans MS";
 							font-size: 14px;
@@ -137,11 +137,11 @@
 		
 		<!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
 		<div class="switchCont" id="switch1">
-			<img id="background-image" src="./img/background/1.png">
-			<webaudio-switch src="../img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
+			<img id="background-image" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/background/1.png">
+			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
 		</div>
 		
-	<div class="knob " id="knob_51"><webaudio-knob src="../img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_798"><webaudio-knob src="../img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_878"><webaudio-knob src="../img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template><script>
+	<div class="knob " id="knob_380"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_328"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_969"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template><script>
         let PingPongDelayTemp = document.currentScript.ownerDocument.querySelector('template');
         class PingPongDelayGui extends HTMLElement {
     
@@ -178,9 +178,9 @@
             }
         
             setKnobs() {
-                              //this._root.querySelector("#knob_51").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_798").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_878").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+                              //this._root.querySelector("#knob_380").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_328").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_969").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
 
             }
         
