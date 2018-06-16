@@ -5,7 +5,6 @@ class FunctionalPedalGenerator {
     
     constructor(editablePedal) {
         this.editablePedal = editablePedal;
-
     }
 
     /** 
@@ -133,15 +132,18 @@ class FunctionalPedalGenerator {
         let functionGetObservedAttributes = this.generateFunction('static get observedAttributes', [], funcGetObservedAttributes);
         let functionAttributeChangedCallback = this.generateFunction('attributeChangedCallback', [], funcAttributeChangedCallback);
 
-        let function1 = this.generateFunction('setKnobs', [], function1Content);
-        let function3 = this.generateFunction('setSwitchListener', [], '');
+        let function1 = this.generateFunction(
+            'setKnobs', 
+            [], 
+            function1Content);
+        
         let function4 = this.generateFunction('bypass', [], funcBypassContent);
         let function5 = this.generateFunction('reactivate', [], funcReactivateContent);
         let function6 = this.generateFunction('setSwitchListener', [], funcSwitchListenerContent);
 
 
         // The class will contain the constructor and the two functions.
-        classContent += constructor + funcProperties + functionGetObservedAttributes + functionAttributeChangedCallback + function1 + function3 + function4 + function6 + function5;
+        classContent += constructor + funcProperties + functionGetObservedAttributes + functionAttributeChangedCallback + function1 + function4 + function6 + function5;
 
         functionalPedalCode += '<script>';
 

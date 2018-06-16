@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
     <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+
     <link rel="stylesheet" href="StyleSheet.css">
+    <link rel="stylesheet" href="StyleSideNav.css">
+
     <link rel="import" href="pedal_models/pedal.html">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
-    
+
     <!-- Latest compiled JavaScript -->
     <link rel="import" href="blue.html">
     <script src="js/bootstrap.min.js"></script>
@@ -24,224 +26,398 @@
     <script src="pedal_models/functionalPedalGenerator.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
-          rel="stylesheet">
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Pedal Creator 0.1</title>
 </head>
+
 <body>
-    <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button>
-    <button class="buttonDownload" onclick="savePedal()">Save</button>
-    <button class="buttonDownload" onclick="newPedal()">New</button>
-    Load :
-    <select id="load-pedal" onchange="loadPedalConfig(value)">
-        <option value="Georgia"></option>
-    </select>
 
-<div class="wrapper">    
-<section class="content">
-<div class="columns">
-
-    <!-- Pedal section -->
-<main class="pedalSection">
-
-</main>
-
-<!-- Inspector -->
-<aside class="container-fluid componentSection">
-    <h2 class="component-title">Inspector<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i></span>
-    </h2>
-
-    <div hidden id="inspector" class="menuOptions">
-        <!--<label>Id: </label><span id="inspector-id"></span>
-        
-        <br>-->
-        <button class="maininput" onclick="deleteSelectedElement()">Delete</button>
-
-        <br>
-
-        <label>Label: </label>
-        <input id="inspector-label" type="text" onkeyup="setSelectedElementLabel(this.value)" class="maininput">
-
-        <br>
-
-        <label>Label Color: </label>
-        <input id="inspector-label-color" class="jscolor maininput" onchange="setSelectedElementLabelColor(value)">
-
-        <br>
-
-        <label>Label Font Family: </label>
-        <select id="inspector-label-font-family" onchange="setSelectedElementLabelFontfamily(value)" class="maininput"> 
-            <option value="Georgia">Georgia</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Palatino Linotype">Palatino Linotype</option>
-            <option value="Arial Black">Arial Black</option>
-            <option value="Comic Sans MS">Comic Sans MS</option>
-            <option value="Impact">Impact</option>
-            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-            <option value="Tahoma">Tahoma</option>
-            <option value="Trebuchet MS">Trebuchet MS</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Lucida Console">Lucida Console</option>
-        </select>
-
-        <br>
-
-        <label>Label size: </label>
-        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number"
-               min="0" max="600" onchange="setSelectedElementLabelFontsize(value)"> px
-
-        <br>
-
-        <label>X position: </label>
-        <input id="inspector-x-position" class="maininput" type="number"
-            onchange="setSelectedElementXPosition(value)">
-        
-        <br>
-
-        <label>Y position: </label>
-        <input id="inspector-y-position" class="maininput" type="number"
-            onchange="setSelectedElementYPosition(value)">
-        
-        <br>
-
-        <label>Width: </label>
-        <input id="inspector-width" class="maininput" type="number"
-            onchange="setSelectedElementWidth(value)">
-        
-        <br>
-
-        <label>Height: </label>
-        <input id="inspector-height" class="maininput" type="number"
-            onchange="setSelectedElementHeight(value)">
-        
-        <br>
-        <br>
-
-        <label>Model: </label>
-        <select id="inspector-model" onchange="setSelectedElementModel(value)" class="maininput">
-            <option value="knob2.png">Knob2</option>
-            <option value="Carbon.png">Carbon</option>
-            <option value="JP8000.png">JP8000</option>
-            <option value="Jambalaya.png">Jambalaya</option>
-            <option value="MiniMoog_Main.png">MiniMoog_Main</option>
-            <option value="SimpleFlat3.png">SimpleFlat3</option>
-            <option value="Vintage_Knob.png">Vintage_Knob</option>
-            <option value="lineshadow.png">lineshadow</option>
-            <option value="lineshadow2.png">lineshadow2</option>
-        </select>
-        
-        <br>
-
-        <webaudio-knob id="inspector-preview" sprites="100" min="0" max="100" onchange="setSelectedElementValue(this.value)"></webaudio-knob>
+    <div class="hmessage">
+        <p>Welcome on Pedal editor ! click on MENU to start !</p>
     </div>
 
 
-</aside>
+    <!--div class="wrapper">
+        <section class="content">
+            <div class="columns"-->
+
+    <!-- Pedal section -->
+    <main class="pedalSection"></main>
 
 
-<!-- Main section -->
-<aside class="componentSection-right">
+    <!-- Inspector -->
+    <!--aside class="container-fluid componentSection"-->
+    <!--h2 class="component-title">Inspector
+                        <i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
+                        </span>
+                    </h2-->
+
+    <!--div hidden id="inspector" class="menuOptions"-->
+    <!--<label>Id: </label><span id="inspector-id"></span>
+        
+                        <br>-->
+
+    <!--Selider Nav Menu-->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button>
+        <button class="buttonDownload" onclick="savePedal()">Save</button>
+        <button class="buttonDownload" onclick="newPedal()">New</button>
+        <br>
+        <br>
+        <label>Load: </label>
+        <select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
+            <option value="Georgia"></option>
+        </select>
+        <br>
+        <!--Accrodion Menu-->
+        <div id="accordion">
+            <ul>
+                <li>
+                    <a href="#acc-pedal">PEDAL</a>
+                    <div id="acc-pedal" class="accordion">
+
+                        <label>Name: </label>
+                        <input id="pedal-name" onkeyup="setPedalName(this.value)" class="maininput">
+
+                        <br>
+
+                        <label>Background color: #</label>
+                        <input id="background-color-picker" class="jscolor" onchange="setPedalColor(this.value)" class="maininput">
+
+                        <br>
+
+                        <label>Image opacity: </label>
+                        <input id="opacity" class="maininput" type="number" name="opacity" onchange="setPedalBackgroundImageOpacity(this.value)"
+                            min="0" max="1">
+
+                        <br>
+
+                        <label>Width: </label>
+                        <input id="width" class="maininput" type="number" name="width" onchange="setPedalWidth(this.value)" min="0" max="600"> px
+
+                        <br>
+
+                        <label>Height: </label>
+                        <input id="height" class="maininput" type="number" name="height" onchange="setPedalHeight(this.value)" min="0" max="600"> px
+
+                        <br>
+
+                        <label>Radius: </label>
+                        <input id="radius" class="maininput" type="number" name="radius" onchange="setPedalRadius(this.value)" min="0" max="25"> px
+                    </div>
+                </li>
+                <li>
+                    <a href="#acc-pedal-bg">PEDAL BACKGROUNDS</a>
+                    <div id="acc-pedal-bg" class="accordion">
+
+                        <img class="menu-img" src="./img/background/image2.png" alt="image2.png" onclick="setPedalBackgroundImage(this.alt)" />
+                        <img class="menu-img" src="./img/background/1.png" alt="1.png" onclick="setPedalBackgroundImage(this.alt)" />
+                        <img class="menu-img" src="./img/background/2.jpg" alt="2.jpg" onclick="setPedalBackgroundImage(this.alt)" />
+
+                    </div>
+                </li>
+                <li>
+                    <a href="#acc-inspector">INSPECTOR</a>
+                    <div id="acc-inspector" class="accordion">
+
+                        <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button>
+
+                        <br>
+
+                        <label>Label: </label>
+                        <input id="inspector-label" class="maininput" type="text" onkeyup="setSelectedElementLabel(this.value)">
+
+                        <br>
+
+                        <label>Label Color: </label>
+                        <input id="inspector-label-color" class="jscolor maininput" onchange="setSelectedElementLabelColor(value)">
+
+                        <br>
+
+                        <label>Label size: </label>
+                        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number" min="0" max="600" onchange="setSelectedElementLabelFontsize(value)"> px
+
+                        <br>
+
+                        <label>X position: </label>
+                        <input id="inspector-x-position" class="maininput" type="number" onchange="setSelectedElementXPosition(value)">
+
+                        <br>
+
+                        <label>Y position: </label>
+                        <input id="inspector-y-position" class="maininput" type="number" onchange="setSelectedElementYPosition(value)">
+
+                        <br>
+
+                        <label>Width: </label>
+                        <input id="inspector-width" class="maininput" type="number" onchange="setSelectedElementWidth(value)">
+
+                        <br>
+
+                        <label>Label Font Family: </label>
+                        <select id="inspector-label-font-family" onchange="setSelectedElementLabelFontfamily(value)" class="maininput">
+                            <option value="Georgia">Georgia</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Palatino Linotype">Palatino Linotype</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="Comic Sans MS">Comic Sans MS</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+                            <option value="Tahoma">Tahoma</option>
+                            <option value="Trebuchet MS">Trebuchet MS</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Lucida Console">Lucida Console</option>
+                        </select>
+
+                        <br>
+
+                        <label>Height: </label>
+                        <input id="inspector-height" class="maininput" type="number" onchange="setSelectedElementHeight(value)">
+
+                        <br>
+
+                        <!--label>Model: </label>
+                        <select id="inspector-model" onchange="setSelectedElementModel(value)" class="maininput">
+                            <option value="knob2.png">Knob2</option>
+                            <option value="Carbon.png">Carbon</option>
+                            <option value="JP8000.png">JP8000</option>
+                            <option value="Jambalaya.png">Jambalaya</option>
+                            <option value="MiniMoog_Main.png">MiniMoog_Main</option>
+                            <option value="SimpleFlat3.png">SimpleFlat3</option>
+                            <option value="Vintage_Knob.png">Vintage_Knob</option>
+                            <option value="lineshadow.png">lineshadow</option>
+                            <option value="lineshadow2.png">lineshadow2</option>
+                        </select-->
+
+                        <br>
+
+                        <!--webaudio-knob id="inspector-preview" sprites="100" min="0" max="100" onchange="setSelectedElementValue(this.value)"></webaudio-knob-->
+
+                    </div>
+                </li>
+                <li>
+                    <a href="#acc-knobs">KNOBS</a>
+                    <div id="acc-knobs" class="accordion">
+
+                        <button class="mainbtn" onclick="addKnob()">Add Knob</button>
+
+                        <br>
+                        <br>
+
+                        <img class="menu-img" title="Aqua" src="./img/knobs2/Aqua.png" alt="Aqua.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="boss_basic_cyan" src="./img/knobs2/boss_basic_cyan.png" alt="boss_basic_cyan.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="boss_grey" src="./img/knobs2/boss_grey.png" alt="boss_grey.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="boss_basic_gold" src="./img/knobs2/boss_basic_gold.png" alt="boss_basic_gold.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="boss_basic_red" src="./img/knobs2/boss_basic_red.png" alt="boss_basic_red.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="boss_golden" src="./img/knobs2/boss_golden.png" alt="boss_golden.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="Carbon" src="./img/knobs2/Carbon.png" alt="Carbon.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="Jambalaya" src="./img/knobs2/Jambalaya.png" alt="Jambalaya.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="JP8000" src="./img/knobs2/JP8000.png" alt="JP8000.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="knob2" src="./img/knobs2/knob2.png" alt="knob2.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="lineshadow" src="./img/knobs2/lineshadow.png" alt="lineshadow.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="lineshadow2" src="./img/knobs2/lineshadow2.png" alt="lineshadow2.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="m400" src="./img/knobs2/m400.png" alt="m400.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="MiniMoog_Main" src="./img/knobs2/MiniMoog_Main.png" alt="MiniMoog_Main.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="nux_black_black_stripe" src="./img/knobs2/nux_black_black_stripe.png" alt="nux_black_black_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_black_not_stripped" src="./img/knobs2/nux_black_not_stripped.png" alt="nux_black_not_stripped.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_black_white_stripe" src="./img/knobs2/nux_black_white_stripe.png" alt="nux_black_white_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_white_black_stripe" src="./img/knobs2/nux_white_black_stripe.png" alt="nux_white_black_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_white_not_stripped" src="./img/knobs2/nux_white_not_stripped.png" alt="nux_white_not_stripped.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_white_white_stripe" src="./img/knobs2/nux_white_white_stripe.png" alt="nux_white_white_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_yellow_black_stripe" src="./img/knobs2/nux_yellow_black_stripe.png" alt="nux_yellow_black_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_yellow_not_stripe" src="./img/knobs2/nux_yellow_not_stripe.png" alt="nux_yellow_not_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="nux_yellow_white_stripe" src="./img/knobs2/nux_yellow_white_stripe.png" alt="nux_yellow_white_stripe.png"
+                            onclick="setSelectedElementModel(this.alt)" />
+                        <img class="menu-img" title="SimpleFlat3" src="./img/knobs2/SimpleFlat3.png" alt="SimpleFlat3.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="simplegray" src="./img/knobs2/simplegray.png" alt="simplegray.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="vernier" src="./img/knobs2/vernier.png" alt="vernier.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="Vintage_Knob" src="./img/knobs2/Vintage_Knob.png" alt="Vintage_Knob.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+                        <img class="menu-img" title="Vintage_VUMeter" src="./img/knobs2/Vintage_VUMeter.png" alt="Vintage_VUMeter.png" onclick="setSelectedElementModel(this.alt)"
+                        />
+
+                    </div>
+                </li>
+                <li>
+                    <a href="#acc-switches">SWITCHES</a>
+                    <div id="acc-switches" class="accordion">
+
+                        <button class="mainbtn" onclick="addSwitch()">Add Switch</button>
+
+                    </div>
+                    <li>
+                        <a href="#acc-sliders">SLIDERS</a>
+                        <div id="acc-sliders" class="accordion">
+
+                            <button class="mainbtn">Add Slider</button>
+
+                        </div>
+                        <li>
+                            <a href="#acc-icons">ICONS</a>
+                            <div id="acc-icons" class="accordion">
+
+                                <img class="menu-img" src="./img/icons/icon.png" alt="icon.png" onclick="addIcon(this.alt)" />
+                                <img class="menu-img" src="./img/icons/1.png" alt="1.png" onclick="addIcon(this.alt)" />
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#acc-icons-list">ICONS LIST</a>
+                            <div id="acc-icons-list" class="accordion">
+
+                                <div id="icon_section" class="menuOptions"></div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#acc-knobs-list">KNOBS LIST</a>
+                            <div id="acc-knobs-list" class="accordion">
+
+                                <div id="knob_section" class="menuOptions"></div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#acc-labels-list">LABELS LIST</a>
+                            <div id="acc-labels-list" class="accordion">
+
+                                <div class="menuOptions"></div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#acc-other">OTHER</a>
+                            <div id="acc-other" class="accordion">
+
+                                <div class="menuOptions"></div>
+
+                            </div>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+    <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--/div-->
+
+
+    <!--/aside-->
+
+
+    <!-- Main section -->
+    <!--aside class="componentSection-right"-->
+
+
+    <!--div class="menuOptions"-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--button class="maininput" onclick="toggleBackgrounds()">Backgrounds</button>
+    <div id="backgrounds">
+
+    </div>
 
     <br>
 
-    <div class="menuOptions">
-
-        <label>Name: </label>
-        <input id="pedal-name" onkeyup="setPedalName(this.value)" class="maininput">
-        
-        <br>
-
-        <label>Background color: #</label>
-        <input id="background-color-picker" class="jscolor" onchange="setPedalColor(this.value)">
-
-        <br>
-
-        <label>Image opacity: </label>
-        <input id="opacity" class="maininput"  type="number" name="opacity" onchange="setPedalBackgroundImageOpacity(this.value)"
-            min="0" max="1">
-
-        <br>
-
-        <label>Width: </label>
-        <input id="width" class="maininput" type="number" name="width" onchange="setPedalWidth(this.value)"
-               min="0" max="600"> px
-
-        <br>
-
-        <label>Height: </label>
-        <input id="height" class="maininput" type="number" name="height" onchange="setPedalHeight(this.value)"
-               min="0" max="600"> px
-
-        <br>
-
-        <label>Radius: </label>
-        <input id="radius" class="maininput" type="number" name="radius" onchange="setPedalRadius(this.value)"
-                min="0" max="25"> px
-                
-        <br>
-
-        <button class="maininput" onclick="toggleBackgrounds()">Backgrounds</button>
-        <div id="backgrounds">
-            <img class="menu-img" src="./img/background/image2.png" alt="image2.png" onclick="setPedalBackgroundImage(this.alt)" />
-            <img class="menu-img" src="./img/background/1.png" alt="1.png" onclick="setPedalBackgroundImage(this.alt)" />
-            <img class="menu-img" src="./img/background/2.jpg" alt="2.jpg" onclick="setPedalBackgroundImage(this.alt)" />
-        </div>
-
-        <br>    
-
-        <button class="maininput" onclick="toggleIcons()">Icons</button>
-        <div id="icons" >
-            <img class="menu-img" src="./img/icons/icon.png" alt="icon.png" onclick="addIcon(this.alt)" />
-            <img class="menu-img" src="./img/icons/1.png" alt="1.png" onclick="addIcon(this.alt)" />
-        </div>
-
-        <br>
-
-        <button class="maininput" onclick="addKnob()">Add Knob</button>
-        
-        <br>
-
-        <button class="maininput" onclick="addSwitch()">Add Switch</button>
-
-        <br>
-
-        <button class="maininput" >Add Slider</button>
-
-        <br>
+    <button class="maininput" onclick="toggleIcons()">Icons</button>
+    <div id="icons">
 
     </div>
+
+    <br-->
+
+
+
+
+    <!--/div-->
 
     <!-- Pedal font color menu -->
-    <h2 class="component-title">
-        Knobs<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
-    </h2>
+    <!--h2 class="component-title">
+        Knobs
+        <i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
+    </h2-->
 
-    <div id="knob_section" class="menuOptions">
-    </div>
+    <!-- Knob font size menu >
+    <h2 class="component-title">Icons
+        <i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
+    </h2-->
 
-    <!-- Knob font size menu -->
-    <h2 class="component-title">Icons<i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
-    </h2>
 
-    <div id="icon_section" class="menuOptions">
-    </div>
 
-    <h2 class="component-title">Labels<i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i></h2>
+    <!--h2 class="component-title">Labels
+        <i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i>
+    </h2-->
 
-    <div class="menuOptions">
-    </div>
+
 
     <!-- Other pedal elements that are not labels, knobs or switch. -->
-    <h2 class="component-title">Other<i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i></h2>
+    <!--h2 class="component-title">Other
+        <i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i>
+    </h2-->
 
-    <div class="menuOptions">
-    </div>
+    <!--div class="menuOptions">
+    </div-->
 
-</aside>
+    <!--/aside-->
 
-</div></section></div>
+    <!--/div>
+        </section>
+    </div-->
 
 </body>
 <script>
@@ -267,28 +443,37 @@
     var defaultOpacity = 1;
     let savedPedalsConfigs;
     let funcitonalPedalGenerator;
-    
+
     window.onload = initialize();
 
     function initialize() {
-        
+
         displaySavedPedalsIds();
-        
+
+    }
+
+    /*Slider Nav Menu*/
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "500px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
     }
 
     function newPedal() {
-        
+
         section.innerHTML = '';
         pedal = null;
         let pedalElem = document.createElement('my-pedal');
         section.appendChild(pedalElem);
         pedal = pedalElem;
 
-        pedal.addEventListener('select-knob', function(e) {
+        pedal.addEventListener('select-knob', function (e) {
             selectKnob(e.detail);
             updateInspector();
         });
-        
+
         initialize();
 
         document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
@@ -309,7 +494,7 @@
     function savePedal() {
 
         let pedalName = document.querySelector('#pedal-name').value;
-        if(pedalName == '') {
+        if (pedalName == '') {
             alert('You should enter the pedal name before saving !');
             return;
         }
@@ -323,8 +508,8 @@
 
         http.setRequestHeader("Content-type", "application/json");
 
-        http.onreadystatechange = function() {
-            if(http.readyState == 4 && http.status == 200) {
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
                 alert('Saved successfully!');
                 pedal.pedalId = JSON.parse(http.responseText).id;
                 displaySavedPedalsIds();
@@ -343,24 +528,28 @@
     }
 
     function displaySavedPedalsIds() {
+
+        /* Uptates the list of pedal configurations by fetching then from the server. */
         refreshSavedPedalsConfigs();
-        let loadPedalElem = document.querySelector('#load-pedal');
         
+        /* Gets the select element that displays the list of names of the saved pedal configurations. */
+        let loadPedalElem = document.querySelector('#load-pedal');
+
         let oldVal = loadPedalElem.value;
-
+        
+        /* Flushes the select element to get rid of the old pedal configurations that have been generated
+        during the last call to this function. If we don't flush it, the names of the new pedal configurations
+        will be appended to the ones that has been fetched in the previous call to the function.*/
         loadPedalElem.innerHTML = '';
-        let none = document.createElement('option');
-        none.setAttribute('value', 'none');
-        loadPedalElem.appendChild(none);
 
-        for(let savedPedalConfig of savedPedalsConfigs) {
+        for (let savedPedalConfig of savedPedalsConfigs) {
             let savedPedalIdElem = document.createElement('option');
             savedPedalIdElem.setAttribute('value', savedPedalConfig.id);
-            savedPedalIdElem.innerHTML = savedPedalConfig.id;
+            savedPedalIdElem.innerHTML = savedPedalConfig.name;
 
             loadPedalElem.appendChild(savedPedalIdElem);
         }
-        
+
         loadPedalElem.value = oldVal;
 
     }
@@ -428,26 +617,26 @@
     }
 
     function updatePedalElementsSection() {
-        
+
         // Deleting the elements of all the sections.
-        for(let pedalElementType of pedal.getElementsTypes()) {
+        for (let pedalElementType of pedal.getElementsTypes()) {
             let section = getSectionByPedalElementType(pedalElementType);
-            
-            if(!section) {
+
+            if (!section) {
                 continue;
             }
 
             let firstChild;
-            while(firstChild = section.firstChild) {
+            while (firstChild = section.firstChild) {
                 section.removeChild(firstChild);
             }
         }
 
-        
+
         // Populating the sections.
-        for(let pedalElement of pedal.getElements()) {
+        for (let pedalElement of pedal.getElements()) {
             let section = getSectionByPedalElementType(pedalElement.type);
-            if(!section) {
+            if (!section) {
                 continue;
             }
 
@@ -457,13 +646,13 @@
             idElem.onclick = (e) => {
                 selectKnob(e.target.innerHTML);
             }
-            
+
             section.appendChild(idElem);
         }
-        
+
         // Select the pedal's selected element.
         let selectedElement = pedal.getSelectedElement();
-        if(selectedElement) {
+        if (selectedElement) {
             selectKnob(selectedElement.id);
         }
 
@@ -484,28 +673,28 @@
         var knobs = document.getElementById('knob_section').childNodes;
         var icons = document.getElementById('icon_section').childNodes;
 
-        for(let knob of knobs) {
+        for (let knob of knobs) {
             // TODO: Remove.
-            if(knob.className)
+            if (knob.className)
                 knob.className = knob.className.replace('selected', '');
-            if(knob.innerHTML === knobId) {
+            if (knob.innerHTML === knobId) {
                 knob.className += ' selected';
             }
         }
 
-        for(let icon of icons) {
+        for (let icon of icons) {
             // TODO: Remove.
-            if(icon.className)
-            icon.className = icon.className.replace('selected', '');
-            if(icon.innerHTML === knobId) {
+            if (icon.className)
+                icon.className = icon.className.replace('selected', '');
+            if (icon.innerHTML === knobId) {
                 icon.className += ' selected';
             }
         }
 
-        if(pedal.getSelectedElement().id != knobId) {
+        if (pedal.getSelectedElement().id != knobId) {
             pedal.selectElement(knobId);
         }
-        
+
 
         let knob = pedal.getSelectedElement();
         let inspectorId = document.getElementById('inspector-id');
@@ -522,7 +711,7 @@
         let inspectorPreview = document.getElementById('inspector-preview');
 
 
-        
+
         //inspectorId.innerHTML = knobId;
         inspectorLabel.value = knob.label;
         inspectorLabelColor.value = knob.label_color;
@@ -600,8 +789,8 @@
 
     function loadPedalConfig(value) {
         newPedal();
-        for(let pedalConfig of savedPedalsConfigs) {
-            if(pedalConfig.id == value) {
+        for (let pedalConfig of savedPedalsConfigs) {
+            if (pedalConfig.id == value) {
                 console.log("ok");
                 pedal.loadConfig(pedalConfig);
                 document.getElementById('pedal-name').value = pedalConfig.name;
@@ -611,9 +800,11 @@
                 document.getElementById("radius").value = pedalConfig.radius;
                 let loadPedal = document.querySelector('#load-pedal');
                 loadPedal.value = value;
+                //loadPedal.innerHTML = pedalConfig.name;
+                //console.log(loadPedal);
             }
         }
-        
+
         updatePedalElementsSection();
     }
 
@@ -627,12 +818,14 @@
         return firstChild;
     }
 
-    function setBackgroundColor(value){
-        document.body.style.backgroundColor = "#"+value;
+    function setBackgroundColor(value) {
+        document.body.style.backgroundColor = "#" + value;
     }
 
     function generateCodeFunctionalPedal() {
-        
+
+        console.log(funcitonalPedalGenerator.generateFunctionalPedalCode());
+
         let http = new XMLHttpRequest();
         let url = serverUrl + '/generate';
 
@@ -640,14 +833,14 @@
 
         http.setRequestHeader("Content-type", "application/json");
 
-        http.onreadystatechange = function() {
-            if(http.readyState == 4 && http.status == 200) {
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
                 alert('Saved successfully!');
                 pedal.pedalId = JSON.parse(http.responseText).id;
                 displaySavedPedalsIds();
             }
         }
-        http.send(JSON.stringify({generated: funcitonalPedalGenerator.generateFunctionalPedalCode()}));
+        http.send(JSON.stringify({ generated: funcitonalPedalGenerator.generateFunctionalPedalCode() }));
 
     }
 
@@ -668,7 +861,7 @@
     }
 
     function toggleHidden(elem) {
-        if(elem.style.display === 'none') {
+        if (elem.style.display === 'none') {
             elem.style.display = 'block';
         } else {
             elem.style.display = 'none';
@@ -676,4 +869,5 @@
     }
 
 </script>
+
 </html>

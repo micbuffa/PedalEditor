@@ -1,12 +1,26 @@
-﻿body {
-    margin: 0;
+﻿
+
+body {
+    background: -webkit-linear-gradient(RGB(216, 223, 227),RGB(216, 223, 227));
+    background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .bordered {
     border: 1px solid red;
 }
 
-.wrapper {
+.hmessage {
+    position: absolute;
+    color: #0f0f0f;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 1.5em;  
+    top: 1%;
+    left: 30%;
+}
+
+/*.wrapper {
     min-height: 100vh;
     background: #ccc;
     display: flex;
@@ -41,7 +55,7 @@
 
 }
 
-.componentSection {
+/*.componentSection {
     width: 20%;
     background: #ccc;
     order: 1;
@@ -83,7 +97,7 @@
     left: -10px;
     border-radius: 5px / 100px;
     box-shadow: 0 0 13px rgba(0, 0, 0, 0.6);
-}
+}*/
 
 .knob_id {
     cursor: pointer;
@@ -249,7 +263,7 @@ p.typePreview {
     margin-top: 20px;
 }
 
-.buttonDownload {
+/*.buttonDownload {
     
     width: auto;
     height: 50px;
@@ -264,6 +278,34 @@ p.typePreview {
 #buttonDownload:hover {
     color: white;
     background-color: #999999;
+}
+*/
+
+.buttonDownload, .mainbtn {
+	-moz-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	-webkit-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	background-color:#a73f2d;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #241d13;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #a52a2a;
+}
+.buttonDownload, .mainbtn:hover {
+	background-color:#b34332;
+}
+.buttonDownload, .mainbtn:active {
+	position:relative;
+	top:1px;
 }
 
 
@@ -388,7 +430,7 @@ input#background-color-picker {
     margin-bottom: 10px;
     padding-left: 5px;
     width: 125px;
-    height: 20px;
+    height: 30px;
     font-size: 14px;
     box-shadow: 0 0 10px;
     -webkit-box-shadow: 0 0 10px;

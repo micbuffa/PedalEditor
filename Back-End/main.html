@@ -9,9 +9,9 @@
         <template><style>	
 							.pedal{
 								display: block;
-								background-color: #FF8075;
+								background-color: #269CAB;
 								width: 400px;
-								height: 500px;
+								height: 650px;
 								border-radius: 10px;
 								position: relative;
 								/* bring your own prefixes */
@@ -21,7 +21,7 @@
 							#background-image {
 								//border: solid 2px black;
 								width: 400px;
-								height: 500px;
+								height: 650px;
 								opacity: 1;
 							}
 
@@ -72,42 +72,120 @@
 								right: 0px;
 							}
 							
-						#knob_622 {
-							left: 113px;
-							top: 32px;
+						#knob_223 {
+							left: 129px;
+							top: 40px;
 						}
 
-						#knob_622 div {
+						#knob_223 div {
 							color: #000000;
-							font-family: "Comic Sans MS";
+							font-family: "Courier New";
 							font-size: 14px;
 							
 						}
 					
-						#knob_147 {
-							left: 170px;
-							top: 254px;
+						#knob_902 {
+							left: 77px;
+							top: 123px;
 						}
 
-						#knob_147 div {
+						#knob_902 div {
 							color: #000000;
-							font-family: "Comic Sans MS";
+							font-family: "Courier New";
 							font-size: 14px;
 							
 						}
 					
-						#knob_375 {
-							left: 75px;
-							top: 150px;
+						#knob_463 {
+							left: 104px;
+							top: 226px;
 						}
 
-						#knob_375 div {
+						#knob_463 div {
 							color: #000000;
-							font-family: "Comic Sans MS";
+							font-family: "Courier New";
 							font-size: 14px;
 							
 						}
 					
+						#knob_250 {
+							left: 193px;
+							top: 241px;
+						}
+
+						#knob_250 div {
+							color: #000000;
+							font-family: "Courier New";
+							font-size: 14px;
+							
+						}
+					
+						#knob_592 {
+							left: 255px;
+							top: 147px;
+						}
+
+						#knob_592 div {
+							color: #000000;
+							font-family: "Courier New";
+							font-size: 14px;
+							
+						}
+					
+						#knob_921 {
+							left: 130px;
+							top: 491px;
+						}
+
+						#knob_921 div {
+							color: #9E9E9E;
+							font-family: "Courier New";
+							font-size: 20px;
+							
+						}
+					
+							#icon_536 {
+								left: 7px;
+								top: 30px;
+								width: 380px;
+								height: 380px;
+							}
+						
+							#icon_886 {
+								left: 10px;
+								top: 10px;
+								width: 45px;
+								height: 45px;
+							}
+						
+							#icon_0 {
+								left: 347px;
+								top: 9px;
+								width: 45px;
+								height: 45px;
+							}
+						
+							#icon_898 {
+								left: 3px;
+								top: 407px;
+								width: 45px;
+								height: 45px;
+							}
+						
+							#icon_166 {
+								left: 349px;
+								top: 411px;
+								width: 45px;
+								height: 45px;
+							}
+						
+							#icon_634 {
+								left: 70px;
+								top: 457px;
+								width: 190px;
+								height: 190px;
+							}
+						
 							
 							.pedalLabel{
 								position: absolute;
@@ -137,13 +215,13 @@
 		
 		<!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
 		<div class="switchCont" id="switch1">
-			<img id="background-image" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/background/1.png">
+			<img id="background-image" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/background/null">
 			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
 		</div>
 		
-	<div class="knob " id="knob_622"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_147"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_375"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template><script>
-        let PingPongDelayTemp = document.currentScript.ownerDocument.querySelector('template');
-        class PingPongDelayGui extends HTMLElement {
+	<div class="knob " id="knob_223"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Jambalaya.png" height="70" width="70" sprites="100" step="1" value="20"></webaudio-knob><div>Freq 1</div></div><div class="knob " id="knob_902"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Jambalaya.png" height="70" width="70" sprites="100" step="1" value="20"></webaudio-knob><div>Freq 2</div></div><div class="knob   " id="knob_463"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Jambalaya.png" height="70" width="70" sprites="100" step="1" value="20"></webaudio-knob><div>Freq 3</div></div><div class="knob  " id="knob_250"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Jambalaya.png" height="70" width="70" sprites="100" step="1" value="20"></webaudio-knob><div>Freq 4</div></div><div class="knob  " id="knob_592"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Jambalaya.png" height="70" width="70" sprites="100" step="1" value="20"></webaudio-knob><div>Freq 5</div></div><div class="knob " id="knob_921"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="20"></webaudio-knob><div>Volume</div></div><img class="icon " id="icon_536" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/1.png"><img class="icon " id="icon_886" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/icon.png"><img class="icon " id="icon_0" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/icon.png"><img class="icon " id="icon_898" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/icon.png"><img class="icon " id="icon_166" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/icon.png"><img class="icon " id="icon_634" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/1.png"></div></template><script>
+        let ThirdTemp = document.currentScript.ownerDocument.querySelector('template');
+        class ThirdGui extends HTMLElement {
     
         
             constructor(plug) {
@@ -153,7 +231,7 @@
                 //this._plug.gui = this;
                 console.log(this._plug);
                 this._root = this.attachShadow({ mode: 'open' });
-                this._root.appendChild(PingPongDelayTemp.content.cloneNode(true));
+                this._root.appendChild(ThirdTemp.content.cloneNode(true));
                 this.isOn;
                 this.state = new Object();
                 this.setKnobs();
@@ -170,7 +248,7 @@
                 },
                 dataHeight: {
                 type: Number,
-                value: 500
+                value: 650
                 }
           };
           return this.boundingRect;
@@ -200,14 +278,13 @@
             }
         
             setKnobs() {
-                              //this._root.querySelector("#knob_622").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_147").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_375").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+                              //this._root.querySelector("#knob_223").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_902").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_463").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_250").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_592").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+               //this._root.querySelector("#knob_921").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
 
-            }
-        
-            setSwitchListener() {
-               
             }
         
             bypass() {
@@ -235,14 +312,14 @@
             }
         }
                 try {
-                    customElements.define('amine-pingpongdelay', PingPongDelayGui);
+                    customElements.define('amine-third', ThirdGui);
                     console.log("Element defined");
                 } catch(error){
                     console.log(error);
                     console.log("Element already defined");      
                 }
-                const createPingPongDelay = (plug) => {
-                    let elem = new PingPongDelayGui(plug);
+                const createThird = (plug) => {
+                    let elem = new ThirdGui(plug);
                     return elem; 
                 }
         </script>
