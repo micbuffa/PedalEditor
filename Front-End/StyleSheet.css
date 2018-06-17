@@ -444,6 +444,19 @@ input#background-color-picker {
     /* For Mozilla Web Browser */
 }
 
+.maininput-checkbox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    width: 125px;
+    height: 30px;
+    font-size: 14px;
+    /* For I.E */
+    /* For Mozilla Web Browser */
+    /* For I.E */
+    /* For Mozilla Web Browser */
+}
+
 .menu-img {
     width: 50px;
     height: 50px;
