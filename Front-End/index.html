@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="StyleSideNav.css">
 
     <link rel="import" href="pedal_models/pedal.html">
+    <link rel="import" href="editor-components/pedal-details.html">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -23,6 +24,7 @@
     <link rel="import" href="blue.html">
     <script src="js/bootstrap.min.js"></script>
     <script src="jscolor.js"></script>
+    
     <script src="pedal_models/functionalPedalGenerator.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
@@ -59,6 +61,7 @@
         
                         <br>-->
 
+
     <!--Selider Nav Menu-->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -73,12 +76,16 @@
             <option value="Georgia"></option>
         </select>
         <br>
+
+        
         <!--Accrodion Menu-->
         <div id="accordion">
             <ul>
                 <li>
-                    <a href="#acc-pedal">PEDAL</a>
-                    <div id="acc-pedal" class="accordion">
+                    <a href="#pedal-details">PEDAL</a>
+
+                    <!--<pedal-details id="pedal-details" class="accordion"></pedal-details>-->
+                    <div id="pedal-details" class="accordion">
 
                         <label>Name: </label>
                         <input id="pedal-name" onkeyup="setPedalName(this.value)" class="maininput">
@@ -109,6 +116,7 @@
                         <label>Radius: </label>
                         <input id="radius" class="maininput" type="number" name="radius" onchange="setPedalRadius(this.value)" min="0" max="25"> px
                     </div>
+                    
                 </li>
                 <li>
                     <a href="#acc-pedal-bg">PEDAL BACKGROUNDS</a>
@@ -205,7 +213,7 @@
 
                         <br>
 
-                        <webaudio-knob id="inspector-preview" sprites="100" min="0" max="100" onchange="setSelectedElementValue(this.value)"></webaudio-knob>
+                        <!--<webaudio-knob id="inspector-preview" sprites="100" min="0" max="100" onchange="setSelectedElementValue(this.value)"></webaudio-knob>-->
 
                     </div>
                 </li>
@@ -457,9 +465,15 @@
 
     function initialize() {
 
+        let pedalDetails = document.querySelector('#pedal-details');
+        //pedalDetails.setEditablePedal(pedal);
+        
+        console.log(pedalDetails);
+
         displaySavedPedalsIds();
 
     }
+
 
     /*Slider Nav Menu*/
     function openNav() {
@@ -485,17 +499,17 @@
 
         initialize();
 
-        document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
+        /*document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
         document.getElementById("width").value = defaultWidth;
         document.getElementById("height").value = defaultHeight;
         document.getElementById("radius").value = defaultRadius;
-        document.getElementById('opacity').value = defaultOpacity;
+        document.getElementById('opacity').value = defaultOpacity;*/
 
-        setPedalColor(defaultPedalColor);
-        setPedalWidth(defaultWidth);
+        /*setPedalColor(defaultPedalColor);
+        setPedalWidth(defaultidth);
         setPedalHeight(defaultHeight);
         setPedalRadius(defaultRadius);
-        setPedalBackgroundImageOpacity(defaultOpacity);
+        setPedalBackgroundImageOpacity(defaultOpaciWty);*/
 
         funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);
     }
