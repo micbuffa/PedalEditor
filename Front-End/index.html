@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="StyleSideNav.css">
 
     <link rel="import" href="pedal_models/pedal.html">
-    <link rel="import" href="editor-components/pedal-details.html">
+    <link rel="import" href="editor-components/editor-pedal-details.html">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -84,7 +84,8 @@
                 <li>
                     <a href="#pedal-details">PEDAL</a>
 
-                    <!--<pedal-details id="pedal-details" class="accordion"></pedal-details>-->
+                    <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
+                    
                     <div id="pedal-details" class="accordion">
 
                         <label>Name: </label>
@@ -465,10 +466,12 @@
 
     function initialize() {
 
-        let pedalDetails = document.querySelector('#pedal-details');
-        //pedalDetails.setEditablePedal(pedal);
+
+        let pedalDetails = document.querySelector('#editor-pedal-details');
         
         console.log(pedalDetails);
+        
+        pedalDetails.setEditablePedal(pedal);
 
         displaySavedPedalsIds();
 

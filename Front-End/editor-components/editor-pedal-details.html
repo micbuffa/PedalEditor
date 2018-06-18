@@ -12,7 +12,7 @@
         <br>
 
         <label>Background color: #</label>
-        <input id="background-color-picker" class="jscolor" class="maininput">
+        <input id="background-color-picker" name="background-color" class="jscolor" class="maininput">
 
         <br>
 
@@ -73,14 +73,14 @@
             for(let inputElem of this.root.querySelectorAll('input')) {
                 //console.log(inputElem);
                 inputElem.addEventListener('change', (event) => {
-                    console.log("Event fired");
+                    this.editablePedal.setParam(event.target.name, event.value);
                 });
             }
         }
 
     }
 
-    window.customElements.define('pedal-details', PedalDetails);
+    window.customElements.define('editor-pedal-details', PedalDetails);
 
 
 </script>

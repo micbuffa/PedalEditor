@@ -3,6 +3,16 @@ class PedalElementManager {
     constructor(pedal, document) {
         this.pedal = pedal;
         this.doc = document;
+
+        let resizeElem = this.pedal.shadowRoot.querySelector('#resize');
+
+        var that = this;
+
+        resizeElem.addEventListener('mousedown', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            that.resizeListener(e, that.pedal);
+        }, true);
     }
 
 
@@ -267,6 +277,42 @@ class PedalElementManager {
 
         document.addEventListener('mousemove', onMouseMove);			
         document.addEventListener('mouseup', onMouseUp);
+    }
+
+    resizeListener(e, pedal) {
+        let initialX = e.pageX;
+        let initialY = e.pageY;
+
+        let width = pedal.getAttribute("width");
+        let height = pedal.getAttribute("height");
+
+        function move(x, y) {
+            console.log("moving");
+            let cursorOffsetX = x - initialX;
+            let cursorOffsetY = y - initialY;
+            console.log(cursorOffsetX);
+
+            pedal.setAttribute("width", parseInt(width) + cursorOffsetX);
+            pedal.setAttribute("height", parseInt(height) + cursorOffsetY);
+
+            console.log(parseInt(width) + cursorOffsetX);
+            //pedal.setAttribute("height", pedal.getAttribute("height") + height);
+
+            pedal.updateStyle(pedal);
+        }
+
+        function onMouseMove(e) {
+                move(e.pageX, e.pageY);
+        }
+
+        function onMouseUp(e) {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.onmouseup = null;
+        }
+
+        document.addEventListener('mousemove', onMouseMove);			
+        document.addEventListener('mouseup', onMouseUp);
+
     }
 
     /* Listener for rescaling the pedal element with the mouse. */
