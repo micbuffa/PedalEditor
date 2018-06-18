@@ -436,7 +436,19 @@
 				this.knobs = [];
 
 				for(let element of config.elements) {
-					
+		
+					if(element.type === 'icon') {
+						let icon = this.addElement('icon', element.file);
+						icon.x = element.x;
+						icon.y = element.y;
+						icon.width = element.width;
+						icon.height = element.height;
+						icon.file = element.file;
+						icon.type = element.type;
+					}
+				}
+
+				for(let element of config.elements) {
 					if(element.type == 'knob') {
 						let knob = this.addElement('knob');
 						knob.x = element.x;
@@ -448,14 +460,6 @@
 						knob.label_fontsize = element.label_fontsize;
 						knob.label_color = element.label_color;
 						knob.type = element.type;
-					} else if(element.type === 'icon') {
-						let icon = this.addElement('icon', element.file);
-						icon.x = element.x;
-						icon.y = element.y;
-						icon.width = element.width;
-						icon.height = element.height;
-						icon.file = element.file;
-						icon.type = element.type;
 					}
 				}
 
