@@ -1,3 +1,5 @@
+
+
 <template id="pedal-details">
 
     <style>
@@ -12,7 +14,7 @@
         <br>
 
         <label>Background color: #</label>
-        <input id="background-color-picker" name="background-color" class="jscolor" class="maininput">
+        <input type="color" name="color" class="maininput">
 
         <br>
 
@@ -44,7 +46,7 @@
     const doc = (document._currentScript || document.currentScript).ownerDocument;
     const template = doc.querySelector('#pedal-details');
 
-    class PedalDetails extends HTMLElement {
+    class EditorPedalDetails extends HTMLElement {
         
         constructor(editablePedal) {
             super();
@@ -57,30 +59,29 @@
             this.root.appendChild(temp);
             
             this.setInputListeners();
-            //this.setPedalParam();
+            
         }
         
         setEditablePedal(editablePedal) {
             this.editablePedal = editablePedal;
+            this.refreshInputs();
         }
 
-        setPedalParam(name, value) {
-            //console.log("Setting the param of name: " + name + " to the value " + value);
-            //console.log(this.root.querySelector('#' + name));
+        refreshInputs() {
+            console.log(this.editablePedal.getAttributes());
         }
 
         setInputListeners() {
             for(let inputElem of this.root.querySelectorAll('input')) {
-                //console.log(inputElem);
                 inputElem.addEventListener('change', (event) => {
-                    this.editablePedal.setParam(event.target.name, event.value);
+                    this.editablePedal.setAttribute(event.target.name, event.target.value);
                 });
             }
         }
 
     }
 
-    window.customElements.define('editor-pedal-details', PedalDetails);
+    window.customElements.define('editor-pedal-details', EditorPedalDetails);
 
 
 </script>

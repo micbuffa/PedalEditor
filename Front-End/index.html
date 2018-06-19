@@ -82,42 +82,10 @@
         <div id="accordion">
             <ul>
                 <li>
-                    <a href="#pedal-details">PEDAL</a>
-
+                    <a href="#editor-pedal-details">PEDAL</a>
                     <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
                     
-                    <div id="pedal-details" class="accordion">
 
-                        <label>Name: </label>
-                        <input id="pedal-name" onkeyup="setPedalName(this.value)" class="maininput">
-
-                        <br>
-
-                        <label>Background color: #</label>
-                        <input id="background-color-picker" class="jscolor" onchange="setPedalColor(this.value)" class="maininput">
-
-                        <br>
-
-                        <label>Image opacity: </label>
-                        <input id="opacity" class="maininput" type="number" name="opacity" onchange="setPedalBackgroundImageOpacity(this.value)"
-                            min="0" max="1">
-
-                        <br>
-
-                        <label>Width: </label>
-                        <input id="width" class="maininput" type="number" name="width" onchange="setPedalWidth(this.value)" min="0" max="600"> px
-
-                        <br>
-
-                        <label>Height: </label>
-                        <input id="height" class="maininput" type="number" name="height" onchange="setPedalHeight(this.value)" min="0" max="600"> px
-
-                        <br>
-
-                        <label>Radius: </label>
-                        <input id="radius" class="maininput" type="number" name="radius" onchange="setPedalRadius(this.value)" min="0" max="25"> px
-                    </div>
-                    
                 </li>
                 <li>
                     <a href="#acc-pedal-bg">PEDAL BACKGROUNDS</a>
@@ -467,12 +435,7 @@
     function initialize() {
 
 
-        let pedalDetails = document.querySelector('#editor-pedal-details');
         
-        console.log(pedalDetails);
-        
-        pedalDetails.setEditablePedal(pedal);
-
         displaySavedPedalsIds();
 
     }
@@ -502,19 +465,10 @@
 
         initialize();
 
-        /*document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
-        document.getElementById("width").value = defaultWidth;
-        document.getElementById("height").value = defaultHeight;
-        document.getElementById("radius").value = defaultRadius;
-        document.getElementById('opacity').value = defaultOpacity;*/
-
-        /*setPedalColor(defaultPedalColor);
-        setPedalWidth(defaultidth);
-        setPedalHeight(defaultHeight);
-        setPedalRadius(defaultRadius);
-        setPedalBackgroundImageOpacity(defaultOpaciWty);*/
+        let pedalDetails = document.querySelector('#editor-pedal-details');
 
         funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);
+        pedalDetails.setEditablePedal(pedal);
     }
 
     function savePedal() {
