@@ -466,14 +466,14 @@
         initialize();
 
         let pedalDetails = document.querySelector('#editor-pedal-details');
-
-        funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);
         pedalDetails.setEditablePedal(pedal);
+
+        funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
     }
 
     function savePedal() {
 
-        let pedalName = document.querySelector('#pedal-name').value;
+        let pedalName = pedal.getAttribute('name');
         if (pedalName == '') {
             alert('You should enter the pedal name before saving !');
             return;
@@ -721,11 +721,11 @@
         inspectorHeight.value = knob.height || 0;
 
         inspectorModel.value = knob.model;
-        inspectorPreview.value = knob.value;
-        inspectorPreview.src = 'img/knobs/' + knob.model;
+        //inspectorPreview.value = knob.value;
+        //inspectorPreview.src = 'img/knobs/' + knob.model;
 
         let inspector = document.getElementById('inspector');
-        inspector.hidden = false;
+        //inspector.hidden = false;
     }
 
     function deleteSelectedElement() {
@@ -791,17 +791,21 @@
             if (pedalConfig.id == value) {
                 console.log("ok");
                 pedal.loadConfig(pedalConfig);
-                document.getElementById('pedal-name').value = pedalConfig.name;
+              /*  document.getElementById('pedal-name').value = pedalConfig.name;
                 document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
                 document.getElementById("width").value = pedalConfig.width;
                 document.getElementById("height").value = pedalConfig.height;
-                document.getElementById("radius").value = pedalConfig.radius;
+                document.getElementById("radius").value = pedalConfig.radius;*/
                 let loadPedal = document.querySelector('#load-pedal');
                 loadPedal.value = value;
+                console.log(pedal);
                 //loadPedal.innerHTML = pedalConfig.name;
                 //console.log(loadPedal);
             }
         }
+        
+        let pedalDetails = document.querySelector('#editor-pedal-details');
+        pedalDetails.setEditablePedal(pedal);
 
         updatePedalElementsSection();
     }

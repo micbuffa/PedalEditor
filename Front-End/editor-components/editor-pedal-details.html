@@ -68,7 +68,11 @@
         }
 
         refreshInputs() {
-            console.log(this.editablePedal.getAttributes());
+            for(let inputElem of this.root.querySelectorAll('input')) {
+                inputElem.value = this.editablePedal.getAttribute(inputElem.name);
+                console.log(this.editablePedal.getAttribute('name'));
+
+            }
         }
 
         setInputListeners() {

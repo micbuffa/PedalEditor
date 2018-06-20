@@ -62,7 +62,7 @@
 			}
 			
 			getAttributes() {
-				return ['color', 'width', 'height', 'radius', 'background-image', 'opacity'];
+				return ['color', 'width', 'height', 'radius', 'background-image', 'opacity', 'name'];
 			}
 			
 			/********************************* Add Pedal Elements Config ************************************/
@@ -487,6 +487,7 @@
 				this.setAttribute('color', config.color);
 				this.setAttribute('height', config.height);
 				this.setAttribute('radius', config.radius);
+				this.setAttribute('name', config.name);
 				this.setBackgroundImage(config.backgroundImageSrc);
 			}
 
@@ -498,7 +499,7 @@
 			getConfig() {
 				let config = {
 					id: this.pedalId,
-					name: this.name,
+					name: this.getAttribute('name'),
 					backgroundImageSrc: this.backgroundImageSrc,
 					color: this.getAttribute('color'),
         			width: this.getAttribute('width'),
