@@ -287,16 +287,18 @@ class PedalElementManager {
         let height = pedal.getAttribute("height");
 
         function move(x, y) {
-            console.log("moving");
             let cursorOffsetX = x - initialX;
             let cursorOffsetY = y - initialY;
-            console.log(cursorOffsetX);
 
-            pedal.setAttribute("width", parseInt(width) + cursorOffsetX);
-            pedal.setAttribute("height", parseInt(height) + cursorOffsetY);
+            let newWidth = parseInt(width) + cursorOffsetX;
+            let newHeight = parseInt(height) + cursorOffsetY;
 
-            console.log(parseInt(width) + cursorOffsetX);
-            //pedal.setAttribute("height", pedal.getAttribute("height") + height);
+            pedal.setAttribute("width", newWidth);
+            pedal.setAttribute("height", newHeight);
+            
+            // Firing an event providing the new width and the new height of the pedal.
+            let evt = new CustomEvent('pedal-resized', {detail: {width: newWidth, height: newHeight}});
+			pedal.dispatchEvent(evt);
 
             pedal.updateStyle(pedal);
         }
@@ -308,6 +310,7 @@ class PedalElementManager {
         function onMouseUp(e) {
             document.removeEventListener('mousemove', onMouseMove);
             document.onmouseup = null;
+            console.log("Entered here");
         }
 
         document.addEventListener('mousemove', onMouseMove);			

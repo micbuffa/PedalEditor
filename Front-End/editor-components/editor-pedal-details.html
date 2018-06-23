@@ -48,10 +48,8 @@
 
     class EditorPedalDetails extends HTMLElement {
         
-        constructor(editablePedal) {
+        constructor() {
             super();
-            
-            this.editablePedal = editablePedal;
 
             this.root = this.attachShadow({mode: 'closed'});
             const temp = document.importNode(template.content, true);
@@ -65,13 +63,15 @@
         setEditablePedal(editablePedal) {
             this.editablePedal = editablePedal;
             this.refreshInputs();
+
+            this.editablePedal.addEventListener('pedal-resized', (e) => {
+                this.refreshInputs();
+            });
         }
 
         refreshInputs() {
             for(let inputElem of this.root.querySelectorAll('input')) {
                 inputElem.value = this.editablePedal.getAttribute(inputElem.name);
-                console.log(this.editablePedal.getAttribute('opacity'));
-
             }
         }
 
