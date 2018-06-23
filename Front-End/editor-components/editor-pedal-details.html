@@ -64,7 +64,7 @@
             this.editablePedal = editablePedal;
             this.refreshInputs();
 
-            this.editablePedal.addEventListener('pedal-resized', (e) => {
+            this.editablePedal.addEventListener('config-changed', (e) => {
                 this.refreshInputs();
             });
         }

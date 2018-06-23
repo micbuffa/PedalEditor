@@ -297,8 +297,8 @@ class PedalElementManager {
             pedal.setAttribute("height", newHeight);
             
             // Firing an event providing the new width and the new height of the pedal.
-            let evt = new CustomEvent('pedal-resized', {detail: {width: newWidth, height: newHeight}});
-			pedal.dispatchEvent(evt);
+            //let evt = new CustomEvent('pedal-resized', {detail: {width: newWidth, height: newHeight}});
+			pedal.dispatchEvent(pedal.configChangedEvent);
 
             pedal.updateStyle(pedal);
         }
