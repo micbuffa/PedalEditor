@@ -488,6 +488,7 @@
 				this.setAttribute('height', config.height);
 				this.setAttribute('radius', config.radius);
 				this.setAttribute('name', config.name);
+				this.setAttribute('opacity', config.opacity || 1);		// If the opacity is not set, initialize it to the default value which is 1.
 				this.setBackgroundImage(config.backgroundImageSrc);
 			}
 
@@ -505,6 +506,7 @@
         			width: this.getAttribute('width'),
         			height: this.getAttribute('height'),
         			radius: this.getAttribute('radius'),
+					opacity: this.getAttribute('opacity'),
 					elements: []
 				};
 
