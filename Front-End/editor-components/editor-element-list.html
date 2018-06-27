@@ -7,72 +7,74 @@
     </style>
 
     <div>
-
-        <label>Name: </label>
-        <input id="pedal-name" name="name" class="maininput" disabled>
-
-        <br>
-
-        <label>Background color: #</label>
-        <input type="color" name="color" class="maininput" disabled>
-
-        <br>
-
-        <label>Image opacity: </label>
-        <input id="opacity" class="maininput" type="number" name="opacity" 
-            min="0" max="1" disabled>
-
-        <br>
-
-        <label>Width: </label>
-        <input id="width" class="maininput" type="number" name="width"  min="0" max="600" disabled> px
-
-        <br>
-
-        <label>Height: </label>
-        <input id="height" class="maininput" type="number" name="height" min="0" max="600" disabled> px
-
-        <br>
-
-        <label>Radius: </label>
-        <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" disabled> px
-
+        <div id="elements_section" class="menuOptions">
+        </div>
     </div>
 
 </template>
 
 <script>
 
-    const doc = (document._currentScript || document.currentScript).ownerDocument;
-    const template = doc.querySelector('#pedal-details');
-
-    class EditorElementList extends HTMLElement {
+    (function(window, document, undefined) {
         
-        constructor() {
-            super();
+        const doc = (document._currentScript || document.currentScript).ownerDocument;
+        const template = doc.querySelector('#element-list');
+
+        class EditorElementList extends HTMLElement {
             
-        }
-        
-        setEditablePedal(editablePedal) {
+            constructor() {
+                super();
+
+                this.root = this.attachShadow({mode: 'closed'});
+                const temp = document.importNode(template.content, true);
+
+                this.root.appendChild(temp);
+            }
+            
+            setEditablePedal(editablePedal) {
+                this.editablePedal = editablePedal;
+                this.refreshInputs();
+                console.log("Seeing the editable pedal");
+            }
+
+            refreshInputs() {
+
+                // Emptying the section.
+                let section = this.root.querySelector('#elements_section');
+                let firstChild;
+
+                while (firstChild = section.firstChild) {
+                    section.removeChild(firstChild);
+                }
+
+                console.log(this.editablePedal.getElements());
+                // Populating the sections.
+                for (let pedalElement of this.editablePedal.getElements()) {
+
+                    let idElem = document.createElement('div');
+                    idElem.className = pedalElement.type + '_id';
+                    idElem.innerHTML = pedalElement.id;
+                    idElem.onclick = (e) => {
+                        selectKnob(e.target.innerHTML);
+                    }
+
+                    section.appendChild(idElem);
+                }
+
+            }
+
+            setInputListeners() {
+
+            }
+
+            enableInputs() {
     
-        }
-
-        refreshInputs() {
+            }
 
         }
 
-        setInputListeners() {
-
-        }
-
-        enableInputs() {
- 
-        }
-
-    }
-
-    window.customElements.define('editor-element-list', EditorElementList);
-
+        window.customElements.define('editor-element-list', EditorElementList);
+    })(window, document);
 
 </script>
 

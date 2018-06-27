@@ -15,6 +15,7 @@
 
     <link rel="import" href="pedal_models/pedal.html">
     <link rel="import" href="editor-components/editor-pedal-details.html">
+    <link rel="import" href="editor-components/editor-element-list.html">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -49,19 +50,6 @@
     <main class="pedalSection"></main>
 
 
-    <!-- Inspector -->
-    <!--aside class="container-fluid componentSection"-->
-    <!--h2 class="component-title">Inspector
-                        <i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
-                        </span>
-                    </h2-->
-
-    <!--div hidden id="inspector" class="menuOptions"-->
-    <!--<label>Id: </label><span id="inspector-id"></span>
-        
-                        <br>-->
-
-
     <!--Selider Nav Menu-->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -81,12 +69,17 @@
         <!--Accrodion Menu-->
         <div id="accordion">
             <ul>
+                
                 <li>
                     <a href="#editor-pedal-details">PEDAL</a>
                     <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
-                    
-
                 </li>
+
+                <li>
+                    <a href="#editor-element-list">ELEMENTS</a>
+                    <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
+                </li>
+
                 <li>
                     <a href="#acc-pedal-bg">PEDAL BACKGROUNDS</a>
                     <div id="acc-pedal-bg" class="accordion">
@@ -316,95 +309,6 @@
     <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--/div-->
-
-
-    <!--/aside-->
-
-
-    <!-- Main section -->
-    <!--aside class="componentSection-right"-->
-
-
-    <!--div class="menuOptions"-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--button class="maininput" onclick="toggleBackgrounds()">Backgrounds</button>
-    <div id="backgrounds">
-
-    </div>
-
-    <br>
-
-    <button class="maininput" onclick="toggleIcons()">Icons</button>
-    <div id="icons">
-
-    </div>
-
-    <br-->
-
-
-
-
-    <!--/div-->
-
-    <!-- Pedal font color menu -->
-    <!--h2 class="component-title">
-        Knobs
-        <i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
-    </h2-->
-
-    <!-- Knob font size menu >
-    <h2 class="component-title">Icons
-        <i class="fa fa-caret-square-o-up displayer" aria-hidden="true"></i>
-    </h2-->
-
-
-
-    <!--h2 class="component-title">Labels
-        <i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i>
-    </h2-->
-
-
-
-    <!-- Other pedal elements that are not labels, knobs or switch. -->
-    <!--h2 class="component-title">Other
-        <i class="fa fa-caret-square-o-up displayer" aria-hidden="false"></i>
-    </h2-->
-
-    <!--div class="menuOptions">
-    </div-->
-
-    <!--/aside-->
-
-    <!--/div>
-        </section>
-    </div-->
-
 </body>
 <script>
 
@@ -464,9 +368,6 @@
         });
 
         initialize();
-
-        let pedalDetails = document.querySelector('#editor-pedal-details');
-        pedalDetails.setEditablePedal(pedal);
 
         funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
     }
@@ -755,57 +656,28 @@
         pedal.name = value;
     }
 
-    function setPedalColor(value) {
-        pedal.setAttribute("color", "#" + value);
-    }
-
     function setPedalBackgroundImage(value) {
         console.log("The background image is: " + value);
         pedal.setBackgroundImage(value);
     }
 
-    function setPedalWidth(width) {
-        pedal.setAttribute("width", width);
-    }
-
-    function setPedalHeight(height) {
-        pedal.setAttribute("height", height);
-    }
-
-    function setPedalRadius(radius) {
-        pedal.setAttribute("radius", radius);
-    }
-
-    function setPedalBackgroundImageOpacity(opacity) {
-        pedal.setAttribute("opacity", opacity);
-    }
-
-    function setPedalFontColor(value) {
-        pedal.changeFontColor(value);
-        pedalFontColor = value;
-    }
 
     function loadPedalConfig(value) {
         newPedal();
         for (let pedalConfig of savedPedalsConfigs) {
             if (pedalConfig.id == value) {
-                console.log("ok");
                 pedal.loadConfig(pedalConfig);
-              /*  document.getElementById('pedal-name').value = pedalConfig.name;
-                document.getElementById("background-color-picker").value = "#" + defaultPedalColor;
-                document.getElementById("width").value = pedalConfig.width;
-                document.getElementById("height").value = pedalConfig.height;
-                document.getElementById("radius").value = pedalConfig.radius;*/
+
                 let loadPedal = document.querySelector('#load-pedal');
                 loadPedal.value = value;
-                console.log(pedal);
-                //loadPedal.innerHTML = pedalConfig.name;
-                //console.log(loadPedal);
             }
         }
-        
+
         let pedalDetails = document.querySelector('#editor-pedal-details');
+        let elementList = document.querySelector('#editor-element-list');
+
         pedalDetails.setEditablePedal(pedal);
+        elementList.setEditablePedal(pedal);
 
         updatePedalElementsSection();
     }
