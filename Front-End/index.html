@@ -69,9 +69,9 @@
         <!--Accrodion Menu-->
         <div id="accordion">
             <ul>
-                
+
                 <li>
-                    <a href="#editor-pedal-details">PEDAL</a>
+                    <a href="#editor-pedal-details">PEDAL DETAILS</a>
                     <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
                 </li>
 
@@ -80,16 +80,6 @@
                     <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
                 </li>
 
-                <li>
-                    <a href="#acc-pedal-bg">PEDAL BACKGROUNDS</a>
-                    <div id="acc-pedal-bg" class="accordion">
-
-                        <img class="menu-img" src="./img/background/image2.png" alt="image2.png" onclick="setPedalBackgroundImage(this.alt)" />
-                        <img class="menu-img" src="./img/background/1.png" alt="1.png" onclick="setPedalBackgroundImage(this.alt)" />
-                        <img class="menu-img" src="./img/background/2.jpg" alt="2.jpg" onclick="setPedalBackgroundImage(this.alt)" />
-
-                    </div>
-                </li>
                 <li>
                     <a href="#acc-inspector">INSPECTOR</a>
                     <div id="acc-inspector" class="accordion">
@@ -247,61 +237,6 @@
 
                     </div>
                 </li>
-                <li>
-                    <a href="#acc-switches">SWITCHES</a>
-                    <div id="acc-switches" class="accordion">
-
-                        <button class="mainbtn" onclick="addSwitch()">Add Switch</button>
-
-                    </div>
-                    <li>
-                        <a href="#acc-sliders">SLIDERS</a>
-                        <div id="acc-sliders" class="accordion">
-
-                            <button class="mainbtn">Add Slider</button>
-
-                        </div>
-                        <li>
-                            <a href="#acc-icons">ICONS</a>
-                            <div id="acc-icons" class="accordion">
-
-                                <img class="menu-img" src="./img/icons/icon.png" alt="icon.png" onclick="addIcon(this.alt)" />
-                                <img class="menu-img" src="./img/icons/1.png" alt="1.png" onclick="addIcon(this.alt)" />
-
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#acc-icons-list">ICONS LIST</a>
-                            <div id="acc-icons-list" class="accordion">
-
-                                <div id="icon_section" class="menuOptions"></div>
-
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#acc-knobs-list">KNOBS LIST</a>
-                            <div id="acc-knobs-list" class="accordion">
-
-                                <div id="knob_section" class="menuOptions"></div>
-
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#acc-labels-list">LABELS LIST</a>
-                            <div id="acc-labels-list" class="accordion">
-
-                                <div class="menuOptions"></div>
-
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#acc-other">OTHER</a>
-                            <div id="acc-other" class="accordion">
-
-                                <div class="menuOptions"></div>
-
-                            </div>
-                        </li>
             </ul>
         </div>
     </div>
@@ -515,7 +450,7 @@
         pedal.updateStyle_();
     }
 
-    function updatePedalElementsSection() {
+    /*function updatePedalElementsSection() {
 
         // Deleting the elements of all the sections.
         for (let pedalElementType of pedal.getElementsTypes()) {
@@ -555,7 +490,7 @@
             selectKnob(selectedElement.id);
         }
 
-    }
+    }*/
 
     function getSectionByPedalElementType(pedalElementType) {
         let section = document.querySelector('#' + pedalElementType + '_section');
@@ -569,6 +504,7 @@
 
     function selectKnob(knobId) {
 
+        /*
         var knobs = document.getElementById('knob_section').childNodes;
         var icons = document.getElementById('icon_section').childNodes;
 
@@ -592,7 +528,7 @@
 
         if (pedal.getSelectedElement().id != knobId) {
             pedal.selectElement(knobId);
-        }
+        }*/
 
 
         let knob = pedal.getSelectedElement();
@@ -656,10 +592,6 @@
         pedal.name = value;
     }
 
-    function setPedalBackgroundImage(value) {
-        console.log("The background image is: " + value);
-        pedal.setBackgroundImage(value);
-    }
 
 
     function loadPedalConfig(value) {
@@ -679,7 +611,7 @@
         pedalDetails.setEditablePedal(pedal);
         elementList.setEditablePedal(pedal);
 
-        updatePedalElementsSection();
+        //updatePedalElementsSection();
     }
 
     function getFirstChild(el) {

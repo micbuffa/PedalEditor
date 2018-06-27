@@ -36,6 +36,33 @@
 
         <label>Radius: </label>
         <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" disabled> px
+        
+        <label>Background image: </label>
+        <div>
+            <img class="menu-img background-image" src="./img/background/image2.png" alt="image2.png" />
+            <img class="menu-img background-image" src="./img/background/1.png" alt="1.png"/>
+            <img class="menu-img background-image" src="./img/background/2.jpg" alt="2.jpg"/>
+        </div>
+        
+        
+        <br><br>
+
+        <label>Add icon:</label>
+        <div>
+            <img class="menu-img add-icon" src="./img/icons/icon.png" alt="icon.png" />
+            <img class="menu-img add-icon" src="./img/icons/1.png" alt="1.png" />
+        </div>
+
+        <br>
+
+        <label></label>
+        <button id="add-knob" class="maininput">Add knob</button>
+        <label></label>
+        <button id="add-switch" class="maininput">Add switch</button>
+
+        <br>
+
+
 
     </div>
 
@@ -78,10 +105,39 @@
             }
 
             setInputListeners() {
+                // For main inputs
                 for(let inputElem of this.root.querySelectorAll('input')) {
                     inputElem.addEventListener('change', (event) => {
                         this.editablePedal.setAttribute(event.target.name, event.target.value);
                     });
+                }
+
+                // For background images
+                for(let backgroundImageElem of this.root.querySelectorAll('.background-image')) {
+                    backgroundImageElem.addEventListener('click', (event) => {
+                        this.setBackgroundImage(event.target.alt);
+                    })
+                }
+
+                // For adding icons
+                for(let addIcon of this.root.querySelectorAll('.add-icon')) {
+                    addIcon.addEventListener('click', (event) => {
+                        this.addIcon(event.target.alt);
+                    })
+                }
+
+                // For adding knobs
+                for(let addKnob of this.root.querySelectorAll('#add-knob')) {
+                    addKnob.addEventListener('click', (event) => {
+                        this.addKnob();
+                    })
+                }
+
+                // For adding switches
+                for(let addSwitch of this.root.querySelectorAll('#add-switch')) {
+                    addSwitch.addEventListener('click', (event) => {
+                        this.addSwitch();
+                    })
                 }
             }
 
@@ -89,6 +145,22 @@
                 for(let inputElem of this.root.querySelectorAll('input')) {
                     inputElem.disabled = false;
                 }
+            }
+
+            setBackgroundImage(value) {
+                this.editablePedal.setBackgroundImage(value);
+            }
+
+            addIcon(value) {
+                pedal.addElement('icon', value);
+            }
+
+            addKnob() {
+                pedal.addElement('knob');
+            }
+
+            addSwitch() {
+                pedal.addElement('switch');
             }
 
         }
