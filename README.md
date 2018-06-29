@@ -61,7 +61,7 @@ The custom element of this component is:
 <editor-pedal-details></editor-pedal-details>
 ```
 
-#####- Pedal Elements List
+##### - Pedal Elements List
 
 This component shows a list of pedal elements by their ids.
 

@@ -580,18 +580,7 @@
         pedalDetailsSection.appendChild(pedalDetails1);
         console.log(pedalDetailsSection);*/
         
-        let parent;
-
-        let pedalDetails = document.querySelector('#editor-pedal-details');
-        let newPedalDetails = pedalDetails.cloneNode();
-        parent = pedalDetails.parentNode;
-
-        parent.replaceChild(newPedalDetails, pedalDetails);
-
-        let elementList = document.querySelector('#editor-element-list');
-
-        newPedalDetails.setEditablePedal(pedal);
-        elementList.setEditablePedal(pedal);
+        plugPedalToEditor();
     }
 
     function plugPedalToEditor() {
