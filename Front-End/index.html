@@ -257,15 +257,6 @@
     var pedal = getFirstChild(section);
     var knobSprite;
     var switchSprite;
-    var defaultPedalColor = "755E5E";
-    var pedalFontColor;
-    var knobFontSize;
-    var pedalFontSize;
-    var pedalFont;
-    var defaultWidth = 400;
-    var defaultHeight = 500;
-    var defaultRadius = 10;
-    var defaultOpacity = 1;
     let savedPedalsConfigs;
     let funcitonalPedalGenerator;
 
@@ -547,7 +538,6 @@
 
 
 
-        //inspectorId.innerHTML = knobId;
         inspectorLabel.value = knob.label;
         inspectorLabelColor.value = knob.label_color;
         inspectorLabelFontFamily.value = knob.label_fontfamily;
@@ -558,11 +548,8 @@
         inspectorHeight.value = knob.height || 0;
 
         inspectorModel.value = knob.model;
-        //inspectorPreview.value = knob.value;
-        //inspectorPreview.src = 'img/knobs/' + knob.model;
 
         let inspector = document.getElementById('inspector');
-        //inspector.hidden = false;
     }
 
     function deleteSelectedElement() {
@@ -570,26 +557,8 @@
         updatePedalElementsSection();
     }
 
-    function addKnob() {
-        pedal.addElement('knob');
-        updatePedalElementsSection();
-    }
-
-    function addIcon(name) {
-        pedal.addElement('icon', name);
-        updatePedalElementsSection();
-    }
-
-    function addSwitch() {
-        pedal.addElement('switch');
-    }
-
     function addSlider() {
         pedal.addElement('slider');
-    }
-
-    function setPedalName(value) {
-        pedal.name = value;
     }
 
 
@@ -604,14 +573,25 @@
                 loadPedal.value = value;
             }
         }
+        
+        
+        /*let pedalDetails1 = document.createElement('editor-pedal-details');
+        let pedalDetailsSection = document.querySelector('#accordion');
+        pedalDetailsSection.appendChild(pedalDetails1);
+        console.log(pedalDetailsSection);*/
+        
+        let parent;
 
         let pedalDetails = document.querySelector('#editor-pedal-details');
+        let newPedalDetails = pedalDetails.cloneNode();
+        parent = pedalDetails.parentNode;
+        
+        parent.replaceChild(newPedalDetails, pedalDetails);
+
         let elementList = document.querySelector('#editor-element-list');
 
-        pedalDetails.setEditablePedal(pedal);
+        newPedalDetails.setEditablePedal(pedal);
         elementList.setEditablePedal(pedal);
-
-        //updatePedalElementsSection();
     }
 
     function getFirstChild(el) {
@@ -624,9 +604,6 @@
         return firstChild;
     }
 
-    function setBackgroundColor(value) {
-        document.body.style.backgroundColor = "#" + value;
-    }
 
     function generateCodeFunctionalPedal() {
 
@@ -650,28 +627,17 @@
 
     }
 
-    function toggleBackgrounds() {
-        let elem = document.querySelector('#backgrounds');
-        toggleHidden(elem);
-
-    }
-
-    function toggleKnobs() {
-        let elem = document.querySelector('#knobs');
-        toggleHidden(elem);
-    }
-
-    function toggleIcons() {
-        let elem = document.querySelector('#icons');
-        toggleHidden(elem);
-    }
-
     function toggleHidden(elem) {
         if (elem.style.display === 'none') {
             elem.style.display = 'block';
         } else {
             elem.style.display = 'none';
         }
+    }
+
+    function toggleEditorPedalDetails() {
+        let elem = document.querySelector('#editor-pedal-details');
+        toggleHidden(elem);
     }
 
 </script>

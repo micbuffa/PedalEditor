@@ -37,8 +37,8 @@
         <label>Radius: </label>
         <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" disabled> px
         
-        <label>Background image: </label>
-        <div>
+        <label>Background images: </label>
+        <div id="background-images">
             <img class="menu-img background-image" src="./img/background/image2.png" alt="image2.png" />
             <img class="menu-img background-image" src="./img/background/1.png" alt="1.png"/>
             <img class="menu-img background-image" src="./img/background/2.jpg" alt="2.jpg"/>
@@ -48,7 +48,7 @@
         <br><br>
 
         <label>Add icon:</label>
-        <div>
+        <div id="icons">
             <img class="menu-img add-icon" src="./img/icons/icon.png" alt="icon.png" />
             <img class="menu-img add-icon" src="./img/icons/1.png" alt="1.png" />
         </div>
@@ -56,9 +56,10 @@
         <br>
 
         <label></label>
-        <button id="add-knob" class="maininput">Add knob</button>
+        <button id="add-knob" class="maininput" disabled>Add knob</button>
+
         <label></label>
-        <button id="add-switch" class="maininput">Add switch</button>
+        <button id="add-switch" class="maininput" disabled>Add switch</button>
 
         <br>
 
@@ -84,13 +85,12 @@
 
                 this.root.appendChild(temp);
                 
-                this.setInputListeners();
-                
             }
             
             setEditablePedal(editablePedal) {
                 this.editablePedal = editablePedal;
                 this.enableInputs();
+                this.setInputListeners();
                 this.refreshInputs();
                 
                 this.editablePedal.addEventListener('config-changed', (e) => {
@@ -143,6 +143,10 @@
 
             enableInputs() {
                 for(let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.disabled = false;
+                }
+
+                for(let inputElem of this.root.querySelectorAll('button')) {
                     inputElem.disabled = false;
                 }
             }
