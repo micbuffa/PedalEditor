@@ -1,0 +1,176 @@
+
+
+<template id="pedal-details">
+
+    <style>
+        @import "StyleSheet.css";
+    </style>
+
+    <div>
+
+        <label>Name: </label>
+        <input id="pedal-name" name="name" class="maininput" disabled>
+
+        <br>
+
+        <label>Background color: #</label>
+        <input type="color" name="color" class="maininput" disabled>
+
+        <br>
+
+        <label>Image opacity: </label>
+        <input id="opacity" class="maininput" type="number" name="opacity" 
+            min="0" max="1" disabled>
+
+        <br>
+
+        <label>Width: </label>
+        <input id="width" class="maininput" type="number" name="width"  min="0" max="600" disabled> px
+
+        <br>
+
+        <label>Height: </label>
+        <input id="height" class="maininput" type="number" name="height" min="0" max="600" disabled> px
+
+        <br>
+
+        <label>Radius: </label>
+        <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" disabled> px
+        
+        <label>Background images: </label>
+        <div id="background-images">
+            <img class="menu-img background-image" src="./img/background/image2.png" alt="image2.png" />
+            <img class="menu-img background-image" src="./img/background/1.png" alt="1.png"/>
+            <img class="menu-img background-image" src="./img/background/2.jpg" alt="2.jpg"/>
+        </div>
+        
+        
+        <br><br>
+
+        <label>Add icon:</label>
+        <div id="icons">
+            <img class="menu-img add-icon" src="./img/icons/icon.png" alt="icon.png" />
+            <img class="menu-img add-icon" src="./img/icons/1.png" alt="1.png" />
+        </div>
+
+        <br>
+
+        <label></label>
+        <button id="add-knob" class="maininput" disabled>Add knob</button>
+
+        <label></label>
+        <button id="add-switch" class="maininput" disabled>Add switch</button>
+
+        <br>
+
+
+
+    </div>
+
+</template>
+
+<script>
+    (function(window, document, undefined) {
+
+        const doc = (document._currentScript || document.currentScript).ownerDocument;
+        const template = doc.querySelector('#pedal-details');
+
+        class EditorPedalDetails extends HTMLElement {
+            
+            constructor() {
+                super();
+
+                this.root = this.attachShadow({mode: 'closed'});
+                const temp = document.importNode(template.content, true);
+
+                this.root.appendChild(temp);
+                
+            }
+            
+            setEditablePedal(editablePedal) {
+                this.editablePedal = editablePedal;
+                this.enableInputs();
+                this.setInputListeners();
+                this.refreshInputs();
+                
+                this.editablePedal.addEventListener('config-changed', (e) => {
+                    this.refreshInputs();
+                });
+            }
+
+            refreshInputs() {
+                for(let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.value = this.editablePedal.getAttribute(inputElem.name);
+                }
+            }
+
+            setInputListeners() {
+                // For main inputs
+                for(let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.addEventListener('change', (event) => {
+                        this.editablePedal.setAttribute(event.target.name, event.target.value);
+                    });
+                }
+
+                // For background images
+                for(let backgroundImageElem of this.root.querySelectorAll('.background-image')) {
+                    backgroundImageElem.addEventListener('click', (event) => {
+                        this.setBackgroundImage(event.target.alt);
+                    })
+                }
+
+                // For adding icons
+                for(let addIcon of this.root.querySelectorAll('.add-icon')) {
+                    addIcon.addEventListener('click', (event) => {
+                        this.addIcon(event.target.alt);
+                    })
+                }
+
+                // For adding knobs
+                for(let addKnob of this.root.querySelectorAll('#add-knob')) {
+                    addKnob.addEventListener('click', (event) => {
+                        this.addKnob();
+                    })
+                }
+
+                // For adding switches
+                for(let addSwitch of this.root.querySelectorAll('#add-switch')) {
+                    addSwitch.addEventListener('click', (event) => {
+                        this.addSwitch();
+                    })
+                }
+            }
+
+            enableInputs() {
+                for(let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.disabled = false;
+                }
+
+                for(let inputElem of this.root.querySelectorAll('button')) {
+                    inputElem.disabled = false;
+                }
+            }
+
+            setBackgroundImage(value) {
+                this.editablePedal.setBackgroundImage(value);
+            }
+
+            addIcon(value) {
+                pedal.addElement('icon', value);
+            }
+
+            addKnob() {
+                pedal.addElement('knob');
+            }
+
+            addSwitch() {
+                pedal.addElement('switch');
+            }
+
+        }
+
+        window.customElements.define('editor-pedal-details', EditorPedalDetails);
+    })(window, document);
+
+</script>
+

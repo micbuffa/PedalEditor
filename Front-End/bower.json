@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "webaudio-controls": "g200kg/webaudio-controls"
+    "webaudio-controls": "g200kg/webaudio-controls",
+    "color-picker": "fooloomanzoo/color-picker#^2.0.8"
   },
   "resolutions": {
     "polymer": "^1.0.0",

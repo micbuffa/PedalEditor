@@ -24,11 +24,11 @@
   "dependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.1.0"
   },
-  "_release": "6418e2f7c0",
+  "_release": "15c98e5e63",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "6418e2f7c0b69ebd746c2428ba2cdae17e623e35"
+    "commit": "15c98e5e638a8357bfb8ae027c7cccea81739635"
   },
   "_source": "https://github.com/g200kg/webaudio-controls.git",
   "_target": "*",

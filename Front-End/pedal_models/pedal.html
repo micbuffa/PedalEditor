@@ -5,10 +5,12 @@
     </style>
 
 	<div class="pedal">
-		
+		<div id="resize"></div>
+
 		<!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
+		<img id="background-image" >
+
 		<div class="switchCont" id="switch1">
-			<img id="background-image" >
 			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
 		</div>
 		
@@ -57,8 +59,12 @@
 				this.selectedElement = null;
 				this.pedalId = null;
 				this.name = null;
-				this.pedalElementManager = new PedalElementManager(this, thatDoc);
-            }
+				this.configChangedEvent = new CustomEvent('config-changed');
+			}
+			
+			getAttributes() {
+				return ['color', 'width', 'height', 'radius', 'background-image', 'opacity', 'name'];
+			}
 			
 			/********************************* Add Pedal Elements Config ************************************/
 
@@ -103,7 +109,10 @@
                 var shadowRoot = this.attachShadow({mode:'open'});
     
                 var clone = thatDoc.importNode( template.content, true );
-                shadowRoot.appendChild(clone);
+				shadowRoot.appendChild(clone);
+				
+				this.pedalElementManager = new PedalElementManager(this, thatDoc);
+
 				this.updateStyle(this);
 			}
 
@@ -212,6 +221,16 @@
 								width: ${this.getAttribute('width')}px;
 								height: ${this.getAttribute('height')}px;
 								opacity: ${this.getAttribute('opacity')};
+							}
+
+							#resize {
+								position: absolute;
+								cursor: nwse-resize;
+								width: 10px;
+								height: 10px;
+								left: ${this.getAttribute('width') - 8}px;
+								top: ${this.getAttribute('height') - 8}px;
+								border: 1px solid black;
 							}
 
 							.knob, .switch, .icon{
@@ -436,19 +455,8 @@
 				this.knobs = [];
 
 				for(let element of config.elements) {
-					
-					if(element.type == 'knob') {
-						let knob = this.addElement('knob');
-						knob.x = element.x;
-						knob.y = element.y;
-						knob.model = element.model;
-						knob.value = element.value;
-						knob.label = element.label;
-						knob.label_fontfamily = element.label_fontfamily;
-						knob.label_fontsize = element.label_fontsize;
-						knob.label_color = element.label_color;
-						knob.type = element.type;
-					} else if(element.type === 'icon') {
+		
+					if(element.type === 'icon') {
 						let icon = this.addElement('icon', element.file);
 						icon.x = element.x;
 						icon.y = element.y;
@@ -459,10 +467,29 @@
 					}
 				}
 
+				for(let element of config.elements) {
+					if(element.type == 'knob') {
+						let knob = this.addElement('knob');
+						knob.x = element.x;
+						knob.y = element.y;
+						knob.width = element.width;
+						knob.height = element.height;
+						knob.model = element.model;
+						knob.value = element.value;
+						knob.label = element.label;
+						knob.label_fontfamily = element.label_fontfamily;
+						knob.label_fontsize = element.label_fontsize;
+						knob.label_color = element.label_color;
+						knob.type = element.type;
+					}
+				}
+
 				this.setAttribute('width', config.width);
 				this.setAttribute('color', config.color);
 				this.setAttribute('height', config.height);
 				this.setAttribute('radius', config.radius);
+				this.setAttribute('name', config.name);
+				this.setAttribute('opacity', config.opacity || 1);		// If the opacity is not set, initialize it to the default value which is 1.
 				this.setBackgroundImage(config.backgroundImageSrc);
 			}
 
@@ -474,12 +501,13 @@
 			getConfig() {
 				let config = {
 					id: this.pedalId,
-					name: this.name,
+					name: this.getAttribute('name'),
 					backgroundImageSrc: this.backgroundImageSrc,
 					color: this.getAttribute('color'),
         			width: this.getAttribute('width'),
         			height: this.getAttribute('height'),
         			radius: this.getAttribute('radius'),
+					opacity: this.getAttribute('opacity'),
 					elements: []
 				};
 
@@ -539,8 +567,14 @@
 
 				return html;
 			}
+			
+			setParam(name, value) {
+				console.log("Setting the param " + name + " to value " + value)
+				this.setAttribute(name, value);
+			}
 
 		}
+
 
 
         window.customElements.define('my-pedal', Pedal);
