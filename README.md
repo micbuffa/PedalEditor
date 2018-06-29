@@ -5,7 +5,7 @@ In order to launch the application, we must:
 - Start the server application.
 - Start the browser application.
 
-####1. Lauching the server application:
+#### 1. Lauching the server application:
 
 **Requirements:**
 - Node.js installed
@@ -21,7 +21,7 @@ node ./index.js
 ```
 The default port is: 3000.
 
-####2. Lauching the Browser application:
+#### 2. Lauching the Browser application:
 **Requirements:**
 - Chrome Server installed and serving the directory "PedalEditor/Front-End"
 
@@ -41,7 +41,7 @@ Editor components are used to set the parameters of an editable pedal or of an e
 
 Herewidth is a list of already implemented pedal components.
 
-- #####Pedal details
+##### - Pedal details
 
 This component is used to set the parameters of a pedal.
 
@@ -61,7 +61,7 @@ The custom element of this component is:
 <editor-pedal-details></editor-pedal-details>
 ```
 
-- #####Pedal Elements List
+#####- Pedal Elements List
 
 This component shows a list of pedal elements by their ids.
 
@@ -76,7 +76,7 @@ The custom element of this component is:
 
 An editor component is always a Web Component.
 
-- ##### Implementation
+##### - Implementation
 In the `NewEditorComponent` class contained in the `new-editor-component.html` Web Component, we should implement the following functions:
 
 1. `constructor()`: For attaching the shadow dom.
@@ -144,7 +144,7 @@ enableInputs() {
 }
 ```
 
-- ##### Instantiation
+##### - Instantiation
 
 In `index.html`, to instanciate the editor component we should:
 
