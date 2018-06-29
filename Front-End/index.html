@@ -585,13 +585,28 @@
         let pedalDetails = document.querySelector('#editor-pedal-details');
         let newPedalDetails = pedalDetails.cloneNode();
         parent = pedalDetails.parentNode;
-        
+
         parent.replaceChild(newPedalDetails, pedalDetails);
 
         let elementList = document.querySelector('#editor-element-list');
 
         newPedalDetails.setEditablePedal(pedal);
         elementList.setEditablePedal(pedal);
+    }
+
+    function plugPedalToEditor() {
+
+        // Plug pedal to pedal details component
+        let pedalDetails = document.querySelector('#editor-pedal-details');
+        let newPedalDetails = pedalDetails.cloneNode();
+        pedalDetails.parentNode.replaceChild(newPedalDetails, pedalDetails);
+        newPedalDetails.setEditablePedal(pedal);
+        
+        // Plug pedal to element list component
+        let elementList = document.querySelector('#editor-element-list');
+        elementList.setEditablePedal(pedal);
+
+
     }
 
     function getFirstChild(el) {
