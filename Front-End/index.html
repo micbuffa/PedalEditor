@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
     <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+    <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/sdk/WebAudioSDK.js"></script>
 
     <link rel="stylesheet" href="StyleSheet.css">
     <link rel="stylesheet" href="StyleSideNav.css">
@@ -25,7 +26,7 @@
     <link rel="import" href="blue.html">
     <script src="js/bootstrap.min.js"></script>
     <script src="jscolor.js"></script>
-    
+
     <script src="pedal_models/functionalPedalGenerator.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
@@ -59,13 +60,21 @@
         <button class="buttonDownload" onclick="newPedal()">New</button>
         <br>
         <br>
+        <br>
+
+        <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/">
+        <br>
+        <div id="buttons">
+            <button id="bt_buildIt">fetch plugin descriptor</button>
+        </div>
+        <br>
         <label>Load: </label>
         <select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
             <option value="Georgia"></option>
         </select>
         <br>
 
-        
+
         <!--Accrodion Menu-->
         <div id="accordion">
             <ul>
@@ -141,12 +150,12 @@
 
                         <label>Height: </label>
                         <input id="inspector-height" class="maininput" type="number" onchange="setSelectedElementHeight(value)">
-                        
+
                         <br>
 
                         <label>Keep ratio</label>
                         <input id="keep-ratio" type="checkbox" class="maininput-checkbox" checked="true">
-                        
+
                         <br>
                         <br>
 
@@ -252,7 +261,7 @@
 
     var http = new XMLHttpRequest();
     var path = "/pedale";
-
+    var ctx = new AudioContext();
     var section = document.getElementsByClassName("pedalSection")[0];
     var pedal = getFirstChild(section);
     var knobSprite;
@@ -260,15 +269,21 @@
     let savedPedalsConfigs;
     let funcitonalPedalGenerator;
 
+    var bt_buildIt = document.querySelector('#bt_buildIt');
+
     window.onload = initialize();
 
     function initialize() {
-
-
-        
         displaySavedPedalsIds();
 
+        bt_buildIt.addEventListener('click', () => {
+
+            checkMetadata(document.querySelector("#urlPlugin").value);
+        });
+
     }
+
+
 
 
     /*Slider Nav Menu*/
@@ -338,12 +353,12 @@
 
         /* Uptates the list of pedal configurations by fetching then from the server. */
         refreshSavedPedalsConfigs();
-        
+
         /* Gets the select element that displays the list of names of the saved pedal configurations. */
         let loadPedalElem = document.querySelector('#load-pedal');
 
         let oldVal = loadPedalElem.value;
-        
+
         /* Flushes the select element to get rid of the old pedal configurations that have been generated
         during the last call to this function. If we don't flush it, the names of the new pedal configurations
         will be appended to the ones that has been fetched in the previous call to the function.*/
@@ -413,12 +428,12 @@
 
     function setSelectedElementWidth(width) {
         let keepRatio = document.querySelector("#keep-ratio").checked;
-    
-        
+
+
         let element = pedal.getSelectedElement();
         element.width = width;
-        
-        if(keepRatio) {
+
+        if (keepRatio) {
             element.height = element.width;
             document.querySelector("#inspector-height").value = width;
         }
@@ -432,12 +447,12 @@
         let element = pedal.getSelectedElement();
         element.height = height;
 
-        if(keepRatio) {
+        if (keepRatio) {
             element.width = element.height;
             document.querySelector("#inspector-width").value = height;
 
         }
-        
+
         pedal.updateStyle_();
     }
 
@@ -573,13 +588,13 @@
                 loadPedal.value = value;
             }
         }
-        
-        
+
+
         /*let pedalDetails1 = document.createElement('editor-pedal-details');
         let pedalDetailsSection = document.querySelector('#accordion');
         pedalDetailsSection.appendChild(pedalDetails1);
         console.log(pedalDetailsSection);*/
-        
+
         plugPedalToEditor();
     }
 
@@ -590,7 +605,7 @@
         let newPedalDetails = pedalDetails.cloneNode();
         pedalDetails.parentNode.replaceChild(newPedalDetails, pedalDetails);
         newPedalDetails.setEditablePedal(pedal);
-        
+
         // Plug pedal to element list component
         let elementList = document.querySelector('#editor-element-list');
         elementList.setEditablePedal(pedal);
@@ -643,6 +658,101 @@
         let elem = document.querySelector('#editor-pedal-details');
         toggleHidden(elem);
     }
+
+
+
+    // And of the forked content
+    // -----------------------------Json fetching part ---------------------------//
+
+    function checkMetadata(baseURL) {
+        fetch(baseURL + "/main.json").then(responseJSON => {
+            return responseJSON.json();
+        }).then(metadata => {
+            let name = metadata.name
+            let className = metadata.vendor + metadata.name;
+            loadPlugin(className, name, baseURL);
+        }).catch((e) => {
+            console.log(e);
+        });
+    }
+
+    // add the script tag and load the plugin 
+    function loadPlugin(className, name, baseURL) {
+        let scriptURL = baseURL + "/main.js";
+
+        // if we are here this means that the script is not present. Add it to the document
+        let script = document.createElement("script");
+        script.src = scriptURL;
+
+        script.onload = function () {
+            // Once the script has been loaded instanciate the plugin
+            getDescriptorFromPlugin(className, name, baseURL);
+        }
+        // will be executed before the onload above...
+        document.head.appendChild(script);
+    }
+
+    // instanciate the plugin 
+    function getDescriptorFromPlugin(className, name, baseURL) {
+
+        var plugin = new window[className](ctx, baseURL);
+        console.log(plugin);
+
+        plugin.load().then((node) => {
+            plugin.loadGui().then((elem) => {
+                console.log(name);
+                let descriptor = node.getDescriptor();
+                let dimensions = elem.properties;
+
+                //--------------------------------- JSON edition PART -------------------------//
+                let extendedDescriptor = {
+                    "id": 1526614886013,
+                    "name": name,
+                    "backgroundImageSrc": "image2.png",
+                    "color": "#AB2E24",
+                    "width": dimensions.dataWidth.value,
+                    "height": dimensions.dataHeight.value,
+                    "radius": "10",
+                    "elements": []
+                }
+                for (var param in descriptor) {
+                    if (descriptor.hasOwnProperty(param)) {
+                        var element = {
+                            "id": param,
+                            "x": 29,
+                            "y": 113,
+                            "width": 70,
+                            "height": 70,
+                            "model": "Carbon.png",
+                            "value": descriptor[param].defaultValue,
+                            "min":descriptor[param].minValue,
+                            "max":descriptor[param].maxValue,
+                            "label": param,
+                            "label_fontfamily": "Verdana",
+                            "label_fontsize": "14",
+                            "label_color": "000000",
+                            "type": "knob"
+                        }
+
+                    }
+                    extendedDescriptor.elements.push(element);
+                }
+                //-------------------- END of JSON Edition -------------------- //
+                console.log(extendedDescriptor);
+
+
+            });
+            delete node;
+
+        });
+
+        delete plugin;
+
+    }
+
+
+
+
 
 </script>
 
