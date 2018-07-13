@@ -11,7 +11,7 @@
 
 		<div class="switchCont" id="switch1">
 			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png"
-			 class="switch" id="switch1" height="64" width="128"></webaudio-switch>
+			 class="switch" id="switch1" height="15" width="30"></webaudio-switch>
 		</div>
 
 	</div>
@@ -96,9 +96,17 @@
 			}
 
 			setBackgroundImage(imageName) {
+				console.log(imageName);
+				if(imageName){
 				this.backgroundImageSrc = imageName;
 				let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
 				backgroundImageElem.setAttribute('src', './img/background/' + imageName);
+				}
+			}
+			
+			setBackgroundImagebysrc(src){
+				let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
+				backgroundImageElem.setAttribute('src', src);
 			}
 
 			setSrc(src) {
@@ -344,7 +352,6 @@
 					knobContainer.innerHTML = '';
 
 					var knobElem = thatDoc.createElement("webaudio-knob");
-					console.log(knob);
 					knobElem.src = 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/' + knob.model;
 					knobElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/' + knob.model);
 					knobElem.setAttribute('height', knob.height);
@@ -362,6 +369,7 @@
 
 					let labelElem = thatDoc.createElement("div");
 					labelElem.innerHTML = knob.label;
+					labelElem.setAttribute('style','text-align:center');
 					knobContainer.appendChild(labelElem);
 
 

@@ -77,7 +77,7 @@ class PedalElementManager {
             value: 20,
             label: 'knbo_' + uid,
             label_fontfamily: 'Comic Sans MS',
-            label_fontsize: '14',
+            label_fontsize: '9',
             label_color: '000000',
             type: 'knob'
         };
@@ -98,7 +98,7 @@ class PedalElementManager {
             model: 'switch_2.png',
             label: 'switch_' + uid,
             label_fontfamily: 'Comic Sans MS',
-            label_fontsize: '14',
+            label_fontsize: '9',
             label_color: '000000',
             type: 'switch'
         };
@@ -119,7 +119,7 @@ class PedalElementManager {
             model: 'slider1.png',
             label: 'slider_' + uid,
             label_fontfamily: 'Comic Sans MS',
-            label_fontsize: '14',
+            label_fontsize: '9',
             label_color: '000000',
             type: 'slider'
         };

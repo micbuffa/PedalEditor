@@ -8,7 +8,7 @@
     <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
-    <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+    <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
     <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/sdk/WebAudioSDK.js"></script>
 
     <link rel="stylesheet" href="StyleSheet.css">
@@ -61,11 +61,11 @@
         <br>
         <br>
         <br>
-
-        <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/">
-        <br>
-        <div id="buttons">
-            <button id="bt_buildIt">fetch plugin descriptor</button>
+        <div id="fetching">
+            Paste a WAP directory URL to Fetch
+            <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/" style="width: 90%;">
+            <br>
+            <button class="buttonDownload" id="bt_buildIt">fetch plugin descriptor</button>
         </div>
         <br>
         <label>Load: </label>
@@ -742,15 +742,15 @@
                             "id": param,
                             "x": 29,
                             "y": 113,
-                            "width": 30,
-                            "height": 30,
+                            "width": 40,
+                            "height": 40,
                             "model": "Carbon.png",
                             "value": descriptor[param].defaultValue,
                             "min": descriptor[param].minValue,
                             "max": descriptor[param].maxValue,
                             "label": param,
                             "label_fontfamily": "Verdana",
-                            "label_fontsize": "14",
+                            "label_fontsize": "7",
                             "label_color": "000000",
                             "type": "knob"
                         }
