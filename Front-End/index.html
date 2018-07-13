@@ -294,7 +294,20 @@
         });
 
         initialize();
+        
+        //{"id":1526614886013,"name":"First","backgroundImageSrc":"image2.png","color":"#AB2E24","width":"400","height":"500","radius":"10"
 
+        let defaultPedalConfig = {
+                color: "#AB2E24",
+                width: 400,
+                height: 500,
+                radius: 10,
+                elements: []
+        };
+
+        pedal.loadConfig(defaultPedalConfig);
+        
+        plugPedalToEditor();
         funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
     }
 
