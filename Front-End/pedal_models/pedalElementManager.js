@@ -16,19 +16,21 @@ class PedalElementManager {
     }
 
 
-    addElement(type, filename) {
+    addElement(type, filename, id) {
         
         /* The configuration of the pedal element. */
         let pedalElementConfig = this.addElementConfigDefault(type, filename);
         
         /* The html container of the element. */
-        let pedalElementContainer = this.addElementHtml(pedalElementConfig);
+        let pedalElementContainer = this.addElementHtml(pedalElementConfig, id);
         
         /* For the listeners. */
         var that = this;
-
+        
         /* Drag and drop listener. */
         pedalElementContainer.addEventListener('mousedown', function(e) {
+            console.log(id);
+
             e.stopPropagation();
             e.preventDefault();
             that.dragAndDropElementListener(e, pedalElementConfig, that.pedal);
@@ -36,11 +38,11 @@ class PedalElementManager {
         
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function(e) {
-            that.pedal.selectElement(pedalElementConfig.id);
+            that.pedal.selectElement(id);
         }, true);
         
         /* Selecting the element just after it has been added. */
-        this.pedal.selectElement(pedalElementConfig.id);
+        //this.pedal.selectElement(id);
 
         return pedalElementConfig;
     }
@@ -147,12 +149,12 @@ class PedalElementManager {
     /********************************* Add Pedal Elements Html ************************************/
 
     /* Creating and adding the html of the pedal element from its config. */
-    addElementHtml(pedalElementConfig) {
+    addElementHtml(pedalElementConfig, id) {
         switch(pedalElementConfig.type) {
             case 'switch':
                 return this.addSwitchHtml(pedalElementConfig);
             case 'knob':
-                return this.addKnobHtml(pedalElementConfig);
+                return this.addKnobHtml(pedalElementConfig, id);
             case 'icon':
                 return this.addIconHtml(pedalElementConfig);
             case 'slider':
@@ -162,10 +164,10 @@ class PedalElementManager {
     
 
     /* Creating and adding the html of the knob from its config. */
-    addKnobHtml(knobConfig) {
+    addKnobHtml(knobConfig, id) {
         var knobContainer = this.doc.createElement("div");
         knobContainer.setAttribute('class', 'knob');
-        knobContainer.setAttribute('id', knobConfig.id);
+        knobContainer.setAttribute('id', id ? id : knobConfig.id);
         
         var knobElem = this.doc.createElement("webaudio-knob");
         knobElem.setAttribute('sprites', 100);
@@ -180,7 +182,6 @@ class PedalElementManager {
         knobContainer.appendChild(label);
         
         this.pedal.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
-
         return knobContainer;
     }
     

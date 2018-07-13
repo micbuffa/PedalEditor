@@ -573,5 +573,72 @@
         "type": "knob"
       }
     ]
+  },
+  {
+    "name": "azdada",
+    "color": "#AB2E24",
+    "width": "400",
+    "height": "500",
+    "radius": "10",
+    "opacity": "1",
+    "elements": [
+      {
+        "id": "knob_667",
+        "x": 29,
+        "y": 113,
+        "width": 30,
+        "height": 30,
+        "model": "Carbon.png",
+        "value": 0.5,
+        "label": "highgain",
+        "label_fontfamily": "Verdana",
+        "label_fontsize": "14",
+        "label_color": "000000",
+        "type": "knob"
+      },
+      {
+        "id": "knob_898",
+        "x": 270,
+        "y": 250,
+        "width": 30,
+        "height": 30,
+        "model": "Carbon.png",
+        "value": 0.5,
+        "label": "midhighgain",
+        "label_fontfamily": "Verdana",
+        "label_fontsize": "14",
+        "label_color": "000000",
+        "type": "knob"
+      },
+      {
+        "id": "knob_844",
+        "x": 106,
+        "y": 275,
+        "width": 30,
+        "height": 30,
+        "model": "Carbon.png",
+        "value": 0.8,
+        "label": "midlowgain",
+        "label_fontfamily": "Verdana",
+        "label_fontsize": "14",
+        "label_color": "000000",
+        "type": "knob"
+      },
+      {
+        "id": "knob_347",
+        "x": 211,
+        "y": 122,
+        "width": 30,
+        "height": 30,
+        "model": "Carbon.png",
+        "value": 0.6,
+        "label": "lowgain",
+        "label_fontfamily": "Verdana",
+        "label_fontsize": "14",
+        "label_color": "000000",
+        "type": "knob"
+      }
+    ],
+    "id": 1531472423327
   }
 ]

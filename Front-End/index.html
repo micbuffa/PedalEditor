@@ -295,7 +295,9 @@
         document.getElementById("mySidenav").style.width = "0";
     }
 
-    function newPedal() {
+    function newPedal(args) {
+
+
 
         section.innerHTML = '';
         pedal = null;
@@ -309,6 +311,26 @@
         });
 
         initialize();
+
+
+        let defaultPedalConfig = {
+            color: "#AB2E24",
+            width: 400,
+            height: 500,
+            radius: 10,
+            elements: []
+        };
+
+        if (args) {
+            defaultPedalConfig.height = args.height;
+            defaultPedalConfig.width = args.width;
+            defaultPedalConfig.name = args.name;
+            defaultPedalConfig.elements = args.elements;
+        }
+
+        pedal.loadConfig(defaultPedalConfig);
+
+        plugPedalToEditor();
 
         funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
     }
@@ -706,7 +728,6 @@
 
                 //--------------------------------- JSON edition PART -------------------------//
                 let extendedDescriptor = {
-                    "id": 1526614886013,
                     "name": name,
                     "backgroundImageSrc": "image2.png",
                     "color": "#AB2E24",
@@ -721,12 +742,12 @@
                             "id": param,
                             "x": 29,
                             "y": 113,
-                            "width": 70,
-                            "height": 70,
+                            "width": 30,
+                            "height": 30,
                             "model": "Carbon.png",
                             "value": descriptor[param].defaultValue,
-                            "min":descriptor[param].minValue,
-                            "max":descriptor[param].maxValue,
+                            "min": descriptor[param].minValue,
+                            "max": descriptor[param].maxValue,
                             "label": param,
                             "label_fontfamily": "Verdana",
                             "label_fontsize": "14",
@@ -738,6 +759,8 @@
                     extendedDescriptor.elements.push(element);
                 }
                 //-------------------- END of JSON Edition -------------------- //
+
+                newPedal(extendedDescriptor);
                 console.log(extendedDescriptor);
 
 
