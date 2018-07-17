@@ -180,6 +180,14 @@
                     })
                 }
 
+                // For adding labels
+                for (let addLabel of this.root.querySelectorAll('#add-label')) {
+                    console.log(addLabel)
+                    addLabel.addEventListener('click', (event) => {
+                        this.addLabel();
+                    })
+                }
+
                 // For adding switches
                 for (let addSwitch of this.root.querySelectorAll('#add-switch')) {
                     addSwitch.addEventListener('click', (event) => {
@@ -212,6 +220,9 @@
 
             addSwitch() {
                 pedal.addElement('switch');
+            }
+            addSwitch() {
+                pedal.addElement('label');
             }
 
         }

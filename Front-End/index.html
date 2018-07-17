@@ -16,6 +16,7 @@
 
     <link rel="import" href="pedal_models/pedal.html">
     <link rel="import" href="editor-components/editor-pedal-details.html">
+    <link rel="import" href="editor-components/editor-labels.html">
     <link rel="import" href="editor-components/editor-element-list.html">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -87,6 +88,10 @@
                 <li>
                     <a href="#editor-element-list">ELEMENTS</a>
                     <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
+                </li>
+                <li>
+                    <a href="#label-editor">LABELS</a>
+                    <label-editor id="label-editor" class="accordion"></label-editor>
                 </li>
 
                 <li>
@@ -325,6 +330,7 @@
         };
 
         if (args) {
+            defaultPedalConfig.name = args.name;
             defaultPedalConfig.height = args.height;
             defaultPedalConfig.width = args.width;
             defaultPedalConfig.name = args.name;
@@ -636,6 +642,9 @@
         // Plug pedal to element list component
         let elementList = document.querySelector('#editor-element-list');
         elementList.setEditablePedal(pedal);
+
+        let labelEditor = document.querySelector("#label-editor");
+        labelEditor.setEditablePedal(pedal);
 
 
     }

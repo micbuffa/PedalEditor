@@ -1,156 +1,157 @@
 <html>
 
-    <head>
-      <link rel="stylesheet" href="lib/codemirror.css">
-    </head>
+<head>
+    <link rel="stylesheet" href="lib/codemirror.css">
+</head>
 
-    <body id="bodyId">
-        Sélectionnez un fichier : <select id="mySelect" onchange="loadFile()" >
-            <option value="/editor/pedals_generated/pedale_FLANGER.html">Flanger</option>
-            <option value="/editor/pedals_generated/pedale_VINTAGE.html">VINTAGE</option>
-        </select>
-        <button style="float:right" onclick="saveFile()">Sauvegarder</button>
-        <br/>
-        <br/>
-        <textarea id="sourceCode" >
+<body id="bodyId">
+    Sélectionnez un fichier :
+    <select id="mySelect" onchange="loadFile()">
+        <option value="/editor/pedals_generated/pedale_FLANGER.html">Flanger</option>
+        <option value="/editor/pedals_generated/pedale_VINTAGE.html">VINTAGE</option>
+    </select>
+    <button style="float:right" onclick="saveFile()">Sauvegarder</button>
+    <br/>
+    <br/>
+    <textarea id="sourceCode">
         </textarea>
 
-    </body>
+</body>
 
 <script src="lib/codemirror.js"></script>
 <script src="lib/xml.js"></script>
 <script>
     var editor;
 
-addKnobHtml(knobConfig) {
-				var knobContainer = thatDoc.createElement("div");
-				knobContainer.setAttribute('class', 'knob');
-				knobContainer.setAttribute('id', knobConfig.id);
-				
-				var knobElem = thatDoc.createElement("webaudio-knob");
-				knobElem.setAttribute('sprites', 100);
-				knobElem.setAttribute('value', 0);
-				knobElem.setAttribute('step', 1);
-				knobElem.setAttribute('src', '../img/knobs/' + knobConfig.model);
-				
-				knobContainer.appendChild(knobElem);
+    addKnobHtml(knobConfig) {
+        var knobContainer = thatDoc.createElement("div");
+        knobContainer.setAttribute('class', 'knob');
+        knobContainer.setAttribute('id', knobConfig.id);
 
-				var label = thatDoc.createElement('div');
-				label.innerHTML = knobConfig.id;
-				knobContainer.appendChild(label);
+        var knobElem = thatDoc.createElement("webaudio-knob");
+        knobElem.setAttribute('sprites', 100);
+        knobElem.setAttribute('value', 0);
+        knobElem.setAttribute('step', 1);
+        knobElem.setAttribute('src', '../img/knobs/' + knobConfig.model);
 
-				return knobContainer;
-			}
+        knobContainer.appendChild(knobElem);
 
-			addSwitchHtml(switchConfig) {
+        var label = thatDoc.createElement('div');
+        label.innerHTML = knobConfig.id;
+        knobContainer.appendChild(label);
 
-			}
-
-			addIconHtml(iconConfig) {
-
-			}
-
-			addPedalElementHtml(pedalElementConfig) {
-				switch(pedalElementConfig.type) {
-					case 'switch':
-						return this.addSwitchHtml(pedalElementConfig);
-					case 'knob':
-						return this.addKnobHtml(pedalElementConfig);
-					case 'icon':
-						return this.addIconHtml(pedalElementConfig);
-				}
-			}
-
-			addPedalElementConfigDefault(type) {
-				switch(type) {
-					case 'switch':
-						return this.addSwitchConfigDefault();
-					case 'knob':
-						return this.addKnobConfigDefault();
-					case 'icon':
-						return this.addIconConfigDefault();
-				}
-			}
-			
-			/* Creating and adding the default configuration of the knob. */
-			addKnobConfigDefault() {
-				var knob = {
-					id: "knob_" + this.knobs.length,
-					x: 43,
-					y: 30,
-					model: 'knob2.png',
-					value: 20,
-					label: 'knbo_' + this.knobs.length,
-					label_fontfamily: 'Comic Sans MS',
-					label_fontsize: '14',
-					label_color: '000000',
-					type: 'knob'
-				};
-				this.knobs.push(knob);
-
-				return knob;
-			}
-
-			/* Creating and adding the default configuration of a switch. */
-			addSwitchConfigDefault() {
-			}
-
-			/* Creating and adding the default configuration of an icon. */
-			addIconConfigDefault() {
-			}
-            
-
-    getPedals = function () {
-      var select = document.getElementById("mySelect");
-
-      var callback = function (pedals) {
-        var pedals2 = JSON.parse(pedals);
-        for (var i=0;i<pedals2.length;i++) {
-          select.innerHTML += "<option value='"+pedals2[i].path+"'>"+pedals2[i].name+"</option>";
-        }
-      };
-
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-          if (callback)
-            callback(xmlHttp.responseText);
-          }
-          else if (xmlHttp.status == 400) {
-            console.log("error");
-            console.log(xmlHttp.responseText);
-          }
-      }
-      xmlHttp.open("GET", "/pedale", true);
-      xmlHttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
-      xmlHttp.withCredentials = true;
-      xmlHttp.send(null);
+        return knobContainer;
     }
 
-    loadFile = function(){
+    addSwitchHtml(switchConfig) {
+
+    }
+
+    addIconHtml(iconConfig) {
+
+    }
+
+    addPedalElementHtml(pedalElementConfig) {
+        console.log("why am i here");
+        switch (pedalElementConfig.type) {
+            case 'switch':
+                return this.addSwitchHtml(pedalElementConfig);
+            case 'knob':
+                return this.addKnobHtml(pedalElementConfig);
+            case 'icon':
+                return this.addIconHtml(pedalElementConfig);
+        }
+    }
+
+    addPedalElementConfigDefault(type) {
+        switch (type) {
+            case 'switch':
+                return this.addSwitchConfigDefault();
+            case 'knob':
+                return this.addKnobConfigDefault();
+            case 'icon':
+                return this.addIconConfigDefault();
+        }
+    }
+
+    /* Creating and adding the default configuration of the knob. */
+    addKnobConfigDefault() {
+        var knob = {
+            id: "knob_" + this.knobs.length,
+            x: 43,
+            y: 30,
+            model: 'knob2.png',
+            value: 20,
+            label: 'knbo_' + this.knobs.length,
+            label_fontfamily: 'Comic Sans MS',
+            label_fontsize: '14',
+            label_color: '000000',
+            type: 'knob'
+        };
+        this.knobs.push(knob);
+
+        return knob;
+    }
+
+    /* Creating and adding the default configuration of a switch. */
+    addSwitchConfigDefault() {
+    }
+
+    /* Creating and adding the default configuration of an icon. */
+    addIconConfigDefault() {
+    }
+
+
+    getPedals = function () {
+        var select = document.getElementById("mySelect");
+
+        var callback = function (pedals) {
+            var pedals2 = JSON.parse(pedals);
+            for (var i = 0; i < pedals2.length; i++) {
+                select.innerHTML += "<option value='" + pedals2[i].path + "'>" + pedals2[i].name + "</option>";
+            }
+        };
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                if (callback)
+                    callback(xmlHttp.responseText);
+            }
+            else if (xmlHttp.status == 400) {
+                console.log("error");
+                console.log(xmlHttp.responseText);
+            }
+        }
+        xmlHttp.open("GET", "/pedale", true);
+        xmlHttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xmlHttp.withCredentials = true;
+        xmlHttp.send(null);
+    }
+
+    loadFile = function () {
         var pathFile = document.getElementById("mySelect").value;
         console.log();
         client = new XMLHttpRequest();
         client.open('GET', pathFile);
-        client.onreadystatechange = function() {
+        client.onreadystatechange = function () {
             //console.log(client.responseText);
             document.getElementById('sourceCode').innerHTML = client.responseText;
             document.getElementById('sourceCode').value = client.responseText;
-               editor = CodeMirror.fromTextArea(sourceCode, {
-                mode : "xml",
+            editor = CodeMirror.fromTextArea(sourceCode, {
+                mode: "xml",
                 htmlMode: true,
                 lineNumbers: true,
-                  tabSize:8
-              });
+                tabSize: 8
+            });
 
-            while(document.querySelectorAll('.CodeMirror').length >1)
-            {
+            while (document.querySelectorAll('.CodeMirror').length > 1) {
                 document.getElementById("bodyId").removeChild(document.getElementById("bodyId").lastChild);
             }
         }
         client.send();
     }
-    saveFile = function(){
+    saveFile = function () {
 
         editor.toTextArea();
 
@@ -162,27 +163,27 @@ addKnobHtml(knobConfig) {
 
 
         var params = JSON.stringify({
-            "path" : document.getElementById("mySelect").value,
-            "source" : editor.getValue()
+            "path": document.getElementById("mySelect").value,
+            "source": editor.getValue()
         });
 
 
 
         client.open('POST', '/pedale/code', true);
         client.setRequestHeader("Content-type", "application/json; charset=utf-8");
-        client.onreadystatechange = function() {
-                //console.log(client.responseText);
-            while(document.querySelectorAll('.CodeMirror').length >0)
-            {
+        client.onreadystatechange = function () {
+            //console.log(client.responseText);
+            while (document.querySelectorAll('.CodeMirror').length > 0) {
                 document.getElementById("bodyId").removeChild(document.getElementById("bodyId").lastChild);
             }
             loadFile();
-         }
+        }
         client.send(params);
 
     }
 
     getPedals();
-    
+
 </script>
+
 </html>
