@@ -55,6 +55,7 @@
 				this.icons = [];
 				this.switches = [];
 				this.sliders = [];
+				this.labels = [];
 				this.backgroundImageSrc = null;
 				this.selectedElement = null;
 				this.pedalId = null;
@@ -80,11 +81,11 @@
 			}
 
 			getElements() {
-				return this.knobs.concat(this.icons.concat(this.switches.concat(this.sliders)));
+				return this.knobs.concat(this.icons.concat(this.switches.concat(this.sliders.concat(this.labels))));
 			}
 
 			getElementsTypes() {
-				return ['knob', 'icon', 'switch', 'slider'];
+				return ['knob', 'icon', 'switch', 'slider','label'];
 			}
 
 			getKnobs() {
@@ -156,6 +157,11 @@
 						this.selectedElement = slider;
 					}
 				}
+				for (let label of this.labels) {
+					if (label.id === elementId) {
+						this.selectedElement = label;
+					}
+				}
 
 				this.highlightElement(elementId);
 
@@ -187,7 +193,10 @@
 					let slider = shadow.querySelectorAll('.slider')[i];
 					slider.className = slider.className.replace('selected', '');
 				}
-				
+				for (let i = 0; i < this.labels.length; i++) {
+					let label = shadow.querySelectorAll('.label')[i];
+					label.className = label.className.replace('selected', '');
+				}
 				console.log(elementId);
 				let selectedElement = shadow.querySelector('#' + elementId);
 				selectedElement.className += " selected";
@@ -241,7 +250,7 @@
 								border: 1px solid black;
 							}
 
-							.knob, .switch, .icon{
+							.knob, .switch, .icon, .label{
 								position: absolute;
 								cursor: pointer;
 							}
@@ -263,6 +272,14 @@
 							}
 
 							.selected  webaudio-switch{
+								cursor: move;
+							}
+
+							.selected  span{
+								cursor: move;
+							}
+
+							.selected:hover  span{
 								cursor: move;
 							}
 
@@ -442,8 +459,20 @@
 								height: ${icon.height}px;
 							}
 						`
-
 				}
+
+				for (let label of this.labels){
+					ret+= `
+					#${label.id} {
+								left: ${label.x}px;
+								top: ${label.y}px;
+								width: ${label.width}px;
+								height: ${label.height}px;
+							}
+						`
+						let labelContainer = this.shadowRoot.querySelector('#' + label.id);
+
+				}						
 
 
 				return ret;
@@ -500,6 +529,10 @@
 						knob.type = element.type;
 					}
 				}
+
+				if(config.name){ 
+					let label = this.addElement('label',config.name);
+					}
 
 				this.setAttribute('width', config.width);
 				this.setAttribute('color', config.color);

@@ -1,0 +1,91 @@
+<template id="label-editor">
+
+    <style>
+        @import "StyleSheet.css";
+    </style>
+
+    <div>
+        <h3>yes</h3>
+        <button class="mainbtn" id="add-label">Add Label</button>
+
+        <label>Text: </label>
+        <input id="label-text" name="text" class="maininput" disabled>
+
+        <br>
+
+        <label>Font color: #</label>
+        <input type="color" name="color" class="maininput" disabled>
+
+        <br>
+
+        <label>Fontsize: </label>
+        <input id="fontsize" class="maininput" type="number" name="fontsize" min="0" max="600" disabled> px
+
+        <br>
+
+        <label>Font Family : </label>
+        <input id="height" class="maininput" type="number" name="height" min="0" max="600" disabled> px
+
+        <br>
+
+    </div>
+
+</template>
+
+<script>
+
+    (function (window, document, undefined) {
+
+        const doc = (document._currentScript || document.currentScript).ownerDocument;
+        const template = doc.querySelector('#label-editor');
+
+        class LabelEditor extends HTMLElement {
+
+            constructor() {
+                super();
+
+                this.root = this.attachShadow({ mode: 'closed' });
+                const temp = document.importNode(template.content, true);
+
+                this.root.appendChild(temp);
+            }
+
+            setEditablePedal(editablePedal) {
+                this.editablePedal = editablePedal;
+
+                this.enableInputs();
+                this.setInputListeners();
+                this.refreshInputs();
+
+                this.editablePedal.addEventListener('config-changed', (e) => {
+                    this.refreshInputs();
+                });
+            }
+
+            refreshInputs() {
+                for (let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.value = this.editablePedal.getAttribute(inputElem.name);
+                }
+            }
+
+            setInputListeners() {
+                // Synchonize input fields with pedal configuration
+                for (let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.addEventListener('change', (event) => {
+                        this.editablePedal.setAttribute(event.target.name, event.target.value);
+                    });
+                }
+            }
+
+            enableInputs() {
+                for (let inputElem of this.root.querySelectorAll('input')) {
+                    inputElem.disabled = false;
+                }
+
+            }
+        }
+
+        window.customElements.define('label-editor', LabelEditor);
+    })(window, document);
+
+</script>
