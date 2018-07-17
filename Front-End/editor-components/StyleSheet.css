@@ -10,6 +10,12 @@ body {
     border: 1px solid red;
 }
 
+#backround-images{display: flow-root}
+#uploadImage{
+    margin-left: 10%;
+    width: 80%;
+}
+
 .hmessage {
     position: absolute;
     color: #0f0f0f;
