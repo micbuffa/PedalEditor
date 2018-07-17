@@ -727,9 +727,13 @@
 
         plugin.load().then((node) => {
             plugin.loadGui().then((elem) => {
-                console.log(name);
                 let descriptor = node.getDescriptor();
                 let dimensions = elem.properties;
+                let nbParam =Object.keys(descriptor).length;
+                var count = 0;
+                let hoffset = 50;
+                let voffset = 60;
+                console.log(descriptor);
 
                 //--------------------------------- JSON edition PART -------------------------//
                 let extendedDescriptor = {
@@ -741,12 +745,21 @@
                     "radius": "10",
                     "elements": []
                 }
+
+
                 for (var param in descriptor) {
+                    // 2* because we want by default two ranges of knobs
+                    let horizontalRange = Math.ceil(count % (nbParam / 2));
+                    let verticalRange = Math.floor(count / (nbParam /2));
+                    console.log(param, horizontalRange, verticalRange);
+
+                    // Here we do a little normalisation because we have to select by ID later
+
                     if (descriptor.hasOwnProperty(param)) {
                         var element = {
-                            "id": param,
-                            "x": 29,
-                            "y": 113,
+                            "id": param.toLowerCase().replace(/ /g, "").replace('\/',""),
+                            "x": hoffset * horizontalRange,
+                            "y":  voffset * verticalRange,
                             "width": 40,
                             "height": 40,
                             "model": "Carbon.png",
@@ -761,6 +774,7 @@
                         }
 
                     }
+                    count ++;
                     extendedDescriptor.elements.push(element);
                 }
                 //-------------------- END of JSON Edition -------------------- //

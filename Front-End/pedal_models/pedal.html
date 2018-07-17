@@ -96,7 +96,6 @@
 			}
 
 			setBackgroundImage(imageName) {
-				console.log(imageName);
 				if(imageName){
 				this.backgroundImageSrc = imageName;
 				let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
@@ -330,7 +329,6 @@
 			}
 
 			generateElementsStyles() {
-				console.log(this.knobs);
 				let ret = '';
 				for (let knob of this.knobs) {
 					ret += `
@@ -347,7 +345,7 @@
 						}
 					`
 
-					let knobContainer = this.shadowRoot.querySelector('#' + knob.id);
+					let knobContainer = this.shadowRoot.getElementById(knob.id);
 					
 					knobContainer.innerHTML = '';
 
