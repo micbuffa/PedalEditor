@@ -134,6 +134,7 @@
 			}
 
 			selectElement(elementId) {
+				console.log(elementId);
 				for (let knob of this.knobs) {
 					if (knob.id === elementId) {
 						this.selectedElement = knob;
@@ -197,7 +198,7 @@
 					let label = shadow.querySelectorAll('.label')[i];
 					label.className = label.className.replace('selected', '');
 				}
-				console.log(elementId);
+				
 				let selectedElement = shadow.querySelector('#' + elementId);
 				selectedElement.className += " selected";
 			}

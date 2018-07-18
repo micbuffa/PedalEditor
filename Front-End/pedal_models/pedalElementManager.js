@@ -24,12 +24,14 @@ class PedalElementManager {
         /* The html container of the element. */
         let pedalElementContainer = this.addElementHtml(pedalElementConfig, id);
 
+        let containerId = pedalElementContainer.getAttribute('id');
+
         /* For the listeners. */
         var that = this;
 
         /* Drag and drop listener. */
         pedalElementContainer.addEventListener('mousedown', function (e) {
-            console.log(id);
+            //console.log(id);
 
             e.stopPropagation();
             e.preventDefault();
@@ -38,7 +40,8 @@ class PedalElementManager {
 
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function (e) {
-            that.pedal.selectElement(id);
+            console.log("id is: " + containerId);
+            that.pedal.selectElement(containerId);
         }, true);
 
         /* Selecting the element just after it has been added. */
@@ -213,7 +216,7 @@ class PedalElementManager {
         labelContainer.setAttribute('class', 'label');
         labelContainer.setAttribute('id', id ? id : labelConfig.id);
 
-        var labelElement = this.doc.createElement("span");
+        var labelElement = this.doc.createElement("div");
 
         labelElement.innerHTML = labelConfig.id;
         labelContainer.appendChild(labelElement);
@@ -348,7 +351,6 @@ class PedalElementManager {
         function onMouseUp(e) {
             document.removeEventListener('mousemove', onMouseMove);
             document.onmouseup = null;
-            console.log("Entered here");
         }
 
         document.addEventListener('mousemove', onMouseMove);
