@@ -64,7 +64,7 @@ class PedalElementManager {
             case 'slider':
                 return this.addSliderConfigDefault(filename);
             case 'label':
-                return this.addLabelConfigDefault();
+                return this.addLabelConfigDefault(filename);
         }
     }
 
@@ -151,15 +151,16 @@ class PedalElementManager {
         return icon;
     }
 
-    addLabelConfigDefault() {
+    addLabelConfigDefault(name) {
         let uid = Math.floor(Math.random() * 1000);
         var _label = {
             id: "label_" + uid,
             x: 43,
             y: 30,
+            label: name,
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '14',
-            label_color: '000000',
+            label_color: 'ffffff',
             type: 'label'
         };
         this.pedal.labels.push(_label);
@@ -181,7 +182,7 @@ class PedalElementManager {
             case 'slider':
                 return this.addSliderHtml(pedalElementConfig);
             case 'label':
-                return this.addLabelHtml(pedalElementConfig);
+                return this.addLabelHtml(pedalElementConfig, id);
         }
     }
 
@@ -210,13 +211,14 @@ class PedalElementManager {
 
     /* Creating and adding the html of the knob from its config. */
     addLabelHtml(labelConfig, id) {
+        console.log(labelConfig);
         var labelContainer = this.doc.createElement("div");
         labelContainer.setAttribute('class', 'label');
         labelContainer.setAttribute('id', id ? id : labelConfig.id);
 
         var labelElement = this.doc.createElement("div");
-
-        labelElement.innerHTML = labelConfig.id;
+        //labelElement.setAttribute('style',`color:#${labelConfig.label_color}; font-family:${labelConfig.label_fontfamily}; font-size:${labelConfig.label_fontsize}px`);
+        labelElement.innerHTML = labelConfig.label;
         labelContainer.appendChild(labelElement);
 
         this.pedal.shadowRoot.querySelector('.pedal').appendChild(labelContainer);

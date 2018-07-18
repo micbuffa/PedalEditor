@@ -85,7 +85,7 @@
 			}
 
 			getElementsTypes() {
-				return ['knob', 'icon', 'switch', 'slider','label'];
+				return ['knob', 'icon', 'switch', 'slider', 'label'];
 			}
 
 			getKnobs() {
@@ -97,14 +97,14 @@
 			}
 
 			setBackgroundImage(imageName) {
-				if(imageName){
-				this.backgroundImageSrc = imageName;
-				let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
-				backgroundImageElem.setAttribute('src', './img/background/' + imageName);
+				if (imageName) {
+					this.backgroundImageSrc = imageName;
+					let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
+					backgroundImageElem.setAttribute('src', './img/background/' + imageName);
 				}
 			}
-			
-			setBackgroundImagebysrc(src){
+
+			setBackgroundImagebysrc(src) {
 				let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
 				backgroundImageElem.setAttribute('src', src);
 			}
@@ -134,7 +134,6 @@
 			}
 
 			selectElement(elementId) {
-				console.log(elementId);
 				for (let knob of this.knobs) {
 					if (knob.id === elementId) {
 						this.selectedElement = knob;
@@ -198,7 +197,7 @@
 					let label = shadow.querySelectorAll('.label')[i];
 					label.className = label.className.replace('selected', '');
 				}
-				
+
 				let selectedElement = shadow.querySelector('#' + elementId);
 				selectedElement.className += " selected";
 			}
@@ -364,7 +363,7 @@
 					`
 
 					let knobContainer = this.shadowRoot.getElementById(knob.id);
-					
+
 					knobContainer.innerHTML = '';
 
 					var knobElem = thatDoc.createElement("webaudio-knob");
@@ -385,7 +384,7 @@
 
 					let labelElem = thatDoc.createElement("div");
 					labelElem.innerHTML = knob.label;
-					labelElem.setAttribute('style','text-align:center');
+					labelElem.setAttribute('style', 'text-align:center');
 					knobContainer.appendChild(labelElem);
 
 
@@ -462,18 +461,22 @@
 						`
 				}
 
-				for (let label of this.labels){
-					ret+= `
+				for (let label of this.labels) {
+					ret += `
 					#${label.id} {
 								left: ${label.x}px;
 								top: ${label.y}px;
-								width: ${label.width}px;
-								height: ${label.height}px;
+
+							}
+					#${label.id} div {
+							color: #${label.label_color};
+							font-family: "${label.label_fontfamily}";
+							font-size: ${label.label_fontsize}px;
 							}
 						`
-						let labelContainer = this.shadowRoot.querySelector('#' + label.id);
+					let labelContainer = this.shadowRoot.querySelector('#' + label.id);
 
-				}						
+				}
 
 
 				return ret;
@@ -531,9 +534,19 @@
 					}
 				}
 
-				if(config.name){ 
-					let label = this.addElement('label',config.name);
+				if (config.name) {
+					for (let element of config.elements) {
+						if (element.type == 'label') {
+							let label = this.addElement('label', config.name);
+							label.x = element.x;
+							label.y = element.y;
+							label.label_fontfamily = element.label_fontfamily;
+							label.label_fontsize = element.label_fontsize;
+							label.label_color = element.label_color;
+							label.type = element.type;
+						}
 					}
+				}
 
 				this.setAttribute('width', config.width);
 				this.setAttribute('color', config.color);
