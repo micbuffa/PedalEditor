@@ -316,8 +316,8 @@
         });
 
         initialize();
-        
-        
+
+
 
 
 
@@ -738,7 +738,7 @@
             plugin.loadGui().then((elem) => {
                 let descriptor = node.getDescriptor();
                 let dimensions = elem.properties;
-                let nbParam =Object.keys(descriptor).length;
+                let nbParam = Object.keys(descriptor).length;
                 var count = 0;
                 let hoffset = 50;
                 let voffset = 60;
@@ -759,16 +759,16 @@
                 for (var param in descriptor) {
                     // 2* because we want by default two ranges of knobs
                     let horizontalRange = Math.ceil(count % (nbParam / 2));
-                    let verticalRange = Math.floor(count / (nbParam /2));
+                    let verticalRange = Math.floor(count / (nbParam / 2));
                     console.log(param, horizontalRange, verticalRange);
 
                     // Here we do a little normalisation because we have to select by ID later
 
                     if (descriptor.hasOwnProperty(param)) {
                         var element = {
-                            "id": param.toLowerCase().replace(/ /g, "").replace('\/',""),
+                            "id": param.toLowerCase().replace(/ /g, "").replace('\/', ""),
                             "x": hoffset * horizontalRange,
-                            "y":  voffset * verticalRange,
+                            "y": voffset * verticalRange,
                             "width": 40,
                             "height": 40,
                             "model": "Carbon.png",
@@ -783,9 +783,21 @@
                         }
 
                     }
-                    count ++;
+                    count++;
                     extendedDescriptor.elements.push(element);
+
+
                 }
+                var elemlabel = {
+                    "x": 20,
+                    "y": 130,
+                    "label": name,
+                    "label_fontfamily": 'Comic Sans MS',
+                    "label_fontsize": '14',
+                    "label_color": 'ffffff',
+                    "type": 'label'
+                }
+                extendedDescriptor.elements.push(elemlabel);
                 //-------------------- END of JSON Edition -------------------- //
 
                 newPedal(extendedDescriptor);

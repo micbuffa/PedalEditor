@@ -217,7 +217,7 @@ class PedalElementManager {
         labelContainer.setAttribute('id', id ? id : labelConfig.id);
 
         var labelElement = this.doc.createElement("div");
-
+        //labelElement.setAttribute('style',`color:#${labelConfig.label_color}; font-family:${labelConfig.label_fontfamily}; font-size:${labelConfig.label_fontsize}px`);
         labelElement.innerHTML = labelConfig.label;
         labelContainer.appendChild(labelElement);
 
