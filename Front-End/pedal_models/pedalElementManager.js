@@ -157,8 +157,6 @@ class PedalElementManager {
             id: "label_" + uid,
             x: 43,
             y: 30,
-            width: 130,
-            height: 75,
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '14',
             label_color: '000000',
@@ -337,8 +335,6 @@ class PedalElementManager {
             pedal.setAttribute("width", newWidth);
             pedal.setAttribute("height", newHeight);
 
-            // Firing an event providing the new width and the new height of the pedal.
-            //let evt = new CustomEvent('pedal-resized', {detail: {width: newWidth, height: newHeight}});
             pedal.dispatchEvent(pedal.configChangedEvent);
 
             pedal.updateStyle(pedal);
