@@ -24,12 +24,14 @@ class PedalElementManager {
         /* The html container of the element. */
         let pedalElementContainer = this.addElementHtml(pedalElementConfig, id);
 
+        let containerId = pedalElementContainer.getAttribute('id');
+
         /* For the listeners. */
         var that = this;
 
         /* Drag and drop listener. */
         pedalElementContainer.addEventListener('mousedown', function (e) {
-            console.log(id);
+            //console.log(id);
 
             e.stopPropagation();
             e.preventDefault();
@@ -38,7 +40,8 @@ class PedalElementManager {
 
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function (e) {
-            that.pedal.selectElement(id);
+            console.log("id is: " + containerId);
+            that.pedal.selectElement(containerId);
         }, true);
 
         /* Selecting the element just after it has been added. */
@@ -154,8 +157,6 @@ class PedalElementManager {
             id: "label_" + uid,
             x: 43,
             y: 30,
-            width: 130,
-            height: 75,
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '14',
             label_color: '000000',
@@ -213,7 +214,7 @@ class PedalElementManager {
         labelContainer.setAttribute('class', 'label');
         labelContainer.setAttribute('id', id ? id : labelConfig.id);
 
-        var labelElement = this.doc.createElement("span");
+        var labelElement = this.doc.createElement("div");
 
         labelElement.innerHTML = labelConfig.id;
         labelContainer.appendChild(labelElement);
@@ -334,8 +335,6 @@ class PedalElementManager {
             pedal.setAttribute("width", newWidth);
             pedal.setAttribute("height", newHeight);
 
-            // Firing an event providing the new width and the new height of the pedal.
-            //let evt = new CustomEvent('pedal-resized', {detail: {width: newWidth, height: newHeight}});
             pedal.dispatchEvent(pedal.configChangedEvent);
 
             pedal.updateStyle(pedal);
@@ -348,7 +347,6 @@ class PedalElementManager {
         function onMouseUp(e) {
             document.removeEventListener('mousemove', onMouseMove);
             document.onmouseup = null;
-            console.log("Entered here");
         }
 
         document.addEventListener('mousemove', onMouseMove);
