@@ -305,6 +305,7 @@ class PedalElementManager {
         function onMouseMove(e) {
             if (that.selectedElement === elem) {
                 move(e.pageX, e.pageY);
+                that.dispatchEvent(that.configChangedEvent);
             }
         }
 
