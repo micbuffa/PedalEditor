@@ -14,67 +14,84 @@
     </style>
 
     <div>
+        <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button>
 
-        <label>Name: </label>
-        <input id="pedal-name" name="name" class="maininput" disabled>
+                        <br>
 
-        <br>
+                        <label>Label: </label>
+                        <input id="inspector-label" class="maininput" type="text" onkeyup="setSelectedElementLabel(this.value)">
 
-        <label>Background color: #</label>
-        <input type="color" name="color" class="maininput" disabled>
-
-        <br>
-
-        <label>Image opacity: </label>
-        <input id="opacity" class="maininput" type="number" name="opacity" min="0" max="1" disabled>
-
-        <br>
-
-        <label>Width: </label>
-        <input id="width" class="maininput" type="number" name="width" min="0" max="600" disabled> px
-
-        <br>
-
-        <label>Height: </label>
-        <input id="height" class="maininput" type="number" name="height" min="0" max="600" disabled> px
-
-        <br>
-
-        <label>Radius: </label>
-        <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" disabled> px
-
-        <label>Background images: </label>
-        <div id="background-images">
-            <img class="menu-img background-image" src="./img/background/image2.png" alt="image2.png" />
-            <img class="menu-img background-image" src="./img/background/1.png" alt="1.png" />
-            <img class="menu-img background-image" src="./img/background/2.jpg" alt="2.jpg" />
-        </div>
-        <br>
-        <input id="uploadImage" type="file" class="maininput" name="radius" name="photo" />
-        <br />
+                        <br>
 
 
-        <br>
-        <br>
+                        <label>Label Font Family: </label>
+                        <select id="inspector-label-font-family" onchange="setSelectedElementLabelFontfamily(value)" class="maininput">
+                            <option value="Georgia">Georgia</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Palatino Linotype">Palatino Linotype</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="Comic Sans MS">Comic Sans MS</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+                            <option value="Tahoma">Tahoma</option>
+                            <option value="Trebuchet MS">Trebuchet MS</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Lucida Console">Lucida Console</option>
+                        </select>
 
-        <label>Add icon:</label>
-        <div id="icons">
-            <img class="menu-img add-icon" src="./img/icons/icon.png" alt="icon.png" />
-            <img class="menu-img add-icon" src="./img/icons/1.png" alt="1.png" />
-        </div>
+                        <br>
 
-        <br>
+                        <label>Label Color: </label>
+                        <input id="inspector-label-color" class="jscolor maininput" onchange="setSelectedElementLabelColor(value)">
 
-        <label></label>
-        <button id="add-knob" class="maininput" disabled>Add knob</button>
+                        <br>
 
-        <label></label>
-        <button id="add-switch" class="maininput" disabled>Add switch</button>
+                        <label>Label size: </label>
+                        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number" min="0" max="600" onchange="setSelectedElementLabelFontsize(value)"> px
 
-        <br>
+                        <br>
+                        <br>
 
+                        <label>X position: </label>
+                        <input id="inspector-x-position" class="maininput" type="number" onchange="setSelectedElementXPosition(value)">
 
+                        <br>
 
+                        <label>Y position: </label>
+                        <input id="inspector-y-position" class="maininput" type="number" onchange="setSelectedElementYPosition(value)">
+
+                        <br>
+                        <br>
+
+                        <label>Width: </label>
+                        <input id="inspector-width" class="maininput" type="number" onchange="setSelectedElementWidth(value)">
+
+                        <br>
+
+                        <label>Height: </label>
+                        <input id="inspector-height" class="maininput" type="number" onchange="setSelectedElementHeight(value)">
+
+                        <br>
+
+                        <label>Keep ratio</label>
+                        <input id="keep-ratio" type="checkbox" class="maininput-checkbox" checked="true">
+
+                        <br>
+                        <br>
+
+                        <label>Model: </label>
+                        <select id="inspector-model" onchange="setSelectedElementModel(value)" class="maininput">
+                            <option value="knob2.png">Knob2</option>
+                            <option value="Carbon.png">Carbon</option>
+                            <option value="JP8000.png">JP8000</option>
+                            <option value="Jambalaya.png">Jambalaya</option>
+                            <option value="MiniMoog_Main.png">MiniMoog_Main</option>
+                            <option value="SimpleFlat3.png">SimpleFlat3</option>
+                            <option value="Vintage_Knob.png">Vintage_Knob</option>
+                            <option value="lineshadow.png">lineshadow</option>
+                            <option value="lineshadow2.png">lineshadow2</option>
+                        </select>
     </div>
 
 </template>
@@ -94,43 +111,6 @@
                 const temp = document.importNode(template.content, true);
 
                 this.root.appendChild(temp);
-
-                this.setUploadEnvironnement()
-
-            }
-
-            setUploadEnvironnement() {
-                //-------------------- Image Upload----------------------
-                // just upload and use
-                //  http://tech.pro/tutorial/1383/javascript-one-language-to-rule-them-all
-                var ls = window.localStorage;
-                var photo = this.root.getElementById('uploadImage');
-                var fileReader = new FileReader();
-                var img = new Image();
-                var lastImgData = ls.getItem('image');
-
-                if (lastImgData) {
-                    img.src = lastImgData;
-                }
-                fileReader.onload = function (e) {
-                    console.log(typeof e.target.result, e.target.result instanceof Blob);
-                    img.src = e.target.result;
-                };
-                img.onload = () => {
-                    img.classList.add("menu-img");
-                    img.classList.add("background-image");
-                    img.addEventListener('click', (event) => {
-                        this.editablePedal.setBackgroundImagebysrc(event.target.src);
-
-                    })
-                    this.root.querySelector('#background-images').appendChild(img);
-
-                };
-                photo.addEventListener('change', function () {
-                    var file = this.files[0];
-                    return file && fileReader.readAsDataURL(file);
-                });
-                //-----------------------------------------
 
             }
 
