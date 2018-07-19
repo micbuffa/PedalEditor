@@ -214,11 +214,11 @@ class PedalElementManager {
         var labelContainer = this.doc.createElement("div");
         labelContainer.setAttribute('class', 'label');
         labelContainer.setAttribute('id', id ? id : labelConfig.id);
-
+        labelContainer.innerHTML = labelConfig.label;
         var labelElement = this.doc.createElement("div");
         //labelElement.setAttribute('style',`color:#${labelConfig.label_color}; font-family:${labelConfig.label_fontfamily}; font-size:${labelConfig.label_fontsize}px`);
-        labelElement.innerHTML = labelConfig.label;
-        labelContainer.appendChild(labelElement);
+        //labelElement.innerHTML = labelConfig.label;
+        //labelContainer.appendChild(labelElement);
 
         this.pedal.shadowRoot.querySelector('.pedal').appendChild(labelContainer);
         return labelContainer;

@@ -466,16 +466,14 @@
 					#${label.id} {
 								left: ${label.x}px;
 								top: ${label.y}px;
+								color: #${label.label_color};
+								font-family: "${label.label_fontfamily}";
+								font-size: ${label.label_fontsize}px;
+							}
 
-							}
-					#${label.id} div {
-							color: #${label.label_color};
-							font-family: "${label.label_fontfamily}";
-							font-size: ${label.label_fontsize}px;
-							}
-						`
+					`
 					let labelContainer = this.shadowRoot.querySelector('#' + label.id);
-
+					labelContainer.innerHTML = label.label;
 				}
 
 
