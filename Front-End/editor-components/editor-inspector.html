@@ -16,82 +16,82 @@
     <div>
         <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button>
 
-                        <br>
+            <br>
 
-                        <label>Label: </label>
-                        <input id="inspector-label" class="maininput" type="text" name="label">
+            <label>Label: </label>
+            <input id="inspector-label" class="maininput" type="text" name="label" disabled>
 
-                        <br>
+            <br>
 
 
-                        <label>Label Font Family: </label>
-                        <select id="inspector-label-font-family" onchange="setSelectedElementLabelFontfamily(value)" class="maininput">
-                            <option value="Georgia">Georgia</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Palatino Linotype">Palatino Linotype</option>
-                            <option value="Arial Black">Arial Black</option>
-                            <option value="Comic Sans MS">Comic Sans MS</option>
-                            <option value="Impact">Impact</option>
-                            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-                            <option value="Tahoma">Tahoma</option>
-                            <option value="Trebuchet MS">Trebuchet MS</option>
-                            <option value="Verdana">Verdana</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Lucida Console">Lucida Console</option>
-                        </select>
+            <label>Label Font Family: </label>
+            <select id="inspector-label-font-family" class="maininput" name="label_fontfamily" disabled>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Palatino Linotype">Palatino Linotype</option>
+                <option value="Arial Black">Arial Black</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Impact">Impact</option>
+                <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Lucida Console">Lucida Console</option>
+            </select>
 
-                        <br>
+            <br>
 
-                        <label>Label Color: </label>
-                        <input id="inspector-label-color" class="jscolor maininput" name="color">
+            <label>Label Color: </label>
+            <input id="inspector-label-color" class="jscolor maininput" name="label_color" disabled>
 
-                        <br>
+            <br>
 
-                        <label>Label size: </label>
-                        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number" min="0" max="600" name="size"> px
+            <label>Label size: </label>
+            <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number" min="0" max="600" name="label_fontsize" disabled> px
 
-                        <br>
-                        <br>
+            <br>
+            <br>
 
-                        <label>X position: </label>
-                        <input id="inspector-x-position" class="maininput" type="number">
+            <label>X position: </label>
+            <input id="inspector-x-position" class="maininput" type="number" name="x" disabled>
 
-                        <br>
+            <br>
 
-                        <label>Y position: </label>
-                        <input id="inspector-y-position" class="maininput" type="number">
+            <label>Y position: </label>
+            <input id="inspector-y-position" class="maininput" type="number" name="y" disabled>
 
-                        <br>
-                        <br>
+            <br>
+            <br>
 
-                        <label>Width: </label>
-                        <input id="inspector-width" class="maininput" type="number">
+            <label>Width: </label>
+            <input id="inspector-width" class="maininput" type="number" name="height" disabled>
 
-                        <br>
+            <br>
 
-                        <label>Height: </label>
-                        <input id="inspector-height" class="maininput" type="number">
+            <label>Height: </label>
+            <input id="inspector-height" class="maininput" type="number" name="width" disabled>
 
-                        <br>
+            <br>
 
-                        <label>Keep ratio</label>
-                        <input id="keep-ratio" type="checkbox" class="maininput-checkbox" checked="true">
+            <label>Keep ratio</label>
+            <input id="keep-ratio" type="checkbox" class="maininput-checkbox" checked="true">
 
-                        <br>
-                        <br>
+            <br>
+            <br>
 
-                        <label>Model: </label>
-                        <select id="inspector-model" onchange="setSelectedElementModel(value)" class="maininput">
-                            <option value="knob2.png">Knob2</option>
-                            <option value="Carbon.png">Carbon</option>
-                            <option value="JP8000.png">JP8000</option>
-                            <option value="Jambalaya.png">Jambalaya</option>
-                            <option value="MiniMoog_Main.png">MiniMoog_Main</option>
-                            <option value="SimpleFlat3.png">SimpleFlat3</option>
-                            <option value="Vintage_Knob.png">Vintage_Knob</option>
-                            <option value="lineshadow.png">lineshadow</option>
-                            <option value="lineshadow2.png">lineshadow2</option>
-                        </select>
+            <label>Model: </label>
+            <select id="inspector-model" class="maininput" name="model" disabled>
+                <option value="knob2.png">Knob2</option>
+                <option value="Carbon.png">Carbon</option>
+                <option value="JP8000.png">JP8000</option>
+                <option value="Jambalaya.png">Jambalaya</option>
+                <option value="MiniMoog_Main.png">MiniMoog_Main</option>
+                <option value="SimpleFlat3.png">SimpleFlat3</option>
+                <option value="Vintage_Knob.png">Vintage_Knob</option>
+                <option value="lineshadow.png">lineshadow</option>
+                <option value="lineshadow2.png">lineshadow2</option>
+            </select>
     </div>
 
 </template>
@@ -116,18 +116,18 @@
 
             setEditablePedal(editablePedal) {
                 this.editablePedal = editablePedal;
-                this.enableInputs();
                 this.setInputListeners();
-                this.refreshInputs();
 
                 this.editablePedal.addEventListener('config-changed', (e) => {
+                    this.enableInputs();
                     this.refreshInputs();
                 });
             }
 
             refreshInputs() {
+                
                 for (let inputElem of this.root.querySelectorAll('input')) {
-                    inputElem.setAttribute('value', this.editablePedal.getAttribute(inputElem.name));
+                    inputElem.setAttribute('value', this.editablePedal.getSelectedElement()[inputElem.name]);
                 }
             }
 
@@ -135,44 +135,14 @@
                 // For main inputs
                 for (let inputElem of this.root.querySelectorAll('input')) {
                     inputElem.addEventListener('keyup', (event) => {
-                        //this.editablePedal.getSelectedElement()[event.target.name] = event.target.value;
                         this.editablePedal.setSelectedElementAttribute(event.target.name, event.target.value);
                     });
                 }
 
-                // For background images
-                for (let backgroundImageElem of this.root.querySelectorAll('.background-image')) {
-                    backgroundImageElem.addEventListener('click', (event) => {
-                        this.setBackgroundImage(event.target.alt);
-                    })
-                }
-
-                // For adding icons
-                for (let addIcon of this.root.querySelectorAll('.add-icon')) {
-                    addIcon.addEventListener('click', (event) => {
-                        this.addIcon(event.target.alt);
-                    })
-                }
-
-                // For adding knobs
-                for (let addKnob of this.root.querySelectorAll('#add-knob')) {
-                    addKnob.addEventListener('click', (event) => {
-                        this.addKnob();
-                    })
-                }
-
-                // For adding labels
-                for (let addLabel of this.root.querySelectorAll('#add-label')) {
-                    console.log(addLabel)
-                    addLabel.addEventListener('click', (event) => {
-                        this.addLabel();
-                    })
-                }
-
-                // For adding switches
-                for (let addSwitch of this.root.querySelectorAll('#add-switch')) {
-                    addSwitch.addEventListener('click', (event) => {
-                        this.addSwitch();
+                // For selections
+                for (let backgroundImageElem of this.root.querySelectorAll('select')) {
+                    backgroundImageElem.addEventListener('change', (event) => {
+                        this.editablePedal.setSelectedElementAttribute(event.target.name, event.target.value);
                     })
                 }
             }
@@ -182,7 +152,7 @@
                     inputElem.disabled = false;
                 }
 
-                for (let inputElem of this.root.querySelectorAll('button')) {
+                for (let inputElem of this.root.querySelectorAll('select')) {
                     inputElem.disabled = false;
                 }
             }

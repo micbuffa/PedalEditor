@@ -171,8 +171,7 @@
 				this.highlightElement(elementId);
 
 				this.updateStyle(this);
-				let evt = new CustomEvent('select-knob', { detail: elementId });
-				this.dispatchEvent(evt);
+				this.dispatchEvent(this.configChangedEvent);
 
 			}
 
