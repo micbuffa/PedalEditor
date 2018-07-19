@@ -19,7 +19,7 @@
                         <br>
 
                         <label>Label: </label>
-                        <input id="inspector-label" class="maininput" type="text" onkeyup="setSelectedElementLabel(this.value)">
+                        <input id="inspector-label" class="maininput" type="text" name="label">
 
                         <br>
 
@@ -43,34 +43,34 @@
                         <br>
 
                         <label>Label Color: </label>
-                        <input id="inspector-label-color" class="jscolor maininput" onchange="setSelectedElementLabelColor(value)">
+                        <input id="inspector-label-color" class="jscolor maininput" name="color">
 
                         <br>
 
                         <label>Label size: </label>
-                        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number" min="0" max="600" onchange="setSelectedElementLabelFontsize(value)"> px
+                        <input id="inspector-label-font-size" class="fontsizeselector maininput" type="number" min="0" max="600" name="size"> px
 
                         <br>
                         <br>
 
                         <label>X position: </label>
-                        <input id="inspector-x-position" class="maininput" type="number" onchange="setSelectedElementXPosition(value)">
+                        <input id="inspector-x-position" class="maininput" type="number">
 
                         <br>
 
                         <label>Y position: </label>
-                        <input id="inspector-y-position" class="maininput" type="number" onchange="setSelectedElementYPosition(value)">
+                        <input id="inspector-y-position" class="maininput" type="number">
 
                         <br>
                         <br>
 
                         <label>Width: </label>
-                        <input id="inspector-width" class="maininput" type="number" onchange="setSelectedElementWidth(value)">
+                        <input id="inspector-width" class="maininput" type="number">
 
                         <br>
 
                         <label>Height: </label>
-                        <input id="inspector-height" class="maininput" type="number" onchange="setSelectedElementHeight(value)">
+                        <input id="inspector-height" class="maininput" type="number">
 
                         <br>
 
@@ -134,8 +134,9 @@
             setInputListeners() {
                 // For main inputs
                 for (let inputElem of this.root.querySelectorAll('input')) {
-                    inputElem.addEventListener('change', (event) => {
-                        this.editablePedal.setAttribute(event.target.name, event.target.value);
+                    inputElem.addEventListener('keyup', (event) => {
+                        //this.editablePedal.getSelectedElement()[event.target.name] = event.target.value;
+                        this.editablePedal.setSelectedElementAttribute(event.target.name, event.target.value);
                     });
                 }
 

@@ -112,6 +112,11 @@
 			setSrc(src) {
 				this.src = src;
 			}
+			
+			setSelectedElementAttribute(key, value) {
+				this.selectedElement[key] = value;
+				this.updateStyle_();
+			}
 
 			connectedCallback() {
 				var shadowRoot = this.attachShadow({ mode: 'open' });
