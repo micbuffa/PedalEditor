@@ -17,6 +17,7 @@
     <link rel="import" href="pedal_models/pedal.html">
     <link rel="import" href="editor-components/editor-pedal-details.html">
     <link rel="import" href="editor-components/editor-element-list.html">
+    <link rel="import" href="editor-components/editor-inspector.html">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -88,8 +89,14 @@
                     <a href="#editor-element-list">ELEMENTS</a>
                     <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
                 </li>
+
                 <li>
-                    <a href="#acc-inspector">INSPECTOR</a>
+                    <a href="#editor-inspector">INSPECTOR</a>
+                    <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
+                </li>
+
+                <li>
+                    <a href="#acc-inspector">INSPECTOR OLD</a>
                     <div id="acc-inspector" class="accordion">
 
                         <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button>
@@ -606,6 +613,7 @@
 
 
     function loadPedalConfig(value) {
+        
         newPedal();
         for (let pedalConfig of savedPedalsConfigs) {
             if (pedalConfig.id == value) {
@@ -615,12 +623,6 @@
                 loadPedal.value = value;
             }
         }
-
-
-        /*let pedalDetails1 = document.createElement('editor-pedal-details');
-        let pedalDetailsSection = document.querySelector('#accordion');
-        pedalDetailsSection.appendChild(pedalDetails1);
-        console.log(pedalDetailsSection);*/
 
         plugPedalToEditor();
     }
@@ -636,6 +638,10 @@
         // Plug pedal to element list component
         let elementList = document.querySelector('#editor-element-list');
         elementList.setEditablePedal(pedal);
+
+        // Plug pedal to inspector component
+        let inspector = document.querySelector('#editor-inspector');
+        inspector.setEditablePedal(pedal);
 
     }
 
