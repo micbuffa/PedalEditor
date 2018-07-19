@@ -147,7 +147,7 @@
 
             refreshInputs() {
                 for (let inputElem of this.root.querySelectorAll('input')) {
-                    inputElem.value = this.editablePedal.getAttribute(inputElem.name);
+                    inputElem.setAttribute('value', this.editablePedal.getAttribute(inputElem.name));
                 }
             }
 

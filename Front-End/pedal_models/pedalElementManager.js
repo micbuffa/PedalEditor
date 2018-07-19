@@ -40,7 +40,6 @@ class PedalElementManager {
 
         /* Selection listener. */
         pedalElementContainer.addEventListener('click', function (e) {
-            console.log("id is: " + containerId);
             that.pedal.selectElement(containerId);
         }, true);
 
