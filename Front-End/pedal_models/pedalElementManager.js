@@ -196,7 +196,7 @@ class PedalElementManager {
         knobElem.setAttribute('sprites', 100);
         knobElem.setAttribute('value', 0);
         knobElem.setAttribute('step', 1);
-        knobElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/' + knobConfig.model);
+        knobElem.setAttribute('src', 'https://g200kg.github.io/webaudio-controls/knobs/LittlePhatty.png');
 
         knobContainer.appendChild(knobElem);
 
@@ -247,7 +247,7 @@ class PedalElementManager {
         sliderContainer.setAttribute('id', sliderConfig.id);
 
         var switchElem = this.doc.createElement("webaudio-slider");
-        switchElem.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/sliders/' + sliderConfig.model);
+        switchElem.setAttribute('src', this.pedal.ASSETS_PATH + '/img/sliders/' + sliderConfig.model);
         switchElem.setAttribute('height', 64);
         switchElem.setAttribute('width', 128);
 
@@ -273,7 +273,7 @@ class PedalElementManager {
         var iconImg = this.doc.createElement("img");
         iconImg.setAttribute('class', 'icon');
         iconImg.setAttribute('id', iconConfig.id);
-        iconImg.setAttribute('src', 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/icons/' + iconConfig.file);
+        iconImg.setAttribute('src', this.pedal.ASSETS_PATH + '/icons/' + iconConfig.file);
 
         //iconContainer.appendChild(iconImg);
         this.pedal.shadowRoot.querySelector('.pedal').appendChild(iconImg);
