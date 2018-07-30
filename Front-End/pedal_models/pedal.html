@@ -170,6 +170,8 @@
 				this.updateStyle(this);
 				this.dispatchEvent(this.configChangedEvent);
 
+				console.log(this.getSelectedElement());
+
 			}
 
 			highlightElement(elementId) {
@@ -409,20 +411,21 @@
 							
 						}
 					`
-					let switchContainer = this.shadowRoot.querySelector('#' + s.id);
+					let switchContainer = this.shadowRoot.getElementById(s.id);
+					if(switchContainer) {
+						switchContainer.innerHTML = '';
 
-					switchContainer.innerHTML = '';
+						var switchElem = thatDoc.createElement("webaudio-switch");
+						switchElem.setAttribute('src', ASSETS_PATH + '/switches/' + s.model);
+						switchElem.setAttribute('height', s.height);
+						switchElem.setAttribute('width', s.width);
 
-					var switchElem = thatDoc.createElement("webaudio-switch");
-					switchElem.setAttribute('src', ASSETS_PATH + '/switches/' + s.model);
-					switchElem.setAttribute('height', s.height);
-					switchElem.setAttribute('width', s.width);
+						switchContainer.appendChild(switchElem);
 
-					switchContainer.appendChild(switchElem);
-
-					let labelElem = thatDoc.createElement("div");
-					labelElem.innerHTML = s.label;
-					switchContainer.appendChild(labelElem);
+						let labelElem = thatDoc.createElement("div");
+						labelElem.innerHTML = s.label;
+						switchContainer.appendChild(labelElem);
+					}
 
 				}
 
@@ -537,6 +540,22 @@
 					}
 				}
 
+				for (let element of config.elements) {
+					if (element.type == 'switch') {
+						let switch_ = this.addElement('switch', null, element.id);
+						switch_.id = element.id;
+						switch_.x = element.x;
+						switch_.y = element.y;
+						switch_.width = element.width;
+						switch_.height = element.height;
+						switch_.label = element.label;
+						switch_.label_fontfamily = element.label_fontfamily;
+						switch_.label_fontsize = element.label_fontsize;
+						switch_.label_color = element.label_color;
+						switch_.type = element.type;
+					}
+				}
+
 				if (config.name) {
 					for (let element of config.elements) {
 						if (element.type == 'label') {
@@ -589,6 +608,10 @@
 
 				for (let label of this.labels) {
 					config.elements.push(label);
+				}
+
+				for(let switch_ of this.switches) {
+					config.elements.push(switch_);
 				}
 
 				return config;

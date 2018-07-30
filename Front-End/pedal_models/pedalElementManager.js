@@ -176,7 +176,7 @@ class PedalElementManager {
     addElementHtml(pedalElementConfig, id) {
         switch (pedalElementConfig.type) {
             case 'switch':
-                return this.addSwitchHtml(pedalElementConfig);
+                return this.addSwitchHtml(pedalElementConfig, id);
             case 'knob':
                 return this.addKnobHtml(pedalElementConfig, id);
             case 'icon':
@@ -232,12 +232,13 @@ class PedalElementManager {
     }
 
     /* Creating and adding the html of the switch from its config. */
-    addSwitchHtml(switchConfig) {
+    addSwitchHtml(switchConfig, id) {
         var switchContainer = this.doc.createElement("div");
         switchContainer.setAttribute('class', 'switch');
-        switchContainer.setAttribute('id', switchConfig.id);
-
+        switchContainer.setAttribute('id', id ? id : switchConfig.id);
+        console.log("switchId" + id);
         var swithcElem = this.doc.createElement("webaudio-switch");
+
         swithcElem.setAttribute('src', this.pedal.ASSETS_PATH + '/switches/' + switchConfig.model);
         
         switchContainer.appendChild(swithcElem);
