@@ -174,7 +174,7 @@
 							
 						}
 					
-					#label_257 {
+					#label_437 {
 								left: 43px;
 								top: 30px;
 								color: #ffffff;
@@ -183,7 +183,7 @@
 							}
 
 					
-					#label_824 {
+					#label_408 {
 								left: 82px;
 								top: 210px;
 								color: #ffffff;
@@ -221,9 +221,9 @@
 		<div id="resize"></div>
 
 		<!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
-		<img id="background-image" src="./img/background/2.jpg">
+		<img id="background-image" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/background/2.jpg">
 
-	<div class="knob" id="knob_314"><webaudio-knob src="./img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="8" style="height: 64px;"></webaudio-knob><div style="text-align:center">FREQ 1</div></div><div class="knob" id="knob_258"><webaudio-knob src="./img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="50" style="height: 64px;"></webaudio-knob><div style="text-align:center">FREQ 2</div></div><div class="knob" id="knob_983"><webaudio-knob src="./img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="0" style="height: 64px;"></webaudio-knob><div style="text-align:center">VOL 1</div></div><div class="knob" id="knob_431"><webaudio-knob src="./img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="74" style="height: 64px;"></webaudio-knob><div style="text-align:center">VOL 2</div></div><div class="switch" id="switch_860"></div><div class="switch" id="switch_112"></div><div class="switch" id="switch_517"></div><div class="label" id="label_257">Other</div><div class="label" id="label_824">ert'</div></div></template><script>
+	<div class="knob" id="knob_314"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="8" style="height: 64px;"></webaudio-knob><div style="text-align:center">FREQ 1</div></div><div class="knob" id="knob_258"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="50" style="height: 64px;"></webaudio-knob><div style="text-align:center">FREQ 2</div></div><div class="knob" id="knob_983"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="0" style="height: 64px;"></webaudio-knob><div style="text-align:center">VOL 1</div></div><div class="knob" id="knob_431"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/lineshadow2.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="74" style="height: 64px;"></webaudio-knob><div style="text-align:center">VOL 2</div></div><div class="switch" id="switch_860"></div><div class="switch" id="switch_112"></div><div class="switch" id="switch_517"></div><div class="label" id="label_437">Other</div><div class="label" id="label_408">ert'</div></div></template><script>
         let Metal2Temp = document.currentScript.ownerDocument.querySelector('template');
         class Metal2Gui extends HTMLElement {
     
@@ -249,13 +249,14 @@
             this.state = JSON.parse(this.getAttribute('state'));
             console.log(this.state);
             if (this.state.status == "enable") {
-                this._root.querySelector("#switch1").querySelector("webaudio-switch").value = 1;
+                this._root.querySelector(".switch").querySelector("webaudio-switch").value = 1;
                 this.isOn = true;
             }
-            this.knobs = this._root.querySelectorAll(".knob");
-            this.labels = this._root.querySelectorAll(".knob-label");
+            //this.knobs = this._root.querySelectorAll(".knob");
+            //this.labels = this._root.querySelectorAll(".knob-label");
             for (var i = 0; i < this.knobs.length; i++) {
-                this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
+                //this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
+                this.knobs[i].querySelector("webaudio-knob").value = this.state[this.knobs[i].id];
             }
         
             }
@@ -288,29 +289,37 @@
             var background = this._root.querySelector('img');
             background.src = this._plug.URL + '/assets/2.jpg';
             background.style = 'border-radius : 10px;'
+
+            this._root.querySelectorAll(".knob").forEach((knob) => {
+				knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
+            });
+            
+            this._root.querySelectorAll(".switch").forEach((s) => {
+				s.querySelector("webaudio-switch").setAttribute('src', this._plug.URL + '/assets/switch_1.png');
+            });
+            
             
         
             }
         
             setKnobs() {
-                              //this._root.querySelector("#knob_314").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_258").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_983").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-               //this._root.querySelector("#knob_431").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
-
+               
+            for (var i = 0; i < this.knobs.length; i++) {
+                this.eventToKnob(i);
+            }
+        
             }
         
             bypass() {
                
-            //this._plug.setParam("",1);
-            console.log("disabled");
+            this._plug.setParam("status", "disable");
         
             }
         
             setSwitchListener() {
                
             console.log("setswitch");
-            this._root.querySelector("#switch1").querySelector("webaudio-switch").addEventListener('change', (e) => {
+            this._root.querySelector(".switch").querySelector("webaudio-switch").addEventListener('change', (e) => {
                 if (this.isOn) this.bypass()
                 else this.reactivate();
                 this.isOn = !this.isOn;
@@ -320,7 +329,7 @@
         
             reactivate() {
                
-            //this._plug.setParam("",0);
+            this._plug.setParam("status", "enable")
         
             }
         }
@@ -331,7 +340,8 @@
                     console.log(error);
                     console.log("Element already defined");      
                 }
-                const createMetal2 = (plug) => {
+                
+                createMetal2 = (plug) => {
                     let elem = new Metal2Gui(plug);
                     return elem; 
                 }

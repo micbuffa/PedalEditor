@@ -73,13 +73,14 @@ class FunctionalPedalGenerator {
             this.state = JSON.parse(this.getAttribute('state'));
             console.log(this.state);
             if (this.state.status == "enable") {
-                this._root.querySelector("#switch1").querySelector("webaudio-switch").value = 1;
+                this._root.querySelector(".switch").querySelector("webaudio-switch").value = 1;
                 this.isOn = true;
             }
-            this.knobs = this._root.querySelectorAll(".knob");
-            this.labels = this._root.querySelectorAll(".knob-label");
+            //this.knobs = this._root.querySelectorAll(".knob");
+            //this.labels = this._root.querySelectorAll(".knob-label");
             for (var i = 0; i < this.knobs.length; i++) {
-                this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
+                //this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
+                this.knobs[i].querySelector("webaudio-knob").value = this.state[this.knobs[i].id];
             }
         `;
 
@@ -88,15 +89,24 @@ class FunctionalPedalGenerator {
             var background = this._root.querySelector('img');
             background.src = this._plug.URL + '/assets/${this.editablePedal.getBackgroundImageName()}';
             background.style = 'border-radius : ${this.editablePedal.getAttribute('radius')}px;'
+
+            this._root.querySelectorAll(".knob").forEach((knob) => {
+				knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
+            });
+            
+            this._root.querySelectorAll(".switch").forEach((s) => {
+				s.querySelector("webaudio-switch").setAttribute('src', this._plug.URL + '/assets/switch_1.png');
+            });
+            
             
         `;
 
         // The content of the second function of the class.
-        let function1Content = '';
-
-        for(let knob of this.editablePedal.getKnobs()) {
-            function1Content += `               //this._root.querySelector("#${knob.id}").querySelector("webaudio-knob").addEventListener(\'input\', (e) => this._plug.setParam("", e.target.value));\n`
-        }
+        let function1Content = `
+            for (var i = 0; i < this.knobs.length; i++) {
+                this.eventToKnob(i);
+            }
+        `;
 
         let funcPropertiesContent = `
             this.boundingRect = {
@@ -114,7 +124,7 @@ class FunctionalPedalGenerator {
 
         let funcSwitchListenerContent = `
             console.log("setswitch");
-            this._root.querySelector("#switch1").querySelector("webaudio-switch").addEventListener('change', (e) => {
+            this._root.querySelector(".switch").querySelector("webaudio-switch").addEventListener('change', (e) => {
                 if (this.isOn) this.bypass()
                 else this.reactivate();
                 this.isOn = !this.isOn;
@@ -122,11 +132,10 @@ class FunctionalPedalGenerator {
         `
 
         let funcBypassContent = `
-            //this._plug.setParam("",1);
-            console.log("disabled");
+            this._plug.setParam("status", "disable");
         `
         let funcReactivateContent = `
-            //this._plug.setParam("",0);
+            this._plug.setParam("status", "enable")
         `
 
         
@@ -174,7 +183,8 @@ class FunctionalPedalGenerator {
                     console.log(error);
                     console.log("Element already defined");      
                 }
-                const create${this.editablePedal.name} = (plug) => {
+                
+                create${this.editablePedal.name} = (plug) => {
                     let elem = new ${this.editablePedal.name}Gui(plug);
                     return elem; 
                 }
