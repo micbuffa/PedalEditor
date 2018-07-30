@@ -46,6 +46,7 @@ class PedalElementManager {
         /* Selecting the element just after it has been added. */
         //this.pedal.selectElement(id);
 
+        this.pedal.updateStyle_();
         return pedalElementConfig;
     }
 
@@ -53,6 +54,7 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of the element by providing its type. */
     addElementConfigDefault(type, filename) {
+        console.log(type);
         switch (type) {
             case 'switch':
                 return this.addSwitchConfigDefault(filename);
@@ -92,6 +94,7 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of a switch. */
     addSwitchConfigDefault(filename) {
+        console.log("hooo");
         let uid = Math.floor(Math.random() * 1000);
         var _switch = {
             id: "switch_" + uid,
@@ -100,14 +103,14 @@ class PedalElementManager {
             width: 130,
             height: 75,
             model: 'switch_2.png',
-            label: 'switch_' + uid,
+            label: '',
             label_fontfamily: 'Comic Sans MS',
             label_fontsize: '9',
             label_color: '000000',
             type: 'switch'
         };
         this.pedal.switches.push(_switch);
-
+        console.log(this.pedal.switches);
         return _switch;
     }
 
@@ -192,11 +195,15 @@ class PedalElementManager {
         knobContainer.setAttribute('class', 'knob');
         knobContainer.setAttribute('id', id ? id : knobConfig.id);
 
-        var knobElem = this.doc.createElement("webaudio-knob");
+        var knobElem = this.doc.createElement("webaudio-konb");
+
+        
         knobElem.setAttribute('sprites', 100);
         knobElem.setAttribute('value', 0);
         knobElem.setAttribute('step', 1);
-        knobElem.setAttribute('src', 'https://g200kg.github.io/webaudio-controls/knobs/LittlePhatty.png');
+        knobElem.setAttribute('height', knobConfig.height);
+		knobElem.setAttribute('width', knobConfig.width);
+        knobElem.setAttribute('src', this.pedal.ASSETS_PATH + '/knobs/' + knobConfig.model);
 
         knobContainer.appendChild(knobElem);
 
@@ -215,7 +222,7 @@ class PedalElementManager {
         labelContainer.setAttribute('class', 'label');
         labelContainer.setAttribute('id', id ? id : labelConfig.id);
         labelContainer.innerHTML = labelConfig.label;
-        var labelElement = this.doc.createElement("div");
+
         //labelElement.setAttribute('style',`color:#${labelConfig.label_color}; font-family:${labelConfig.label_fontfamily}; font-size:${labelConfig.label_fontsize}px`);
         //labelElement.innerHTML = labelConfig.label;
         //labelContainer.appendChild(labelElement);
@@ -230,13 +237,18 @@ class PedalElementManager {
         switchContainer.setAttribute('class', 'switch');
         switchContainer.setAttribute('id', switchConfig.id);
 
+        var swithcElem = this.doc.createElement("webaudio-switch");
+        swithcElem.setAttribute('src', this.pedal.ASSETS_PATH + '/switches/' + switchConfig.model);
+        
+        switchContainer.appendChild(swithcElem);
+
         var label = this.doc.createElement('div');
-        label.innerHTML = switchConfig.id;
 
         switchContainer.appendChild(label);
 
         this.pedal.shadowRoot.querySelector('.pedal').appendChild(switchContainer);
 
+        //console.log(switchContainer);
         return switchContainer;
     }
 

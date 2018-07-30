@@ -9,11 +9,6 @@
 		<!-- <p class="knob-label" id="knob1-label" contenteditable="true">FREQ</p> -->
 		<img id="background-image">
 
-		<div class="switchCont" id="switch1">
-			<webaudio-switch src="./img/switches/switch_1.png"
-			 class="switch" id="switch1" height="15" width="30"></webaudio-switch>
-		</div>
-
 	</div>
 
 
@@ -191,7 +186,7 @@
 				}
 
 				for (let i = 0; i < this.switches.length; i++) {
-					let s = shadow.querySelectorAll('.switch')[i + 1];
+					let s = shadow.querySelectorAll('.switch')[i];
 					s.className = s.className.replace('selected', '');
 				}
 
@@ -352,6 +347,8 @@
 			}
 
 			generateElementsStyles() {
+
+
 				let ret = '';
 				for (let knob of this.knobs) {
 					ret += `
@@ -369,32 +366,34 @@
 					`
 
 					let knobContainer = this.shadowRoot.getElementById(knob.id);
+					if(knobContainer) {
+						knobContainer.innerHTML = '';
 
-					knobContainer.innerHTML = '';
+						var knobElem = thatDoc.createElement("webaudio-knob");
+						knobElem.src = ASSETS_PATH + '/knobs/' + knob.model;
+						knobElem.setAttribute('src', ASSETS_PATH + '/knobs/' + knob.model);
+						knobElem.setAttribute('height', knob.height);
+						knobElem.setAttribute('width', knob.width);
+						knobElem.setAttribute('sprites', 100);
+						knobElem.setAttribute('min', knob.min);
+						knobElem.setAttribute('max', knob.max);
 
-					var knobElem = thatDoc.createElement("webaudio-knob");
-					knobElem.src = ASSETS_PATH + '/knobs/' + knob.model;
-					knobElem.setAttribute('src', ASSETS_PATH + '/knobs/' + knob.model);
-					knobElem.setAttribute('height', knob.height);
-					knobElem.setAttribute('width', knob.width);
-					knobElem.setAttribute('sprites', 100);
-					knobElem.setAttribute('min', knob.min);
-					knobElem.setAttribute('max', knob.max);
+						// calculated automatically
+						knobElem.setAttribute('step', 1);
+						knobElem.value = knob.value;
+						knobElem.setAttribute('value', knob.value);
 
-					// calculated automatically
-					knobElem.setAttribute('step', 1);
-					knobElem.value = knob.value;
-					knobElem.setAttribute('value', knob.value);
+						knobContainer.appendChild(knobElem);
 
-					knobContainer.appendChild(knobElem);
-
-					let labelElem = thatDoc.createElement("div");
-					labelElem.innerHTML = knob.label;
-					labelElem.setAttribute('style', 'text-align:center');
-					knobContainer.appendChild(labelElem);
+						let labelElem = thatDoc.createElement("div");
+						labelElem.innerHTML = knob.label;
+						labelElem.setAttribute('style', 'text-align:center');
+						knobContainer.appendChild(labelElem);
+					}
 
 
 				}
+				
 
 				for (let s of this.switches) {
 					ret += `
@@ -420,7 +419,6 @@
 					switchElem.setAttribute('width', s.width);
 
 					switchContainer.appendChild(switchElem);
-
 
 					let labelElem = thatDoc.createElement("div");
 					labelElem.innerHTML = s.label;
