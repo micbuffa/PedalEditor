@@ -98,7 +98,12 @@
 					this.backgroundImageSrc = imageName;
 					let backgroundImageElem = this.shadowRoot.querySelector('#background-image');
 					backgroundImageElem.setAttribute('src', ASSETS_PATH + '/background/' + imageName);
+					this.backgroundImageName = imageName;
 				}
+			}
+
+			getBackgroundImageName() {
+				return this.backgroundImageName;
 			}
 
 			setBackgroundImagebysrc(src) {
@@ -577,6 +582,7 @@
 				this.setAttribute('radius', config.radius);
 				this.setAttribute('name', config.name);
 				this.setAttribute('opacity', config.opacity || 1);		// If the opacity is not set, initialize it to the default value which is 1.
+				
 				this.setBackgroundImage(config.backgroundImageSrc);
 			}
 

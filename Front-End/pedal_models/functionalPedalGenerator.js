@@ -41,7 +41,7 @@ class FunctionalPedalGenerator {
         let constructorContent = `
                 super();
                 this._plug = plug;
-                //this._plug.gui = this;
+                this._plug.gui = this;
                 console.log(this._plug);
                 this._root = this.attachShadow({ mode: 'open' });
                 this._root.appendChild(${this.editablePedal.name}Temp.content.cloneNode(true));
@@ -49,6 +49,7 @@ class FunctionalPedalGenerator {
                 this.state = new Object();
                 this.setKnobs();
                 this.setSwitchListener();
+                this.setResources();
         `;
 
         // The content of the first function of the class.
@@ -80,6 +81,14 @@ class FunctionalPedalGenerator {
             for (var i = 0; i < this.knobs.length; i++) {
                 this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
             }
+        `;
+
+        let funcSetResources = `
+            // Sets the background image and style.
+            var background = this._root.querySelector('img');
+            background.src = this._plug.URL + '/assets/${this.editablePedal.getBackgroundImageName()}';
+            background.style = 'border-radius : ${this.editablePedal.getAttribute('radius')}px;'
+            
         `;
 
         // The content of the second function of the class.
@@ -131,6 +140,7 @@ class FunctionalPedalGenerator {
         let funcProperties = this.generateFunction('get properties', [], funcPropertiesContent);
         let functionGetObservedAttributes = this.generateFunction('static get observedAttributes', [], funcGetObservedAttributes);
         let functionAttributeChangedCallback = this.generateFunction('attributeChangedCallback', [], funcAttributeChangedCallback);
+        let funcitonSetResources = this.generateFunction('setResources', [], funcSetResources);
 
         let function1 = this.generateFunction(
             'setKnobs', 
@@ -142,8 +152,9 @@ class FunctionalPedalGenerator {
         let function6 = this.generateFunction('setSwitchListener', [], funcSwitchListenerContent);
 
 
+
         // The class will contain the constructor and the two functions.
-        classContent += constructor + funcProperties + functionGetObservedAttributes + functionAttributeChangedCallback + function1 + function4 + function6 + function5;
+        classContent += constructor + functionAttributeChangedCallback + funcProperties + functionGetObservedAttributes + funcitonSetResources + function1 + function4 + function6 + function5;
 
         functionalPedalCode += '<script>';
 
