@@ -493,6 +493,7 @@
 			 ** Loads and sets the configuration of the pedal from a json file. 
 			 */
 			loadConfig(config) {
+				console.log(config);
 				this.pedalId = config.id;
 				this.name = config.name;
 
@@ -540,6 +541,7 @@
 					for (let element of config.elements) {
 						if (element.type == 'label') {
 							let label = this.addElement('label', config.name);
+							label.label = element.label;
 							label.x = element.x;
 							label.y = element.y;
 							label.label_fontfamily = element.label_fontfamily;
@@ -583,6 +585,10 @@
 
 				for (let icon of this.icons) {
 					config.elements.push(icon);
+				}
+
+				for (let label of this.labels) {
+					config.elements.push(label);
 				}
 
 				return config;
