@@ -121,8 +121,8 @@ class PedalElementManager {
             id: "slider_" + uid,
             x: 43,
             y: 30,
-            width: 45,
-            height: 45,
+            width: 150,
+            height: 40,
             model: 'slider1.png',
             label: 'slider_' + uid,
             label_fontfamily: 'Comic Sans MS',
@@ -236,7 +236,6 @@ class PedalElementManager {
         var switchContainer = this.doc.createElement("div");
         switchContainer.setAttribute('class', 'switch');
         switchContainer.setAttribute('id', id ? id : switchConfig.id);
-        console.log("switchId" + id);
         var swithcElem = this.doc.createElement("webaudio-switch");
 
         swithcElem.setAttribute('src', this.pedal.ASSETS_PATH + '/switches/' + switchConfig.model);
@@ -254,20 +253,20 @@ class PedalElementManager {
     }
 
     /* Creating and adding the html of the slider from its config. */
-    addSliderHtml(sliderConfig) {
+    addSliderHtml(sliderConfig, id) {
         var sliderContainer = this.doc.createElement("div");
-        sliderContainer.setAttribute('class', 'switch');
-        sliderContainer.setAttribute('id', sliderConfig.id);
+        sliderContainer.setAttribute('class', 'slider');
+        sliderContainer.setAttribute('id', id ? id : sliderConfig.id);
 
-        var switchElem = this.doc.createElement("webaudio-slider");
-        switchElem.setAttribute('src', this.pedal.ASSETS_PATH + '/img/sliders/' + sliderConfig.model);
-        switchElem.setAttribute('height', 64);
-        switchElem.setAttribute('width', 128);
+        var sliderelem = this.doc.createElement("webaudio-slider");
+        sliderelem.setAttribute('src', this.pedal.ASSETS_PATH + '/img/sliders/' + sliderConfig.model);
+        sliderelem.setAttribute('height', sliderConfig.height);
+        sliderelem.setAttribute('width', sliderConfig.width);
 
-        sliderContainer.appendChild(switchElem);
+        sliderContainer.appendChild(sliderelem);
 
         var label = this.doc.createElement('div');
-        label.innerHTML = sliderConfig.id;
+        //label.innerHTML = sliderConfig.id;
 
         sliderContainer.appendChild(label);
 

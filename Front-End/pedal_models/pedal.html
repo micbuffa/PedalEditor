@@ -261,7 +261,7 @@
 								border: 1px solid black;
 							}
 
-							.knob, .switch, .icon, .label{
+							.knob, .switch, .icon, .label, .slider {
 								position: absolute;
 								cursor: pointer;
 							}
@@ -451,17 +451,22 @@
 							
 						}
 					`
-					let sliderContainer = this.shadowRoot.querySelector('#' + slider.id);
+					let sliderContainer = this.shadowRoot.getElementById(slider.id);
+					
+					if(sliderContainer) {
+						let sliderElem = thatDoc.createElement("webaudio-slider");
+						sliderContainer.innerHTML = '';
+						sliderElem.setAttribute('value', slider.value);
+						sliderElem.setAttribute('height', slider.height);
+						sliderElem.setAttribute('width', slider.width);
 
-					let sliderElem = sliderContainer.childNodes[0];
-					sliderElem.value = slider.value;
-					sliderElem.setAttribute('value', slider.value);
+						sliderElem.src = ASSETS_PATH + '/sliders/' + slider.model;
+						sliderElem.setAttribute('src', ASSETS_PATH + '/sliders/' + slider.model);
 
-					sliderElem.src = ASSETS_PATH + '/sliders/' + slider.model;
-					sliderElem.setAttribute('src', ASSETS_PATH + '/img/sliders/' + slider.model);
-
-					let labelElem = sliderContainer.childNodes[1];
-					labelElem.innerHTML = slider.label;
+						/* let labelElem = sliderContainer.childNodes[1];
+						labelElem.innerHTML = slider.label; */
+						sliderContainer.appendChild(sliderElem);
+					}
 
 				}
 
