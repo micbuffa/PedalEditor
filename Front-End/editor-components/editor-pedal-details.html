@@ -74,6 +74,8 @@
         <label></label>
         <button id="add-switch" class="maininput" disabled>Add switch</button>
 
+        <label></label>
+        <button id="add-slider" class="maininput" disabled>Add slider</button>
         <br>
 
 
@@ -195,6 +197,13 @@
                 for (let addSwitch of this.root.querySelectorAll('#add-switch')) {
                     addSwitch.addEventListener('click', (event) => {
                         this.addSwitch();
+                    })
+                }
+
+                // For adding sliders
+                for (let addSlider of this.root.querySelectorAll('#add-slider')) {
+                    addSlider.addEventListener('click', (event) => {
+                        this.editablePedal.addElement('slider');
                     })
                 }
             }
