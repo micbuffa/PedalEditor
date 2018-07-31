@@ -182,7 +182,7 @@ class PedalElementManager {
             case 'icon':
                 return this.addIconHtml(pedalElementConfig);
             case 'slider':
-                return this.addSliderHtml(pedalElementConfig);
+                return this.addSliderHtml(pedalElementConfig, id);
             case 'label':
                 return this.addLabelHtml(pedalElementConfig, id);
         }

@@ -465,8 +465,8 @@
 						sliderElem.src = ASSETS_PATH + '/sliders/' + slider.model;
 						sliderElem.setAttribute('src', ASSETS_PATH + '/sliders/' + slider.model);
 						sliderElem.setAttribute('knobsrc', ASSETS_PATH + '/sliders/sliderKnob.png');
-						/* let labelElem = sliderContainer.childNodes[1];
-						labelElem.innerHTML = slider.label; */
+						
+						
 						sliderContainer.appendChild(sliderElem);
 
 						let labelElem = thatDoc.createElement("div");
@@ -575,6 +575,22 @@
 					}
 				}
 
+				for(let element of config.elements) {
+					if(element.type == 'slider') {
+						let slider = this.addElement('slider', null, element.id);
+						slider.id = element.id;
+						slider.x = element.x;
+						slider.y = element.y;
+						slider.width = element.width;
+						slider.height = element.height;
+						slider.label = element.label;
+						slider.label_fontfamily = element.label_fontfamily;
+						slider.label_fontsize = element.label_fontsize;
+						slider.label_color = element.label_color;
+						slider.type = element.type; 
+					}
+				}
+
 				if (config.name) {
 					for (let element of config.elements) {
 						if (element.type == 'label') {
@@ -632,6 +648,10 @@
 
 				for(let switch_ of this.switches) {
 					config.elements.push(switch_);
+				}
+
+				for(let slider of this.sliders) {
+					config.elements.push(slider);
 				}
 
 				return config;
