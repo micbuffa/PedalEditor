@@ -264,6 +264,7 @@
 							.knob, .switch, .icon, .label, .slider {
 								position: absolute;
 								cursor: pointer;
+								text-align: center;
 							}
 
 						
@@ -425,6 +426,7 @@
 
 						var switchElem = thatDoc.createElement("webaudio-switch");
 						switchElem.setAttribute('src', ASSETS_PATH + '/switches/' + s.model);
+						
 						switchElem.setAttribute('height', s.height);
 						switchElem.setAttribute('width', s.width);
 
@@ -462,10 +464,14 @@
 
 						sliderElem.src = ASSETS_PATH + '/sliders/' + slider.model;
 						sliderElem.setAttribute('src', ASSETS_PATH + '/sliders/' + slider.model);
-
+						sliderElem.setAttribute('knobsrc', ASSETS_PATH + '/sliders/sliderKnob.png');
 						/* let labelElem = sliderContainer.childNodes[1];
 						labelElem.innerHTML = slider.label; */
 						sliderContainer.appendChild(sliderElem);
+
+						let labelElem = thatDoc.createElement("div");
+						labelElem.innerHTML = slider.label;
+						sliderContainer.appendChild(labelElem);
 					}
 
 				}
