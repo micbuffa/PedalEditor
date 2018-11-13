@@ -17,7 +17,7 @@ The first step consists on launching the server application.
 
 After navigating to the directory "PedalEditor/Back-End", execute the following command:
 ``` 
-node ./index.js
+npm start
 ```
 The default port is: 3000.
 
