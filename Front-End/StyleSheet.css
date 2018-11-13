@@ -20,6 +20,7 @@ body {
     left: 30%;
 }
 
+
 /*.wrapper {
     min-height: 100vh;
     background: #ccc;
@@ -324,6 +325,40 @@ label {
     font-weight:bold;
 }
 
+.editor-collapsible {
+    margin-right: 8px;
+}
+
+.sub-editor-collapsible {
+    padding-left: 10px;
+}
+
+.editor-collapsible summary {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em;
+    margin-bottom: .5em;
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+}
+
+.sub-editor-collapsible > summary {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em;
+    margin-bottom: .5em;
+    cursor: pointer;
+
+}
+
+.editor-collapsible-content {
+    padding-left: 5px;
+    border-left: 1px solid #aaa;
+}
+
+.editor-element-field 
+
 input, textarea {
     width: 250px;
     margin-bottom: 7px;
@@ -374,6 +409,8 @@ input#background-color-picker {
     -moz-border-radius: 5px
     /* For Mozilla Web Browser */
 }
+
+
 
 .maininput-checkbox {
     margin-top: 10px;

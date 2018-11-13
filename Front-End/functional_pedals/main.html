@@ -141,7 +141,8 @@
 			<webaudio-switch src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/switches/switch_1.png" class="switch" id="switch1" height="64" width="128"></webaudio-switch>
 		</div>
 		
-	<div class="knob " id="knob_622"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_147"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_375"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template><script>
+	<div class="knob " id="knob_622"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="30"></webaudio-knob><div>Feedback</div></div><div class="knob " id="knob_147"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Time</div></div><div class="knob " id="knob_375"><webaudio-knob src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img/knobs/Carbon.png" height="70" width="70" sprites="100" step="1" value="0"></webaudio-knob><div>Mix</div></div></div></template>
+	<script>
         let PingPongDelayTemp = document.currentScript.ownerDocument.querySelector('template');
         class PingPongDelayGui extends HTMLElement {
     
@@ -200,7 +201,7 @@
             }
         
             setKnobs() {
-                              //this._root.querySelector("#knob_622").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
+                             // this._root.querySelector("#knob_622").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
                //this._root.querySelector("#knob_147").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
                //this._root.querySelector("#knob_375").querySelector("webaudio-knob").addEventListener('input', (e) => this._plug.setParam("", e.target.value));
 
