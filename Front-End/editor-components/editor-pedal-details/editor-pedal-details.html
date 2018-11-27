@@ -2,6 +2,7 @@
 
     <style>
         @import "StyleSheet.css";
+
         #backround-images {
             width: 50%;
             float: right;
@@ -98,34 +99,8 @@
                     <summary> Knob </summary>
 
                     <div class="editor-collapsible-content">
-                        <img class="menu-img" title="Aqua" src="./img/knobs2/Aqua.png" alt="Aqua.png" onclick="setSelectedElementModel(this.alt)">
-                        <img class="menu-img" title="boss_basic_cyan" src="./img/knobs2/boss_basic_cyan.png" alt="boss_basic_cyan.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="boss_grey" src="./img/knobs2/boss_grey.png" alt="boss_grey.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="boss_basic_gold" src="./img/knobs2/boss_basic_gold.png" alt="boss_basic_gold.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="boss_basic_red" src="./img/knobs2/boss_basic_red.png" alt="boss_basic_red.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="boss_golden" src="./img/knobs2/boss_golden.png" alt="boss_golden.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="Carbon" src="./img/knobs2/Carbon.png" alt="Carbon.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="Jambalaya" src="./img/knobs2/Jambalaya.png" alt="Jambalaya.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="JP8000" src="./img/knobs2/JP8000.png" alt="JP8000.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="knob2" src="./img/knobs2/knob2.png" alt="knob2.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="lineshadow" src="./img/knobs2/lineshadow.png" alt="lineshadow.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="lineshadow2" src="./img/knobs2/lineshadow2.png" alt="lineshadow2.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="m400" src="./img/knobs2/m400.png" alt="m400.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="MiniMoog_Main" src="./img/knobs2/MiniMoog_Main.png" alt="MiniMoog_Main.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="nux_black_black_stripe" src="./img/knobs2/nux_black_black_stripe.png" alt="nux_black_black_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_black_not_stripped" src="./img/knobs2/nux_black_not_stripped.png" alt="nux_black_not_stripped.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_black_white_stripe" src="./img/knobs2/nux_black_white_stripe.png" alt="nux_black_white_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_white_black_stripe" src="./img/knobs2/nux_white_black_stripe.png" alt="nux_white_black_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_white_not_stripped" src="./img/knobs2/nux_white_not_stripped.png" alt="nux_white_not_stripped.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_white_white_stripe" src="./img/knobs2/nux_white_white_stripe.png" alt="nux_white_white_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_yellow_black_stripe" src="./img/knobs2/nux_yellow_black_stripe.png" alt="nux_yellow_black_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_yellow_not_stripe" src="./img/knobs2/nux_yellow_not_stripe.png" alt="nux_yellow_not_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_yellow_white_stripe" src="./img/knobs2/nux_yellow_white_stripe.png" alt="nux_yellow_white_stripe.png"onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="SimpleFlat3" src="./img/knobs2/SimpleFlat3.png" alt="SimpleFlat3.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="simplegray" src="./img/knobs2/simplegray.png" alt="simplegray.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="vernier" src="./img/knobs2/vernier.png" alt="vernier.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="Vintage_Knob" src="./img/knobs2/Vintage_Knob.png" alt="Vintage_Knob.png" onclick="setSelectedElementModel(this.alt)"/>
-                        <img class="menu-img" title="Vintage_VUMeter" src="./img/knobs2/Vintage_VUMeter.png" alt="Vintage_VUMeter.png" onclick="setSelectedElementModel(this.alt)"/>
+                        <pedal-elem-previews url="http://localhost:3000/previews/knobs" pedal-element-type="knob">
+                        </pedal-elem-previews>
                     </div>
 
                 </details>
@@ -143,7 +118,8 @@
                 <details id="add-label" class="sub-editor-collapsible">
                     <summary> Label </summary>
                     <div class="editor-collapsible-content">
-                        <pedal-elem-previews url="http://localhost:3000/previews/knobs"></pedal-elem-previews>
+                        <pedal-elem-previews url="http://localhost:3000/previews/knobs" pedal-element-type="knob">
+                        </pedal-elem-previews>
                     </div>
                 </details>
 
@@ -194,7 +170,9 @@
 
                 this.root.appendChild(temp);
 
-                this.setUploadEnvironnement()
+                this.setUploadEnvironnement();
+
+                this.setUpEventListeners();
 
             }
 
@@ -233,6 +211,7 @@
 
             }
 
+
             setEditablePedal(editablePedal) {
                 this.editablePedal = editablePedal;
                 this.enableInputs();
@@ -242,7 +221,29 @@
                 this.editablePedal.addEventListener('config-changed', (e) => {
                     this.refreshInputs();
                 });
+
             }
+
+            setUpEventListeners() {
+                console.log(this);
+
+                this.addEventListener('preview-selected', e => {
+                    console.log('OKKK');
+                });
+
+                let pedalElemPreviews = this.root.querySelectorAll('pedal-elem-previews');
+
+                pedalElemPreviews.forEach(elm => {
+                    elm.addEventListener('preview-selected', e => {
+                        this.editablePedal.addElement(e.detail.type)
+                    });
+
+                });
+            }
+/*
+            addElem(e) {
+                console.log('Hello world');
+            }*/
 
             refreshInputs() {
                 for (let inputElem of this.root.querySelectorAll('input')) {
@@ -251,7 +252,7 @@
             }
 
             setInputListeners() {
-                // For main inputs
+                /*// For main inputs
                 for (let inputElem of this.root.querySelectorAll('input')) {
                 inputElem.addEventListener('change', (event) => {
                         this.editablePedal.setAttribute(event.target.name, event.target.value);
@@ -299,7 +300,7 @@
                     addSlider.addEventListener('click', (event) => {
                         this.editablePedal.addElement('slider');
                     })
-                }
+                }*/
             }
 
             enableInputs() {

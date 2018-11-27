@@ -1,11 +1,9 @@
 <template>
 
     <style>
+        @import "StyleSheet.css";
 
     </style>
-
-
-    <p> pedal elem previews </p>
 
 </template>
 
@@ -14,11 +12,14 @@
 
         const doc = (document._currentScript || document.currentScript).ownerDocument;
         const template = doc.querySelector('template');
-
+        
+        const PREVIEW_SELECTED_EVENT = "previewSelected";
+        
         class PedalElemPreviews extends HTMLElement {
 
+            
             static get observedAttributes() {
-				return ['url'];
+				return ['url', 'pedal-element-type'];
             }
             
             constructor() {
@@ -30,27 +31,47 @@
 
                 this.root.appendChild(temp);
                 
-                this.previewNames = [];
+                this.previews = [];
 
-                this.fetchPreviewNames();
-
+                this.fetchPreviews();
             }
 
-            fetchPreviewNames() {
-
+            fetchPreviews() {
                 fetch(this.getAttribute('url'))
                     .then(response => {
                         return response.json();
                     })
                     .then(data => {
-                        this.previewNames = data;
-                        console.log(data);
+                        this.previews = data;
+                        this.setUpPreviews();
                     })
                     .catch(err => {
                         console.error('Error fetching preview image names: ' + err);
                     });
 
             }
+
+            setUpPreviews() {
+                for(let previewFile of this.previews.files) {
+                    let previewElem = document.createElement('img');
+                    previewElem.className = 'menu-img';
+                    previewElem.id = 'preview';
+                    previewElem.src = this.previews.filesUrl + previewFile
+                    
+                    previewElem.onclick = (e) => {
+                        let detail = {
+                            type: this.getAttribute('pedal-element-type'),
+                            name: e.target.alt
+                        };
+
+                        let event = new CustomEvent('preview-selected', {detail: detail});
+                        this.dispatchEvent(event);
+                    }
+
+                    this.root.appendChild(previewElem);
+                }
+            }
+
         }
 
 
