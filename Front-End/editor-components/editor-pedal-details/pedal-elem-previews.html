@@ -1,0 +1,60 @@
+<template>
+
+    <style>
+
+    </style>
+
+
+    <p> pedal elem previews </p>
+
+</template>
+
+<script>
+    (function (window, document, undefined) {
+
+        const doc = (document._currentScript || document.currentScript).ownerDocument;
+        const template = doc.querySelector('template');
+
+        class PedalElemPreviews extends HTMLElement {
+
+            static get observedAttributes() {
+				return ['url'];
+            }
+            
+            constructor() {
+                super();
+                
+                this.root = this.attachShadow({mode: 'closed'});
+                
+                const temp = document.importNode(template.content, true);
+
+                this.root.appendChild(temp);
+                
+                this.previewNames = [];
+
+                this.fetchPreviewNames();
+
+            }
+
+            fetchPreviewNames() {
+
+                fetch(this.getAttribute('url'))
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.previewNames = data;
+                        console.log(data);
+                    })
+                    .catch(err => {
+                        console.error('Error fetching preview image names: ' + err);
+                    });
+
+            }
+        }
+
+
+        window.customElements.define('pedal-elem-previews', PedalElemPreviews);
+
+    })(window, document)
+</script>

@@ -10,16 +10,37 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 app.get('/', function(req, res) {
     res.send('Hello world!');
 });
 
 app.get('/pedals', function(req, res) {
+    res.json(JSON.parse(fs.readFileSync('./saves.json','utf8')));
+});
+
+app.get('/previews/knobs', function(req, res) {
+
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-    res.json(JSON.parse(fs.readFileSync('./saves.json','utf8')));
+    fs.readdir('../Front-End/img/knobs2', (err, files) => {
+        let filesUrl = 'http://localhost:8887/img/knobs2/';
+        
+        response = {
+            filesUrl,
+            files
+        };
+
+        res.json(response);
+    });
 });
+
 
 app.post('/pedals', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
