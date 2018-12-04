@@ -41,6 +41,37 @@ app.get('/previews/knobs', function(req, res) {
     });
 });
 
+app.get('/previews/sliders', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    fs.readdir('../Front-End/img/sliders', (err, files) => {
+        let filesUrl = 'https://localhost:8887/img/sliders/';
+
+        response = {
+            filesUrl,
+            files
+        };
+
+        res.json(response);
+    });
+});
+
+app.get('/previews/icons', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    fs.readdir('../Front-End/img/icons', (err, files) => {
+        let filesUrl = 'http://localhost:8887/img/icons/';
+
+        response = {
+            filesUrl,
+            files
+        };
+
+        res.json(response);
+    })
+})
+
 
 app.post('/pedals', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");

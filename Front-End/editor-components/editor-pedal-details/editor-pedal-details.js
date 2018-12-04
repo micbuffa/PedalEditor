@@ -68,17 +68,12 @@
         }
 
         setUpEventListeners() {
-            console.log(this);
-
-            this.addEventListener('preview-selected', e => {
-                console.log('OKKK');
-            });
 
             let pedalElemPreviews = this.root.querySelectorAll('pedal-elem-previews');
 
             pedalElemPreviews.forEach(elm => {
                 elm.addEventListener('preview-selected', e => {
-                    this.editablePedal.addElement(e.detail.type)
+                    this.editablePedal.addElement(e.detail.type, e.detail.fileName)
                 });
             });
         }
@@ -95,7 +90,7 @@
         }
 
         setInputListeners() {
-            /*// For main inputs
+            // For main inputs
             for (let inputElem of this.root.querySelectorAll('input')) {
             inputElem.addEventListener('change', (event) => {
                     this.editablePedal.setAttribute(event.target.name, event.target.value);
@@ -108,42 +103,6 @@
                     this.setBackgroundImage(event.target.alt);
                 })
             }
-
-            // For adding icons
-            for (let addIcon of this.root.querySelectorAll('.add-icon')) {
-                addIcon.addEventListener('click', (event) => {
-                    this.addIcon(event.target.alt);
-                })
-            }
-
-            // For adding knobs
-            for (let addKnob of this.root.querySelectorAll('#add-knob')) {
-                addKnob.addEventListener('click', (event) => {
-                    this.addKnob();
-                })
-            }
-
-            // For adding labels
-            for (let addLabel of this.root.querySelectorAll('#add-label')) {
-                console.log(addLabel)
-                addLabel.addEventListener('click', (event) => {
-                    this.addLabel();
-                })
-            }
-
-            // For adding switches
-            for (let addSwitch of this.root.querySelectorAll('#add-switch')) {
-                addSwitch.addEventListener('click', (event) => {
-                    this.addSwitch();
-                })
-            }
-
-            // For adding sliders
-            for (let addSlider of this.root.querySelectorAll('#add-slider')) {
-                addSlider.addEventListener('click', (event) => {
-                    this.editablePedal.addElement('slider');
-                })
-            }*/
         }
 
         enableInputs() {

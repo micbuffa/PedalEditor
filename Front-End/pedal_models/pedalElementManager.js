@@ -54,7 +54,6 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of the element by providing its type. */
     addElementConfigDefault(type, filename) {
-        console.log(type);
         switch (type) {
             case 'switch':
                 return this.addSwitchConfigDefault(filename);
@@ -72,6 +71,7 @@ class PedalElementManager {
 
     /* Creating and adding the default configuration of the knob. */
     addKnobConfigDefault(filename) {
+        console.log('The filename is : ' + filename);
         let uid = Math.floor(Math.random() * 1000)
         var knob = {
             id: "knob_" + uid,
@@ -79,7 +79,7 @@ class PedalElementManager {
             y: 30,
             width: 70,
             height: 70,
-            model: 'knob2.png',
+            model: filename || 'knob2.png',
             value: 20,
             label: 'knbo_' + uid,
             label_fontfamily: 'Comic Sans MS',

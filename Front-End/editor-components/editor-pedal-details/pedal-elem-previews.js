@@ -47,11 +47,12 @@
                 previewElem.className = 'menu-img';
                 previewElem.id = 'preview';
                 previewElem.src = this.previews.filesUrl + previewFile
+                previewElem.alt = previewFile;
                 
                 previewElem.onclick = (e) => {
                     let detail = {
                         type: this.getAttribute('pedal-element-type'),
-                        name: e.target.alt
+                        fileName: e.target.alt
                     };
 
                     let event = new CustomEvent('preview-selected', {detail: detail});

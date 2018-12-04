@@ -21,14 +21,14 @@
     <link rel="import" href="editor-components/editor-pedal-details/editor-pedal-details.html">
     <link rel="import" href="editor-components/editor-element-list.html">
     <link rel="import" href="editor-components/editor-inspector.html">
-
+    <link rel="import" href="editor-components/editor-faust/editor-faust.html">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
 
     <!-- Latest compiled JavaScript -->
-    <link rel="import" href="blue.html">
-    <script src="jscolor.js"></script>
+    <!--<link rel="import" href="blue.html">
+    <script src="jscolor.js"></script>-->
 
     <script src="pedal_models/functionalPedalGenerator.js"></script>
 
@@ -96,91 +96,26 @@
                     <a href="#editor-inspector">INSPECTOR</a>
                     <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
                 </li>
-                
+
                 <li>
-                    <a href="#acc-knobs">KNOBS</a>
-                    <div id="acc-knobs" class="accordion">
-
-                        <button class="mainbtn" onclick="addKnob()">Add Knob</button>
-
-                        <br>
-                        <br>
-
-                        <img class="menu-img" title="Aqua" src="./img/knobs2/Aqua.png" alt="Aqua.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="boss_basic_cyan" src="./img/knobs2/boss_basic_cyan.png" alt="boss_basic_cyan.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="boss_grey" src="./img/knobs2/boss_grey.png" alt="boss_grey.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="boss_basic_gold" src="./img/knobs2/boss_basic_gold.png" alt="boss_basic_gold.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="boss_basic_red" src="./img/knobs2/boss_basic_red.png" alt="boss_basic_red.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="boss_golden" src="./img/knobs2/boss_golden.png" alt="boss_golden.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="Carbon" src="./img/knobs2/Carbon.png" alt="Carbon.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="Jambalaya" src="./img/knobs2/Jambalaya.png" alt="Jambalaya.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="JP8000" src="./img/knobs2/JP8000.png" alt="JP8000.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="knob2" src="./img/knobs2/knob2.png" alt="knob2.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="lineshadow" src="./img/knobs2/lineshadow.png" alt="lineshadow.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="lineshadow2" src="./img/knobs2/lineshadow2.png" alt="lineshadow2.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="m400" src="./img/knobs2/m400.png" alt="m400.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="MiniMoog_Main" src="./img/knobs2/MiniMoog_Main.png" alt="MiniMoog_Main.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="nux_black_black_stripe" src="./img/knobs2/nux_black_black_stripe.png" alt="nux_black_black_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_black_not_stripped" src="./img/knobs2/nux_black_not_stripped.png" alt="nux_black_not_stripped.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_black_white_stripe" src="./img/knobs2/nux_black_white_stripe.png" alt="nux_black_white_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_white_black_stripe" src="./img/knobs2/nux_white_black_stripe.png" alt="nux_white_black_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_white_not_stripped" src="./img/knobs2/nux_white_not_stripped.png" alt="nux_white_not_stripped.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_white_white_stripe" src="./img/knobs2/nux_white_white_stripe.png" alt="nux_white_white_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_yellow_black_stripe" src="./img/knobs2/nux_yellow_black_stripe.png" alt="nux_yellow_black_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_yellow_not_stripe" src="./img/knobs2/nux_yellow_not_stripe.png" alt="nux_yellow_not_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="nux_yellow_white_stripe" src="./img/knobs2/nux_yellow_white_stripe.png" alt="nux_yellow_white_stripe.png"
-                            onclick="setSelectedElementModel(this.alt)" />
-                        <img class="menu-img" title="SimpleFlat3" src="./img/knobs2/SimpleFlat3.png" alt="SimpleFlat3.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="simplegray" src="./img/knobs2/simplegray.png" alt="simplegray.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="vernier" src="./img/knobs2/vernier.png" alt="vernier.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="Vintage_Knob" src="./img/knobs2/Vintage_Knob.png" alt="Vintage_Knob.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-                        <img class="menu-img" title="Vintage_VUMeter" src="./img/knobs2/Vintage_VUMeter.png" alt="Vintage_VUMeter.png" onclick="setSelectedElementModel(this.alt)"
-                        />
-
-                    </div>
+                    <a href="#editor-faust">FAUST</a>
+                    <editor-faust id="editor-faust" class="accordion"></editor-faust>
                 </li>
+                
             </ul>
         </div>
     </div>
 
     <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span>
 
-
 </body>
 <script>
-
     var url = "http://localhost:8085";
     let serverUrl = 'http://localhost:3000';
 
     var http = new XMLHttpRequest();
     var path = "/pedale";
-    var ctx = new AudioContext();
+    //var ctx = new AudioContext();
     var section = document.getElementsByClassName("pedalSection")[0];
     var pedal = getFirstChild(section);
     var knobSprite;
@@ -638,7 +573,7 @@
     }
 
     // instanciate the plugin 
-    function getDescriptorFromPlugin(className, name, baseURL) {
+   /* function getDescriptorFromPlugin(className, name, baseURL) {
 
         var plugin = new window[className](ctx, baseURL);
         console.log(plugin);
@@ -720,7 +655,7 @@
 
         delete plugin;
 
-    }
+    }*/
 
 
 
