@@ -796,5 +796,44 @@
             }
         ],
         "id": 1531964779861
+    },
+    {
+        "id": 1544303037496,
+        "name": "Dummy pedal",
+        "backgroundImageSrc": null,
+        "color": "#AB2E24",
+        "width": "400",
+        "height": "500",
+        "radius": "10",
+        "opacity": "1",
+        "elements": [
+            {
+                "id": "knob_128",
+                "x": 43,
+                "y": 30,
+                "width": 70,
+                "height": 70,
+                "model": "Aqua.png",
+                "value": 20,
+                "label": "knbo_128",
+                "label_fontfamily": "Comic Sans MS",
+                "label_fontsize": "9",
+                "label_color": "000000",
+                "type": "knob"
+            },
+            {
+                "id": "slider_409",
+                "x": 170,
+                "y": 41,
+                "width": 150,
+                "height": 40,
+                "model": "slider1.png",
+                "label": "slider_409",
+                "label_fontfamily": "Comic Sans MS",
+                "label_fontsize": "9",
+                "label_color": "000000",
+                "type": "slider"
+            }
+        ]
     }
 ]

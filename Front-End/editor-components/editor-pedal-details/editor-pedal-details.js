@@ -46,10 +46,11 @@
                 this.root.querySelector('#background-images').appendChild(img);
 
             };
-            photo.addEventListener('change', function () {
+           
+           /* photo.addEventListener('change', function () {
                 var file = this.files[0];
                 return file && fileReader.readAsDataURL(file);
-            });
+            });*/
             //-----------------------------------------
 
         }

@@ -27,9 +27,34 @@
         }
 
         setUpListeners() {
-            this.root.querySelector('#validate').addEventListener('click', () => {
-                this.faustParser.extractElements(this.faustCodeBox.value);
+
+            this.root.querySelector('#create-pedal').addEventListener('click', () => {
+                this.createPedal();
+            })
+        }
+
+        createPedal() {
+            let elements = this.faustParser.extractElements(this.faustCodeBox.value);
+            //console.log(elements.map(elm => elm.width));
+            let width = Math.max(...elements.map(elm => elm.width)) + 20;
+            width = width < 130 ? 130 : width;
+            let height = 10;
+
+            elements.forEach(elem => {
+                elem.x = width / 2 - elem.width / 2;
+                elem.y = height;
+                height += elem.height + 30
             });
+            
+            let detail = {
+                width: width,
+                height: height,
+                elements: elements
+            };
+
+            console.log(elements);
+            let event = new CustomEvent('create-pedal', {detail: detail});
+            this.dispatchEvent(event);
         }
 
     }

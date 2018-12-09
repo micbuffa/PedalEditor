@@ -46,7 +46,7 @@ app.get('/previews/sliders', (req, res) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     fs.readdir('../Front-End/img/sliders', (err, files) => {
-        let filesUrl = 'https://localhost:8887/img/sliders/';
+        let filesUrl = 'http://localhost:8887/img/sliders/';
 
         response = {
             filesUrl,
@@ -94,7 +94,6 @@ app.post('/pedals', function(req, res) {
         pedals.push(req.body);
     }
     
-    console.log(pedals);
 
     fs.writeFile('./saves.json', JSON.stringify(pedals), err => {
         if(err) {
@@ -107,7 +106,6 @@ app.post('/pedals', function(req, res) {
 });
 
 app.post('/generate', function(req, res) {
-    console.log(req.body);
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     

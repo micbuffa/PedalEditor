@@ -158,8 +158,6 @@
             this.updateStyle(this);
             this.dispatchEvent(this.configChangedEvent);
 
-            console.log(this.getSelectedElement());
-
         }
 
         highlightElement(elementId) {
@@ -441,6 +439,8 @@
                     sliderElem.setAttribute('value', slider.value);
                     sliderElem.setAttribute('height', slider.height);
                     sliderElem.setAttribute('width', slider.width);
+                    sliderElem.setAttribute('max', slider.max);
+                    sliderElem.setAttribute('min', slider.min);
 
                     sliderElem.src = ASSETS_PATH + '/sliders/' + slider.model;
                     sliderElem.setAttribute('src', ASSETS_PATH + '/sliders/' + slider.model);
@@ -495,7 +495,6 @@
          ** Loads and sets the configuration of the pedal from a json file. 
          */
         loadConfig(config) {
-            console.log(config);
             this.pedalId = config.id;
             this.name = config.name;
 
@@ -567,7 +566,10 @@
                     slider.label_fontfamily = element.label_fontfamily;
                     slider.label_fontsize = element.label_fontsize;
                     slider.label_color = element.label_color;
-                    slider.type = element.type; 
+                    slider.type = element.type;
+                    slider.min = element.min;
+                    slider.max = element.max;
+                    slider.value = element.value;
                 }
             }
 
@@ -684,7 +686,6 @@
         }
 
         setParam(name, value) {
-            console.log("Setting the param " + name + " to value " + value)
             this.setAttribute(name, value);
         }
 

@@ -2,11 +2,21 @@
 
     <style>
         @import "StyleSheet.css";
+
+        #faust-code-box {
+            width: 420px;
+            height: 100px;
+        }
     </style>
     
-    <textarea id="faust-code-box" rows="4" cols="50">Past your Faust code here</textarea>
-    <button id="validate">Validate</button>
+    <textarea id="faust-code-box" rows="4" cols="100"></textarea>
+
+    <br>
+
+    <button id="create-pedal">Generate</button>
+
 </template>
 
-<script src="editor-faust.js"></script>
+<script src="editor-faust.js">
+</script>
 <script src="../../faust/faustParser.js"></script>

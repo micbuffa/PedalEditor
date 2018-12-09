@@ -17,7 +17,6 @@
         setEditablePedal(editablePedal) {
             this.editablePedal = editablePedal;
             this.refreshInputs();
-            console.log("Seeing the editable pedal");
         }
 
         refreshInputs() {
@@ -30,7 +29,6 @@
                 section.removeChild(firstChild);
             }
 
-            console.log(this.editablePedal.getElements());
             // Populating the sections.
             for (let pedalElement of this.editablePedal.getElements()) {
 

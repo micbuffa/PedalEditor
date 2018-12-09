@@ -134,7 +134,26 @@
 
             checkMetadata(document.querySelector("#urlPlugin").value);
         });
+        
+        let faust = document.querySelector('#editor-faust'),
+        faustClone = faust.cloneNode(true);
+        faust.parentNode.replaceChild(faustClone, faust);
 
+        faust = document.querySelector('#editor-faust');   
+        faust.addEventListener('create-pedal', (e) => {
+            newPedal();
+            let pedalConfig = {
+                name: "First",
+                color: "#7caeff",
+                width: e.detail.width,
+                height: e.detail.height,
+                radius: "10",
+                opacity: "1",
+                elements: e.detail.elements
+            };
+            //console.log(e.detail);
+            pedal.loadConfig(pedalConfig);
+        });
     }
 
 
@@ -490,7 +509,6 @@
         // Plug pedal to inspector component
         let inspector = document.querySelector('#editor-inspector');
         inspector.setEditablePedal(pedal);
-
     }
 
     function getFirstChild(el) {
