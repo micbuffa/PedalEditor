@@ -98,8 +98,31 @@ function activateDSP(dsp)
 
 function redirectEditor(dsp) {
     const ui = JSON.parse(dsp.getJSON()).ui;
-    var win = window.open("../index.html?data=" + JSON.stringify(ui));
-    win.focus();
+    console.log(ui)
+    
+    /*
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "../index.html");
+    form.setAttribute("target", "view");
+
+    var hiddenField = document.createElement("input"); 
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "message");
+    hiddenField.setAttribute("value", JSON.stringify(ui));
+
+    form.appendChild(hiddenField);
+    document.body.appendChild(form);
+
+    window.open('', 'view');
+
+
+    form.submit();*/
+
+    var newWindow = window.open('../index.html');
+    newWindow.faustUI = ui;
+    //var win = window.open("../index.html?data=" + JSON.stringify(ui));
+    //win.focus();
 }
 
 function activateMonoDSP(dsp)

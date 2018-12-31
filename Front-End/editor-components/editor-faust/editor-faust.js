@@ -58,7 +58,25 @@
         }
 
         pedalConfigFromUI(faustUI) {
-            return this.faustParser.pedalConfigFromUI(faustUI);
+            let elements = this.faustParser.pedalConfigFromUI(faustUI);
+            let width = Math.max(...elements.map(elm => elm.width)) + 20;
+            width = width < 130 ? 130 : width;
+            let height = 10;
+
+            elements.forEach(elem => {
+                elem.x = width / 2 - elem.width / 2;
+                elem.y = height;
+                height += elem.height + 30
+            });
+            
+            let detail = {
+                width: width,
+                height: height,
+                elements: elements
+            };
+
+            
+            return detail;
         }
 
     }

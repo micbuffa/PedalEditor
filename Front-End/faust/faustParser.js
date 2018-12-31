@@ -13,10 +13,10 @@ class FaustParser {
 
     constructor() {
         // Regular expression to mach against horizontal sliders.
-        this.regex = new RegExp('[h|v]slider[(][^)]*[)]', 'g');
+       /* this.regex = new RegExp('[h|v]slider[(][^)]*[)]', 'g');
         this.defaultPedalColor = '#FFFFFF';
         this.defaultPedalRadius = '10';
-        this.defaultPedalOpacity = '1';
+        this.defaultPedalOpacity = '1';*/
     }
 
     /**
@@ -90,6 +90,20 @@ class FaustParser {
     }
 
     addElement(elem) {
+        let type, width, height;
+
+        if(elem.meta && elem.meta[0].style === 'knob' ) {
+            type = 'knob';
+        } else if(elem.type === "vslider") {
+            type = 'slider';
+            height = 150;
+            width = 40;
+        } else if(elem.type === 'hslider') {
+            type = 'slider';
+            width = 150;
+            height = 40;
+        }
+
         let ret = {
             id: elem.label,
             x: 10,
@@ -97,8 +111,8 @@ class FaustParser {
             width: type === 'slider' ? width : 50,
             height: type === 'slider' ? height : 50,
             model: type === 'slider' ? "slider1.png" : "knob2.png",
-            value: faustSliderParams[1],
-            label: faustSliderParams[0],
+            value: elem.init,
+            label: elem.label,
             label_fontfamily: "Verdana",
             label_fontsize: "14",
             label_color: "000000",
@@ -106,10 +120,16 @@ class FaustParser {
             min: elem.min,
             max: elem.max
         }
+
+        return ret;
     }
 
     pedalConfigFromUI(faustUI) {
-        console.log(faustUI);
+        let ret = [];
+        for(let elem of faustUI[0].items) {
+            ret.push(this.addElement(elem));
+        }
+        return ret;
     }
 
 }

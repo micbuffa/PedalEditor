@@ -143,7 +143,7 @@
         faust.parentNode.replaceChild(faustClone, faust);
 
         faust = document.querySelector('#editor-faust');   
-        faust.addEventListener('create-pedal', (e) => {
+        /*faust.addEventListener('create-pedal', (e) => {
             newPedal();
             let pedalConfig = {
                 name: "First",
@@ -156,25 +156,29 @@
             };
             //console.log(e.detail);
             pedal.loadConfig(pedalConfig);
-        });
+        });*/
 
-        if(faustUI) {
-           /* if(!pedal)
-                newPedal();
-            let pedalConfig = faust.pedalConfigFromUI(faustUI);
+        if(window.faustUI) {
 
-            /*let pedalConfig =  {
+            newPedal(null, true);
+
+            let detail = faust.pedalConfigFromUI(window.faustUI);
+            
+            let pedalConfig = {
                 name: "First",
                 color: "#7caeff",
-                width: 500,
-                height: 400,
+                width: detail.width,
+                height: detail.height,
                 radius: "10",
                 opacity: "1",
-                elements: []
-                };
-                */
+                elements: detail.elements
+            };
+            console.log(detail);
+            console.log(pedalConfig);
 
-            //pedal.loadConfig(pedalConfig);
+            pedal.loadConfig(pedalConfig);
+            window.faustUI = null;
+
         }
     }
 
@@ -194,7 +198,7 @@
         document.getElementById("mySidenav").style.width = "0";
     }
 
-    function newPedal(args) {
+    function newPedal(args, withoutInit) {
 
 
 
@@ -208,8 +212,10 @@
             selectKnob(e.detail);
             updateInspector();
         });
-
-        initialize();
+        
+        if(!withoutInit) {
+            initialize();
+        }
 
 
 
