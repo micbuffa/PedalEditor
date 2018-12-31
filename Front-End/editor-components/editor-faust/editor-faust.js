@@ -57,6 +57,10 @@
             this.dispatchEvent(event);
         }
 
+        pedalConfigFromUI(faustUI) {
+            return this.faustParser.pedalConfigFromUI(faustUI);
+        }
+
     }
 
 

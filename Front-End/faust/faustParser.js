@@ -89,4 +89,27 @@ class FaustParser {
         return /\(([^)]+)\)/g.exec(functionStr)[1].replace(/\"/g, '').replace(/\[.*\]/g, '').split(',');
     }
 
+    addElement(elem) {
+        let ret = {
+            id: elem.label,
+            x: 10,
+            y: 10,
+            width: type === 'slider' ? width : 50,
+            height: type === 'slider' ? height : 50,
+            model: type === 'slider' ? "slider1.png" : "knob2.png",
+            value: faustSliderParams[1],
+            label: faustSliderParams[0],
+            label_fontfamily: "Verdana",
+            label_fontsize: "14",
+            label_color: "000000",
+            type: type,
+            min: elem.min,
+            max: elem.max
+        }
+    }
+
+    pedalConfigFromUI(faustUI) {
+        console.log(faustUI);
+    }
+
 }

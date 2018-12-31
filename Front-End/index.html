@@ -122,12 +122,15 @@
     var switchSprite;
     let savedPedalsConfigs;
     let funcitonalPedalGenerator;
+    let faustUI = null;
 
     var bt_buildIt = document.querySelector('#bt_buildIt');
 
     window.onload = initialize();
 
     function initialize() {
+        setFaustUIFromUrl();
+        
         displaySavedPedalsIds();
 
         bt_buildIt.addEventListener('click', () => {
@@ -154,9 +157,32 @@
             //console.log(e.detail);
             pedal.loadConfig(pedalConfig);
         });
+
+        if(faustUI) {
+           /* if(!pedal)
+                newPedal();
+            let pedalConfig = faust.pedalConfigFromUI(faustUI);
+
+            /*let pedalConfig =  {
+                name: "First",
+                color: "#7caeff",
+                width: 500,
+                height: 400,
+                radius: "10",
+                opacity: "1",
+                elements: []
+                };
+                */
+
+            //pedal.loadConfig(pedalConfig);
+        }
     }
 
-
+    function setFaustUIFromUrl() {
+        let url = new URL(location);
+        let searchParams = new URLSearchParams(url.search);
+        faustUI = searchParams.get('data');
+    }
 
 
     /*Slider Nav Menu*/
