@@ -144,12 +144,12 @@ class FunctionalPedalGenerator {
             console.log("disabled");
         `
         let funcReactivateContent = `
-            this._plug.setParam("status", "enable")
+            this._plug.setParam("/${this.editablePedal.getAttribute('name')}/bypass", 0);
         `
         let funcAttributeChangedCallbackContent = `
             console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
-            let tmp = '/Blipper/bypass';
+            let tmp = /${this.editablePedal.getAttribute('name')}/bypass;
             if (this.state[tmp] == 1) {
             this._root.querySelector("#switch1").value = 0;
             this.isOn = false;
@@ -174,7 +174,7 @@ class FunctionalPedalGenerator {
         // Generating the functions of the pedal.
         let funcProperties = this.generateFunction('get properties', [], funcPropertiesContent);
         let functionGetObservedAttributes = this.generateFunction('static get observedAttributes', [], funcGetObservedAttributes);
-        let functionAttributeChangedCallback = this.generateFunction('attributeChangedCallback', [], funcAttributeChangedCallback);
+        let functionAttributeChangedCallback = this.generateFunction('attributeChangedCallback', [], funcAttributeChangedCallbackContent);
         let funcitonSetResources = this.generateFunction('setResources', [], funcSetResources);
         let funcSetActive = this.generateFunction('setActive', ['active'], funcSetActiveContent);
         let function1 = this.generateFunction(
@@ -249,6 +249,7 @@ class FunctionalPedalGenerator {
      * Generate the html of the functional pedal.
      */
     generateFunctionalPedalHtml() {
+        this.setWebAudioControlsKnobsIds();
         let html = this.editablePedal.getHtml();
         
         return html.outerHTML;
@@ -297,6 +298,20 @@ class FunctionalPedalGenerator {
         }
 
         return ret;
+    }
+
+    setWebAudioControlsKnobsIds() {
+        /*for(let knob of this.editablePedal.html) {
+            let waControl = knob.childNodes[0];
+            console.log(waControl);
+        }*/
+        for(let knob of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(".knob")) {
+            let id = knob.getAttribute('id');
+            let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
+            knob.childNodes[0].setAttribute('id', waControlId);
+            console.log(knob.childNodes[0]);
+            //console.log(id);
+        }
     }
 
 }

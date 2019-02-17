@@ -1,488 +1,381 @@
-<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
-<script>
-    WebAudioControlsOptions = {
-        useMidi: 1,
-    };
-</script>
-<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
-<template>
-    <style>
-        .pedal {
-            display: block;
-            background-color: #755E5E;
-            width: 700px;
-            height: 400px;
-            border-radius: 10px;
-            position: relative;
-            /* bring your own prefixes */
-        }
-
-
-        #background-image {
-            //border: solid 2px black;
-            width: 700px;
-            height: 400px;
-            opacity: 1;
-        }
-
-        #resize {
-            position: absolute;
-            cursor: nwse-resize;
-            width: 10px;
-            height: 10px;
-            left: 692px;
-            top: 392px;
-            border: 1px solid black;
-        }
-
-        .knob,
-        .switch,
-        .icon,
-        .label,
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            text-align: center;
-        }
-
-
-
-        .selected {
-            border: 1px dashed black;
-            cursor: move;
-        }
-
-        .selected:hover {
-            border: 1px dashed black;
-            cursor: move;
-        }
-
-        .selected webaudio-knob {
-            cursor: move;
-        }
-
-        .selected webaudio-switch {
-            cursor: move;
-        }
-
-        .selected span {
-            cursor: move;
-        }
-
-        .selected:hover span {
-            cursor: move;
-        }
-
-        .selected webaudio-slider {
-            cursor: move;
-        }
-
-        .selected:hover webaudio-knob {
-            cursor: move;
-        }
-
-        .selected:hover webaudio-switch {
-            cursor: move;
-        }
-
-        .selected:hover webaudio-slider {
-            cursor: move;
-        }
-
-
-        #switch1 {
-            bottom: 10px;
-            right: 0px;
-        }
-
-        #knob_0 {
-            left: 54px;
-            top: 65px;
-        }
-
-        #knob_0 div {
-            color: #C7C7C7;
-            font-family: "Impact";
-            font-size: 14px;
 
-        }
-
-        #knob_1 {
-            left: 60px;
-            top: 255px;
-        }
-
-        #knob_1 div {
-            color: #D1D1D1;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_2 {
-            left: 153px;
-            top: 65px;
-        }
-
-        #knob_2 div {
-            color: #FFFFFF;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_3 {
-            left: 246px;
-            top: 67px;
-        }
-
-        #knob_3 div {
-            color: #0A0A0A;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_4 {
-            left: 333px;
-            top: 67px;
-        }
-
-        #knob_4 div {
-            color: #141414;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_5 {
-            left: 418px;
-            top: 67px;
-        }
-
-        #knob_5 div {
-            color: #000000;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_6 {
-            left: 503px;
-            top: 65px;
-        }
-
-        #knob_6 div {
-            color: #D4D4D4;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_7 {
-            left: 143px;
-            top: 254px;
-        }
-
-        #knob_7 div {
-            color: #CCCCCC;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_8 {
-            left: 233px;
-            top: 254px;
-        }
-
-        #knob_8 div {
-            color: #000000;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_9 {
-            left: 334px;
-            top: 251px;
-        }
-
-        #knob_9 div {
-            color: #000000;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_10 {
-            left: 418px;
-            top: 251px;
-        }
-
-        #knob_10 div {
-            color: #000000;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-        #knob_11 {
-            left: 507px;
-            top: 250px;
-        }
-
-        #knob_11 div {
-            color: #B0B0B0;
-            font-family: "Impact";
-            font-size: 14px;
-
-        }
-
-
-        .pedalLabel {
-            position: absolute;
-            top: 225px;
-            font-size: 25px;
-            font-family: Sansita;
-            /*{font}*/
-            text-align: center;
-            line-height: 30px;
-            /*{pedalfontsize}*/
-            width: 150px;
-            color: #6B0000;
-            /*{fontcolor}*/
-        }
-
-        .knob-label {
-            position: absolute;
-            font-size: 12px;
-            /*{knobfontsize}*/
-            line-height: 12px;
-            width: 64px;
-            max-width: 64px;
-            overflow: hidden;
-            text-align: center;
-            font-family: Sansita;
-            /*{font}*/
-            color: #6B0000;
-            /*{fontcolor}*/
-        }
-
-        #knob1-label {
-            top: 84px;
-            left: 43px;
-        }
-    </style>
-    <div class="pedal">
-        <div id="resize"></div>
-
-        <img id="background-image" src="./img/background/2.jpg">
-
-        <div class="knob" id="knob_0">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_0</div>
-        </div>
-        <div class="knob" id="knob_1">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_1</div>
-        </div>
-        <div class="knob" id="knob_2">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_2</div>
-        </div>
-        <div class="knob" id="knob_3">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_3</div>
-        </div>
-        <div class="knob" id="knob_4">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_4</div>
-        </div>
-        <div class="knob" id="knob_5">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_5</div>
-        </div>
-        <div class="knob" id="knob_6">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_6</div>
-        </div>
-        <div class="knob" id="knob_7">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_7</div>
-        </div>
-        <div class="knob" id="knob_8">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_8</div>
-        </div>
-        <div class="knob" id="knob_9">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_9</div>
-        </div>
-        <div class="knob" id="knob_10">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_10</div>
-        </div>
-        <div class="knob" id="knob_11">
-            <webaudio-knob src="./img/knobs/Vintage_Knob.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">knbo_11</div>
-        </div>
-    </div>
-</template>
-<script>
-    let MetalTemp = document.currentScript.ownerDocument.querySelector('template');
-    class MetalGui extends HTMLElement {
-
-
-        constructor(plug) {
-
-            super();
-            this._plug = plug;
-            this._plug.gui = this;
-            console.log(this._plug);
-            this._root = this.attachShadow({ mode: 'open' });
-            this._root.appendChild(MetalTemp.content.cloneNode(true));
-            this.isOn;
-            this.state = new Object();
-            this.setKnobs();
-            this.setSwitchListener();
-            this.setActive(false);
-
-        }
-
-        attributeChangedCallback() {
-
+            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
+            <script>
+            WebAudioControlsOptions = {
+                useMidi: 1,
+            };
+            </script>
+            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
+        <template><style>	
+                        .pedal{
+                            display: block;
+                            background-color: #9f6531;
+                            width: 400px;
+                            height: 650px;
+                            border-radius: 10px;
+                            position: relative;
+                            /* bring your own prefixes */
+                        }
+            
+                        
+                        #background-image {
+                            //border: solid 2px black;
+                            width: 400px;
+                            height: 650px;
+                            opacity: 1;
+                        }
+
+                        #resize {
+                            position: absolute;
+                            cursor: nwse-resize;
+                            width: 10px;
+                            height: 10px;
+                            left: 392px;
+                            top: 642px;
+                            border: 1px solid black;
+                        }
+
+                        .knob, .switch, .icon, .label, .slider {
+                            position: absolute;
+                            cursor: pointer;
+                            text-align: center;
+                        }
+
+                    
+
+                        .selected {
+                            border: 1px dashed black;
+                            cursor: move;
+                        }
+
+                        .selected:hover {
+                            border: 1px dashed black;
+                            cursor: move;
+                        }
+
+                        .selected  webaudio-knob{
+                            cursor: move;
+                        }
+
+                        .selected  webaudio-switch{
+                            cursor: move;
+                        }
+
+                        .selected  span{
+                            cursor: move;
+                        }
+
+                        .selected:hover  span{
+                            cursor: move;
+                        }
+
+                        .selected  webaudio-slider{
+                            cursor: move;
+                        }
+
+                        .selected:hover webaudio-knob{
+                            cursor: move;
+                        }
+
+                        .selected:hover webaudio-switch{
+                            cursor: move;
+                        }
+                        
+                        .selected:hover webaudio-slider{
+                            cursor: move;
+                        }
+
+
+                        #switch1 {
+                            bottom: 10px;
+                            right: 0px;
+                        }
+                        
+                    #knob_374 {
+                        left: 129px;
+                        top: 40px;
+                    }
+
+                    #knob_374 div {
+                        color: #000000;
+                        font-family: "Courier New";
+                        font-size: 14px;
+                        
+                    }
+                
+                    #knob_908 {
+                        left: 77px;
+                        top: 123px;
+                    }
+
+                    #knob_908 div {
+                        color: #000000;
+                        font-family: "Courier New";
+                        font-size: 14px;
+                        
+                    }
+                
+                    #knob_484 {
+                        left: 104px;
+                        top: 226px;
+                    }
+
+                    #knob_484 div {
+                        color: #000000;
+                        font-family: "Courier New";
+                        font-size: 14px;
+                        
+                    }
+                
+                    #knob_98 {
+                        left: 193px;
+                        top: 241px;
+                    }
+
+                    #knob_98 div {
+                        color: #000000;
+                        font-family: "Courier New";
+                        font-size: 14px;
+                        
+                    }
+                
+                    #knob_171 {
+                        left: 255px;
+                        top: 147px;
+                    }
+
+                    #knob_171 div {
+                        color: #000000;
+                        font-family: "Courier New";
+                        font-size: 14px;
+                        
+                    }
+                
+                    #knob_62 {
+                        left: 130px;
+                        top: 491px;
+                    }
+
+                    #knob_62 div {
+                        color: #9E9E9E;
+                        font-family: "Courier New";
+                        font-size: 20px;
+                        
+                    }
+                
+                        #icon_391 {
+                            left: 7px;
+                            top: 30px;
+                            width: 380px;
+                            height: 380px;
+                        }
+                    
+                        #icon_712 {
+                            left: 10px;
+                            top: 10px;
+                            width: 45px;
+                            height: 45px;
+                        }
+                    
+                        #icon_543 {
+                            left: 347px;
+                            top: 9px;
+                            width: 45px;
+                            height: 45px;
+                        }
+                    
+                        #icon_919 {
+                            left: 3px;
+                            top: 407px;
+                            width: 45px;
+                            height: 45px;
+                        }
+                    
+                        #icon_881 {
+                            left: 349px;
+                            top: 411px;
+                            width: 45px;
+                            height: 45px;
+                        }
+                    
+                        #icon_326 {
+                            left: 70px;
+                            top: 457px;
+                            width: 190px;
+                            height: 190px;
+                        }
+                    
+                        
+                        .pedalLabel{
+                            position: absolute;
+                            top: 225px;
+                            font-size: 25px;
+                            font-family: Sansita;/*{font}*/
+                            text-align: center;
+                            line-height: 30px;/*{pedalfontsize}*/
+                            width: 150px;
+                            color: #6B0000;/*{fontcolor}*/
+                        }
+                        .knob-label{
+                            position: absolute;
+                            font-size: 12px;/*{knobfontsize}*/
+                            line-height: 12px;
+                            width:64px;
+                            max-width:64px;
+                            overflow: hidden;
+                            text-align: center;
+                            font-family: Sansita;/*{font}*/
+                            color: #6B0000;/*{fontcolor}*/
+                        }
+                        #knob1-label{
+                            top: 84px;
+                            left: 43px;
+                        }</style><div class="pedal">
+		<div id="resize"></div>
+
+		<img id="background-image">
+
+	<img class="icon" id="icon_391" src="./img/icons/1.png"><img class="icon" id="icon_712" src="./img/icons/icon.png"><img class="icon" id="icon_543" src="./img/icons/icon.png"><img class="icon" id="icon_919" src="./img/icons/icon.png"><img class="icon" id="icon_881" src="./img/icons/icon.png"><img class="icon" id="icon_326" src="./img/icons/1.png"><div class="knob" id="knob_374"><webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="20" id="/Blipper/knob_374" style="height: 64px;"></webaudio-knob><div style="text-align:center">Freq 1</div></div><div class="knob" id="knob_908"><webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="20" id="/Blipper/knob_908" style="height: 64px;"></webaudio-knob><div style="text-align:center">Freq 2</div></div><div class="knob" id="knob_484"><webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="20" id="/Blipper/knob_484" style="height: 64px;"></webaudio-knob><div style="text-align:center">Freq 3</div></div><div class="knob" id="knob_98"><webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="20" id="/Blipper/knob_98" style="height: 64px;"></webaudio-knob><div style="text-align:center">Freq ff</div></div><div class="knob" id="knob_171"><webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="20" id="/Blipper/knob_171" style="height: 64px;"></webaudio-knob><div style="text-align:center">Freq 5</div></div><div class="knob" id="knob_62"><webaudio-knob src="./img/knobs/Carbon.png" height="undefined" width="undefined" sprites="100" min="undefined" max="undefined" step="1" value="20" id="/Blipper/knob_62" style="height: 64px;"></webaudio-knob><div style="text-align:center">Volume</div></div></div></template><script>
+        let BlipperTemp = document.currentScript.ownerDocument.querySelector('template');
+        class BlipperGui extends HTMLElement {
+    
+        
+            constructor(plug) {
+               
+                super();
+                this._plug = plug;
+                this._plug.gui = this;
+                console.log(this._plug);
+                this._root = this.attachShadow({ mode: 'open' });
+                this._root.appendChild(BlipperTemp.content.cloneNode(true));
+                this.isOn;
+                this.state = new Object();
+                this.setKnobs();
+                this.setSwitchListener();
+                this.setActive(false);
+        
+            }
+        
+            attributeChangedCallback() {
+               
+            console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
+            let tmp = /Blipper/bypass;
+            if (this.state[tmp] == 1) {
+            this._root.querySelector("#switch1").value = 0;
+            this.isOn = false;
+            } else if (this.state[tmp] == 0) {
+            this._root.querySelector("#switch1").value = 1;
+            this.isOn = true;
+            }
+            this.knobs = this._root.querySelectorAll(".knob");
             console.log(this.state);
-            if (this.state.status == "enable") {
-                this._root.querySelector(".switch").querySelector("webaudio-switch").value = 1;
-                this.isOn = true;
-            }
-            //this.knobs = this._root.querySelectorAll(".knob");
-            //this.labels = this._root.querySelectorAll(".knob-label");
             for (var i = 0; i < this.knobs.length; i++) {
-                //this.knobs[i].querySelector("webaudio-konb").value = this.state[this.labels[i].innerHTML.toLowerCase().replace(/ /g, "")] * 100;
-                this.knobs[i].querySelector("webaudio-knob").value = this.state[this.knobs[i].id];
+                    this.knobs[i].setValue(this.state[this.knobs[i].id],false);
+            console.log(this.knobs[i].value);
             }
-
-        }
-
-        get properties() {
-
+        
+            }
+        
+            get properties() {
+               
             this.boundingRect = {
                 dataWidth: {
-                    type: Number,
-                    value: 700
+                type: Number,
+                value: 400
                 },
                 dataHeight: {
-                    type: Number,
-                    value: 400
+                type: Number,
+                value: 650
                 }
-            };
-            return this.boundingRect;
-
-        }
-
-        static get observedAttributes() {
-
-            return ['state'];
-
-        }
-
-        setResources() {
-
+          };
+          return this.boundingRect;
+        
+            }
+        
+            static get observedAttributes() {
+               
+                return ['state'];
+        
+            }
+        
+            setResources() {
+               
             // Sets the background image and style.
             var background = this._root.querySelector('img');
-            background.src = this._plug.URL + '/assets/2.jpg';
+            background.src = this._plug.URL + '/assets/undefined';
             background.style = 'border-radius : 10px;'
 
             this._root.querySelectorAll(".knob").forEach((knob) => {
-                knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
+				knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
             });
-
+            
             this._root.querySelectorAll(".switch").forEach((s) => {
-                s.querySelector("webaudio-switch").setAttribute('src', this._plug.URL + '/assets/switch_1.png');
+				s.querySelector("webaudio-switch").setAttribute('src', this._plug.URL + '/assets/switch_1.png');
             });
+            
+            
+        
+            }
+        
+            setKnobs() {
+               this._root.getElementById("/Blipper/Freq 1").addEventListener("input", (e) =>this._plug.setParam("/Blipper/Freq 1", e.target.value));
+this._root.getElementById("/Blipper/Freq 2").addEventListener("input", (e) =>this._plug.setParam("/Blipper/Freq 2", e.target.value));
+this._root.getElementById("/Blipper/Freq 3").addEventListener("input", (e) =>this._plug.setParam("/Blipper/Freq 3", e.target.value));
+this._root.getElementById("/Blipper/Freq ff").addEventListener("input", (e) =>this._plug.setParam("/Blipper/Freq ff", e.target.value));
+this._root.getElementById("/Blipper/Freq 5").addEventListener("input", (e) =>this._plug.setParam("/Blipper/Freq 5", e.target.value));
+this._root.getElementById("/Blipper/Volume").addEventListener("input", (e) =>this._plug.setParam("/Blipper/Volume", e.target.value));
 
-
-
-        }
-
-        setKnobs() {
-            this._root.getElementById("/Metal/knbo_0").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_0", e.target.value));
-            this._root.getElementById("/Metal/knbo_1").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_1", e.target.value));
-            this._root.getElementById("/Metal/knbo_2").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_2", e.target.value));
-            this._root.getElementById("/Metal/knbo_3").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_3", e.target.value));
-            this._root.getElementById("/Metal/knbo_4").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_4", e.target.value));
-            this._root.getElementById("/Metal/knbo_5").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_5", e.target.value));
-            this._root.getElementById("/Metal/knbo_6").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_6", e.target.value));
-            this._root.getElementById("/Metal/knbo_7").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_7", e.target.value));
-            this._root.getElementById("/Metal/knbo_8").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_8", e.target.value));
-            this._root.getElementById("/Metal/knbo_9").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_9", e.target.value));
-            this._root.getElementById("/Metal/knbo_10").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_10", e.target.value));
-            this._root.getElementById("/Metal/knbo_11").addEventListener("input", (e) => this._plug.setParam("/Metal/knbo_11", e.target.value));
-
-        }
-
-        bypass() {
-
-            this._plug.setParam("/Metal/bypass", 1);
-
-        }
-
-        setSwitchListener() {
-
+            }
+        
+            bypass() {
+               
+            this._plug.setParam("/Blipper/bypass", 1);
+            console.log("disabled");
+        
+            }
+        
+            setSwitchListener() {
+               
             console.log("setswitch");
             this._root.querySelector(".switch").querySelector("webaudio-switch").addEventListener('change', (e) => {
                 if (this.isOn) this.bypass()
                 else this.reactivate();
                 this.isOn = !this.isOn;
             });
-
-        }
-
-        reactivate() {
-
-            this._plug.setParam("status", "enable")
-
-        }
-
-        setActive(active) {
-
-            if (active == undefined || active == false) {
-                this.isOn = false;
-                this.bypass();
-                this._root.querySelector("#switch1").value = 0;
-            } else if (active) {
-                this.isOn = true;
-                this.reactivate();
-                this._root.querySelector("#switch1").value = 1;
+        
             }
-
+        
+            reactivate() {
+               
+            this._plug.setParam("/Blipper/bypass", 0);
+        
+            }
+        
+            setActive(active) {
+               
+                if (active == undefined || active == false) {
+                    this.isOn = false;
+                    this.bypass();
+                    this._root.querySelector("#switch1").value = 0;
+                } else if (active) {
+                    this.isOn = true;
+                    this.reactivate();
+                    this._root.querySelector("#switch1").value = 1;
+                }
+        
+            }
         }
-    }
-    try {
-        customElements.define('amine-metal', MetalGui);
-        console.log("Element defined");
-    } catch (error) {
-        console.log(error);
-        console.log("Element already defined");
-    }
-
-    createMetal = (plug) => {
-        let elem = new MetalGui(plug);
-        return elem;
-    }
-</script>
+                try {
+                    customElements.define('amine-blipper', BlipperGui);
+                    console.log("Element defined");
+                } catch(error){
+                    console.log(error);
+                    console.log("Element already defined");      
+                }
+                
+                createBlipper = (plug) => {
+                    let elem = new BlipperGui(plug);
+                    return elem; 
+                }
+        </script>
