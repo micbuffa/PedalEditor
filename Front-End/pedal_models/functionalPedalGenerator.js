@@ -49,11 +49,23 @@ class FunctionalPedalGenerator {
                 this.state = new Object();
                 this.setKnobs();
                 this.setSwitchListener();
-                this.setResources();
+                this.setActive(false);
         `;
 
         // The content of the first function of the class.
         let function2Content = `
+                if (active == undefined || active == false) {
+                    this.isOn = false;
+                    this.bypass();
+                    this._root.querySelector("#switch1").value = 0;
+                } else if (active) {
+                    this.isOn = true;
+                    this.reactivate();
+                    this._root.querySelector("#switch1").value = 1;
+                }
+        `;
+
+        let funcSetActiveContent =  `
                 if (active == undefined || active == false) {
                     this.isOn = false;
                     this.bypass();
@@ -102,11 +114,7 @@ class FunctionalPedalGenerator {
         `;
 
         // The content of the second function of the class.
-        let function1Content = `
-            for (var i = 0; i < this.knobs.length; i++) {
-                this.eventToKnob(i);
-            }
-        `;
+        let function1Content = this.generateSetKnobs();
 
         let funcPropertiesContent = `
             this.boundingRect = {
@@ -132,12 +140,30 @@ class FunctionalPedalGenerator {
         `
 
         let funcBypassContent = `
-            this._plug.setParam("status", "disable");
+            this._plug.setParam("/${this.editablePedal.getAttribute('name')}/bypass", 1);
+            console.log("disabled");
         `
         let funcReactivateContent = `
             this._plug.setParam("status", "enable")
         `
-
+        let funcAttributeChangedCallbackContent = `
+            console.log("Custom element attributes changed.");
+            this.state = JSON.parse(this.getAttribute('state'));
+            let tmp = '/Blipper/bypass';
+            if (this.state[tmp] == 1) {
+            this._root.querySelector("#switch1").value = 0;
+            this.isOn = false;
+            } else if (this.state[tmp] == 0) {
+            this._root.querySelector("#switch1").value = 1;
+            this.isOn = true;
+            }
+            this.knobs = this._root.querySelectorAll(".knob");
+            console.log(this.state);
+            for (var i = 0; i < this.knobs.length; i++) {
+                    this.knobs[i].setValue(this.state[this.knobs[i].id],false);
+            console.log(this.knobs[i].value);
+            }
+        `
         
         // Generating and appending the template of the pedal.
         functionalPedalCode += this.generateFunctionalPedalTemplate();
@@ -150,12 +176,11 @@ class FunctionalPedalGenerator {
         let functionGetObservedAttributes = this.generateFunction('static get observedAttributes', [], funcGetObservedAttributes);
         let functionAttributeChangedCallback = this.generateFunction('attributeChangedCallback', [], funcAttributeChangedCallback);
         let funcitonSetResources = this.generateFunction('setResources', [], funcSetResources);
-
+        let funcSetActive = this.generateFunction('setActive', ['active'], funcSetActiveContent);
         let function1 = this.generateFunction(
             'setKnobs', 
             [], 
             function1Content);
-        
         let function4 = this.generateFunction('bypass', [], funcBypassContent);
         let function5 = this.generateFunction('reactivate', [], funcReactivateContent);
         let function6 = this.generateFunction('setSwitchListener', [], funcSwitchListenerContent);
@@ -163,7 +188,10 @@ class FunctionalPedalGenerator {
 
 
         // The class will contain the constructor and the two functions.
-        classContent += constructor + functionAttributeChangedCallback + funcProperties + functionGetObservedAttributes + funcitonSetResources + function1 + function4 + function6 + function5;
+        classContent += constructor + functionAttributeChangedCallback + funcProperties 
+            + functionGetObservedAttributes + funcitonSetResources + function1 + function4
+            + function6 + function5
+            + funcSetActive;
 
         functionalPedalCode += '<script>';
 
@@ -255,6 +283,18 @@ class FunctionalPedalGenerator {
         ret += 'class ' + name + ' extends HTMLElement {';
         ret += content;
         ret += '}';
+
+        return ret;
+    }
+
+    generateSetKnobs() {
+        let ret = '';
+        
+        for(let knob of this.editablePedal.knobs) {
+            ret += 'this._root.getElementById("/' + this.editablePedal.getAttribute('name') + '/' + knob.label + '").addEventListener("input", (e) =>'
+                + 'this._plug.setParam("/' + this.editablePedal.getAttribute('name') + '/' + knob.label + '", e.target.value));'
+            ret += '\n';
+        }
 
         return ret;
     }
