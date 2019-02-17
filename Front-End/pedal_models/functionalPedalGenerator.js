@@ -149,7 +149,7 @@ class FunctionalPedalGenerator {
         let funcAttributeChangedCallbackContent = `
             console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
-            let tmp = /${this.editablePedal.getAttribute('name')}/bypass;
+            let tmp = "/${this.editablePedal.getAttribute('name')}/bypass";
             if (this.state[tmp] == 1) {
             this._root.querySelector("#switch1").value = 0;
             this.isOn = false;
@@ -212,7 +212,7 @@ class FunctionalPedalGenerator {
                     console.log("Element already defined");      
                 }
                 
-                create${this.editablePedal.name} = (plug) => {
+                createLarkin${this.editablePedal.name} = (plug) => {
                     let elem = new ${this.editablePedal.name}Gui(plug);
                     return elem; 
                 }
@@ -292,8 +292,8 @@ class FunctionalPedalGenerator {
         let ret = '';
         
         for(let knob of this.editablePedal.knobs) {
-            ret += 'this._root.getElementById("/' + this.editablePedal.getAttribute('name') + '/' + knob.label + '").addEventListener("input", (e) =>'
-                + 'this._plug.setParam("/' + this.editablePedal.getAttribute('name') + '/' + knob.label + '", e.target.value));'
+            ret += 'this._root.getElementById("/' + this.editablePedal.getAttribute('name') + '/' + knob.id + '").addEventListener("input", (e) =>'
+                + 'this._plug.setParam("/' + this.editablePedal.getAttribute('name') + '/' + knob.id + '", e.target.value));'
             ret += '\n';
         }
 
@@ -309,8 +309,6 @@ class FunctionalPedalGenerator {
             let id = knob.getAttribute('id');
             let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
             knob.childNodes[0].setAttribute('id', waControlId);
-            console.log(knob.childNodes[0]);
-            //console.log(id);
         }
     }
 
