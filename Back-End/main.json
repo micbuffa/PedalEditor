@@ -1,8 +1,8 @@
-  {
-    "documentation": "...",
-    "name": "Blipper",
-    "thumbnail": "FaustBlipper.png",
-    "vendor": "Larkin",
-    "category":"Modulation",
-    "version": "1.0"
-  }
+{
+"name": "Blipper",
+"vendor": "Faust",
+"version": "1.0",
+"url": "Blipper.js",
+"homepage": "https://faust.grame.fr",
+"thumbnail": ""
+}

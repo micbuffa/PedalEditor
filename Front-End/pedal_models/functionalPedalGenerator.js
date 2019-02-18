@@ -212,7 +212,7 @@ class FunctionalPedalGenerator {
                     console.log("Element already defined");      
                 }
                 
-                createLarkin${this.editablePedal.name} = (plug) => {
+                create${this.editablePedal.name}GUI = (plug) => {
                     let elem = new ${this.editablePedal.name}Gui(plug);
                     return elem; 
                 }
