@@ -50,7 +50,8 @@ function getSHAKey(exportUrl, name, source_code, callback, errCallback) {
 			errCallback(newRequest.responseText);
 		}
 	}
-
+	
+	console.log(newRequest);
 	newRequest.send(params);
 }
 

@@ -73,6 +73,23 @@ function updateQrCode(sha, div)
 	link.appendChild(myWhiteDiv);
 }
 
+function updateQrCodeForWAP(sha, div) {
+	deleteQrCode(div);
+
+	var plateform = 'web'
+	var architecture = 'wap';
+	var output = "binary.zip";
+
+	var link = document.createElement('a');
+	link.href = document.getElementById("exportUrl").value + "/" + sha + "/" +
+		plateform + "/" + architecture + "/" + output;
+
+	var myWhiteDiv = getQrCode(document.getElementById("exportUrl").value, sha, plateform, architecture, output, 130);
+
+	div.appendChild(link);
+	link.appendChild(myWhiteDiv);
+}
+
 function cancelLoader() {
 	document.getElementById("loader").style.visibility = "hidden";
 }

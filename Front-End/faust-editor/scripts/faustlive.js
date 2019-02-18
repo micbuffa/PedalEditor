@@ -389,7 +389,6 @@ function faustDocumentation() {
 
 function openBlockDiagram() {
   if (expandDSP(codeEditor.getValue())) {
-    console.log('open block diagram visualisation');
     getSHAKey(
         document.getElementById('exportUrl').value,
         document.getElementById('filename').value.split('.')[0],
@@ -455,8 +454,7 @@ function trigCompilation(key) {
   var architecture =
       document.getElementById('Architecture')
           .options[document.getElementById('Architecture').selectedIndex]
-          .value;
-
+          .value;  
   startWaitingQrCode();
 
   sendPrecompileRequest(
@@ -467,13 +465,29 @@ function trigCompilation(key) {
       });
 }
 
+
+function trigCompilationForWap(key) {
+  var plateform = 'web';
+  var architecture = 'wap';
+
+  startWaitingQrCode();
+
+  sendPrecompileRequest(
+    document.getElementById('exportUrl').value, key, plateform, architecture,
+    sha => {
+      stopWaitingQrCode();
+      updateQrCodeForWAP(sha, document.getElementById('qrDiv'));
+    });
+}
+
 // exportFaustSource: send sourcecode to export URL : get back shakey and trig
 // compilation if success
 function exportFaustSource() {
+  
   getSHAKey(
       document.getElementById('exportUrl').value,
       document.getElementById('filename').value.split('.')[0],
-      codeEditor.getValue(), trigCompilation, cancelLoader);
+      codeEditor.getValue(), trigCompilationForWap, cancelLoader);
 
   /*
   console.log(expandDSP(codeEditor.getValue()));
