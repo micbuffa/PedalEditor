@@ -80,14 +80,18 @@ function updateQrCodeForWAP(sha, div) {
 	var architecture = 'wap';
 	var output = "binary.zip";
 
-	var link = document.createElement('a');
+	/* var link = document.createElement('a');
 	link.href = document.getElementById("exportUrl").value + "/" + sha + "/" +
-		plateform + "/" + architecture + "/" + output;
+		plateform + "/" + architecture + "/" + output; */
 
-	var myWhiteDiv = getQrCode(document.getElementById("exportUrl").value, sha, plateform, architecture, output, 130);
+	var a = document.querySelector('#download-wap');
+	a.href = document.getElementById("exportUrl").value + "/" + sha + "/" +
+	plateform + "/" + architecture + "/" + output;
 
-	div.appendChild(link);
-	link.appendChild(myWhiteDiv);
+	//var myWhiteDiv = getQrCode(document.getElementById("exportUrl").value, sha, plateform, architecture, output, 130);
+
+	//div.appendChild(link);
+	//link.appendChild(myWhiteDiv);
 }
 
 function cancelLoader() {

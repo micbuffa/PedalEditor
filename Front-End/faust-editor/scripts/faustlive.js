@@ -499,6 +499,13 @@ function exportFaustSource() {
   */
 }
 
+function exportFaustSourceForWap() {
+  getSHAKey(
+    document.getElementById('exportUrl').value,
+    document.getElementById('filename').value.split('.')[0],
+    codeEditor.getValue(), trigCompilationForWap, cancelLoader);
+}
+
 //-----------------------------------------------------------------------
 // Config Dialog
 //-----------------------------------------------------------------------
