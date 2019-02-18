@@ -1,10 +1,12 @@
-<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
+<script
+    src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
 <script>
     WebAudioControlsOptions = {
         useMidi: 1,
     };
 </script>
-<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
+<script
+    src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
 <template>
     <style>
         .pedal {
@@ -95,114 +97,102 @@
             right: 0px;
         }
 
-        #knob_374 {
+        #BasePitch {
             left: 129px;
             top: 40px;
         }
 
-        #knob_374 div {
+        #BasePitch div {
             color: #000000;
             font-family: "Courier New";
             font-size: 14px;
 
         }
 
-        #knob_908 {
+        #Mix {
             left: 77px;
             top: 123px;
         }
 
-        #knob_908 div {
+        #Mix div {
             color: #000000;
             font-family: "Courier New";
             font-size: 14px;
 
         }
 
-        #knob_484 {
-            left: 104px;
-            top: 226px;
+        #PitchMod {
+            left: 154px;
+            top: 197px;
         }
 
-        #knob_484 div {
+        #PitchMod div {
             color: #000000;
             font-family: "Courier New";
             font-size: 14px;
 
         }
 
-        #knob_98 {
-            left: 193px;
-            top: 241px;
-        }
-
-        #knob_98 div {
-            color: #000000;
-            font-family: "Courier New";
-            font-size: 14px;
-
-        }
-
-        #knob_171 {
-            left: 255px;
-            top: 147px;
-        }
-
-        #knob_171 div {
-            color: #000000;
-            font-family: "Courier New";
-            font-size: 14px;
-
-        }
-
-        #knob_62 {
+        #Release {
             left: 130px;
-            top: 491px;
+            top: 477px;
         }
 
-        #knob_62 div {
+        #Release div {
             color: #9E9E9E;
             font-family: "Courier New";
             font-size: 20px;
 
         }
 
-        #icon_174 {
+        #switch_271 {
+            left: 257px;
+            top: 533px;
+        }
+
+        #switch_271 div {
+            color: #000000;
+            font-family: "Comic Sans MS";
+            font-size: 9px;
+
+        }
+
+        #icon_448 {
             left: 7px;
             top: 30px;
             width: 380px;
             height: 380px;
         }
 
-        #icon_69 {
+        #icon_115 {
             left: 10px;
             top: 10px;
             width: 45px;
             height: 45px;
         }
 
-        #icon_580 {
+        #icon_280 {
             left: 347px;
             top: 9px;
             width: 45px;
             height: 45px;
         }
 
-        #icon_240 {
+        #icon_473 {
             left: 3px;
             top: 407px;
             width: 45px;
             height: 45px;
         }
 
-        #icon_591 {
+        #icon_358 {
             left: 349px;
             top: 411px;
             width: 45px;
             height: 45px;
         }
 
-        #icon_369 {
+        #icon_644 {
             left: 70px;
             top: 457px;
             width: 190px;
@@ -249,38 +239,38 @@
 
         <img id="background-image">
 
-        <img class="icon" id="icon_174" src="./img/icons/1.png"><img class="icon" id="icon_69" src="./img/icons/icon.png"><img
-            class="icon" id="icon_580" src="./img/icons/icon.png"><img class="icon" id="icon_240" src="./img/icons/icon.png"><img
-            class="icon" id="icon_591" src="./img/icons/icon.png"><img class="icon" id="icon_369" src="./img/icons/1.png">
-        <div class="knob" id="knob_374">
-            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" id="/Blipper/knob_374" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">Freq 1</div>
+        <img class="icon" id="icon_448" src="./img/icons/1.png"><img class="icon" id="icon_115"
+            src="./img/icons/icon.png"><img class="icon" id="icon_280" src="./img/icons/icon.png"><img class="icon"
+            id="icon_473" src="./img/icons/icon.png"><img class="icon" id="icon_358" src="./img/icons/icon.png"><img
+            class="icon" id="icon_644" src="./img/icons/1.png">
+        <div class="knob" id="BasePitch">
+            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100"
+                min="undefined" max="undefined" step="1" value="20" id="/Blipper/BasePitch" style="height: 64px;">
+            </webaudio-knob>
+            <div style="text-align:center">BasePitch</div>
         </div>
-        <div class="knob" id="knob_908">
-            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" id="/Blipper/knob_908" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">Freq 2</div>
+        <div class="knob" id="Mix">
+            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100"
+                min="undefined" max="undefined" step="1" value="20" id="/Blipper/Mix" style="height: 64px;">
+            </webaudio-knob>
+            <div style="text-align:center">Mix</div>
         </div>
-        <div class="knob" id="knob_484">
-            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" id="/Blipper/knob_484" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">Freq 3</div>
+        <div class="knob" id="PitchMod">
+            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100"
+                min="undefined" max="undefined" step="1" value="20" id="/Blipper/PitchMod" style="height: 64px;">
+            </webaudio-knob>
+            <div style="text-align:center">PitchMod</div>
         </div>
-        <div class="knob" id="knob_98">
-            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" id="/Blipper/knob_98" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">Freq ff</div>
+        <div class="knob" id="Release">
+            <webaudio-knob src="./img/knobs/Carbon.png" height="undefined" width="undefined" sprites="100"
+                min="undefined" max="undefined" step="1" value="20" id="/Blipper/Release" style="height: 64px;">
+            </webaudio-knob>
+            <div style="text-align:center">Release</div>
         </div>
-        <div class="knob" id="knob_171">
-            <webaudio-knob src="./img/knobs/Jambalaya.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" id="/Blipper/knob_171" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">Freq 5</div>
-        </div>
-        <div class="knob" id="knob_62">
-            <webaudio-knob src="./img/knobs/Carbon.png" height="undefined" width="undefined" sprites="100" min="undefined"
-                max="undefined" step="1" value="20" id="/Blipper/knob_62" style="height: 64px;"></webaudio-knob>
-            <div style="text-align:center">Volume</div>
+        <div class="switch" id="switch_271">
+            <webaudio-switch src="./img/switches/switch_2.png" height="75" width="130" id="switch1"
+                style="height: 75px;"></webaudio-switch>
+            <div>switch</div>
         </div>
     </div>
 </template>
@@ -368,12 +358,10 @@
         }
 
         setKnobs() {
-            this._root.getElementById("/Blipper/knob_374").addEventListener("input", (e) => this._plug.setParam("/Blipper/knob_374", e.target.value));
-            this._root.getElementById("/Blipper/knob_908").addEventListener("input", (e) => this._plug.setParam("/Blipper/knob_908", e.target.value));
-            this._root.getElementById("/Blipper/knob_484").addEventListener("input", (e) => this._plug.setParam("/Blipper/knob_484", e.target.value));
-            this._root.getElementById("/Blipper/knob_98").addEventListener("input", (e) => this._plug.setParam("/Blipper/knob_98", e.target.value));
-            this._root.getElementById("/Blipper/knob_171").addEventListener("input", (e) => this._plug.setParam("/Blipper/knob_171", e.target.value));
-            this._root.getElementById("/Blipper/knob_62").addEventListener("input", (e) => this._plug.setParam("/Blipper/knob_62", e.target.value));
+            this._root.getElementById("/Blipper/BasePitch").addEventListener("input", (e) => this._plug.setParam("/Blipper/BasePitch", e.target.value));
+            this._root.getElementById("/Blipper/Mix").addEventListener("input", (e) => this._plug.setParam("/Blipper/Mix", e.target.value));
+            this._root.getElementById("/Blipper/PitchMod").addEventListener("input", (e) => this._plug.setParam("/Blipper/PitchMod", e.target.value));
+            this._root.getElementById("/Blipper/Release").addEventListener("input", (e) => this._plug.setParam("/Blipper/Release", e.target.value));
 
         }
 
@@ -387,11 +375,11 @@
         setSwitchListener() {
 
             console.log("setswitch");
-            /*this._root.querySelector(".switch").querySelector("webaudio-switch").addEventListener('change', (e) => {
+            this._root.querySelector("#switch1").addEventListener('change', (e) => {
                 if (this.isOn) this.bypass()
                 else this.reactivate();
                 this.isOn = !this.isOn;
-            });*/
+            });
 
         }
 
@@ -406,11 +394,11 @@
             if (active == undefined || active == false) {
                 this.isOn = false;
                 this.bypass();
-         //       this._root.querySelector("#switch1").value = 0;
+                this._root.querySelector("#switch1").value = 0;
             } else if (active) {
                 this.isOn = true;
                 this.reactivate();
-          //      this._root.querySelector("#switch1").value = 1;
+                this._root.querySelector("#switch1").value = 1;
             }
 
         }

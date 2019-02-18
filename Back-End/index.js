@@ -70,6 +70,21 @@ app.get('/previews/icons', function(req, res) {
 
         res.json(response);
     })
+});
+
+app.get('/previews/switches', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    fs.readdir('../Front-End/img/switches', (err, files) => {
+        let filesUrl = 'http://localhost:8887/img/switches/';
+
+        response = {
+            filesUrl,
+            files
+        };
+
+        res.json(response);
+    })
 })
 
 

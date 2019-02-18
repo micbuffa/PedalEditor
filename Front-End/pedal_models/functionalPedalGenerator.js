@@ -132,7 +132,7 @@ class FunctionalPedalGenerator {
 
         let funcSwitchListenerContent = `
             console.log("setswitch");
-            this._root.querySelector(".switch").querySelector("webaudio-switch").addEventListener('change', (e) => {
+            this._root.querySelector("#switch1").addEventListener('change', (e) => {
                 if (this.isOn) this.bypass()
                 else this.reactivate();
                 this.isOn = !this.isOn;
@@ -249,7 +249,7 @@ class FunctionalPedalGenerator {
      * Generate the html of the functional pedal.
      */
     generateFunctionalPedalHtml() {
-        this.setWebAudioControlsKnobsIds();
+        this.setWebAudioControlsIds();
         let html = this.editablePedal.getHtml();
         
         return html.outerHTML;
@@ -300,16 +300,19 @@ class FunctionalPedalGenerator {
         return ret;
     }
 
-    setWebAudioControlsKnobsIds() {
-        /*for(let knob of this.editablePedal.html) {
-            let waControl = knob.childNodes[0];
-            console.log(waControl);
-        }*/
+    /**
+     * Currently, works only for a single switch !!
+     */
+    setWebAudioControlsIds() {
         for(let knob of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(".knob")) {
             let id = knob.getAttribute('id');
             let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
             knob.childNodes[0].setAttribute('id', waControlId);
         }
+
+        let waControl = this.editablePedal.shadowRoot.childNodes[3].querySelector('.switch');
+        waControl.childNodes[0].setAttribute('id', 'switch1');
+
     }
 
 }

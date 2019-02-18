@@ -17,7 +17,7 @@ class PedalElementManager {
 
 
     addElement(type, filename, id) {
-
+        
         /* The configuration of the pedal element. */
         let pedalElementConfig = this.addElementConfigDefault(type, filename);
 
