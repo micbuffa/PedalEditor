@@ -671,6 +671,10 @@
                 elem.innerHTML = '';
             }
 
+            for (let elem of html.querySelectorAll('webaudio-slider')) {
+                elem.innerHTML = '';
+            }
+
             for (let elem of html.querySelectorAll('.knob')) {
                 elem.className = elem.className.replace('selected', '');
                 for (let knob of this.knobs) {

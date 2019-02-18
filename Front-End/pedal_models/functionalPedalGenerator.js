@@ -48,6 +48,7 @@ class FunctionalPedalGenerator {
                 this.isOn;
                 this.state = new Object();
                 this.setKnobs();
+                this.setSliders();
                 this.setSwitchListener();
                 this.setActive(false);
         `;
@@ -115,6 +116,8 @@ class FunctionalPedalGenerator {
 
         // The content of the second function of the class.
         let function1Content = this.generateSetKnobs();
+        
+        let funcSetSlidersContent = this.generateSetSliders();
 
         let funcPropertiesContent = `
             this.boundingRect = {
@@ -184,13 +187,13 @@ class FunctionalPedalGenerator {
         let function4 = this.generateFunction('bypass', [], funcBypassContent);
         let function5 = this.generateFunction('reactivate', [], funcReactivateContent);
         let function6 = this.generateFunction('setSwitchListener', [], funcSwitchListenerContent);
-
+        let funcSetSliders = this.generateFunction('setSliders', [], funcSetSlidersContent);
 
 
         // The class will contain the constructor and the two functions.
         classContent += constructor + functionAttributeChangedCallback + funcProperties 
             + functionGetObservedAttributes + funcitonSetResources + function1 + function4
-            + function6 + function5
+            + function6 + function5 + funcSetSliders
             + funcSetActive;
 
         functionalPedalCode += '<script>';
@@ -300,6 +303,18 @@ class FunctionalPedalGenerator {
         return ret;
     }
 
+    generateSetSliders() {
+        let ret = '';
+
+        for(let slider of this.editablePedal.sliders) {
+            ret += 'this._root.getElementById("/' + this.editablePedal.getAttribute('name') + '/' + slider.id + '").addEventListener("input", (e) =>'
+                + 'this._plug.setParam("/' + this.editablePedal.getAttribute('name') + '/' + slider.id + '", e.target.value));'
+            ret += '\n';
+        }
+
+        return ret;
+    }
+
     /**
      * Currently, works only for a single switch !!
      */
@@ -308,6 +323,12 @@ class FunctionalPedalGenerator {
             let id = knob.getAttribute('id');
             let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
             knob.childNodes[0].setAttribute('id', waControlId);
+        }
+
+        for(let slider of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll('.slider')) {
+            let id = slider.getAttribute('id');
+            let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
+            slider.childNodes[0].setAttribute('id', waControlId);
         }
 
         let waControl = this.editablePedal.shadowRoot.childNodes[3].querySelector('.switch');

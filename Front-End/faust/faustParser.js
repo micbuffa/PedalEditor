@@ -94,6 +94,8 @@ class FaustParser {
 
         if(elem.meta && elem.meta[0].style === 'knob' ) {
             type = 'knob';
+            width = 50;
+            height = 50;
         } else if(elem.type === "vslider") {
             type = 'slider';
             height = 150;
@@ -102,14 +104,18 @@ class FaustParser {
             type = 'slider';
             width = 150;
             height = 40;
+        } else if(elem.type == 'checkbox') {
+            type = 'switch';
+            width = 80;
+            height = 50;
         }
 
         let ret = {
             id: elem.label,
             x: 10,
             y: 10,
-            width: type === 'slider' ? width : 50,
-            height: type === 'slider' ? height : 50,
+            width: width,
+            height: height,
             model: type === 'slider' ? "slider1.png" : "knob2.png",
             value: elem.init,
             label: elem.label,
