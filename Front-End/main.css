@@ -1,0 +1,114 @@
+body {
+  height: 100vh;
+}
+
+.app {
+  /* Menu */
+  --menu-bg-color: #eee;
+  --menu-select-color: #336699;
+  --menu-select-text-color: #FFF;
+  --menu-container-height: 25px;
+
+  /* Dorpdown */
+  --dropdown-border-color: #9E9E9E;
+
+  display: grid;
+  grid-template-rows: var(--menu-container-height) 1fr;
+}
+  .app > main {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+  }
+    .app > main > .sidebar {
+      background-color: #9E9E9E;
+    }
+
+/* Main navigation */
+.main-navigation {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(60px, min-content) );
+  grid-template-rows: var(--menu-container-height);
+  background-color: var(--menu-bg-color);
+  padding: 0 5px;
+}
+  .main-navigation > .nav-item:hover {
+    background-color: var(--menu-select-color);
+  }
+
+/* Dropdown */
+.dropdown {
+  display: flex;
+  flex-flow: column nowrap;
+}
+  .dropdown-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+    .dropdown-btn:hover {
+      color: var(--menu-select-text-color);
+    }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--menu-bg-color);
+    top: var(--menu-container-height);
+    padding: 0;
+    width: max-content;
+    border: 1px solid var(--dropdown-border-color);
+    z-index: 100;
+  }
+    .dropdown-content .item {
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+      .dropdown-content .item:hover {
+        background-color: var(--menu-select-color);
+        color: var(--menu-select-text-color);
+      }
+      .dropdown-content .keyboard-shortcuts {
+        margin-left: 25px;
+      }
+    .dropdown-content .separator {
+      margin: 0;
+      width: 100%;
+      border-top: 1px solid var(--dropdown-border-color);
+    }
+  .dropdown:hover .dropdown-content {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .tabbar {
+    display: flex;
+    flex-flow: row nowrap;
+    position: relative;
+  }
+    .tabbar-item {
+      flex: 1 1 0;
+      padding: 10 20px;
+    }
+      .tabbar-item .tab-bar-content{
+        display: none;
+        position: absolute;
+        top: 25px;
+        left: 0;
+        right: 0;
+      }
+      .tabbar-item .tab-bar-btn {
+        text-align: center;
+        background-color: #c5c5c5;
+      }
+      .tabbar-item:hover .tab-bar-btn {
+        background-color: var(--menu-select-color);
+      }
+      .tabbar-item.selected .tab-bar-btn {
+        background-color: #9E9E9E;
+      }
+      .tabbar-item.selected .tab-bar-content {
+        display: block;
+      }
+.tree-pane {
+  padding: 5px 10px;
+}
