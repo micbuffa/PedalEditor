@@ -16,16 +16,6 @@ body {
     width: 80%;
 }
 
-.hmessage {
-    position: absolute;
-    color: #0f0f0f;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    font-size: 1.5em;  
-    top: 1%;
-    left: 30%;
-}
-
 /*.wrapper {
     min-height: 100vh;
     background: #ccc;

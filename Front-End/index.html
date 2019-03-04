@@ -2,710 +2,992 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title>Pedal Creator 0.1</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
+	 rel="stylesheet">
 
+	<!-- Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-    <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
-    <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/sdk/WebAudioSDK.js"></script>
+	<!-- CSS -->
+	<link rel="stylesheet" href="StyleSheet.css">
+	<link rel="stylesheet" href="StyleSideNav.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css">
 
-    <link rel="stylesheet" href="StyleSheet.css">
-    <link rel="stylesheet" href="StyleSideNav.css">
+	<!-- Web Component -->
+	<link rel="import" href="pedal_models/pedal.html">
+	<link rel="import" href="editor-components/editor-pedal-details/editor-pedal-details.html">
+	<link rel="import" href="editor-components/editor-element-list.html">
+	<link rel="import" href="editor-components/editor-inspector.html">
+	<link rel="import" href="editor-components/editor-faust/editor-faust.html">
 
-    <link rel="import" href="pedal_models/pedal.html">
-    <link rel="import" href="editor-components/editor-pedal-details/editor-pedal-details.html">
-    <link rel="import" href="editor-components/editor-element-list.html">
-    <link rel="import" href="editor-components/editor-inspector.html">
-    <link rel="import" href="editor-components/editor-faust/editor-faust.html">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-
-    <!-- Latest compiled JavaScript -->
-    <!--<link rel="import" href="blue.html">
-    <script src="jscolor.js"></script>-->
-
-    <script src="pedal_models/functionalPedalGenerator.js"></script>
-
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title>Pedal Creator 0.1</title>
+	<!-- Scripts -->
+	<script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	 crossorigin="anonymous"></script>
+	<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
+	<script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/sdk/WebAudioSDK.js"></script>
+	<script src="pedal_models/functionalPedalGenerator.js"></script>
+	<script type="text/javascript" src="tree-view.js"></script>
+	<script type="text/javascript" src="tabs-bar.js"></script>
 </head>
 
-<body>
+<body class="app">
+	<header>
+		<nav class="main-navigation">
+			<div class="nav-item dropdown">
+				<div class="dropdown-btn"><span>Project</span></div>
+				<ul class="dropdown-content">
+					<li class="item">
+						<span>New project</span>
+						<span class="keyboard-shortcuts">CTRL+N</span>
+					</li>
+					<li class="item">
+						<span>Open project</span>
+						<span class="keyboard-shortcuts">CTRL+O</span>
+					</li>
+					<li class="item"><span>Close project</span></li>
+					<hr class="separator">
+					<li class="item">
+						<span>Save project</span>
+						<span class="keyboard-shortcuts">CTRL+S</span>
+					</li>
+					<li class="item"><span>Rename project</span></li>
+					<hr class="separator">
+					<li class="item">
+						<span>Exit</span>
+						<span class="keyboard-shortcuts">CTRL+Q</span>
+					</li>
+				</ul>
+			</div>
+			<div class="nav-item dropdown">
+				<div class="dropdown-btn">Plugin</div>
+				<ul class="dropdown-content">
+					<li class="item"><span>fetch plugin descriptor</span></li>
+					<hr class="separator">
+					<li class="item"><span>Save plugin</span></li>
+				</ul>
+			</div>
+			<div class="nav-item dropdown">
+				<div class="dropdown-btn">Help</div>
+				<ul class="dropdown-content">
+					<li class="item"><span>Documentation</span></li>
+					<hr class="separator">
+					<li class="item"><span>Keyboard Shortcuts Reference</span></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<section class="sidebar">
+			<div class="tabbar">
+				<div class="tabbar-item selected" onclick="selectTabBar(this)">
+					<div class="tab-bar-btn"><span>Configuration</span></div>
+					<div class="tab-bar-content">
+						<div class="tree-pane">
+							<tree-view data='[
+								{
+									"title": "Properties",
+									"children": [
+										{
+											"label": "Name",
+											"type": "input",
+											"props": {
+												"type": "text"
+											}
+										}
+									]
+								},
+								{
+									"title": "background",
+									"children": [
+										{
+											"label": "color",
+											"type": "input",
+											"props": {
+												"type": "color",
+												"value": "#f6b73c"
+											}
+										},
+										{
+											"label": "image",
+											"type": "input",
+											"props": {
+												"type": "file"
+											}
+										},
+										{
+											"label": "opacity",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										}
+									]
+								},
+								{
+									"title": "Size",
+									"children": [
+										{
+											"label": "Width",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										},
+										{
+											"label": "Height",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										},
+										{
+											"label": "Radius",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										}
+									]
+								},
+								{
+									"title": "Element",
+									"children": [
+										{
+											"label": "Coffee",
+											"type": "input",
+											"props": {
+												"type": "checkbox"
+											}
+										},
+										{
+											"label": "Coffee",
+											"type": "input",
+											"props": {
+												"type": "checkbox"
+											}
+										},
+										{
+											"label": "Coffee",
+											"type": "input",
+											"props": {
+												"type": "checkbox"
+											}
+										}
+									]
+								}
+						]' />
+						</div>
+					</div>
+				</div>
+				<div class="tabbar-item" onclick="selectTabBar(this)">
+					<div class="tab-bar-btn"><span>Elements</span></div>
+					<div class="tab-bar-content">
+						<div class="tree-pane">
+							<tree-view data='[
+								{
+								"title": "Knob",
+								"children": [
+									{
+										"label": "Test",
+										"type": "input",
+										"props": {
+											"type": "text"
+										}
+									}
+								]
+							},
+							{
+								"title": "Icons",
+								"children": [
+									{
+										"label": "Test",
+										"type": "input",
+										"props": {
+											"type": "text"
+										}
+									}
+								]
+							},
+							{
+								"title": "Slider",
+								"children": [
+									{
+										"label": "Test",
+										"type": "input",
+										"props": {
+											"type": "text"
+										}
+									}
+								]
+							}
+						]' />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="editor">
+			<!-- Pedal section -->
+			<main class="pedalSection"></main>
 
-    <div class="hmessage">
-        <p>Welcome on Pedal editor ! click on MENU to start !</p>
-    </div>
+
+			<!--Selider Nav Menu-->
+			<div id="mySidenav" class="sidenav">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+				<button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button>
+				<button class="buttonDownload" onclick="savePedal()">Save</button>
+				<button class="buttonDownload" onclick="newPedal()">New</button>
+				<br>
+				<br>
+				<br>
+				<div id="fetching">
+					Paste a WAP directory URL to Fetch
+					<input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/" style="width: 90%;">
+					<br>
+					<button class="buttonDownload" id="bt_buildIt">fetch plugin descriptor</button>
+				</div>
+				<br>
+				<label>Load: </label>
+				<select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
+					<option value="Georgia"></option>
+				</select>
+				<br>
 
 
-    <!--div class="wrapper">
-        <section class="content">
-            <div class="columns"-->
+				<!--Accrodion Menu-->
+				<div id="accordion">
+					<ul>
 
-    <!-- Pedal section -->
-    <main class="pedalSection"></main>
+						<li>
+							<a href="#editor-pedal-details">PEDAL DETAILS</a>
+							<editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
+						</li>
 
+						<li>
+							<a href="#editor-element-list">ELEMENTS</a>
+							<editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
+						</li>
 
-    <!--Selider Nav Menu-->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+						<li>
+							<a href="#editor-inspector">INSPECTOR</a>
+							<editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
+						</li>
 
-        <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button>
-        <button class="buttonDownload" onclick="savePedal()">Save</button>
-        <button class="buttonDownload" onclick="newPedal()">New</button>
-        <br>
-        <br>
-        <br>
-        <div id="fetching">
-            Paste a WAP directory URL to Fetch
-            <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/" style="width: 90%;">
-            <br>
-            <button class="buttonDownload" id="bt_buildIt">fetch plugin descriptor</button>
-        </div>
-        <br>
-        <label>Load: </label>
-        <select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
-            <option value="Georgia"></option>
-        </select>
-        <br>
+						<li>
+							<a href="#editor-faust">FAUST</a>
+							<editor-faust id="editor-faust" class="accordion"></editor-faust>
+						</li>
 
+					</ul>
+				</div>
+			</div>
 
-        <!--Accrodion Menu-->
-        <div id="accordion">
-            <ul>
-
-                <li>
-                    <a href="#editor-pedal-details">PEDAL DETAILS</a>
-                    <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
-                </li>
-
-                <li>
-                    <a href="#editor-element-list">ELEMENTS</a>
-                    <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
-                </li>
-
-                <li>
-                    <a href="#editor-inspector">INSPECTOR</a>
-                    <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
-                </li>
-
-                <li>
-                    <a href="#editor-faust">FAUST</a>
-                    <editor-faust id="editor-faust" class="accordion"></editor-faust>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span>
-
+			<span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span>
+		</section>
+		<section class="sidebar">
+			<div class="tabbar">
+				<div class="tabbar-item selected" onclick="selectTabBar(this)">
+					<div class="tab-bar-btn"><span>Inspector</span></div>
+					<div class="tab-bar-content">
+						<div class="tree-pane">
+							<tree-view data='[
+								{
+									"title": "Label",
+									"children": [
+										{
+											"label": "value",
+											"type": "input",
+											"props": {
+												"type": "text"
+											}
+										}
+									]
+								},
+								{
+									"title": "Text",
+									"children": [
+										{
+											"label": "font-family",
+											"type": "input",
+											"props": {
+												"type": "text"
+											}
+										},
+										{
+											"label": "color",
+											"type": "input",
+											"props": {
+												"type": "color",
+												"value": "black"
+											}
+										},
+										{
+											"label": "font-size",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										}
+									]
+								},
+								{
+									"title": "Position",
+									"children": [
+										{
+											"label": "x",
+											"type": "input",
+											"props": {
+												"type": "text"
+											}
+										},
+										{
+											"label": "y",
+											"type": "input",
+											"props": {
+												"type": "text"
+											}
+										}
+									]
+								},
+								{
+									"title": "Size",
+									"children": [
+										{
+											"label": "Width",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										},
+										{
+											"label": "Height",
+											"type": "input",
+											"props": {
+												"type": "number"
+											}
+										}
+									]
+								}
+							]' />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 </body>
 <script>
-    var url = "http://localhost:8085";
-    let serverUrl = 'http://localhost:3000';
-
-    var http = new XMLHttpRequest();
-    var path = "/pedale";
-    //var ctx = new AudioContext();
-    var section = document.getElementsByClassName("pedalSection")[0];
-    var pedal = getFirstChild(section);
-    var knobSprite;
-    var switchSprite;
-    let savedPedalsConfigs;
-    let funcitonalPedalGenerator;
-    let faustUI = null;
-
-    var bt_buildIt = document.querySelector('#bt_buildIt');
-
-    window.onload = initialize();
-
-    function initialize() {
-        setFaustUIFromUrl();
-        
-        displaySavedPedalsIds();
-
-        bt_buildIt.addEventListener('click', () => {
-
-            checkMetadata(document.querySelector("#urlPlugin").value);
-        });
-        
-        let faust = document.querySelector('#editor-faust'),
-        faustClone = faust.cloneNode(true);
-        faust.parentNode.replaceChild(faustClone, faust);
-
-        faust = document.querySelector('#editor-faust');   
-        /*faust.addEventListener('create-pedal', (e) => {
-            newPedal();
-            let pedalConfig = {
-                name: "First",
-                color: "#7caeff",
-                width: e.detail.width,
-                height: e.detail.height,
-                radius: "10",
-                opacity: "1",
-                elements: e.detail.elements
-            };
-            //console.log(e.detail);
-            pedal.loadConfig(pedalConfig);
-        });*/
-
-        if(window.faustUI) {
-
-            newPedal(null, true);
-
-            let detail = faust.pedalConfigFromUI(window.faustUI);
-            
-            let pedalConfig = {
-                name: "First",
-                color: "#7caeff",
-                width: detail.width,
-                height: detail.height,
-                radius: "10",
-                opacity: "1",
-                elements: detail.elements
-            };
-            console.log(detail);
-            console.log(pedalConfig);
-
-            pedal.loadConfig(pedalConfig);
-            window.faustUI = null;
-
-        }
-    }
-
-    function setFaustUIFromUrl() {
-        let url = new URL(location);
-        let searchParams = new URLSearchParams(url.search);
-        faustUI = searchParams.get('data');
-    }
-
-
-    /*Slider Nav Menu*/
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "500px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-
-    function newPedal(args, withoutInit) {
-
-
-
-        section.innerHTML = '';
-        pedal = null;
-        let pedalElem = document.createElement('my-pedal');
-        section.appendChild(pedalElem);
-        pedal = pedalElem;
-
-        pedal.addEventListener('select-knob', function (e) {
-            selectKnob(e.detail);
-            updateInspector();
-        });
-        
-        if(!withoutInit) {
-            initialize();
-        }
+	function selectTabBar(event) {
+		event.parentNode.querySelector(".tabbar-item.selected").classList.remove("selected");
+		event.classList.add("selected");
+	}
+</script>
+<script>
+	var url = "http://localhost:8085";
+	let serverUrl = 'http://localhost:3000';
+
+	var http = new XMLHttpRequest();
+	var path = "/pedale";
+	//var ctx = new AudioContext();
+	var section = document.getElementsByClassName("pedalSection")[0];
+	var pedal = getFirstChild(section);
+	var knobSprite;
+	var switchSprite;
+	let savedPedalsConfigs;
+	let funcitonalPedalGenerator;
+	let faustUI = null;
 
+	var bt_buildIt = document.querySelector('#bt_buildIt');
+
+	window.onload = initialize();
+
+	function initialize() {
+		setFaustUIFromUrl();
+
+		displaySavedPedalsIds();
+
+		bt_buildIt.addEventListener('click', () => {
+
+			checkMetadata(document.querySelector("#urlPlugin").value);
+		});
+
+		let faust = document.querySelector('#editor-faust'),
+			faustClone = faust.cloneNode(true);
+		faust.parentNode.replaceChild(faustClone, faust);
+
+		faust = document.querySelector('#editor-faust');
+		/*faust.addEventListener('create-pedal', (e) => {
+				newPedal();
+				let pedalConfig = {
+						name: "First",
+						color: "#7caeff",
+						width: e.detail.width,
+						height: e.detail.height,
+						radius: "10",
+						opacity: "1",
+						elements: e.detail.elements
+				};
+				//console.log(e.detail);
+				pedal.loadConfig(pedalConfig);
+		});*/
 
+		if (window.faustUI) {
 
+			newPedal(null, true);
 
+			let detail = faust.pedalConfigFromUI(window.faustUI);
 
-        let defaultPedalConfig = {
-            color: "#AB2E24",
-            width: 400,
-            height: 500,
-            radius: 10,
-            elements: []
-        };
+			let pedalConfig = {
+				name: "First",
+				color: "#7caeff",
+				width: detail.width,
+				height: detail.height,
+				radius: "10",
+				opacity: "1",
+				elements: detail.elements
+			};
+			console.log(detail);
+			console.log(pedalConfig);
 
-        if (args) {
-            defaultPedalConfig.name = args.name;
-            defaultPedalConfig.height = args.height;
-            defaultPedalConfig.width = args.width;
-            defaultPedalConfig.name = args.name;
-            defaultPedalConfig.elements = args.elements;
-        }
+			pedal.loadConfig(pedalConfig);
+			window.faustUI = null;
 
-        pedal.loadConfig(defaultPedalConfig);
+		}
+	}
+
+	function setFaustUIFromUrl() {
+		let url = new URL(location);
+		let searchParams = new URLSearchParams(url.search);
+		faustUI = searchParams.get('data');
+	}
 
-        plugPedalToEditor();
 
+	/*Slider Nav Menu*/
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "500px";
+	}
 
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
 
-        funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
-    }
+	function newPedal(args, withoutInit) {
 
-    function savePedal() {
 
-        let pedalName = pedal.getAttribute('name');
-        if (pedalName == '') {
-            alert('You should enter the pedal name before saving !');
-            return;
-        }
 
-        let config = pedal.getConfig();
+		section.innerHTML = '';
+		pedal = null;
+		let pedalElem = document.createElement('my-pedal');
+		section.appendChild(pedalElem);
+		pedal = pedalElem;
 
-        let http = new XMLHttpRequest();
-        let url = serverUrl + '/pedals';
-        let params = config;
-        http.open("POST", url, true);
+		pedal.addEventListener('select-knob', function (e) {
+			selectKnob(e.detail);
+			updateInspector();
+		});
 
-        http.setRequestHeader("Content-type", "application/json");
+		if (!withoutInit) {
+			initialize();
+		}
 
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200) {
-                alert('Saved successfully!');
-                pedal.pedalId = JSON.parse(http.responseText).id;
-                displaySavedPedalsIds();
-            }
-        }
-        http.send(JSON.stringify(params));
 
-    }
 
-    function refreshSavedPedalsConfigs() {
-        let request = new XMLHttpRequest();
-        request.open('GET', serverUrl + '/pedals', false);
-        request.send(null);
-        let pedalConfigs = JSON.parse(request.responseText);
-        savedPedalsConfigs = pedalConfigs;
-    }
 
-    function displaySavedPedalsIds() {
 
-        /* Uptates the list of pedal configurations by fetching then from the server. */
-        refreshSavedPedalsConfigs();
+		let defaultPedalConfig = {
+			color: "#AB2E24",
+			width: 400,
+			height: 500,
+			radius: 10,
+			elements: []
+		};
 
-        /* Gets the select element that displays the list of names of the saved pedal configurations. */
-        let loadPedalElem = document.querySelector('#load-pedal');
+		if (args) {
+			defaultPedalConfig.name = args.name;
+			defaultPedalConfig.height = args.height;
+			defaultPedalConfig.width = args.width;
+			defaultPedalConfig.name = args.name;
+			defaultPedalConfig.elements = args.elements;
+		}
 
-        let oldVal = loadPedalElem.value;
+		pedal.loadConfig(defaultPedalConfig);
 
-        /* Flushes the select element to get rid of the old pedal configurations that have been generated
-        during the last call to this function. If we don't flush it, the names of the new pedal configurations
-        will be appended to the ones that has been fetched in the previous call to the function.*/
-        loadPedalElem.innerHTML = '';
+		plugPedalToEditor();
 
-        for (let savedPedalConfig of savedPedalsConfigs) {
-            let savedPedalIdElem = document.createElement('option');
-            savedPedalIdElem.setAttribute('value', savedPedalConfig.id);
-            savedPedalIdElem.innerHTML = savedPedalConfig.name;
 
-            loadPedalElem.appendChild(savedPedalIdElem);
-        }
 
-        loadPedalElem.value = oldVal;
+		funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
+	}
 
-    }
+	function savePedal() {
 
+		let pedalName = pedal.getAttribute('name');
+		if (pedalName == '') {
+			alert('You should enter the pedal name before saving !');
+			return;
+		}
 
-    function setSelectedElementLabel(value) {
-        let element = pedal.getSelectedElement();
-        element.label = value;
-        pedal.updateStyle_();
-    }
+		let config = pedal.getConfig();
 
-    function setSelectedElementLabelColor(value) {
-        let element = pedal.getSelectedElement();
-        element.label_color = value;
-        pedal.updateStyle_();
-    }
+		let http = new XMLHttpRequest();
+		let url = serverUrl + '/pedals';
+		let params = config;
+		http.open("POST", url, true);
 
-    function setSelectedElementLabelFontfamily(value) {
-        let element = pedal.getSelectedElement();
-        element.label_fontfamily = value;
-        pedal.updateStyle_();
-    }
+		http.setRequestHeader("Content-type", "application/json");
 
-    function setSelectedElementLabelFontsize(value) {
-        let element = pedal.getSelectedElement();
-        element.label_fontsize = value;
-        pedal.updateStyle_();
-    }
+		http.onreadystatechange = function () {
+			if (http.readyState == 4 && http.status == 200) {
+				alert('Saved successfully!');
+				pedal.pedalId = JSON.parse(http.responseText).id;
+				displaySavedPedalsIds();
+			}
+		}
+		http.send(JSON.stringify(params));
 
-    function setSelectedElementValue(value) {
-        let element = pedal.getSelectedElement();
-        element.value = value;
-        pedal.updateStyle_();
-    }
+	}
 
-    function setSelectedElementModel(value) {
-        let element = pedal.getSelectedElement();
-        element.model = value;
-        pedal.updateStyle_();
-        selectKnob(pedal.getSelectedElement());
-    }
+	function refreshSavedPedalsConfigs() {
+		let request = new XMLHttpRequest();
+		request.open('GET', serverUrl + '/pedals', false);
+		request.send(null);
+		let pedalConfigs = JSON.parse(request.responseText);
+		savedPedalsConfigs = pedalConfigs;
+	}
 
-    function setSelectedElementXPosition(xPosition) {
-        let element = pedal.getSelectedElement();
-        element.x = xPosition;
-        pedal.updateStyle_();
-    }
+	function displaySavedPedalsIds() {
 
-    function setSelectedElementYPosition(yPosition) {
-        let element = pedal.getSelectedElement();
-        element.y = yPosition;
-        pedal.updateStyle_();
-    }
+		/* Uptates the list of pedal configurations by fetching then from the server. */
+		refreshSavedPedalsConfigs();
 
-    function setSelectedElementWidth(width) {
-        let keepRatio = document.querySelector("#keep-ratio").checked;
+		/* Gets the select element that displays the list of names of the saved pedal configurations. */
+		let loadPedalElem = document.querySelector('#load-pedal');
 
+		let oldVal = loadPedalElem.value;
 
-        let element = pedal.getSelectedElement();
-        element.width = width;
+		/* Flushes the select element to get rid of the old pedal configurations that have been generated
+		during the last call to this function. If we don't flush it, the names of the new pedal configurations
+		will be appended to the ones that has been fetched in the previous call to the function.*/
+		loadPedalElem.innerHTML = '';
 
-        if (keepRatio) {
-            element.height = element.width;
-            document.querySelector("#inspector-height").value = width;
-        }
+		for (let savedPedalConfig of savedPedalsConfigs) {
+			let savedPedalIdElem = document.createElement('option');
+			savedPedalIdElem.setAttribute('value', savedPedalConfig.id);
+			savedPedalIdElem.innerHTML = savedPedalConfig.name;
 
-        pedal.updateStyle_();
-    }
+			loadPedalElem.appendChild(savedPedalIdElem);
+		}
 
-    function setSelectedElementHeight(height) {
-        let keepRatio = document.querySelector("#keep-ratio").checked;
+		loadPedalElem.value = oldVal;
 
-        let element = pedal.getSelectedElement();
-        element.height = height;
-
-        if (keepRatio) {
-            element.width = element.height;
-            document.querySelector("#inspector-width").value = height;
-
-        }
+	}
 
-        pedal.updateStyle_();
-    }
 
-    /*function updatePedalElementsSection() {
+	function setSelectedElementLabel(value) {
+		let element = pedal.getSelectedElement();
+		element.label = value;
+		pedal.updateStyle_();
+	}
 
-        // Deleting the elements of all the sections.
-        for (let pedalElementType of pedal.getElementsTypes()) {
-            let section = getSectionByPedalElementType(pedalElementType);
+	function setSelectedElementLabelColor(value) {
+		let element = pedal.getSelectedElement();
+		element.label_color = value;
+		pedal.updateStyle_();
+	}
 
-            if (!section) {
-                continue;
-            }
+	function setSelectedElementLabelFontfamily(value) {
+		let element = pedal.getSelectedElement();
+		element.label_fontfamily = value;
+		pedal.updateStyle_();
+	}
 
-            let firstChild;
-            while (firstChild = section.firstChild) {
-                section.removeChild(firstChild);
-            }
-        }
+	function setSelectedElementLabelFontsize(value) {
+		let element = pedal.getSelectedElement();
+		element.label_fontsize = value;
+		pedal.updateStyle_();
+	}
 
+	function setSelectedElementValue(value) {
+		let element = pedal.getSelectedElement();
+		element.value = value;
+		pedal.updateStyle_();
+	}
 
-        // Populating the sections.
-        for (let pedalElement of pedal.getElements()) {
-            let section = getSectionByPedalElementType(pedalElement.type);
-            if (!section) {
-                continue;
-            }
+	function setSelectedElementModel(value) {
+		let element = pedal.getSelectedElement();
+		element.model = value;
+		pedal.updateStyle_();
+		selectKnob(pedal.getSelectedElement());
+	}
 
-            let idElem = document.createElement('div');
-            idElem.className = pedalElement.type + '_id';
-            idElem.innerHTML = pedalElement.id;
-            idElem.onclick = (e) => {
-                selectKnob(e.target.innerHTML);
-            }
+	function setSelectedElementXPosition(xPosition) {
+		let element = pedal.getSelectedElement();
+		element.x = xPosition;
+		pedal.updateStyle_();
+	}
 
-            section.appendChild(idElem);
-        }
+	function setSelectedElementYPosition(yPosition) {
+		let element = pedal.getSelectedElement();
+		element.y = yPosition;
+		pedal.updateStyle_();
+	}
 
-        // Select the pedal's selected element.
-        let selectedElement = pedal.getSelectedElement();
-        if (selectedElement) {
-            selectKnob(selectedElement.id);
-        }
+	function setSelectedElementWidth(width) {
+		let keepRatio = document.querySelector("#keep-ratio").checked;
 
-    }*/
 
-    function getSectionByPedalElementType(pedalElementType) {
-        let section = document.querySelector('#' + pedalElementType + '_section');
+		let element = pedal.getSelectedElement();
+		element.width = width;
 
-        return section;
-    }
+		if (keepRatio) {
+			element.height = element.width;
+			document.querySelector("#inspector-height").value = width;
+		}
 
-    function updateInspector() {
-        pedal.getSelectedElement();
-    }
+		pedal.updateStyle_();
+	}
 
-    function selectKnob(knobId) {
+	function setSelectedElementHeight(height) {
+		let keepRatio = document.querySelector("#keep-ratio").checked;
 
-        /*
-        var knobs = document.getElementById('knob_section').childNodes;
-        var icons = document.getElementById('icon_section').childNodes;
+		let element = pedal.getSelectedElement();
+		element.height = height;
 
-        for (let knob of knobs) {
-            // TODO: Remove.
-            if (knob.className)
-                knob.className = knob.className.replace('selected', '');
-            if (knob.innerHTML === knobId) {
-                knob.className += ' selected';
-            }
-        }
+		if (keepRatio) {
+			element.width = element.height;
+			document.querySelector("#inspector-width").value = height;
 
-        for (let icon of icons) {
-            // TODO: Remove.
-            if (icon.className)
-                icon.className = icon.className.replace('selected', '');
-            if (icon.innerHTML === knobId) {
-                icon.className += ' selected';
-            }
-        }
+		}
 
-        if (pedal.getSelectedElement().id != knobId) {
-            pedal.selectElement(knobId);
-        }*/
+		pedal.updateStyle_();
+	}
 
+	/*function updatePedalElementsSection() {
 
-        let knob = pedal.getSelectedElement();
-        let inspectorId = document.getElementById('inspector-id');
-        let inspectorLabel = document.getElementById('inspector-label');
-        let inspectorLabelColor = document.getElementById('inspector-label-color');
-        let inspectorLabelFontFamily = document.getElementById('inspector-label-font-family');
-        let inspectorLabelSize = document.getElementById('inspector-label-font-size');
-        let inspectorXPosition = document.getElementById('inspector-x-position');
-        let inspectorYPosition = document.getElementById('inspector-y-position');
-        let inspectorWidth = document.getElementById('inspector-width');
-        let inspectorHeight = document.getElementById('inspector-height');
+			// Deleting the elements of all the sections.
+			for (let pedalElementType of pedal.getElementsTypes()) {
+					let section = getSectionByPedalElementType(pedalElementType);
 
-        let inspectorModel = document.getElementById('inspector-model');
-        let inspectorPreview = document.getElementById('inspector-preview');
+					if (!section) {
+							continue;
+					}
 
+					let firstChild;
+					while (firstChild = section.firstChild) {
+							section.removeChild(firstChild);
+					}
+			}
 
 
-        inspectorLabel.value = knob.label;
-        inspectorLabelColor.value = knob.label_color;
-        inspectorLabelFontFamily.value = knob.label_fontfamily;
-        inspectorLabelSize.value = knob.label_fontsize;
-        inspectorXPosition.value = knob.x;
-        inspectorYPosition.value = knob.y;
-        inspectorWidth.value = knob.width || 0;
-        inspectorHeight.value = knob.height || 0;
+			// Populating the sections.
+			for (let pedalElement of pedal.getElements()) {
+					let section = getSectionByPedalElementType(pedalElement.type);
+					if (!section) {
+							continue;
+					}
 
-        inspectorModel.value = knob.model;
+					let idElem = document.createElement('div');
+					idElem.className = pedalElement.type + '_id';
+					idElem.innerHTML = pedalElement.id;
+					idElem.onclick = (e) => {
+							selectKnob(e.target.innerHTML);
+					}
 
-        let inspector = document.getElementById('inspector');
-    }
+					section.appendChild(idElem);
+			}
 
-    function deleteSelectedElement() {
-        pedal.deleteSelectedElement();
-        updatePedalElementsSection();
-    }
+			// Select the pedal's selected element.
+			let selectedElement = pedal.getSelectedElement();
+			if (selectedElement) {
+					selectKnob(selectedElement.id);
+			}
 
-    function addSlider() {
-        pedal.addElement('slider');
-    }
+	}*/
 
+	function getSectionByPedalElementType(pedalElementType) {
+		let section = document.querySelector('#' + pedalElementType + '_section');
 
+		return section;
+	}
 
-    function loadPedalConfig(value) {
-        
-        newPedal();
-        for (let pedalConfig of savedPedalsConfigs) {
-            if (pedalConfig.id == value) {
-                pedal.loadConfig(pedalConfig);
+	function updateInspector() {
+		pedal.getSelectedElement();
+	}
 
-                let loadPedal = document.querySelector('#load-pedal');
-                loadPedal.value = value;
-            }
-        }
+	function selectKnob(knobId) {
 
-        plugPedalToEditor();
-    }
+		/*
+		var knobs = document.getElementById('knob_section').childNodes;
+		var icons = document.getElementById('icon_section').childNodes;
 
-    function plugPedalToEditor() {
+		for (let knob of knobs) {
+				// TODO: Remove.
+				if (knob.className)
+						knob.className = knob.className.replace('selected', '');
+				if (knob.innerHTML === knobId) {
+						knob.className += ' selected';
+				}
+		}
 
-        // Plug pedal to pedal details component
-        let pedalDetails = document.querySelector('#editor-pedal-details');
-        let newPedalDetails = pedalDetails.cloneNode();
-        pedalDetails.parentNode.replaceChild(newPedalDetails, pedalDetails);
-        newPedalDetails.setEditablePedal(pedal);
+		for (let icon of icons) {
+				// TODO: Remove.
+				if (icon.className)
+						icon.className = icon.className.replace('selected', '');
+				if (icon.innerHTML === knobId) {
+						icon.className += ' selected';
+				}
+		}
 
-        // Plug pedal to element list component
-        let elementList = document.querySelector('#editor-element-list');
-        elementList.setEditablePedal(pedal);
+		if (pedal.getSelectedElement().id != knobId) {
+				pedal.selectElement(knobId);
+		}*/
 
-        // Plug pedal to inspector component
-        let inspector = document.querySelector('#editor-inspector');
-        inspector.setEditablePedal(pedal);
-    }
 
-    function getFirstChild(el) {
-        var firstChild = el.firstChild;
+		let knob = pedal.getSelectedElement();
+		let inspectorId = document.getElementById('inspector-id');
+		let inspectorLabel = document.getElementById('inspector-label');
+		let inspectorLabelColor = document.getElementById('inspector-label-color');
+		let inspectorLabelFontFamily = document.getElementById('inspector-label-font-family');
+		let inspectorLabelSize = document.getElementById('inspector-label-font-size');
+		let inspectorXPosition = document.getElementById('inspector-x-position');
+		let inspectorYPosition = document.getElementById('inspector-y-position');
+		let inspectorWidth = document.getElementById('inspector-width');
+		let inspectorHeight = document.getElementById('inspector-height');
 
-        while (firstChild != null && firstChild.nodeType == 3) { // skip TextNodes
-            firstChild = firstChild.nextSibling;
-        }
+		let inspectorModel = document.getElementById('inspector-model');
+		let inspectorPreview = document.getElementById('inspector-preview');
 
-        return firstChild;
-    }
 
 
-    function generateCodeFunctionalPedal() {
+		inspectorLabel.value = knob.label;
+		inspectorLabelColor.value = knob.label_color;
+		inspectorLabelFontFamily.value = knob.label_fontfamily;
+		inspectorLabelSize.value = knob.label_fontsize;
+		inspectorXPosition.value = knob.x;
+		inspectorYPosition.value = knob.y;
+		inspectorWidth.value = knob.width || 0;
+		inspectorHeight.value = knob.height || 0;
 
-        console.log(funcitonalPedalGenerator.generateFunctionalPedalCode());
+		inspectorModel.value = knob.model;
 
-        let http = new XMLHttpRequest();
-        let url = serverUrl + '/generate';
+		let inspector = document.getElementById('inspector');
+	}
 
-        http.open("POST", url, true);
+	function deleteSelectedElement() {
+		pedal.deleteSelectedElement();
+		updatePedalElementsSection();
+	}
 
-        http.setRequestHeader("Content-type", "application/json");
+	function addSlider() {
+		pedal.addElement('slider');
+	}
 
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200) {
-                alert('Generated successfully!');
-                pedal.pedalId = JSON.parse(http.responseText).id;
-                displaySavedPedalsIds();
-            }
-        }
-        http.send(JSON.stringify({ generated: funcitonalPedalGenerator.generateFunctionalPedalCode() }));
 
-    }
 
-    function toggleHidden(elem) {
-        if (elem.style.display === 'none') {
-            elem.style.display = 'block';
-        } else {
-            elem.style.display = 'none';
-        }
-    }
+	function loadPedalConfig(value) {
 
-    function toggleEditorPedalDetails() {
-        let elem = document.querySelector('#editor-pedal-details');
-        toggleHidden(elem);
-    }
+		newPedal();
+		for (let pedalConfig of savedPedalsConfigs) {
+			if (pedalConfig.id == value) {
+				pedal.loadConfig(pedalConfig);
 
+				let loadPedal = document.querySelector('#load-pedal');
+				loadPedal.value = value;
+			}
+		}
 
+		plugPedalToEditor();
+	}
 
-    // And of the forked content
-    // -----------------------------Json fetching part ---------------------------//
+	function plugPedalToEditor() {
 
-    function checkMetadata(baseURL) {
-        fetch(baseURL + "/main.json").then(responseJSON => {
-            return responseJSON.json();
-        }).then(metadata => {
-            let name = metadata.name
-            let className = metadata.vendor + metadata.name;
-            loadPlugin(className, name, baseURL);
-        }).catch((e) => {
-            console.log(e);
-        });
-    }
+		// Plug pedal to pedal details component
+		let pedalDetails = document.querySelector('#editor-pedal-details');
+		let newPedalDetails = pedalDetails.cloneNode();
+		pedalDetails.parentNode.replaceChild(newPedalDetails, pedalDetails);
+		newPedalDetails.setEditablePedal(pedal);
 
-    // add the script tag and load the plugin 
-    function loadPlugin(className, name, baseURL) {
-        let scriptURL = baseURL + "/main.js";
+		// Plug pedal to element list component
+		let elementList = document.querySelector('#editor-element-list');
+		elementList.setEditablePedal(pedal);
 
-        // if we are here this means that the script is not present. Add it to the document
-        let script = document.createElement("script");
-        script.src = scriptURL;
+		// Plug pedal to inspector component
+		let inspector = document.querySelector('#editor-inspector');
+		inspector.setEditablePedal(pedal);
+	}
 
-        script.onload = function () {
-            // Once the script has been loaded instanciate the plugin
-            getDescriptorFromPlugin(className, name, baseURL);
-        }
-        // will be executed before the onload above...
-        document.head.appendChild(script);
-    }
+	function getFirstChild(el) {
+		var firstChild = el.firstChild;
+
+		while (firstChild != null && firstChild.nodeType == 3) { // skip TextNodes
+			firstChild = firstChild.nextSibling;
+		}
+
+		return firstChild;
+	}
+
+
+	function generateCodeFunctionalPedal() {
+
+		console.log(funcitonalPedalGenerator.generateFunctionalPedalCode());
+
+		let http = new XMLHttpRequest();
+		let url = serverUrl + '/generate';
+
+		http.open("POST", url, true);
+
+		http.setRequestHeader("Content-type", "application/json");
+
+		http.onreadystatechange = function () {
+			if (http.readyState == 4 && http.status == 200) {
+				alert('Generated successfully!');
+				pedal.pedalId = JSON.parse(http.responseText).id;
+				displaySavedPedalsIds();
+			}
+		}
+		http.send(JSON.stringify({ generated: funcitonalPedalGenerator.generateFunctionalPedalCode() }));
+
+	}
+
+	function toggleHidden(elem) {
+		if (elem.style.display === 'none') {
+			elem.style.display = 'block';
+		} else {
+			elem.style.display = 'none';
+		}
+	}
+
+	function toggleEditorPedalDetails() {
+		let elem = document.querySelector('#editor-pedal-details');
+		toggleHidden(elem);
+	}
+
+
+
+	// And of the forked content
+	// -----------------------------Json fetching part ---------------------------//
+
+	function checkMetadata(baseURL) {
+		fetch(baseURL + "/main.json").then(responseJSON => {
+			return responseJSON.json();
+		}).then(metadata => {
+			let name = metadata.name
+			let className = metadata.vendor + metadata.name;
+			loadPlugin(className, name, baseURL);
+		}).catch((e) => {
+			console.log(e);
+		});
+	}
+
+	// add the script tag and load the plugin 
+	function loadPlugin(className, name, baseURL) {
+		let scriptURL = baseURL + "/main.js";
+
+		// if we are here this means that the script is not present. Add it to the document
+		let script = document.createElement("script");
+		script.src = scriptURL;
+
+		script.onload = function () {
+			// Once the script has been loaded instanciate the plugin
+			getDescriptorFromPlugin(className, name, baseURL);
+		}
+		// will be executed before the onload above...
+		document.head.appendChild(script);
+	}
 
     // instanciate the plugin 
-   /* function getDescriptorFromPlugin(className, name, baseURL) {
+	/* function getDescriptorFromPlugin(className, name, baseURL) {
 
-        var plugin = new window[className](ctx, baseURL);
-        console.log(plugin);
+			 var plugin = new window[className](ctx, baseURL);
+			 console.log(plugin);
 
-        plugin.load().then((node) => {
-            plugin.loadGui().then((elem) => {
-                let descriptor = node.getDescriptor();
-                let dimensions = elem.properties;
-                let nbParam = Object.keys(descriptor).length;
-                var count = 0;
-                let hoffset = 50;
-                let voffset = 60;
-                console.log(descriptor);
+			 plugin.load().then((node) => {
+					 plugin.loadGui().then((elem) => {
+							 let descriptor = node.getDescriptor();
+							 let dimensions = elem.properties;
+							 let nbParam = Object.keys(descriptor).length;
+							 var count = 0;
+							 let hoffset = 50;
+							 let voffset = 60;
+							 console.log(descriptor);
 
-                //--------------------------------- JSON edition PART -------------------------//
-                let extendedDescriptor = {
-                    "name": name,
-                    "backgroundImageSrc": "image2.png",
-                    "color": "#AB2E24",
-                    "width": dimensions.dataWidth.value,
-                    "height": dimensions.dataHeight.value,
-                    "radius": "10",
-                    "elements": []
-                }
-
-
-                for (var param in descriptor) {
-                    // 2* because we want by default two ranges of knobs
-                    let horizontalRange = Math.ceil(count % (nbParam / 2));
-                    let verticalRange = Math.floor(count / (nbParam / 2));
-                    console.log(param, horizontalRange, verticalRange);
-
-                    // Here we do a little normalisation because we have to select by ID later
-
-                    if (descriptor.hasOwnProperty(param)) {
-                        var element = {
-                            "id": param.toLowerCase().replace(/ /g, "").replace('\/', ""),
-                            "x": hoffset * horizontalRange,
-                            "y": voffset * verticalRange,
-                            "width": 40,
-                            "height": 40,
-                            "model": "Carbon.png",
-                            "value": descriptor[param].defaultValue,
-                            "min": descriptor[param].minValue,
-                            "max": descriptor[param].maxValue,
-                            "label": param,
-                            "label_fontfamily": "Verdana",
-                            "label_fontsize": "7",
-                            "label_color": "000000",
-                            "type": "knob"
-                        }
-
-                    }
-                    count++;
-                    extendedDescriptor.elements.push(element);
+							 //--------------------------------- JSON edition PART -------------------------//
+							 let extendedDescriptor = {
+									 "name": name,
+									 "backgroundImageSrc": "image2.png",
+									 "color": "#AB2E24",
+									 "width": dimensions.dataWidth.value,
+									 "height": dimensions.dataHeight.value,
+									 "radius": "10",
+									 "elements": []
+							 }
 
 
-                }
-                var elemlabel = {
-                    "x": 20,
-                    "y": 130,
-                    "label": name,
-                    "label_fontfamily": 'Comic Sans MS',
-                    "label_fontsize": '14',
-                    "label_color": 'ffffff',
-                    "type": 'label'
-                }
-                extendedDescriptor.elements.push(elemlabel);
-                //-------------------- END of JSON Edition -------------------- //
+							 for (var param in descriptor) {
+									 // 2* because we want by default two ranges of knobs
+									 let horizontalRange = Math.ceil(count % (nbParam / 2));
+									 let verticalRange = Math.floor(count / (nbParam / 2));
+									 console.log(param, horizontalRange, verticalRange);
 
-                newPedal(extendedDescriptor);
-                console.log(extendedDescriptor);
+									 // Here we do a little normalisation because we have to select by ID later
+
+									 if (descriptor.hasOwnProperty(param)) {
+											 var element = {
+													 "id": param.toLowerCase().replace(/ /g, "").replace('\/', ""),
+													 "x": hoffset * horizontalRange,
+													 "y": voffset * verticalRange,
+													 "width": 40,
+													 "height": 40,
+													 "model": "Carbon.png",
+													 "value": descriptor[param].defaultValue,
+													 "min": descriptor[param].minValue,
+													 "max": descriptor[param].maxValue,
+													 "label": param,
+													 "label_fontfamily": "Verdana",
+													 "label_fontsize": "7",
+													 "label_color": "000000",
+													 "type": "knob"
+											 }
+
+									 }
+									 count++;
+									 extendedDescriptor.elements.push(element);
 
 
-            });
-            delete node;
+							 }
+							 var elemlabel = {
+									 "x": 20,
+									 "y": 130,
+									 "label": name,
+									 "label_fontfamily": 'Comic Sans MS',
+									 "label_fontsize": '14',
+									 "label_color": 'ffffff',
+									 "type": 'label'
+							 }
+							 extendedDescriptor.elements.push(elemlabel);
+							 //-------------------- END of JSON Edition -------------------- //
 
-        });
+							 newPedal(extendedDescriptor);
+							 console.log(extendedDescriptor);
 
-        delete plugin;
 
-    }*/
+					 });
+					 delete node;
+
+			 });
+
+			 delete plugin;
+
+	 }*/
 
 
 
