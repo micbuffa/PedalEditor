@@ -17,10 +17,14 @@
 	<link rel=stylesheet href="font-awesome/css/font-awesome.min.css">
 	<link rel=stylesheet href="tippy.css">
 	<link rel=stylesheet href="faust.css">
-
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	
 </head>
 
 <body>
+	<a  id="aa" href='/site/login' class='ls-modal'>Login</a>
+	<div id="myModal" class="reveal" data-reveal></div>
+
 
 	<div class="application">
 		<div class="logozone"><img src="faust-logo.png" width=58px alt="LOGO"></div>
@@ -37,7 +41,7 @@
 				<i class=" fa fa-play" aria-hidden="true"></i>
 			</div>
 
-			<div role=button class="action-button" title="Open in Pedal Editor">
+			<div role=button class="action-button" title="Open in Pedal Editor" onclick="tooglePlayEdit()">
 				<a class=" fa fa-play" id="download-wap" aria-hidden="true"></a>
 			</div>
 
@@ -78,12 +82,18 @@
 			<input id="filename" contenteditable="true" value="untitled.dsp" />
 		</div>
 
-		<div class="editionzone">
+		<div id="edit-zone" class="editionzone">
 			<textarea id="myTextarea">
 import("stdfaust.lib");
 process = +;
 			</textarea>
 		</div>
+
+		<div id="play-zone" class="editionzone">
+
+		</div>
+		
+
 	</div>
 	<input type="file" id="fileinput" style="display:none" />
 
@@ -91,6 +101,7 @@ process = +;
 		<span class="closeBtn" onclick="stopFaustCode()">&times;</span>
 		<div class="faustui" id="faustui"></div>
 	</div>
+
 
 	<div class="modalwrapper" id="exportwrapper">
 		<span class="closeBtn" onclick="closeExportDialog()">&times;</span>

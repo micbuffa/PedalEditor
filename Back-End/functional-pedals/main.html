@@ -9,7 +9,7 @@
         <template><style>	
                         .pedal{
                             display: block;
-                            background-color: #cd8101;
+                            background-color: #7caeff;
                             width: 170px;
                             height: 370px;
                             border-radius: 10px;
@@ -22,7 +22,7 @@
                             //border: solid 2px black;
                             width: 170px;
                             height: 370px;
-                            opacity: 0.3;
+                            opacity: 1;
                         }
 
                         #resize {
@@ -179,7 +179,7 @@
                         }</style><div class="pedal">
 		<div id="resize"></div>
 
-		<img id="background-image" src="./img/background/image2.png">
+		<img id="background-image">
 
 	<div class="switch" id="bypass"><webaudio-switch src="./img/switches/switch_2.png" height="50" width="80" id="switch1" style="height: 50px;"></webaudio-switch><div>bypass</div></div><div class="slider" id="BasePitch"><webaudio-slider value="60" height="40" width="150" max="96" min="24" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/untitled/BasePitch" style="height: 40px;"></webaudio-slider><div>BasePitch</div></div><div class="slider" id="Mix"><webaudio-slider value="0.5" height="40" width="150" max="1" min="0" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/untitled/Mix" style="height: 40px;"></webaudio-slider><div>Mix</div></div><div class="slider" id="PitchMod"><webaudio-slider value="24" height="40" width="150" max="64" min="-64" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/untitled/PitchMod" style="height: 40px;"></webaudio-slider><div>PitchMod</div></div><div class="slider" id="Release"><webaudio-slider value="20" height="40" width="150" max="100" min="2" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/untitled/Release" style="height: 40px;"></webaudio-slider><div>Release</div></div></div></template><script>
         let untitledTemp = document.currentScript.ownerDocument.querySelector('template');
@@ -250,7 +250,7 @@
                
             // Sets the background image and style.
             var background = this._root.querySelector('img');
-            background.src = this._plug.URL + '/assets/image2.png';
+            background.src = this._plug.URL + '/assets/undefined';
             background.style = 'border-radius : 10px;'
 
             this._root.querySelectorAll(".knob").forEach((knob) => {

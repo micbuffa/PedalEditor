@@ -73,6 +73,20 @@ function updateQrCode(sha, div)
 	link.appendChild(myWhiteDiv);
 }
 
+function tooglePlayEdit(sha, div) {
+	console.log('yes');
+	if(document.querySelector('#edit-zone').style.display === 'none') {
+		document.querySelector('#edit-zone').style.display = 'block';
+		document.querySelector('#play-zone').innerHTML = '';
+
+	} else {
+		document.querySelector('#edit-zone').style.display = 'none';
+		document.querySelector('#play-zone').innerHTML = '<object type="text/html" data="http://localhost:3000/functional-pedals/current/testuntitled.html" width="800px" height="600px"></object>'
+	}
+
+	
+}
+
 function updateQrCodeForWAP(sha, div) {
 	deleteQrCode(div);
 
@@ -83,13 +97,10 @@ function updateQrCodeForWAP(sha, div) {
 	let downPath = document.getElementById("exportUrl").value + "/" + sha + "/" +
 	plateform + "/" + architecture + "/" + output;
 
-	var a = document.querySelector('#download-wap');
-
-	a.href = downPath;
-
 	sendDownloadPathToPedalEditorBackendPath(downPath);
-	
 }
+
+
 
 function sendDownloadPathToPedalEditorBackendPath(downPath, pedalName) {
 	var http = new XMLHttpRequest();
