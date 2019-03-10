@@ -80,18 +80,37 @@ function updateQrCodeForWAP(sha, div) {
 	var architecture = 'wap';
 	var output = "binary.zip";
 
-	/* var link = document.createElement('a');
-	link.href = document.getElementById("exportUrl").value + "/" + sha + "/" +
-		plateform + "/" + architecture + "/" + output; */
-
-	var a = document.querySelector('#download-wap');
-	a.href = document.getElementById("exportUrl").value + "/" + sha + "/" +
+	let downPath = document.getElementById("exportUrl").value + "/" + sha + "/" +
 	plateform + "/" + architecture + "/" + output;
 
-	//var myWhiteDiv = getQrCode(document.getElementById("exportUrl").value, sha, plateform, architecture, output, 130);
+	var a = document.querySelector('#download-wap');
 
-	//div.appendChild(link);
-	//link.appendChild(myWhiteDiv);
+	a.href = downPath;
+
+	sendDownloadPathToPedalEditorBackendPath(downPath);
+	
+}
+
+function sendDownloadPathToPedalEditorBackendPath(downPath, pedalName) {
+	var http = new XMLHttpRequest();
+	var url = 'http://localhost:3000/generated-wap';
+	var params = {
+		url: downPath,
+		pedalName: "current"
+	};
+
+	http.open('POST', url, true);
+
+	//Send the proper header information along with the request
+	http.setRequestHeader('Content-type', "application/json");
+
+	http.onreadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+			alert(http.responseText);
+		}
+	}
+
+	http.send(JSON.stringify(params));
 }
 
 function cancelLoader() {

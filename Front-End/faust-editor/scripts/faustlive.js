@@ -268,7 +268,7 @@ function runFaustCode() {
   dsp_code = codeEditor.getValue();
   console.log('run faust code : ', dsp_code);
 
-  document.getElementById('faustuiwrapper').style.display = 'block';
+  //document.getElementById('faustuiwrapper').style.display = 'block';
   compileDSP();
 }
 

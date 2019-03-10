@@ -2,6 +2,8 @@ const express = require('express');
 let fs = require('fs');
 var bodyParser = require('body-parser')
 var cors = require('cors'); 
+const request = require('request');
+const unzip = require('unzip');
 
 const app = express();
 
@@ -87,6 +89,23 @@ app.get('/previews/switches', function(req, res) {
     })
 })
 
+app.post('/generated-wap', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log(req.body);
+    let dir = './functional-pedals/' + req.body.pedalName;
+
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    };
+
+    request(req.body.url).pipe(fs.createWriteStream(dir + '/binary.zip'))
+    .on('close', function () {
+        fs.createReadStream(dir + '/binary.zip').pipe(unzip.Extract({ path: dir }));
+    });
+
+});
+
 
 app.post('/pedals', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -124,7 +143,7 @@ app.post('/generate', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
-    fs.writeFile('./main.html', req.body.generated, err => {
+    fs.writeFile('./functional-pedals/current/main.html', req.body.generated, err => {
         if(err) {
             res.error('An error occured saving the funcitonal pedal.');
         } else {

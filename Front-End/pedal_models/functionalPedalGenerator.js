@@ -11,6 +11,9 @@ class FunctionalPedalGenerator {
      * Generates the code of the functional pedal which will be used on the pedal board. 
      */
     generateFunctionalPedalCode() {
+    
+    this.editablePedal.name = 'untitled';
+    this.editablePedal.setAttribute('name', 'untitled');
         // The complete content of the functional pedal file.
     let functionalPedalCode = `
             <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
