@@ -122,14 +122,18 @@
     var switchSprite;
     let savedPedalsConfigs;
     let funcitonalPedalGenerator;
-    let faustUI = null;
+    //let faustUI = null;
 
     var bt_buildIt = document.querySelector('#bt_buildIt');
 
     window.onload = initialize();
 
     function initialize() {
-        setFaustUIFromUrl();
+        console.log("Initialize")
+        console.log("faustUI = ", faustUI)
+        //setFaustUIFromUrl();
+        //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
+
         
         displaySavedPedalsIds();
 
@@ -157,15 +161,15 @@
             //console.log(e.detail);
             pedal.loadConfig(pedalConfig);
         });*/
-
         if(window.faustUI) {
-
+            console.log("### faustUI present ! ####")
+            console.log(window.faustUI);
             newPedal(null, true);
 
             let detail = faust.pedalConfigFromUI(window.faustUI);
             
             let pedalConfig = {
-                name: "First",
+                name: window.faustUI.WapName,
                 color: "#7caeff",
                 width: detail.width,
                 height: detail.height,
@@ -174,7 +178,7 @@
                 elements: detail.elements
             };
             console.log(detail);
-            console.log(pedalConfig);
+            console.log("PEDALCONFIG = ", pedalConfig);
 
             pedal.loadConfig(pedalConfig);
             window.faustUI = null;
@@ -185,7 +189,9 @@
     function setFaustUIFromUrl() {
         let url = new URL(location);
         let searchParams = new URLSearchParams(url.search);
+        console.log("url = ", url)
         faustUI = searchParams.get('data');
+        console.log("data = ", faustUI)
     }
 
 
@@ -226,7 +232,8 @@
             width: 400,
             height: 500,
             radius: 10,
-            elements: []
+            elements: [],
+            name:'toBeDefined'
         };
 
         if (args) {

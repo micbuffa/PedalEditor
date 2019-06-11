@@ -12,8 +12,9 @@ class FunctionalPedalGenerator {
      */
     generateFunctionalPedalCode() {
     
-    this.editablePedal.name = 'untitled';
-    this.editablePedal.setAttribute('name', 'untitled');
+    //this.editablePedal.name = 'untitled';
+    //this.editablePedal.setAttribute('name', 'untitled');
+
         // The complete content of the functional pedal file.
     let functionalPedalCode = `
             <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
@@ -211,7 +212,7 @@ class FunctionalPedalGenerator {
         // Custom element export statement.
         functionalPedalCode += `
                 try {
-                    customElements.define('amine-${this.editablePedal.name.toLowerCase()}', ${this.editablePedal.name}Gui);
+                    customElements.define('wap-${this.editablePedal.name.toLowerCase()}', ${this.editablePedal.name}Gui);
                     console.log("Element defined");
                 } catch(error){
                     console.log(error);

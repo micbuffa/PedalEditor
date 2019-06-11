@@ -97,8 +97,14 @@ function activateDSP(dsp)
 }
 
 function redirectEditor(dsp) {
-    const ui = JSON.parse(dsp.getJSON()).ui;
-    console.log(ui)
+    let ui = JSON.parse(dsp.getJSON()).ui;
+    // get the WAP name
+    let name = document.querySelector("#filename").value;
+    let pos = name.lastIndexOf(".");
+    ui.WapName = name.substr(0, pos)
+
+    console.log("WapName = " + ui.WapName);
+    console.log("#######", ui);
     
     /*
     var form = document.createElement("form");
@@ -143,7 +149,7 @@ function compileMonoDSP(factory, openPE)
         // Fix me
         document.getElementById('faustuiwrapper').style.display = 'none';
     } else if (openPE && rendering_mode === "ScriptProcessor") {
-        console.log("Copiling for pedal editor");
+        console.log("Compiling for pedal editor");
         faust.createDSPInstance(factory, audio_context, buffer_size, redirectEditor);
     } else if (rendering_mode === "ScriptProcessor") {
         console.log("ScriptProcessor createDSPInstance");
