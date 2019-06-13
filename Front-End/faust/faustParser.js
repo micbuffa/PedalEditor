@@ -92,7 +92,7 @@ class FaustParser {
     addElement(elem) {
         let type, width, height;
 
-        if(elem.meta && elem.meta[0].style === 'knob' ) {
+        if(this.isAKnob(elem)) {
             type = 'knob';
             width = 50;
             height = 50;
@@ -128,6 +128,21 @@ class FaustParser {
         }
 
         return ret;
+    }
+
+    /**
+     * Checks if the UI element retrived from Faust editor is a knob
+     */
+    isAKnob(elem) {
+        if(elem.meta) {
+            for(let param of elem.meta) {
+                if(param.style === 'knob') {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     pedalConfigFromUI(faustUI) {
