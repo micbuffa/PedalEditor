@@ -3,15 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store" />
 
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-    <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script
+        src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js">
+    </script>
     <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/sdk/WebAudioSDK.js"></script>
 
     <link rel="stylesheet" href="StyleSheet.css">
@@ -32,7 +35,8 @@
 
     <script src="pedal_models/functionalPedalGenerator.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
+    <link
+        href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -42,7 +46,7 @@
 <body>
 
     <div class="hmessage">
-        <p>Welcome on Pedal editor ! click on MENU to start !</p>
+        <p>Welcome on the WAP GUI2 editor ! click on MENU to start !</p>
     </div>
 
 
@@ -66,7 +70,8 @@
         <br>
         <div id="fetching">
             Paste a WAP directory URL to Fetch
-            <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/" style="width: 90%;">
+            <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/"
+                style="width: 90%;">
             <br>
             <button class="buttonDownload" id="bt_buildIt">fetch plugin descriptor</button>
         </div>
@@ -83,7 +88,7 @@
             <ul>
 
                 <li>
-                    <a href="#editor-pedal-details">PEDAL DETAILS</a>
+                    <a href="#editor-pedal-details">WAP DETAILS</a>
                     <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
                 </li>
 
@@ -101,7 +106,7 @@
                     <a href="#editor-faust">FAUST</a>
                     <editor-faust id="editor-faust" class="accordion"></editor-faust>
                 </li>
-                
+
             </ul>
         </div>
     </div>
@@ -126,27 +131,42 @@
 
     var bt_buildIt = document.querySelector('#bt_buildIt');
 
-    window.onload = initialize();
+    window.addEventListener("message", (e) => {
+        const data = e.data;
+        if (data.type === "exported") console.log(data.href);
+    });
+
+    window.onload = initialize;
 
     function initialize() {
+        var urlParams = new URLSearchParams(window.location.search);
+
+        console.log(urlParams.has('data')); // true
+        console.log(urlParams.get('data'));
+        console.log("name present : " + urlParams.has('name')); // true
+        console.log("name = " + urlParams.get('name'));
+        faustUI = JSON.parse(urlParams.get('data'));
+        let name = urlParams.get('name');
+        faustUI.WapName = name.substr(0, name.lastIndexOf("."));
+
         console.log("Initialize")
         console.log("faustUI = ", faustUI)
         //setFaustUIFromUrl();
         //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
 
-        
+
         displaySavedPedalsIds();
 
         bt_buildIt.addEventListener('click', () => {
 
             checkMetadata(document.querySelector("#urlPlugin").value);
         });
-        
+
         let faust = document.querySelector('#editor-faust'),
-        faustClone = faust.cloneNode(true);
+            faustClone = faust.cloneNode(true);
         faust.parentNode.replaceChild(faustClone, faust);
 
-        faust = document.querySelector('#editor-faust');   
+        faust = document.querySelector('#editor-faust');
         /*faust.addEventListener('create-pedal', (e) => {
             newPedal();
             let pedalConfig = {
@@ -161,13 +181,13 @@
             //console.log(e.detail);
             pedal.loadConfig(pedalConfig);
         });*/
-        if(window.faustUI) {
+        if (window.faustUI) {
             console.log("### faustUI present ! ####")
             console.log(window.faustUI);
             newPedal(null, true);
 
             let detail = faust.pedalConfigFromUI(window.faustUI);
-            
+
             let pedalConfig = {
                 name: window.faustUI.WapName,
                 color: "#7caeff",
@@ -218,8 +238,8 @@
             selectKnob(e.detail);
             updateInspector();
         });
-        
-        if(!withoutInit) {
+
+        if (!withoutInit) {
             initialize();
         }
 
@@ -233,7 +253,7 @@
             height: 500,
             radius: 10,
             elements: [],
-            name:'toBeDefined'
+            name: 'toBeDefined'
         };
 
         if (args) {
@@ -519,7 +539,7 @@
 
 
     function loadPedalConfig(value) {
-        
+
         newPedal();
         for (let pedalConfig of savedPedalsConfigs) {
             if (pedalConfig.id == value) {
@@ -577,8 +597,19 @@
                 displaySavedPedalsIds();
             }
         }
-        http.send(JSON.stringify({ generated: funcitonalPedalGenerator.generateFunctionalPedalCode() }));
+        http.send(JSON.stringify({
+            generated: funcitonalPedalGenerator.generateFunctionalPedalCode()
+        }));
 
+        // SEND MESSAGE TO FAUST EDITOR
+        console.log("SENDING EXPORT MESSAGE TO FAUST EDITOR")
+        if (window.parent !== window) {
+            window.parent.postMessage({
+                type: "export",
+                plat: "web",
+                arch: "wap"
+            })
+        }
     }
 
     function toggleHidden(elem) {
@@ -628,94 +659,89 @@
     }
 
     // instanciate the plugin 
-   /* function getDescriptorFromPlugin(className, name, baseURL) {
+    /* function getDescriptorFromPlugin(className, name, baseURL) {
 
-        var plugin = new window[className](ctx, baseURL);
-        console.log(plugin);
+         var plugin = new window[className](ctx, baseURL);
+         console.log(plugin);
 
-        plugin.load().then((node) => {
-            plugin.loadGui().then((elem) => {
-                let descriptor = node.getDescriptor();
-                let dimensions = elem.properties;
-                let nbParam = Object.keys(descriptor).length;
-                var count = 0;
-                let hoffset = 50;
-                let voffset = 60;
-                console.log(descriptor);
+         plugin.load().then((node) => {
+             plugin.loadGui().then((elem) => {
+                 let descriptor = node.getDescriptor();
+                 let dimensions = elem.properties;
+                 let nbParam = Object.keys(descriptor).length;
+                 var count = 0;
+                 let hoffset = 50;
+                 let voffset = 60;
+                 console.log(descriptor);
 
-                //--------------------------------- JSON edition PART -------------------------//
-                let extendedDescriptor = {
-                    "name": name,
-                    "backgroundImageSrc": "image2.png",
-                    "color": "#AB2E24",
-                    "width": dimensions.dataWidth.value,
-                    "height": dimensions.dataHeight.value,
-                    "radius": "10",
-                    "elements": []
-                }
-
-
-                for (var param in descriptor) {
-                    // 2* because we want by default two ranges of knobs
-                    let horizontalRange = Math.ceil(count % (nbParam / 2));
-                    let verticalRange = Math.floor(count / (nbParam / 2));
-                    console.log(param, horizontalRange, verticalRange);
-
-                    // Here we do a little normalisation because we have to select by ID later
-
-                    if (descriptor.hasOwnProperty(param)) {
-                        var element = {
-                            "id": param.toLowerCase().replace(/ /g, "").replace('\/', ""),
-                            "x": hoffset * horizontalRange,
-                            "y": voffset * verticalRange,
-                            "width": 40,
-                            "height": 40,
-                            "model": "Carbon.png",
-                            "value": descriptor[param].defaultValue,
-                            "min": descriptor[param].minValue,
-                            "max": descriptor[param].maxValue,
-                            "label": param,
-                            "label_fontfamily": "Verdana",
-                            "label_fontsize": "7",
-                            "label_color": "000000",
-                            "type": "knob"
-                        }
-
-                    }
-                    count++;
-                    extendedDescriptor.elements.push(element);
+                 //--------------------------------- JSON edition PART -------------------------//
+                 let extendedDescriptor = {
+                     "name": name,
+                     "backgroundImageSrc": "image2.png",
+                     "color": "#AB2E24",
+                     "width": dimensions.dataWidth.value,
+                     "height": dimensions.dataHeight.value,
+                     "radius": "10",
+                     "elements": []
+                 }
 
 
-                }
-                var elemlabel = {
-                    "x": 20,
-                    "y": 130,
-                    "label": name,
-                    "label_fontfamily": 'Comic Sans MS',
-                    "label_fontsize": '14',
-                    "label_color": 'ffffff',
-                    "type": 'label'
-                }
-                extendedDescriptor.elements.push(elemlabel);
-                //-------------------- END of JSON Edition -------------------- //
+                 for (var param in descriptor) {
+                     // 2* because we want by default two ranges of knobs
+                     let horizontalRange = Math.ceil(count % (nbParam / 2));
+                     let verticalRange = Math.floor(count / (nbParam / 2));
+                     console.log(param, horizontalRange, verticalRange);
 
-                newPedal(extendedDescriptor);
-                console.log(extendedDescriptor);
+                     // Here we do a little normalisation because we have to select by ID later
+
+                     if (descriptor.hasOwnProperty(param)) {
+                         var element = {
+                             "id": param.toLowerCase().replace(/ /g, "").replace('\/', ""),
+                             "x": hoffset * horizontalRange,
+                             "y": voffset * verticalRange,
+                             "width": 40,
+                             "height": 40,
+                             "model": "Carbon.png",
+                             "value": descriptor[param].defaultValue,
+                             "min": descriptor[param].minValue,
+                             "max": descriptor[param].maxValue,
+                             "label": param,
+                             "label_fontfamily": "Verdana",
+                             "label_fontsize": "7",
+                             "label_color": "000000",
+                             "type": "knob"
+                         }
+
+                     }
+                     count++;
+                     extendedDescriptor.elements.push(element);
 
 
-            });
-            delete node;
+                 }
+                 var elemlabel = {
+                     "x": 20,
+                     "y": 130,
+                     "label": name,
+                     "label_fontfamily": 'Comic Sans MS',
+                     "label_fontsize": '14',
+                     "label_color": 'ffffff',
+                     "type": 'label'
+                 }
+                 extendedDescriptor.elements.push(elemlabel);
+                 //-------------------- END of JSON Edition -------------------- //
 
-        });
-
-        delete plugin;
-
-    }*/
+                 newPedal(extendedDescriptor);
+                 console.log(extendedDescriptor);
 
 
+             });
+             delete node;
 
+         });
 
+         delete plugin;
 
+     }*/
 </script>
 
 </html>

@@ -98,10 +98,13 @@ function activateDSP(dsp)
 
 function redirectEditor(dsp) {
     let ui = JSON.parse(dsp.getJSON()).ui;
+    let dspFull = JSON.parse(dsp.getJSON());
+
     // get the WAP name
-    let name = document.querySelector("#filename").value;
-    let pos = name.lastIndexOf(".");
-    ui.WapName = name.substr(0, pos)
+    //let name = document.querySelector("#filename").value;
+    //let pos = name.lastIndexOf(".");
+    // ui.WapName = name.substr(0, pos)
+    ui.WapName = dspFull.name;
 
     console.log("WapName = " + ui.WapName);
     console.log("#######", ui);
