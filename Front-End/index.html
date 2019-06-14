@@ -62,9 +62,9 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button>
+        <!-- <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button> -->
         <button class="buttonDownload" onclick="savePedal()">Save</button>
-        <button class="buttonDownload" onclick="newPedal()">New</button>
+        <!-- <button class="buttonDownload" onclick="newPedal()">New</button> -->
         <br>
         <br>
         <br>
@@ -298,7 +298,7 @@
             }
         }
         http.send(JSON.stringify(params));
-
+        generateCodeFunctionalPedal();
     }
 
     function refreshSavedPedalsConfigs() {
