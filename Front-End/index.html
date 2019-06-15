@@ -63,25 +63,26 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
         <!-- <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button> -->
-        <button class="buttonDownload" onclick="savePedal()">Save</button>
+        <button class="buttonDownload" onclick="preview()">Preview/Run WAP</button>
+        <button class="buttonDownload" onclick="savePedal()">Publish</button>
         <!-- <button class="buttonDownload" onclick="newPedal()">New</button> -->
         <br>
         <br>
         <br>
-        <div id="fetching">
+        <div id="fetching" style="display:none">
             Paste a WAP directory URL to Fetch
             <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/"
                 style="width: 90%;">
             <br>
             <button class="buttonDownload" id="bt_buildIt">fetch plugin descriptor</button>
         </div>
-        <br>
-        <label>Load: </label>
-        <select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
-            <option value="Georgia"></option>
-        </select>
-        <br>
-
+        <div style="display:none">
+            <label>Load: </label>
+            <select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
+                <option value="Georgia"></option>
+            </select>
+            <br>
+        </div>
 
         <!--Accrodion Menu-->
         <div id="accordion">

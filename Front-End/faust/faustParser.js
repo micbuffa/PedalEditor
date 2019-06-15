@@ -64,7 +64,7 @@ class FaustParser {
         }
                 
         let faustSliderParams = this.extractFunctionArguments(faustSlider);
-
+        console.log("faustSliderParams =  ", faustSliderParams)
         let ret = {
             id: faustSliderParams[0],
             x: 10,
@@ -123,8 +123,10 @@ class FaustParser {
             label_fontsize: "14",
             label_color: "000000",
             type: type,
+            // ATTENTION (MICHEL BUFFA) : all elems may not have min, max, step etc.
             min: elem.min,
-            max: elem.max
+            max: elem.max,
+            step: elem.step
         }
 
         return ret;
