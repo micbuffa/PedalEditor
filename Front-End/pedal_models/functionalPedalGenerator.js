@@ -12,8 +12,8 @@ class FunctionalPedalGenerator {
      */
     generateFunctionalPedalCode() {
     
-    //this.editablePedal.name = 'untitled';
-    //this.editablePedal.setAttribute('name', 'untitled');
+    // this.editablePedal.name = 'untitled';
+    // this.editablePedal.setAttribute('name', 'untitled');
 
         // The complete content of the functional pedal file.
     let functionalPedalCode = `
@@ -26,7 +26,7 @@ class FunctionalPedalGenerator {
             <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
         `;
 
-        /*let functionalPedalCode = `
+        /* let functionalPedalCode = `
         <script>
         WebAudioControlsOptions = {
             useMidi: 1,
@@ -336,7 +336,10 @@ class FunctionalPedalGenerator {
         }
 
         let waControl = this.editablePedal.shadowRoot.childNodes[3].querySelector('.switch');
-        waControl.childNodes[0].setAttribute('id', 'switch1');
+        if(waControl)
+            waControl.childNodes[0].setAttribute('id', 'switch1');
+        else
+            console.log("functionalPedalGenerator waControl = null")
 
     }
 
