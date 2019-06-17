@@ -147,12 +147,22 @@ class FaustParser {
         return false;
     }
 
-    pedalConfigFromUI(faustUI) {
-        let ret = [];
-        for(let elem of faustUI[0].items) {
-            ret.push(this.addElement(elem));
+    singleElementsFromGroupElements(groupElements, singleElements) {
+        if(!singleElements) {
+            singleElements = [];
         }
-        return ret;
+        for(let elem of groupElements.items) {
+            if(elem.type !== 'hgroup' && elem.type !== 'vgroup') {
+                singleElements.push(this.addElement(elem));
+            } else {
+                singleElements = this.singleElementsFromGroupElements(elem, singleElements)
+            }
+        }
+        return singleElements;
+    }
+
+    pedalConfigFromUI(faustUI) {
+        return this.singleElementsFromGroupElements(faustUI[0]);
     }
 
 }
