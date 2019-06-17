@@ -146,6 +146,9 @@
         console.log(urlParams.get('data'));
         console.log("name present : " + urlParams.has('name')); // true
         console.log("name = " + urlParams.get('name'));
+        console.log("### FAUSTUI JSON = ");
+        console.log(urlParams.get('data'));
+        console.log("###")
         faustUI = JSON.parse(urlParams.get('data'));
         let name = urlParams.get('name');
         faustUI.WapName = name.substr(0, name.lastIndexOf("."));
