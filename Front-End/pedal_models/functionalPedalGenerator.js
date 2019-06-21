@@ -71,6 +71,10 @@ class FunctionalPedalGenerator {
         `;
 
         let funcSetActiveContent =  `
+                // Where there is not swtich, no need to set activation logic. 
+                if(!this._root.querySelector("#switch1")) {
+                    return;
+                }
                 if (active == undefined || active == false) {
                     this.isOn = false;
                     this.bypass();
@@ -139,11 +143,13 @@ class FunctionalPedalGenerator {
 
         let funcSwitchListenerContent = `
             console.log("setswitch");
-            this._root.querySelector("#switch1").addEventListener('change', (e) => {
-                if (this.isOn) this.bypass()
-                else this.reactivate();
-                this.isOn = !this.isOn;
-            });
+            if(this._root.querySelector("#switch1")) {
+                this._root.querySelector("#switch1").addEventListener('change', (e) => {
+                    if (this.isOn) this.bypass()
+                    else this.reactivate();
+                    this.isOn = !this.isOn;
+                });
+            }
         `
 
         let funcBypassContent = `
@@ -299,8 +305,8 @@ class FunctionalPedalGenerator {
         let ret = '';
         
         for(let knob of this.editablePedal.knobs) {
-            ret += 'this._root.getElementById("/' + this.editablePedal.getAttribute('name') + '/' + knob.id + '").addEventListener("input", (e) =>'
-                + 'this._plug.setParam("/' + this.editablePedal.getAttribute('name') + '/' + knob.id + '", e.target.value));'
+            ret += 'this._root.getElementById("' + knob.address + '").addEventListener("input", (e) =>'
+                + 'this._plug.setParam("' + knob.address + '", e.target.value));'
             ret += '\n';
         }
 
@@ -311,8 +317,8 @@ class FunctionalPedalGenerator {
         let ret = '';
 
         for(let slider of this.editablePedal.sliders) {
-            ret += 'this._root.getElementById("/' + this.editablePedal.getAttribute('name') + '/' + slider.id + '").addEventListener("input", (e) =>'
-                + 'this._plug.setParam("/' + this.editablePedal.getAttribute('name') + '/' + slider.id + '", e.target.value));'
+            ret += 'this._root.getElementById("' + slider.address + '").addEventListener("input", (e) =>'
+                + 'this._plug.setParam("' + slider.address + '", e.target.value));'
             ret += '\n';
         }
 
@@ -325,13 +331,13 @@ class FunctionalPedalGenerator {
     setWebAudioControlsIds() {
         for(let knob of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(".knob")) {
             let id = knob.getAttribute('id');
-            let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
+            let waControlId = this.editablePedal.getElementById(id).address;
             knob.childNodes[0].setAttribute('id', waControlId);
         }
 
         for(let slider of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll('.slider')) {
             let id = slider.getAttribute('id');
-            let waControlId = '/' + this.editablePedal.getAttribute('name') + '/' + id;
+            let waControlId = this.editablePedal.getElementById(id).address;
             slider.childNodes[0].setAttribute('id', waControlId);
         }
 

@@ -53,6 +53,16 @@
             return this.pedalElementManager.addElement(type, filename, id);
         }
 
+        getElementById(id) {
+            for(let elem of this.getElements()) {
+                if (elem.id == id) {
+                    return elem;
+                }
+            }
+
+            return null;
+        }
+
         /********************************* Deleting Pedal Elements ************************************/
 
         deleteSelectedElement() {
@@ -510,6 +520,8 @@
             this.knobs = [];
 
             // ATTENTION MICHEL BUFFA : why do all loops for each element. One loop is enought !!!
+            // AMINE: Je crois que je l'avais fait car j'avais une limitation don't je ne me rappelles plus.
+            // Pour l'instant je garde les boucles pour éviter de casser quoi que ce soit puis on essaiera de réfactorer.
             for (let element of config.elements) {
                 if (element.type === 'icon') {
                     let icon = this.addElement('icon', element.file);
@@ -543,6 +555,7 @@
                     knob.label_fontsize = element.label_fontsize;
                     knob.label_color = element.label_color;
                     knob.type = element.type;
+                    knob.address = element.address;
                 }
                 //console.log("KNOB STEP = " + element.step)
 
@@ -581,6 +594,7 @@
                     slider.max = element.max ? element.max : 100;
                     slider.step = element.step ? element.step : 1;
                     slider.value = element.value;
+                    slider.address = element.address;
                     console.log("loadConfig SLIDER " + slider.label + " STEP = " + element.step)
                 }
             }

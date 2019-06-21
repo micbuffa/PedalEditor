@@ -111,7 +111,7 @@ class FaustParser {
         }
 
         let ret = {
-            id: elem.label,
+            id: elem.label.replace(/\s+/g, '_'),
             x: 10,
             y: 10,
             width: width,
@@ -126,9 +126,9 @@ class FaustParser {
             // ATTENTION (MICHEL BUFFA) : all elems may not have min, max, step etc.
             min: elem.min,
             max: elem.max,
-            step: elem.step
+            step: elem.step,
+            address: elem.address
         }
-
         return ret;
     }
 
