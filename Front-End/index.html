@@ -46,7 +46,7 @@
 <body>
 
     <div class="hmessage">
-        <p>Welcome on the WAP GUI2 editor ! click on MENU to start !</p>
+        <p>Editing GUI for WAP <span id="wapName"></span> ! click on MENU to start !</p>
     </div>
 
 
@@ -127,15 +127,11 @@
     var knobSprite;
     var switchSprite;
     let savedPedalsConfigs;
-    let funcitonalPedalGenerator;
-    //let faustUI = null;
+    let functionalPedalGenerator;
 
     var bt_buildIt = document.querySelector('#bt_buildIt');
+    let currentWapName;
 
-    window.addEventListener("message", (e) => {
-        const data = e.data;
-        if (data.type === "exported") console.log(data.href);
-    });
 
     window.onload = initialize;
 
@@ -152,6 +148,7 @@
         faustUI = JSON.parse(urlParams.get('data'));
         let name = urlParams.get('name');
         faustUI.WapName = name.substr(0, name.lastIndexOf("."));
+        document.querySelector("#wapName").innerHTML = faustUI.WapName;
 
         console.log("Initialize")
         console.log("faustUI = ", faustUI)
@@ -205,7 +202,7 @@
             console.log("PEDALCONFIG = ", pedalConfig);
 
             pedal.loadConfig(pedalConfig);
-            window.faustUI = null;
+            currentWapName = pedalConfig.name;
 
         }
     }
@@ -274,7 +271,7 @@
 
 
 
-        funcitonalPedalGenerator = new FunctionalPedalGenerator(pedal);;
+        functionalPedalGenerator = new FunctionalPedalGenerator(pedal);;
     }
 
     function savePedal() {
@@ -302,7 +299,7 @@
             }
         }
         http.send(JSON.stringify(params));
-        generateCodeFunctionalPedal();
+        generateCodeFunctionalPedalFetch();
     }
 
     function refreshSavedPedalsConfigs() {
@@ -584,28 +581,36 @@
         return firstChild;
     }
 
-
-    function generateCodeFunctionalPedal() {
-
-        let http = new XMLHttpRequest();
+    // Sends the main.html GUI file for the wap named currentWapName
+    // to the backend server. A dir is created if there is none already
+    // created for this WAP.
+    // It also copies asset files if necessary, and finally sends a message to the Faust IDE
+    // to ask for it to generate a binary.zip file with the DSP code. An async message will be 
+    // sent back by the faust IDE when ready (processed in the next listener defined after this
+    // function)
+    function generateCodeFunctionalPedalFetch() {
         let url = serverUrl + '/generate';
 
-        http.open("POST", url, true);
+        let data = new FormData();
+        data.append("generated", functionalPedalGenerator.generateFunctionalPedalCode());
+        data.append("wapName", currentWapName);
 
-        http.setRequestHeader("Content-type", "application/json");
+        fetch(url, {
+                method: "POST",
+                body: data
+            })
+            .then((responseJSON) => {
+                responseJSON.json()
+                    .then(res => {
+                        console.log(res.message);
+                        alert(res.message);
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200) {
-                alert('Generated successfully!');
-                pedal.pedalId = JSON.parse(http.responseText).id;
-                displaySavedPedalsIds();
-            }
-        }
-        http.send(JSON.stringify({
-            generated: funcitonalPedalGenerator.generateFunctionalPedalCode()
-        }));
-
-        // SEND MESSAGE TO FAUST EDITOR
+        // 1 - SEND ASYNC MESSAGE TO FAUST EDITOR
         console.log("SENDING EXPORT MESSAGE TO FAUST EDITOR")
         if (window.parent !== window) {
             window.parent.postMessage({
@@ -614,6 +619,63 @@
                 arch: "wap"
             })
         }
+
+    }
+
+    // 2 - SENT BY FAUST IDE WHEN THE BINARY.ZIP FILE IS READY TO BE SENT TO BACK-END WAP SERVER
+    window.addEventListener("message", (e) => {
+        const data = e.data;
+        if (data.type === "exported") {
+            let wapBinaryDotZipFileURL = data.href
+            console.log(wapBinaryDotZipFileURL);
+
+            // Let's send a message to the backend server so that it gets
+            // this file, and unzip it in the same dir the main.html GUI file + assets
+            // have been created
+            let url = serverUrl + '/addBinaryDotZip';
+            let data2 = new FormData();
+            data2.append("url", wapBinaryDotZipFileURL);
+            data2.append("wapName", currentWapName);
+
+            fetch(url, {
+                    method: "POST",
+                    body: data2
+                })
+                .then((responseJSON) => {
+                    responseJSON.json()
+                        .then(res => {
+                            console.log(res.message);
+                            alert(res.message);
+                        })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    });
+
+
+    // Sends the binary.zip to the Back-End
+    function publish(downPath, pedalName) {
+        var http = new XMLHttpRequest();
+        var url = 'http://localhost:3000/generated-wap';
+        var params = {
+            url: downPath,
+            pedalName: "current"
+        };
+
+        http.open('POST', url, true);
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', "application/json");
+
+        http.onreadystatechange = function () { //Call a function when the state changes.
+            if (http.readyState == 4 && http.status == 200) {
+                alert(http.responseText);
+            }
+        }
+
+        http.send(JSON.stringify(params));
     }
 
     function toggleHidden(elem) {
