@@ -57,8 +57,6 @@ class FunctionalPedalGenerator {
 
     // The content of the first function of the class.
     let function2Content = `
-            let bypassSwitch = this._root.querySelector("#switch1");
-            if(bypassSwitch !== null) {
                 if (active == undefined || active == false) {
                     this.isOn = false;
                     this.bypass();
@@ -68,11 +66,6 @@ class FunctionalPedalGenerator {
                     this.reactivate();
                     this._root.querySelector("#switch1").value = 1;
                 }
-            } else {
-                // set the wap to true (no bypass)
-                 this.isOn = true;
-                 this.reactivate();
-            }
         `;
 
     let funcSetActiveContent = `
@@ -89,11 +82,6 @@ class FunctionalPedalGenerator {
                     this.reactivate();
                     this._root.querySelector("#switch1").value = 1;
                 }
-            } else {
-                // set the wap to true (no bypass)
-                 this.isOn = true;
-                 this.reactivate();
-            }
         `;
 
     let funcGetObservedAttributes = `
@@ -122,7 +110,6 @@ class FunctionalPedalGenerator {
             background.style = 'border-radius : ${this.editablePedal.getAttribute(
               "radius"
             )}px;'
-
             this._root.querySelectorAll(".knob").forEach((knob) => {
 				knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
             });
@@ -178,17 +165,13 @@ class FunctionalPedalGenerator {
     let funcAttributeChangedCallbackContent = `
             console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
-            let bypassSwitch = this._root.querySelector("#switch1");
-
-            if(bypassSwitch !== null) {
-                let tmp = "/${this.editablePedal.getAttribute("name")}/bypass";
-                if (this.state[tmp] == 1) {
-                    this._root.querySelector("#switch1").value = 0;
-                    this.isOn = false;
-                } else if (this.state[tmp] == 0) {
-                    this._root.querySelector("#switch1").value = 1;
-                    this.isOn = true;
-                }
+            let tmp = "/${this.editablePedal.getAttribute("name")}/bypass";
+            if (this.state[tmp] == 1) {
+            this._root.querySelector("#switch1").value = 0;
+            this.isOn = false;
+            } else if (this.state[tmp] == 0) {
+            this._root.querySelector("#switch1").value = 1;
+            this.isOn = true;
             }
             this.knobs = this._root.querySelectorAll(".knob");
             console.log(this.state);
@@ -273,13 +256,11 @@ class FunctionalPedalGenerator {
           this.editablePedal.name
         }Temp = document.currentScript.ownerDocument.querySelector('template');
         `;
-
     // Generating and appending the class of the pedal.
     functionalPedalCode += this.generateClass(
       this.editablePedal.name + "Gui",
       classContent
     );
-
     // Custom element export statement.
     functionalPedalCode += `
                 try {
@@ -298,33 +279,26 @@ class FunctionalPedalGenerator {
                 }
         `;
     functionalPedalCode += "</script>";
-
     return functionalPedalCode;
   }
-
   /**
    * Generates the template of the functional pedal.
    */
   generateFunctionalPedalTemplate() {
     let template = "";
-
     template += "<template>";
     template += this.generateFunctionalPedalStyle();
     template += this.generateFunctionalPedalHtml();
     template += "</template>";
-
     return template;
   }
-
   /**
    * Generate the style of the functional pedal.
    */
   generateFunctionalPedalStyle() {
-    const style = this.editablePedal.getStyle();
-
+    let style = this.editablePedal.getStyle();
     return style.outerHTML;
   }
-
   /**
    * Generate the html of the functional pedal.
    */
@@ -334,13 +308,11 @@ class FunctionalPedalGenerator {
 
     return html.outerHTML;
   }
-
   generateFunction(name, params, content) {
     // The return value of the function.
     let ret;
 
     let formattedParams = "";
-
     for (let param of params) {
       formattedParams += param;
     }
@@ -350,10 +322,8 @@ class FunctionalPedalGenerator {
                ${content}
             }
         `;
-
     return ret;
   }
-
   /**
    * Generates a class extending 'HTMLElement'.
    * @param {*} name The name of the class.
@@ -364,10 +334,8 @@ class FunctionalPedalGenerator {
     ret += "class " + name + " extends HTMLElement {";
     ret += content;
     ret += "}";
-
     return ret;
   }
-
   generateSetKnobs() {
     let ret = "";
 
@@ -381,13 +349,10 @@ class FunctionalPedalGenerator {
         '", e.target.value));';
       ret += "\n";
     }
-
     return ret;
   }
-
   generateSetSliders() {
     let ret = "";
-
     for (let slider of this.editablePedal.sliders) {
       ret +=
         'this._root.getElementById("' +
@@ -398,10 +363,8 @@ class FunctionalPedalGenerator {
         '", e.target.value));';
       ret += "\n";
     }
-
     return ret;
   }
-
   /**
    * Currently, works only for a single switch !!
    */

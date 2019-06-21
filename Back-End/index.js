@@ -116,6 +116,9 @@ app.post("/pedals", function(req, res) {
   });
 });
 
+// MICHEL BUFFA
+// Generate main.html in functional-pedal/published/<wapname>/main.html
+// creates the folder if does not exist, copy assets inside if needed...
 app.post("/generate", multerData.fields([]), function(req, res) {
   //console.dir(req.body);
   let wapName = req.body.wapName;
@@ -161,6 +164,7 @@ app.post("/generate", multerData.fields([]), function(req, res) {
   });
 });
 
+// MICHEL BUFFA
 // Gets the binary.zip DSP files from Faust remote server, and unzip it in the WAP dir.
 app.post("/addBinaryDotZip", multerData.fields([]), function(req, res) {
   let wapName = req.body.wapName;
@@ -172,6 +176,7 @@ app.post("/addBinaryDotZip", multerData.fields([]), function(req, res) {
   console.log("/addBinaryDotZip, adding binary.zip to " + wapDir);
 
   console.log("Sending request to GET " + binaryDotZipURL);
+  // TODO : check if you can do this with promises...
   request(binaryDotZipURL)
     .pipe(fs.createWriteStream(wapDir + "/binary.zip"))
     .on("close", function() {
