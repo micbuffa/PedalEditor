@@ -76,9 +76,10 @@ class FunctionalPedalGenerator {
         `;
 
     let funcSetActiveContent = `
-            let bypassSwitch = this._root.querySelector("#switch1");
-            if(bypassSwitch !== null) {
- 
+                // Where there is not swtich, no need to set activation logic. 
+                if(!this._root.querySelector("#switch1")) {
+                    return;
+                }
                 if (active == undefined || active == false) {
                     this.isOn = false;
                     this.bypass();
@@ -154,33 +155,25 @@ class FunctionalPedalGenerator {
 
     let funcSwitchListenerContent = `
             console.log("setswitch");
-            let bypassSwitch = this._root.querySelector("#switch1");
-            if(bypassSwitch !== null) {
+            if(this._root.querySelector("#switch1")) {
                 this._root.querySelector("#switch1").addEventListener('change', (e) => {
                     if (this.isOn) this.bypass()
                     else this.reactivate();
                     this.isOn = !this.isOn;
-            });
+                });
             }
         `;
 
     let funcBypassContent = `
-            let bypassSwitch = this._root.querySelector("#switch1");
-            if(bypassSwitch !== null) {
-                this._plug.setParam("/${this.editablePedal.getAttribute(
-                  "name"
-                )}/bypass", 1);
-                console.log("disabled");
-            }
+            this._plug.setParam("/${this.editablePedal.getAttribute(
+              "name"
+            )}/bypass", 1);
+            console.log("disabled");
         `;
     let funcReactivateContent = `
-            let bypassSwitch = this._root.querySelector("#switch1");
-                if(bypassSwitch !== null) {
-
-                this._plug.setParam("/${this.editablePedal.getAttribute(
-                  "name"
-                )}/bypass", 0);
-            }
+            this._plug.setParam("/${this.editablePedal.getAttribute(
+              "name"
+            )}/bypass", 0);
         `;
     let funcAttributeChangedCallbackContent = `
             console.log("Custom element attributes changed.");
@@ -380,15 +373,11 @@ class FunctionalPedalGenerator {
 
     for (let knob of this.editablePedal.knobs) {
       ret +=
-        'this._root.getElementById("/' +
-        this.editablePedal.getAttribute("name") +
-        "/" +
-        knob.id +
+        'this._root.getElementById("' +
+        knob.address +
         '").addEventListener("input", (e) =>' +
-        'this._plug.setParam("/' +
-        this.editablePedal.getAttribute("name") +
-        "/" +
-        knob.id +
+        'this._plug.setParam("' +
+        knob.address +
         '", e.target.value));';
       ret += "\n";
     }
@@ -401,15 +390,11 @@ class FunctionalPedalGenerator {
 
     for (let slider of this.editablePedal.sliders) {
       ret +=
-        'this._root.getElementById("/' +
-        this.editablePedal.getAttribute("name") +
-        "/" +
-        slider.id +
+        'this._root.getElementById("' +
+        slider.address +
         '").addEventListener("input", (e) =>' +
-        'this._plug.setParam("/' +
-        this.editablePedal.getAttribute("name") +
-        "/" +
-        slider.id +
+        'this._plug.setParam("' +
+        slider.address +
         '", e.target.value));';
       ret += "\n";
     }
@@ -425,21 +410,16 @@ class FunctionalPedalGenerator {
       ".knob"
     )) {
       let id = knob.getAttribute("id");
-      let waControlId =
-        "/" + this.editablePedal.getAttribute("name") + "/" + id;
+      let waControlId = this.editablePedal.getElementById(id).address;
       knob.childNodes[0].setAttribute("id", waControlId);
     }
-
     for (let slider of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(
       ".slider"
     )) {
       let id = slider.getAttribute("id");
-      let waControlId =
-        "/" + this.editablePedal.getAttribute("name") + "/" + id;
+      let waControlId = this.editablePedal.getElementById(id).address;
       slider.childNodes[0].setAttribute("id", waControlId);
     }
-
-    // MICHEL BUFFA : c'est quoi ce code avec "switch1" en dur !!!
     let waControl = this.editablePedal.shadowRoot.childNodes[3].querySelector(
       ".switch"
     );
