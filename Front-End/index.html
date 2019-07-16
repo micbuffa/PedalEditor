@@ -9,6 +9,9 @@
     <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -19,13 +22,14 @@
 
     <link rel="stylesheet" href="StyleSheet.css">
     <link rel="stylesheet" href="StyleSideNav.css">
+    <link rel="stylesheet" href="index_css.css">
 
     <link rel="import" href="pedal_models/pedal.html">
     <link rel="import" href="editor-components/editor-pedal-details/editor-pedal-details.html">
     <link rel="import" href="editor-components/editor-element-list.html">
     <link rel="import" href="editor-components/editor-inspector.html">
     <link rel="import" href="editor-components/editor-faust/editor-faust.html">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
     <!-- jQuery library -->
 
@@ -45,9 +49,117 @@
 
 <body>
 
-    <div class="hmessage">
-        <p>Editing GUI for WAP <span id="wapName"></span> ! click on MENU to start !</p>
+    <!-- Pedal section -->
+    <main class="pedalSection"></main>
+    <div class="container"></div>
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark"> <a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"> <a class="nav-link" href="#" ><i class="fa fa-trash"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="toggleFullScreen()"><i class="fa fa-arrows-alt"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#"><i class="fa fa-download"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="savePedal()"><i class="fa fa-save"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.open('faust-editor','popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');"><i class="fa fa-pencil"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="newPedal()"><i class="fa fa-plus-circle"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.location.reload();"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a> </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"> <a class="nav-link" href="#"></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#"></a> </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0"> </form>
+        </div>
+    </nav>
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <div id="accordion">
+                    <div>
+                            <details class="editor-collapsible">
+        
+                                    <summary><a href="#editor-pedal-details">Pedal configuration </a></summary>
+                        
+                                    <div class="editor-collapsible-content" >
+                                            <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
+                                    </div>
+                            </details>   
+
+                            <details class="editor-collapsible">
+        
+                                    <summary><a href="#editor-element-list">Elements </a></summary>
+                        
+                                    <div class="editor-collapsible-content" >
+                                            <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
+                                    </div>
+                            </details>
+                            
+                            <details class="editor-collapsible">
+        
+                                    <summary><a href="#editor-inspector">Inspector </a></summary>
+                        
+                                    <div class="editor-collapsible-content" >
+                                            <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
+                                    </div>
+                            </details>
+
+                            <details class="editor-collapsible">
+        
+                                    <summary><a href="#editor-faust">Faust </a></summary>
+                        
+                                    <div class="editor-collapsible-content" >
+                                            <editor-faust id="editor-faust" class="accordion"></editor-faust>
+                                    </div>
+                            </details>
+                    </div>
+                    <!-- <ul>
+        
+                        <li>
+                            <a href="#editor-pedal-details" >PEDAL DETAILS</a>
+                            <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
+                        </li>
+        
+                        <li>
+                            <a href="#editor-element-list">ELEMENTS</a>
+                            <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
+                        </li>
+        
+                        <li>
+                            <a href="#editor-inspector">INSPECTOR</a>
+                            <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
+                        </li>
+        
+                        <li>
+                            <a href="#editor-faust">FAUST</a>
+                            <editor-faust id="editor-faust" class="accordion"></editor-faust>
+                        </li>
+                        
+                    </ul> -->
+                </div>
+            </div>
+                    
+            </ul>
+        </div> 
+
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                
+            </div>
+        </div> <!-- /#page-content-wrapper -->
     </div>
+
+
+
+
+
+
+
+    <!-- <div class="hmessage">
+        <p>Editing GUI for WAP <span id="wapName"></span> ! click on MENU to start !</p>
+    </div> -->
 
 
     <!--div class="wrapper">
@@ -55,18 +167,18 @@
             <div class="columns"-->
 
     <!-- Pedal section -->
-    <main class="pedalSection"></main>
+   <!--  <main class="pedalSection"></main> -->
 
 
     <!--Selider Nav Menu-->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <!-- <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
 
         <!-- <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button> -->
-        <button class="buttonDownload" onclick="preview()">Preview/Run WAP</button>
-        <button class="buttonDownload" onclick="savePedal()">Publish</button>
+        <!-- <button class="buttonDownload" onclick="preview()">Preview/Run WAP</button>
+        <button class="buttonDownload" onclick="savePedal()">Publish</button> -->
         <!-- <button class="buttonDownload" onclick="newPedal()">New</button> -->
-        <br>
+        <!-- <br>
         <br>
         <br>
         <div id="fetching" style="display:none">
@@ -82,10 +194,10 @@
                 <option value="Georgia"></option>
             </select>
             <br>
-        </div>
+        </div> -->
 
         <!--Accrodion Menu-->
-        <div id="accordion">
+        <!-- <div id="accordion">
             <ul>
 
                 <li>
@@ -112,10 +224,40 @@
         </div>
     </div>
 
-    <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span>
+    <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span> -->
 
 </body>
 <script>
+
+$(function(){
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+
+            $(window).resize(function(e) {
+              if($(window).width()<=768){
+                $("#wrapper").removeClass("toggled");
+              }else{
+                $("#wrapper").addClass("toggled");
+              }
+            });
+          });
+
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen(); 
+    }
+  }
+}
+
+
+
+
     var url = "http://localhost:8085";
     let serverUrl = 'http://localhost:3000';
 
@@ -147,8 +289,8 @@
         console.log("###")
         faustUI = JSON.parse(urlParams.get('data'));
         let name = urlParams.get('name');
-        faustUI.WapName = name.substr(0, name.lastIndexOf("."));
-        document.querySelector("#wapName").innerHTML = faustUI.WapName;
+        /* faustUI.WapName = name.substr(0, name.lastIndexOf("."));
+        document.querySelector("#wapName").innerHTML = faustUI.WapName; */
 
         console.log("Initialize")
         console.log("faustUI = ", faustUI)
@@ -156,12 +298,12 @@
         //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
 
 
-        displaySavedPedalsIds();
+        //displaySavedPedalsIds();
 
-        bt_buildIt.addEventListener('click', () => {
+        /* bt_buildIt.addEventListener('click', () => {
 
             checkMetadata(document.querySelector("#urlPlugin").value);
-        });
+        }); */
 
         let faust = document.querySelector('#editor-faust'),
             faustClone = faust.cloneNode(true);
@@ -295,7 +437,7 @@
             if (http.readyState == 4 && http.status == 200) {
                 alert('Saved successfully!');
                 pedal.pedalId = JSON.parse(http.responseText).id;
-                displaySavedPedalsIds();
+                //displaySavedPedalsIds();
             }
         }
         http.send(JSON.stringify(params));
@@ -310,19 +452,19 @@
         savedPedalsConfigs = pedalConfigs;
     }
 
-    function displaySavedPedalsIds() {
+   /*  function displaySavedPedalsIds() {
 
-        /* Uptates the list of pedal configurations by fetching then from the server. */
+        // Uptates the list of pedal configurations by fetching then from the server. 
         refreshSavedPedalsConfigs();
 
-        /* Gets the select element that displays the list of names of the saved pedal configurations. */
+        // Gets the select element that displays the list of names of the saved pedal configurations. 
         let loadPedalElem = document.querySelector('#load-pedal');
 
         let oldVal = loadPedalElem.value;
 
-        /* Flushes the select element to get rid of the old pedal configurations that have been generated
-        during the last call to this function. If we don't flush it, the names of the new pedal configurations
-        will be appended to the ones that has been fetched in the previous call to the function.*/
+        // Flushes the select element to get rid of the old pedal configurations that have been generated
+        //during the last call to this function. If we don't flush it, the names of the new pedal configurations
+        //will be appended to the ones that has been fetched in the previous call to the function.
         loadPedalElem.innerHTML = '';
 
         for (let savedPedalConfig of savedPedalsConfigs) {
@@ -335,7 +477,7 @@
 
         loadPedalElem.value = oldVal;
 
-    }
+    } */
 
 
     function setSelectedElementLabel(value) {
