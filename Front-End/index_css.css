@@ -1431,7 +1431,7 @@ body {
     width: 0;
   }
   #wrapper.toggled #sidebar-wrapper {
-    width: 400px;
+    width: 500px;
   }
   #page-content-wrapper {
     padding: 20px;

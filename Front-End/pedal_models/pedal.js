@@ -210,7 +210,7 @@
                             height: ${this.getAttribute('height')}px;
                             border-radius: ${this.getAttribute('radius')}px;
                             position: fixed;
-                            top: 40%;
+                            top: 50%;
                             left: 50%;
                             /* bring your own prefixes */
                             transform: translate(-50%, -50%);

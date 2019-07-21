@@ -9,9 +9,10 @@
     <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -29,6 +30,7 @@
     <link rel="import" href="editor-components/editor-element-list.html">
     <link rel="import" href="editor-components/editor-inspector.html">
     <link rel="import" href="editor-components/editor-faust/editor-faust.html">
+    <link rel="import" href="editor-components/editor-pedal-new/editor-pedal-new-1.html">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
     <!-- jQuery library -->
@@ -45,6 +47,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Pedal Creator 0.1</title>
+
 </head>
 
 <body>
@@ -61,6 +64,7 @@
                 <li class="nav-item active"> <a class="nav-link" href="#"><i class="fa fa-download"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#" onclick="savePedal()"><i class="fa fa-save"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.open('faust-editor','popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');"><i class="fa fa-pencil"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus-circle"></i></a></li>
                 <li class="nav-item active"> <a class="nav-link" href="#" onclick="newPedal()"><i class="fa fa-plus-circle"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.location.reload();"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a> </li>
             </ul>
@@ -71,7 +75,26 @@
             <form class="form-inline my-2 my-md-0"> </form>
         </div>
     </nav>
-    <div id="wrapper" class="toggled">
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="height: 500px; width: 500px; background-color: #333;">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #333;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: blanchedalmond;">Pedal Models</h4>
+        </div>
+        <div class="modal-body" style="background-color: #333;">
+          <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1>
+        </div>
+        
+      </div>
+      
+        </div>
+      </div>
+
+    <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -228,6 +251,12 @@
 
 </body>
 <script>
+
+$('a[href$="#myModal"]').on( "click", function() {
+   $('#myModal').modal('show');
+});
+
+
 
 $(function(){
             $("#menu-toggle").click(function(e) {
