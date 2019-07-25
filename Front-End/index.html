@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="StyleSheet.css">
     <link rel="stylesheet" href="StyleSideNav.css">
     <link rel="stylesheet" href="index_css.css">
+    <link rel="Stylesheet" href="SideBar.css">
 
     <link type="text/css" rel="stylesheet" href="rgbaColorPicker/rgbaColorPicker.css" />
     <script type="text/javascript" src="rgbaColorPicker/rgbaColorPicker.js"></script>
@@ -80,7 +81,7 @@
     </nav>
 
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" style="height: 500px; width: 500px; background-color: #333;">
+        <div class="modal-dialog" style="background-color: #333;">
       
       <!-- Modal content-->
       <div class="modal-content">
@@ -128,8 +129,10 @@
         </div>
         <div class="modal-footer" style="background-color: #333;">
             <div class="form-group">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="pull-right">
                     <button type="submit" class="btn btn-default" style="color: black; background-color: white;" onclick="refreshModal()">Refresh</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-primary" onclick="newPedal()">Create</button>
                 </div>
             </div>
@@ -181,29 +184,7 @@
                                     </div>
                             </details>
                     </div>
-                    <!-- <ul>
-        
-                        <li>
-                            <a href="#editor-pedal-details" >PEDAL DETAILS</a>
-                            <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
-                        </li>
-        
-                        <li>
-                            <a href="#editor-element-list">ELEMENTS</a>
-                            <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
-                        </li>
-        
-                        <li>
-                            <a href="#editor-inspector">INSPECTOR</a>
-                            <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
-                        </li>
-        
-                        <li>
-                            <a href="#editor-faust">FAUST</a>
-                            <editor-faust id="editor-faust" class="accordion"></editor-faust>
-                        </li>
-                        
-                    </ul> -->
+                    
                 </div>
             </div>
                     
@@ -221,78 +202,6 @@
 
 
 
-
-
-
-
-    <!-- <div class="hmessage">
-        <p>Editing GUI for WAP <span id="wapName"></span> ! click on MENU to start !</p>
-    </div> -->
-
-
-    <!--div class="wrapper">
-        <section class="content">
-            <div class="columns"-->
-
-    <!-- Pedal section -->
-   <!--  <main class="pedalSection"></main> -->
-
-
-    <!--Selider Nav Menu-->
-    <!-- <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-
-        <!-- <button class="buttonDownload" onclick="generateCodeFunctionalPedal()">Generate code</button> -->
-        <!-- <button class="buttonDownload" onclick="preview()">Preview/Run WAP</button>
-        <button class="buttonDownload" onclick="savePedal()">Publish</button> -->
-        <!-- <button class="buttonDownload" onclick="newPedal()">New</button> -->
-        <!-- <br>
-        <br>
-        <br>
-        <div id="fetching" style="display:none">
-            Paste a WAP directory URL to Fetch
-            <input type="text" id="urlPlugin" value="https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/QuadraFuzz3/"
-                style="width: 90%;">
-            <br>
-            <button class="buttonDownload" id="bt_buildIt">fetch plugin descriptor</button>
-        </div>
-        <div style="display:none">
-            <label>Load: </label>
-            <select id="load-pedal" onchange="loadPedalConfig(value)" class="maininput">
-                <option value="Georgia"></option>
-            </select>
-            <br>
-        </div> -->
-
-        <!--Accrodion Menu-->
-        <!-- <div id="accordion">
-            <ul>
-
-                <li>
-                    <a href="#editor-pedal-details">WAP DETAILS</a>
-                    <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
-                </li>
-
-                <li>
-                    <a href="#editor-element-list">ELEMENTS</a>
-                    <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
-                </li>
-
-                <li>
-                    <a href="#editor-inspector">INSPECTOR</a>
-                    <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
-                </li>
-
-                <li>
-                    <a href="#editor-faust">FAUST</a>
-                    <editor-faust id="editor-faust" class="accordion"></editor-faust>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-
-    <span style="font-size:30px;cursor:pointer;color: #a52a2a" onclick="openNav()">&#9776; Menu</span> -->
 
 </body>
 <script>
