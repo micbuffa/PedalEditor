@@ -18,13 +18,14 @@ font-size:20px;
 .main-menu:hover,nav.main-menu.expanded {
 width:250px;
 overflow:visible;
+
 }
 
 .main-menu {
-background:#212121;
+background:#333;
 border-right:1px solid #e5e5e5;
 position:absolute;
-top:0;
+top:68px;
 bottom:0;
 height:100%;
 left:0;

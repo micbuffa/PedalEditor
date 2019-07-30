@@ -15,12 +15,12 @@
         WebComponents.ShadowCSS.shimStyling(template.content, 'pedal');
     }
 
-    let BACKGROUND_IMAGES_URL = './img/background/';
+    let BACKGROUND_IMAGES_URL = '../../Back-End/img/background/';
 
     //let ASSETS_PATH = 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img';
 
     // Use when server down.
-    let ASSETS_PATH = './img';
+    let ASSETS_PATH = '"http://localhost:3000/img';
 
     class Pedal extends HTMLElement {
         static get observedAttributes() {
@@ -62,7 +62,7 @@
 
             return null;
         }
-
+        
         /********************************* Deleting Pedal Elements ************************************/
 
         deleteSelectedElement() {
@@ -239,7 +239,7 @@
                             opacity: ${this.getAttribute('opacity')};
                         }
 
-                        #resize {
+                        /* #resize {
                             position: absolute;
                             cursor: nwse-resize;
                             width: 10px;
@@ -247,7 +247,7 @@
                             left: ${this.getAttribute('width') - 8}px;
                             top: ${this.getAttribute('height') - 8}px;
                             border: 1px solid black;
-                        }
+                        } */
 
                         .knob, .switch, .icon, .label, .slider {
                             position: absolute;

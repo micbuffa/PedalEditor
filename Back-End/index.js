@@ -37,8 +37,8 @@ app.get("/pedals", function(req, res) {
 });
 
 app.get("/previews/knobs", function(req, res) {
-  fs.readdir("../Front-End/img/knobs2", (err, files) => {
-    let filesUrl = "http://localhost:8887/img/knobs2/";
+  fs.readdir("../Back-End/img/knobs2", (err, files) => {
+    let filesUrl = "http://localhost:3000/img/knobs2/";
 
     response = {
       filesUrl,
@@ -50,8 +50,8 @@ app.get("/previews/knobs", function(req, res) {
 });
 
 app.get("/previews/sliders", (req, res) => {
-  fs.readdir("../Front-End/img/sliders", (err, files) => {
-    let filesUrl = "http://localhost:8887/img/sliders/";
+  fs.readdir("../Back-End/img/sliders", (err, files) => {
+    let filesUrl = "http://localhost:3000/img/sliders/";
 
     response = {
       filesUrl,
@@ -63,8 +63,8 @@ app.get("/previews/sliders", (req, res) => {
 });
 
 app.get("/previews/icons", function(req, res) {
-  fs.readdir("../Front-End/img/icons", (err, files) => {
-    let filesUrl = "http://localhost:8887/img/icons/";
+  fs.readdir("../Back-End/img/icons", (err, files) => {
+    let filesUrl = "http://localhost:3000/img/icons/";
 
     response = {
       filesUrl,
@@ -76,8 +76,8 @@ app.get("/previews/icons", function(req, res) {
 });
 
 app.get("/previews/switches", function(req, res) {
-  fs.readdir("../Front-End/img/switches", (err, files) => {
-    let filesUrl = "http://localhost:8887/img/switches/";
+  fs.readdir("../Back-End/img/switches", (err, files) => {
+    let filesUrl = "http://localhost:3000/img/switches/";
 
     response = {
       filesUrl,
