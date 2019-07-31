@@ -20,7 +20,7 @@
     //let ASSETS_PATH = 'https://wasabi.i3s.unice.fr/WebAudioPluginBank/WASABI/PingPongDelay2Amine/img';
 
     // Use when server down.
-    let ASSETS_PATH = '"http://localhost:3000/img';
+    let ASSETS_PATH = './img';
 
     class Pedal extends HTMLElement {
         static get observedAttributes() {
