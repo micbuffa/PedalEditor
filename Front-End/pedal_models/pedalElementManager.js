@@ -4,15 +4,15 @@ class PedalElementManager {
         this.pedal = pedal;
         this.doc = document;
 
-        //let resizeElem = this.pedal.shadowRoot.querySelector('#resize');
+        let resizeElem = this.pedal.shadowRoot.querySelector('#resize');
 
         var that = this;
 
-        /* resizeElem.addEventListener('mousedown', function (e) {
+        resizeElem.addEventListener('mousedown', function (e) {
             e.stopPropagation();
             e.preventDefault();
             that.resizeListener(e, that.pedal);
-        }, true); */
+        }, true);
     }
 
 
@@ -333,7 +333,7 @@ class PedalElementManager {
         document.addEventListener('mouseup', onMouseUp);
     }
 
-    /* resizeListener(e, pedal) {
+    resizeListener(e, pedal) {
         let initialX = e.pageX;
         let initialY = e.pageY;
 
@@ -353,7 +353,7 @@ class PedalElementManager {
             pedal.dispatchEvent(pedal.configChangedEvent);
 
             pedal.updateStyle(pedal);
-        } */
+        }
 
         function onMouseMove(e) {
             move(e.pageX, e.pageY);

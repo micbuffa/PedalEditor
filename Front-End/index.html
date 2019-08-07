@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="StyleSideNav.css">
     <link rel="stylesheet" href="index_css.css">
     <link rel="Stylesheet" href="SideBar.css">
+    <link rel="Stylesheet" href="police_select.css">
 
     <link type="text/css" rel="stylesheet" href="rgbaColorPicker/rgbaColorPicker.css" />
     <script type="text/javascript" src="rgbaColorPicker/rgbaColorPicker.js"></script>
@@ -37,6 +38,10 @@
     <link rel="import" href="editor-components/editor-pedal-new/editor-pedal-new-1.html">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
+
+    <link href='https://fonts.googleapis.com/css?family=Montez|Lobster|Josefin+Sans|Shadows+Into+Light|Pacifico|Amatic+SC:700|Orbitron:400,900|Rokkitt|Righteous|Dancing+Script:700|Bangers|Chewy|Sigmar+One|Architects+Daughter|Abril+Fatface|Covered+By+Your+Grace|Kaushan+Script|Gloria+Hallelujah|Satisfy|Lobster+Two:700|Comfortaa:700|Cinzel|Courgette' rel='stylesheet' type='text/css'>
+
+
     <!-- jQuery library -->
 
     <!-- Latest compiled JavaScript -->
@@ -45,6 +50,9 @@
 
     <script src="pedal_models/functionalPedalGenerator.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/TextPlugin.min.js"></script>
+    
     <link
         href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
         rel="stylesheet">
@@ -84,18 +92,54 @@
         <ul>
             
             <li>
-                <a href="#">
+                <a data-toggle="modal" data-target="#myModal2" href="#myModal">
                     <i class="fa fa-font fa-2x"></i>
                     <span class="nav-text">
                        Police
                     </span>
                 </a>
+            
             </li>
             
         </ul>
 
         
     </nav>
+
+
+
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="background-color: #333;">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #333;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: blanchedalmond;">Police Menu</h4>
+        </div>
+        <div class="modal-body" style="background-color: #333;">
+          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+          
+        
+            <select id = 'select' onChange = "return fontChange();" style="direction: ltr;">
+            </select>
+            
+                
+        </div>
+
+        </div>
+        <div class="modal-footer" style="background-color: #333;">
+                <div id = "text">
+                        <p id = "h3"  style="color: white; direction: ltr;">
+                            
+                        </p>
+                </div>
+        </div>
+      </div>
+      
+        </div>
+      </div>
+
 
 
 
@@ -143,6 +187,13 @@
             <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
             <div class="col-sm-10">
               <input type="text" placeholder="Name" id="name" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Label</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="Label" id="label" class="form-control">
             </div>
           </div>
 
@@ -226,10 +277,61 @@
 </body>
 <script>
 
+
+
+var fonts = ["Montez","Lobster","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface","Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
+var string = "";
+var select = document.getElementById("select")
+for(var a = 0; a < fonts.length ; a++){
+	var opt = document.createElement('option');
+	opt.value = opt.innerHTML = fonts[a];
+	opt.style.fontFamily = fonts[a];
+	select.add(opt);
+}
+function fontChange(){
+	var x = document.getElementById("select").selectedIndex;
+  var y = document.getElementById("select").options;
+	document.body.insertAdjacentHTML("beforeend", "<style> #text{ font-family:'"+y[x].text+"';}"+
+																	 "#select{font-family:'"+y[x].text+"';</style>");
+	var t3 = new TimelineLite, 
+	mySplitText3 = new SplitText("#h3", {type:"words,chars"}), 
+	chars = mySplitText3.chars; //an array of all the divs that wrap each character
+	TweenLite.set("#h3", {perspective:400});
+	t3.staggerFrom(chars, 0.2, {opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 150% -50",  ease:Back.easeOut}, 0.01, "+=0");
+	
+}
+/* TweenLite.to(page, 0, {top:"-100vh", ease:Bounce.easeOut, delay:0});
+TweenLite.to(page, 1, {top:"0vh", ease:Elastic.easeOut, delay:1}); */
+//fontChange();
+
+
+
+
+
 $('a[href$="#myModal"]').on( "click", function() {
    $('#myModal').modal('show');
 });
 
+
+$('a[href$="#myModal2"]').on( "click", function() {
+   $('#myModal2').modal('show');
+});
+
+
+/* $(".dropdown-toggle").on("mouseenter", function () {
+    // make sure it is not shown:
+    if (!$(this).parent().hasClass("show")) {
+        $(this).click();
+    }
+});
+
+
+$(".btn-group, .dropdown").on("mouseleave", function () {
+    // make sure it is shown:
+    if ($(this).hasClass("show")){
+        $(this).children('.dropdown-toggle').first().click();
+    }
+}); */
 
 
 $(function(){
@@ -406,6 +508,7 @@ function refreshModal(){
         //pedalElem.className = "draggable";
         section.appendChild(pedalElem);
         pedal = pedalElem;
+        
 
         pedal.addEventListener('select-knob', function (e) {
             selectKnob(e.detail);
@@ -463,6 +566,8 @@ function refreshModal(){
 
 
         functionalPedalGenerator = new FunctionalPedalGenerator(pedal);;
+
+        document.getElementById('h3').innerHTML = document.getElementById('label').value;
     }
 
     function savePedal() {
