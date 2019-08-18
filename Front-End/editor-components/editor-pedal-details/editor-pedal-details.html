@@ -15,42 +15,42 @@
 
     </style>
 
-    <div>
+    <div style="direction: ltr;">
 
         <details class="editor-collapsible">
             
-            <summary > Pedal configuration </summary>
+            <summary style="color: white;"> Pedal configuration </summary>
 
-            <div class="editor-collapsible-content">
-                <label style="direction: ltr;">Name: </label>
+            <div class="editor-collapsible-content" style="background-color: #333;">
+                <label style="direction: ltr; color: white;">Name: </label>
                 <input id="pedal-name" name="name" class="maininput" style="direction: ltr;" disabled>
 
                 <br>
 
-                <label style="direction: ltr;">Background color: #</label>
+                <label style="direction: ltr; color: white;">Background color: #</label>
                 <input type="color" name="color" class="maininput" style="direction: ltr;" disabled>
 
                 <br>
 
-                <label style="direction: ltr;">Image opacity: </label>
+                <label style="direction: ltr; color: white;">Image opacity: </label>
                 <input id="opacity" class="maininput" type="number" name="opacity" min="0" max="1" style="direction: ltr;" disabled>
 
                 <br>
 
-                <label style="direction: ltr;">Width: </label>
+                <label style="direction: ltr; color: white;">Width: </label>
                 <input id="width" class="maininput" type="number" name="width" min="0" max="600" style="direction: ltr;" disabled> px
 
                 <br>
 
-                <label style="direction: ltr;">Height: </label>
+                <label style="direction: ltr; color: white;">Height: </label>
                 <input id="height" class="maininput" type="number" name="height" min="0" max="600" style="direction: ltr;" disabled> px
 
                 <br>
 
-                <label style="direction: ltr;">Radius: </label>
+                <label style="direction: ltr; color: white;">Radius: </label>
                 <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" style="direction: ltr;" disabled> px
 
-                <label style="direction: ltr;">Background images: </label>
+                <label style="direction: ltr; color: white;">Background images: </label>
                 <div id="background-images">
                     <img class="menu-img background-image" src="./img/background/image2.png" alt="image2.png" />
                     <img class="menu-img background-image" src="./img/background/1.png" alt="1.png" />
@@ -66,12 +66,12 @@
 
         <details class="editor-collapsible">
 
-            <summary> Add pedal element </summary>
+            <summary style="color: white;"> Add pedal element </summary>
 
             <div class="editor-collapsible-content">
 
                 <details id="add-knob" class="sub-editor-collapsible">
-                    <summary> Knob </summary>
+                    <summary style="color: whitesmoke;"> Knob </summary>
                     <div class="editor-collapsible-content">
                         <pedal-elem-previews url="http://localhost:3000/previews/knobs" pedal-element-type="knob">
                         </pedal-elem-previews>
@@ -79,7 +79,7 @@
                 </details>
 
                 <details id="add-icon" class="sub-editor-collapsible">
-                    <summary> Icons </summary>
+                    <summary style="color: whitesmoke;"> Icons </summary>
                     <div class="editor-collapsible-content">
                         <pedal-elem-previews url="http://localhost:3000/previews/icons" pedal-element-type="icon">
                         </pedal-elem-previews>
@@ -87,7 +87,7 @@
                 </details>
                 
                 <details id="ad-slider" class="sub-editor-collapsible" pedal-element-type="slider">
-                    <summary>Sliders</summary>
+                    <summary style="color: whitesmoke;">Sliders</summary>
                     <div class="editor-collapsible-contnet">
                         <pedal-elem-previews url="http://localhost:3000/previews/sliders" pedal-element-type="slider">
                         </pedal-elem-previews>
@@ -95,7 +95,7 @@
                 </details>
 
                 <details id="ad-switch" class="sub-editor-collapsible" pedal-element-type="slider">
-                    <summary>Switches</summary>
+                    <summary style=color: whitesmoke;">Switches</summary>
                     <div class="editor-collapsible-contnet">
                         <pedal-elem-previews url="http://localhost:3000/previews/switches" pedal-element-type="switch">
                         </pedal-elem-previews>

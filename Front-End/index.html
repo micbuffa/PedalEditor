@@ -53,6 +53,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/TextPlugin.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- <script src="editor_components/editor-inspector.js"></script> -->
 
     <link
         href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
@@ -64,6 +65,7 @@
 </head>
 
 <body>
+        
 
     <!-- Pedal section -->
     <main class="pedalSection"></main>
@@ -103,10 +105,10 @@
             </li>
             
             <li class="has-subnav">
-                <a data-toggle="modal" data-target="#myModal2" href="#myModal">
+                <a data-toggle="modal" data-target="#myModal3" href="#myModal">
                     <i class="fa fa-cog fa-2x"></i>
                     <span class="nav-text">
-                       Label position
+                       Items Positioning
                     </span>
                 </a>
             
@@ -115,6 +117,38 @@
 
         
     </nav>
+
+
+    <div id="myModal3" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="background-color: #333;">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #333;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: blanchedalmond;">Police Menu</h4>
+        </div>
+        <div class="modal-body" style="background-color: #333;">
+          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+          
+
+            <div class="editor-collapsible-content" >
+                    <editor-inspector id="editor-inspector" ></editor-inspector>
+            </div>
+          
+
+        
+        </div>
+
+        </div>
+        <div class="modal-footer" style="background-color: #333;">
+            <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
+        </div>
+      </div>
+      
+        </div>
+      </div>
+
 
 
 
@@ -238,37 +272,37 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <div id="accordion">
-                    <div>
+                    <div style="direction: ltr;">
                             <details class="editor-collapsible">
         
-                                    <summary><a href="#editor-pedal-details">Pedal configuration </a></summary>
+                                    <summary style="color: #999;">Pedal configuration</summary>
                         
-                                    <div class="editor-collapsible-content" >
-                                            <editor-pedal-details id="editor-pedal-details" class="accordion"></editor-pedal-details>
+                                    <div class="editor-collapsible-content">
+                                            <editor-pedal-details id="editor-pedal-details" class="accordion" style="background-color: #333;"></editor-pedal-details>
                                     </div>
                             </details>   
 
                             <details class="editor-collapsible">
         
-                                    <summary><a href="#editor-element-list">Elements </a></summary>
+                                    <summary style="color: #999;">Elements </summary>
                         
                                     <div class="editor-collapsible-content" >
                                             <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
                                     </div>
                             </details>
                             
-                            <details class="editor-collapsible">
+                            <!-- <details class="editor-collapsible">
         
                                     <summary><a href="#editor-inspector">Inspector </a></summary>
                         
                                     <div class="editor-collapsible-content" >
                                             <editor-inspector id="editor-inspector" class="accordion"></editor-inspector>
                                     </div>
-                            </details>
+                            </details> -->
 
                             <details class="editor-collapsible">
         
-                                    <summary><a href="#editor-faust">Faust </a></summary>
+                                    <summary style="color: #999;">Faust</summary>
                         
                                     <div class="editor-collapsible-content" >
                                             <editor-faust id="editor-faust" class="accordion"></editor-faust>
@@ -326,6 +360,20 @@ TweenLite.to(page, 1, {top:"0vh", ease:Elastic.easeOut, delay:1}); */
 
 
 
+function pedalitemslist(){
+    var length = pedal.shadowRoot.getElementById('pedal').children.length;
+    //var i=2;
+    var sel = document.getElementById('selectliste');
+    
+    
+
+    for(var i = 2; i<=length-1; i++){
+        var opt = document.createElement('option');
+        opt.text = pedal.shadowRoot.getElementById('pedal').children[i].id;
+        sel.appendChild(opt);
+    }
+    
+}
 
 
 $('a[href$="#myModal"]').on( "click", function() {
