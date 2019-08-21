@@ -255,7 +255,20 @@
                             text-align: center;
                         }
 
-                    
+                        .container {
+                            position: relative;
+                            font-family: Arial;
+                          }
+                          
+                        .text-block {
+                            position: absolute;
+                            bottom: 20px;
+                            right: 20px;
+                            background-color: ${this.getAttribute('color')};
+                            color: white;
+                            padding-left: 20px;
+                            padding-right: 20px;
+                        }
 
                         .selected {
                             border: 1px dashed black;

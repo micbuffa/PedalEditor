@@ -28,7 +28,10 @@ figcaption {
 } */
 
 	</style>
+    <!-- Include Editor style. -->
+  <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
 
+  
 	<div class="pedal draggable" id="pedal">
 		<div id="resize"></div>
 
@@ -37,9 +40,15 @@ figcaption {
         <img id="background-image" alt="tototo">
         <figcaption>tototo</figcaption>
     </figure> -->
+    <div class="container">
+      <img id="background-image">
+      <div class="text-block" id="textB">
+          <h4></h4>
+          <p id="test"></p>
+      </div>
+    </div>
     
-    <img id="background-image">
-    
+    <!-- <div class="text-block" id="froala-editor"></div> -->
 	</div>
 
 
@@ -48,8 +57,12 @@ figcaption {
 <script src="pedalElementManager.js"></script>
 <script src="pedal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-<script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js'></script>
 
+<script>
+ /* new FroalaEditor('div#froala-editor', {
+   editInPopup: true
+ }) */
 
 interact('.draggable')
   .draggable({

@@ -39,7 +39,7 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
 
-    <link href='https://fonts.googleapis.com/css?family=Montez|Lobster|Josefin+Sans|Shadows+Into+Light|Pacifico|Amatic+SC:700|Orbitron:400,900|Rokkitt|Righteous|Dancing+Script:700|Bangers|Chewy|Sigmar+One|Architects+Daughter|Abril+Fatface|Covered+By+Your+Grace|Kaushan+Script|Gloria+Hallelujah|Satisfy|Lobster+Two:700|Comfortaa:700|Cinzel|Courgette' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montez|Lobster|Roboto|Lexend+Zetta|Josefin+Sans|Shadows+Into+Light|Pacifico|Amatic+SC:700|Orbitron:400,900|Rokkitt|Righteous|Dancing+Script:700|Bangers|Chewy|Sigmar+One|Architects+Daughter|Abril+Fatface|Covered+By+Your+Grace|Kaushan+Script|Gloria+Hallelujah|Satisfy|Lobster+Two:700|Comfortaa:700|Cinzel|Courgette' rel='stylesheet' type='text/css'>
 
 
     <!-- jQuery library -->
@@ -54,6 +54,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/TextPlugin.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!-- <script src="editor_components/editor-inspector.js"></script> -->
+
+    
 
     <link
         href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
@@ -74,7 +76,7 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark"> <a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse" id="navbarsExample02">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"> <a class="nav-link" href="#" ><i class="fa fa-trash"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" id="removeLink" onclick="removeDOMElement()"><i class="fa fa-trash"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#" onclick="toggleFullScreen()"><i class="fa fa-arrows-alt"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#"><i class="fa fa-download"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#" onclick="savePedal()"><i class="fa fa-save"></i></a> </li>
@@ -113,10 +115,55 @@
                 </a>
             
             </li>
+
+            <li class="has-subnav">
+                <a data-toggle="modal" data-target="#myModal4" href="#myModal">
+                    <i class="fa fa-truck fa-2x"></i>
+                    <span class="nav-text">
+                        Pedal Templates
+                    </span>
+                </a>
+            </li>
         </ul>
 
         
     </nav>
+
+
+
+    <div id="myModal4" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="background-color: #333;">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #333;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: blanchedalmond;">Pedal Templates</h4>
+        </div>
+        <div class="modal-body" style="background-color: #333;">
+          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+          
+
+            <div class="container" style="direction: ltr;">
+                <iframe src="pedal_templates/distorder/testDistorder.html" width="285" height="320" id="template1"></iframe>
+            </div>
+            <a href="#selectTemplate" onclick="LoadTemplateConfig()" id="selectTemplate">Select Template</a>
+
+        
+        </div>
+
+        </div>
+        <div class="modal-footer" style="background-color: #333;">
+            <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
+            <!-- <div class="form-group">
+                <a class="btn btn-primary" onclick="removeDOMElement()">Delete</a>
+            </div> -->
+        </div>
+      </div>
+      
+        </div>
+      </div>
+
 
 
     <div id="myModal3" class="modal fade" role="dialog">
@@ -143,6 +190,9 @@
         </div>
         <div class="modal-footer" style="background-color: #333;">
             <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
+            <!-- <div class="form-group">
+                <a class="btn btn-primary" onclick="removeDOMElement()">Delete</a>
+            </div> -->
         </div>
       </div>
       
@@ -156,32 +206,75 @@
         <div class="modal-dialog" style="background-color: #333;">
       
       <!-- Modal content-->
-      <div class="modal-content">
+    <div class="modal-content">
         <div class="modal-header" style="background-color: #333;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="color: blanchedalmond;">Police Menu</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color: blanchedalmond;">Police Menu</h4>
         </div>
         <div class="modal-body" style="background-color: #333;">
-          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
-          <div class="form-group">
-                <label class="col-sm-2 control-label" for="select" style="color: white;">Font Theme</label>&nbsp;&nbsp;&nbsp;
+            <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="select" style="color: white;">Font
+                    Theme</label>&nbsp;&nbsp;&nbsp;
                 <div class="col-sm-9">
-                    <select id = 'select' onChange = "return fontChange();" style="direction: ltr;">
+                    <select id='select' onChange="return fontChange();" style="direction: ltr;">
                     </select>
                 </div>
-          </div>
-
-          <div class="form-group">
-            
-            <div class="col-sm-9" style="direction: ltr;">
-                <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold"></i></a>
-                <a href="#" id="underlineid" onclick="UnderlineStyle()"><i class="fa fa-underline"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines"></i></a>
             </div>
-          </div>
-        </div>
+    
+            <div class="form-group">
+                <div class="col-sm-9" style="direction: ltr;">
+                    <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold"></i></a>
+                    <a href="#" id="underlineid" onclick="UnderlineStyle()"><i
+                            class="fa fa-underline"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines"></i></a>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <div class="col-sm-9" style="direction: ltr;">
+                    <a href="#" class="btn btn-primary" type="submit" onclick="labelPedalChange()">Submit</a>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="sel1" style="color: white;" style="direction: ltr;">Font Size</label>&nbsp;&nbsp;&nbsp;
+                <div class="col-sm-9">
+                    <select id="sel1" onchange="changeSize(this);" style="direction: ltr;">
+                        <option>4</option>
+                        <option>8</option>
+                        <option>12</option>
+                        <option>16</option>
+                        <option>20</option>
+                        <option>24</option>
+                        <option>28</option>
+                        <option>32</option>
+                        <option>36</option>
+                        <option>40</option>
+                        <option>44</option>
+                        <option>48</option>
+                        <option>52</option>
+                        <option>56</option>
+                        <option>58</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="posX" style="color: white;" style="direction: ltr;">X Position</label>&nbsp;&nbsp;&nbsp;
+                <div class="col-sm-9" style="direction: ltr;">
+                    <input type="text" placeholder="Input x position">
+                    <a href="#" type="submit" class="btn btn-default" onclick="moveLabelX()" id="moveLabelX">X Move</a>
+                </div>
+            </div>
+
 
         </div>
+
+        
+
         <div class="modal-footer" style="background-color: #333;">
                 <div id = "text">
                         <p id = "h3"  style="color: white; direction: ltr;">
@@ -275,7 +368,7 @@
                     <div style="direction: ltr;">
                             <details class="editor-collapsible">
         
-                                    <summary style="color: #999;">Pedal configuration</summary>
+                                    <summary style="color: #999;"><a href="#editor-pedal-details">Pedal configuration</a></summary>
                         
                                     <div class="editor-collapsible-content">
                                             <editor-pedal-details id="editor-pedal-details" class="accordion" style="background-color: #333;"></editor-pedal-details>
@@ -333,7 +426,7 @@
 
 
 
-var fonts = ["Montez","Lobster","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface","Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
+var fonts = ["Montez","Lobster","Roboto","Lexend Zetta","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface","Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
 var string = "";
 var select = document.getElementById("select")
 for(var a = 0; a < fonts.length ; a++){
@@ -344,7 +437,7 @@ for(var a = 0; a < fonts.length ; a++){
 }
 function fontChange(){
 	var x = document.getElementById("select").selectedIndex;
-  var y = document.getElementById("select").options;
+    var y = document.getElementById("select").options;
 	document.body.insertAdjacentHTML("beforeend", "<style> #text{ font-family:'"+y[x].text+"';}"+
 																	 "#select{font-family:'"+y[x].text+"';</style>");
 	var t3 = new TimelineLite, 
@@ -352,12 +445,45 @@ function fontChange(){
 	chars = mySplitText3.chars; //an array of all the divs that wrap each character
 	TweenLite.set("#h3", {perspective:400});
 	t3.staggerFrom(chars, 0.2, {opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 150% -50",  ease:Back.easeOut}, 0.01, "+=0");
-	
+    
 }
 /* TweenLite.to(page, 0, {top:"-100vh", ease:Bounce.easeOut, delay:0});
 TweenLite.to(page, 1, {top:"0vh", ease:Elastic.easeOut, delay:1}); */
 //fontChange();
 
+function labelPedalChange(){
+
+    var pp=document.querySelector('my-pedal');
+    if(pp.shadowRoot){
+        pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-family');
+    }
+}
+
+
+function moveLabelX(){
+    var pp=document.querySelector('my-pedal');
+    var t='10';
+    var click=0;
+    var link = document.getElementById('moveLabelX');
+    link.onclick = function(){
+        click = click + 20;
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('textB').style.right = String(click).concat("px");
+        }
+    };
+    
+}
+
+
+function changeSize(n) {
+    var s = document.getElementById('h3');
+    var pp=document.querySelector('my-pedal');
+    s.style.fontSize = n.value + 'px'
+
+    if(pp.shadowRoot){
+        pedal.shadowRoot.getElementById('test').style.fontSize = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size');
+    }
+}
 
 
 function pedalitemslist(){
@@ -385,6 +511,13 @@ $('a[href$="#myModal2"]').on( "click", function() {
    $('#myModal2').modal('show');
 });
 
+$('a[href$="#myModal3"]').on( "click", function() {
+   $('#myModal3').modal('show');
+});
+
+$('a[href$="#myModal4"]').on( "click", function() {
+   $('#myModal4').modal('show');
+});
 
 /* $(".dropdown-toggle").on("mouseenter", function () {
     // make sure it is not shown:
@@ -450,6 +583,7 @@ function RGBAToHexA(r,g,b,a) {
 function BoldStyle(){
     var click = 0;
     var link = document.getElementById('boldid');
+    var pp=document.querySelector('my-pedal');
     document.getElementById("h3").style.fontWeight = "900";
     link.onclick = function(){
         click++;
@@ -459,12 +593,17 @@ function BoldStyle(){
         else{
             document.getElementById("h3").style.fontWeight = "900";
         }
+
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('test').style.fontWeight = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-weight');
+        }
     };
 }
 
 function UnderlineStyle(){
     var click = 0;
     var link = document.getElementById('underlineid');
+    var pp=document.querySelector('my-pedal');
     document.getElementById("h3").style.textDecoration = "underline";
     link.onclick = function(){
         click++;
@@ -474,12 +613,16 @@ function UnderlineStyle(){
         else{
             document.getElementById("h3").style.textDecoration = "underline";
         }
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('text-decoration');
+        }
     };
 }
 
 function OverlineStyle(){
     var click = 0;
     var link = document.getElementById('overlineid');
+    var pp=document.querySelector('my-pedal');
     document.getElementById("h3").style.textDecoration = "overline";
     link.onclick = function(){
         click++;
@@ -489,6 +632,9 @@ function OverlineStyle(){
         else{
             document.getElementById("h3").style.textDecoration = "overline";
         }
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('text-decoration');
+        }
     };
 }
 
@@ -496,6 +642,7 @@ function OverlineStyle(){
 function GripLinesStyle(){
     var click = 0;
     var link = document.getElementById('griplinesid');
+    var pp=document.querySelector('my-pedal');
     document.getElementById("h3").style.textDecoration = "underline overline";
     link.onclick = function(){
         click++;
@@ -505,7 +652,18 @@ function GripLinesStyle(){
         else{
             document.getElementById("h3").style.textDecoration = "underline overline";
         }
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('text-decoration');
+        }
     };
+}
+
+
+
+function LoadTemplateConfig(){
+    var frame = document.getElementById('template1');
+    var linkframe = document.getElementById('selectTemplate');
+    
 }
 
 
@@ -703,7 +861,37 @@ function refreshModal(){
         functionalPedalGenerator = new FunctionalPedalGenerator(pedal);;
 
         document.getElementById('h3').innerHTML = document.getElementById('label').value;
+        var ped = document.querySelector('my-pedal');
+
+        if(ped.shadowRoot){
+            pedal.shadowRoot.getElementById('test').innerHTML = document.getElementById('label').value;
+        }
     }
+
+    function removeDOMElement(){
+        var p = document.querySelector('my-pedal');
+
+        if(p.shadowRoot){
+            //pedal.shadowRoot.getElementById('pedal').removeChild(pedal.shadowRoot.getElementById('pedal').children[2]);
+
+            for(var i=2; i<pedal.shadowRoot.getElementById('pedal').childElementCount; i++){
+                pedal.shadowRoot.getElementById('pedal').removeChild(pedal.shadowRoot.getElementById('pedal').children[i]);
+            }
+        }
+        
+    }
+
+
+    /* function removeDOMElement(){
+        var p = pedal.shadowRoot.getElementById('pedal');
+
+        p.addEventListener("click",function(e) {
+        var tgt = e.target;
+        if (tgt.id.includes('knob')) {
+            tgt.parentNode.removeChild(tgt); // or tgt.remove();
+        }
+        });
+    } */
 
     function savePedal() {
 
