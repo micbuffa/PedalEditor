@@ -36,6 +36,7 @@
     <link rel="import" href="editor-components/editor-inspector.html">
     <link rel="import" href="editor-components/editor-faust/editor-faust.html">
     <link rel="import" href="editor-components/editor-pedal-new/editor-pedal-new-1.html">
+
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
 
@@ -55,15 +56,78 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!-- <script src="editor_components/editor-inspector.js"></script> -->
 
-    
-
+   
     <link
         href="https://fonts.googleapis.com/css?family=Abril+Fatface|Belgrano|Bevan|Bungee+Inline|Bungee+Shade|Calligraffitti|Mogra|Nothing+You+Could+Do|Orbitron|Pangolin|Rock+Salt|Sansita|Shojumaru|UnifrakturMaguntia|VT323"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Pedal Creator 0.1</title>
+    <style>
+        .center{
+  text-align: center;
+}
+.menu {
+  width: 200px;
+  z-index: 1;
+  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  display: none;
+  transition: 0.2s display ease-in;
 
+  .menu-options {
+    list-style: none;
+    padding: 10px 0;
+    z-index: 1;
+    
+    .menu-option {
+      font-weight: 500;
+      z-index: 1;
+      font-size: 14px;
+      padding: 10px 40px 10px 20px;
+      // border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+
+
+button{
+  background: grey;
+  border: none;
+  
+  .next{
+    color:green;
+  }
+  
+  &[disabled="false"]:hover{
+    .next{
+      color: red;
+      animation: move 0.5s;
+      animation-iteration-count: 2;
+    }
+  }
+}
+
+@keyframes move{
+  from{
+    transform: translate(0%);
+  }
+  50%{
+    transform: translate(-40%);
+  }
+  to{
+    transform: transform(0%);
+  }
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -129,7 +193,19 @@
         
     </nav>
 
+    
 
+<div class="menu">
+        <ul class="menu-options">
+          <li class="menu-option" style="list-style-type: none;">
+            <select id='select' onChange="return fontChange();" style="direction: ltr; width: 120px; position: relative;">
+            </select>
+        </li>
+        </ul>
+      </div>
+      
+      
+      
 
     <div id="myModal4" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
@@ -164,7 +240,7 @@
         </div>
       </div>
 
-
+      
 
     <div id="myModal3" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
@@ -424,7 +500,35 @@
 </body>
 <script>
 
+const menu = document.querySelector(".menu");
+    let menuVisible = false;
 
+    const toggleMenu = command => {
+        menu.style.display = command === "show" ? "block" : "none";
+        menuVisible = !menuVisible;
+    };
+
+    const setPosition = ({ top, left }) => {
+        menu.style.left = `${left}px`;
+        menu.style.top = `${top}px`;
+        toggleMenu("show");
+    };
+
+    /* if (document.querySelector('my-pedal').shadowRoot) {
+        window.addEventListener("click", e => {
+            if (menuVisible) toggleMenu("hide");
+        });
+
+        window.addEventListener("contextmenu", e => {
+            e.preventDefault();
+            const origin = {
+                left: e.pageX,
+                top: e.pageY
+            };
+            setPosition(origin);
+            return false;
+        });
+    } */
 
 var fonts = ["Montez","Lobster","Roboto","Lexend Zetta","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface","Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
 var string = "";
@@ -663,6 +767,8 @@ function GripLinesStyle(){
 function LoadTemplateConfig(){
     var frame = document.getElementById('template1');
     var linkframe = document.getElementById('selectTemplate');
+
+    
     
 }
 
@@ -865,6 +971,19 @@ function refreshModal(){
 
         if(ped.shadowRoot){
             pedal.shadowRoot.getElementById('test').innerHTML = document.getElementById('label').value;
+            window.addEventListener("click", e => {
+            if (menuVisible) toggleMenu("hide");
+        });
+
+        window.addEventListener("contextmenu", e => {
+            e.preventDefault();
+            const origin = {
+                left: e.pageX,
+                top: e.pageY
+            };
+            setPosition(origin);
+            return false;
+        });
         }
     }
 
