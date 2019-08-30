@@ -194,15 +194,46 @@ button{
     </nav>
 
     
-
-<div class="menu">
+    <div class="menu" id="menu">
+            <a href="#" id="closeLink" onclick="closeMenu()"><i class="fas fa-times fa-2x" style="float: right; color: red; position: absolute; top: -15px;
+                right: -10px;"></i></a>
         <ul class="menu-options">
           <li class="menu-option" style="list-style-type: none;">
-            <select id='select' onChange="return fontChange();" style="direction: ltr; width: 120px; position: relative;">
-            </select>
-        </li>
+            <div style="display: inline-block; direction: ltr;">
+                <select id='select' onclick="changeLabelFont()" style="direction: ltr; width: 80px; position: relative;">
+                </select>
+                <select id="sel1" onchange="changeSize(this);" style="direction: ltr; width: 35px; position: relative;">
+                    <option>4</option>
+                    <option>8</option>
+                    <option>12</option>
+                    <option>16</option>
+                    <option>20</option>
+                    <option>24</option>
+                    <option>28</option>
+                    <option>32</option>
+                    <option>36</option>
+                    <option>40</option>
+                    <option>44</option>
+                    <option>48</option>
+                    <option>52</option>
+                    <option>56</option>
+                    <option>58</option>
+                </select>
+                <a href="#" onclick="fontSizeX()" id="fontSizeX"><i class="fas fa-plus" style="color: black;"></i></a>
+                <a href="#" onclick="fontSizeY()" id="fontSizeY"><i class="fas fa-minus" style="color: black;"></i></a>
+            </div>
+            
+            <div style="display: inline-block; direction: ltr;">
+                <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold" style="color: black; float: left; width: 20px;"></i></a>
+                <a href="#" id="underlineid" onclick="UnderlineStyle()"><i
+                    class="fa fa-underline" style="color: black; float: left; width: 20px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines" style="color: black; float: left; width: 20px;"></i></a>
+            </div>
+          </li>
         </ul>
-      </div>
+    </div>
+
+
       
       
       
@@ -544,6 +575,7 @@ function fontChange(){
     var y = document.getElementById("select").options;
 	document.body.insertAdjacentHTML("beforeend", "<style> #text{ font-family:'"+y[x].text+"';}"+
 																	 "#select{font-family:'"+y[x].text+"';</style>");
+                                                                     
 	var t3 = new TimelineLite, 
 	mySplitText3 = new SplitText("#h3", {type:"words,chars"}), 
 	chars = mySplitText3.chars; //an array of all the divs that wrap each character
@@ -586,6 +618,71 @@ function changeSize(n) {
 
     if(pp.shadowRoot){
         pedal.shadowRoot.getElementById('test').style.fontSize = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size');
+    }
+}
+
+
+function fontSizeX(){
+    var s = document.getElementById('h3');
+    var pp = document.querySelector('my-pedal');
+    //var click = Number(window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size').slice(0,2));
+    
+    //var click = Number(document.getElementById('sel1').value);
+    var sel = document.getElementById('sel1');
+
+    var link = document.getElementById('fontSizeX');
+    link.onclick = function(){
+        
+        if(pp.shadowRoot){
+            var toto = Number(window.getComputedStyle(pedal.shadowRoot.getElementById('test')).getPropertyValue('font-size').slice(0,2));
+        }
+        click = toto + 1;
+
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('test').style.fontSize = String(click).concat("px");
+        }
+        //s.style.fontSize = click + 'px';
+        //document.getElementById('sel1').value = click;
+    };
+    
+}
+
+
+function fontSizeY(){
+    var s = document.getElementById('h3');
+    var pp = document.querySelector('my-pedal');
+    //var click = Number(window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size').slice(0,2));
+    
+    //var click = Number(document.getElementById('sel1').value);
+    var sel = document.getElementById('sel1');
+
+    var link = document.getElementById('fontSizeY');
+    link.onclick = function(){
+        
+        if(pp.shadowRoot){
+            var toto = Number(window.getComputedStyle(pedal.shadowRoot.getElementById('test')).getPropertyValue('font-size').slice(0,2));
+        }
+        if(toto > 0){
+            click = toto - 1;
+        }
+        
+
+        if(pp.shadowRoot){
+            pedal.shadowRoot.getElementById('test').style.fontSize = String(click).concat("px");
+        }
+        //s.style.fontSize = click + 'px';
+        //document.getElementById('sel1').value = click;
+    };
+    
+}
+
+
+function changeLabelFont(){
+    var vrb = document.getElementById('select');
+    var pp = document.querySelector('my-pedal');
+        
+    if(pp.shadowRoot){
+        pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById('select')).getPropertyValue('font-family');
     }
 }
 
@@ -665,6 +762,14 @@ function toggleFullScreen() {
   }
 }
 
+
+function closeMenu(){
+   var mn = document.getElementById("closeLink");
+    mn.onclick =  function() {
+        toggleMenu("hide");
+    };
+}
+
 function RGBAToHexA(r,g,b,a) {
   r = r.toString(16);
   g = g.toString(16);
@@ -683,6 +788,7 @@ function RGBAToHexA(r,g,b,a) {
   return "#" + r + g + b + a;
 }
 
+var nbliensclick = 0;
 
 function BoldStyle(){
     var click = 0;
@@ -691,6 +797,7 @@ function BoldStyle(){
     document.getElementById("h3").style.fontWeight = "900";
     link.onclick = function(){
         click++;
+        nbliensclick++;
         if((click % 2) == 0){
             document.getElementById("h3").style.fontWeight = "";
         }
@@ -711,6 +818,7 @@ function UnderlineStyle(){
     document.getElementById("h3").style.textDecoration = "underline";
     link.onclick = function(){
         click++;
+        nbliensclick++;
         if((click%2) == 0){
             document.getElementById("h3").style.textDecoration = "";
         }
@@ -730,6 +838,7 @@ function OverlineStyle(){
     document.getElementById("h3").style.textDecoration = "overline";
     link.onclick = function(){
         click++;
+        nbliensclick++;
         if((click%2) == 0){
             document.getElementById("h3").style.textDecoration = "";
         }
@@ -750,6 +859,7 @@ function GripLinesStyle(){
     document.getElementById("h3").style.textDecoration = "underline overline";
     link.onclick = function(){
         click++;
+        nbliensclick++;
         if((click%2) == 0){
             document.getElementById("h3").style.textDecoration = "";
         }
@@ -969,21 +1079,23 @@ function refreshModal(){
         document.getElementById('h3').innerHTML = document.getElementById('label').value;
         var ped = document.querySelector('my-pedal');
 
-        if(ped.shadowRoot){
+        if (ped.shadowRoot) {
             pedal.shadowRoot.getElementById('test').innerHTML = document.getElementById('label').value;
-            window.addEventListener("click", e => {
-            if (menuVisible) toggleMenu("hide");
-        });
+            /* window.addEventListener("click", e => {
+                const flyoutElement = document.getElementById("closeLink");
+                let targetElement = e.target;
+                if (targetElement === flyoutElement) toggleMenu("hide");
+            }); */
 
-        window.addEventListener("contextmenu", e => {
-            e.preventDefault();
-            const origin = {
-                left: e.pageX,
-                top: e.pageY
-            };
-            setPosition(origin);
-            return false;
-        });
+            window.addEventListener("contextmenu", e => {
+                e.preventDefault();
+                const origin = {
+                    left: e.pageX,
+                    top: e.pageY
+                };
+                setPosition(origin);
+                return false;
+            });
         }
     }
 
