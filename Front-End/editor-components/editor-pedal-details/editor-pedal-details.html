@@ -51,11 +51,12 @@
                 <input id="radius" class="maininput" type="number" name="radius" min="0" max="25" style="direction: ltr;" disabled> px
 
                 <label style="direction: ltr; color: white;">Background images: </label>
-                <div id="background-images">
+                <div id="background-images" style="direction: ltr;">
                     <img class="menu-img background-image" src="./img/background/image2.png" alt="image2.png" />
                     <img class="menu-img background-image" src="./img/background/1.png" alt="1.png" />
                     <img class="menu-img background-image" src="./img/background/2.jpg" alt="2.jpg" />
                 </div>
+                <a data-toggle="modal" data-target="#moreModal" href="#moreModal" style="direction: ltr; float: right;" onclick="loadmore()">more...</a>
                 <br>
                 <!--<input id="uploadImage" type="file" class="maininput" name="radius" name="photo" />-->
                 <br />
@@ -115,3 +116,15 @@
 
 
 <script src="editor-pedal-details.js"></script>
+
+<script>
+
+$('a[href$="moreModal"]').on( "click", function() {
+   $('#moreModal').modal('show');
+});
+
+function loadmore(){
+
+}
+
+</script>
