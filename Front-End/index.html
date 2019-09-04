@@ -86,7 +86,7 @@
       z-index: 1;
       font-size: 14px;
       padding: 10px 40px 10px 20px;
-      // border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
       cursor: pointer;
 
       &:hover {
@@ -173,7 +173,7 @@ button{
             
             <li class="has-subnav">
                 <a data-toggle="modal" data-target="#myModal3" href="#myModal">
-                    <i class="fa fa-cog fa-2x"></i>
+                    <i class="fa fa-mouse-pointer fa-2x"></i>
                     <span class="nav-text">
                        Items Positioning
                     </span>
@@ -186,6 +186,15 @@ button{
                     <i class="fa fa-truck fa-2x"></i>
                     <span class="nav-text">
                         Pedal Templates
+                    </span>
+                </a>
+            </li>
+
+            <li class="has-subnav">
+                <a data-toggle="modal" data-target="#myModal5" href="#myModal">
+                    <i class="fa fa-cog fa-2x"></i>
+                    <span class="nav-text">
+                        Pedal Parameters
                     </span>
                 </a>
             </li>
@@ -247,6 +256,39 @@ button{
 
 
       
+
+
+
+    <div id="myModal5" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="background-color: #333;">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #333;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: blanchedalmond;">Pedal Parameters</h4>
+        </div>
+        <div class="modal-body" style="background-color: #333;">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" placeholder="Input Name" id="nompedal" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group" style="direction: ltr; float: right;">
+                <button type="submit" class="btn btn-primary" onclick="submitChange()" id="submitlink">Submit</button>
+            </div>
+        </div>
+
+        </div>
+       <!--  <div class="modal-footer" style="background-color: #333;" style="direction: ltr; float: right;">
+            <button type="submit" class="btn btn-primary" onclick="submitChange()" id="submitlink">Submit</button>
+        </div> -->
+      </div>
+      
+        </div>
+      </div>
       
       
 
@@ -414,7 +456,7 @@ button{
           <div class="form-group">
             <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Input Name" id="name" class="form-control">
+              <input type="text" placeholder="Input Name" id="name" name="name" class="form-control">
             </div>
           </div>
 
@@ -504,6 +546,11 @@ button{
 
 </body>
 <script>
+
+
+function submitChange(){
+    pedal.name = document.getElementById('nompedal').value;
+}
 
 const menu = document.querySelector(".menu");
     let menuVisible = false;
@@ -742,6 +789,10 @@ $('a[href$="#myModal3"]').on( "click", function() {
 
 $('a[href$="#myModal4"]').on( "click", function() {
    $('#myModal4').modal('show');
+});
+
+$('a[href$="#myModal5"]').on( "click", function() {
+   $('#myModal5').modal('show');
 });
 
 /* $(".dropdown-toggle").on("mouseenter", function () {
@@ -1076,7 +1127,7 @@ function refreshModal(){
             height : window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('height').slice(0,window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width').lastIndexOf("p")),
             radius : window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('radius').slice(0,window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width').lastIndexOf("p")),
             elements:[],
-            name:document.getElementById('name').value
+            name: document.getElementById('name').value
         }
 
         if (args) {

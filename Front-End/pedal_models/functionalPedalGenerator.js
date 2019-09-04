@@ -369,21 +369,21 @@ class FunctionalPedalGenerator {
    * Currently, works only for a single switch !!
    */
   setWebAudioControlsIds() {
-    for (let knob of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(
+    for (let knob of this.editablePedal.shadowRoot.childNodes[7].querySelectorAll(
       ".knob"
     )) {
       let id = knob.getAttribute("id");
       let waControlId = this.editablePedal.getElementById(id).address;
       knob.childNodes[0].setAttribute("id", waControlId);
     }
-    for (let slider of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(
+    for (let slider of this.editablePedal.shadowRoot.childNodes[7].querySelectorAll(
       ".slider"
     )) {
       let id = slider.getAttribute("id");
       let waControlId = this.editablePedal.getElementById(id).address;
       slider.childNodes[0].setAttribute("id", waControlId);
     }
-    let waControl = this.editablePedal.shadowRoot.childNodes[3].querySelector(
+    let waControl = this.editablePedal.shadowRoot.childNodes[7].querySelector(
       ".switch"
     );
     if (waControl) waControl.childNodes[0].setAttribute("id", "switch1");

@@ -699,7 +699,7 @@
          * Gets the html content of the function pedal.
          */
         getHtml() {
-            let html = this.shadowRoot.childNodes[3].cloneNode(true);
+            let html = this.shadowRoot.childNodes[7].cloneNode(true);
 
             for (let elem of html.querySelectorAll('webaudio-knob')) {
                 elem.innerHTML = '';

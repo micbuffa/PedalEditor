@@ -9,9 +9,9 @@
         <template><style>	
                         .pedal{
                             display: block;
-                            background-color: #5f3f8f;
-                            width: 400px;
-                            height: 500px;
+                            background-color: #7caeff;
+                            width: 170px;
+                            height: 150px;
                             border-radius: 10px;
                             position: relative;
                             /* bring your own prefixes */
@@ -20,20 +20,20 @@
                         
                         #background-image {
                             //border: solid 2px black;
-                            width: 400px;
-                            height: 500px;
+                            width: 170px;
+                            height: 150px;
                             opacity: 1;
                         }
 
-                        #resize {
+                        /* #resize {
                             position: absolute;
                             cursor: nwse-resize;
                             width: 10px;
                             height: 10px;
-                            left: 392px;
-                            top: 492px;
+                            left: 162px;
+                            top: 142px;
                             border: 1px solid black;
-                        }
+                        } */
 
                         .knob, .switch, .icon, .label, .slider {
                             position: absolute;
@@ -41,7 +41,20 @@
                             text-align: center;
                         }
 
-                    
+                        .container {
+                            position: relative;
+                            font-family: Arial;
+                          }
+                          
+                        .text-block {
+                            position: absolute;
+                            bottom: 20px;
+                            right: 20px;
+                            background-color: #7caeff;
+                            color: white;
+                            padding-left: 20px;
+                            padding-right: 20px;
+                        }
 
                         .selected {
                             border: 1px dashed black;
@@ -91,63 +104,27 @@
                             right: 0px;
                         }
                         
-                    #knob_723 {
-                        left: 51px;
-                        top: 90px;
+                    #feedback {
+                        left: 10px;
+                        top: 10px;
                     }
 
-                    #knob_723 div {
+                    #feedback div {
                         color: #000000;
-                        font-family: "Comic Sans MS";
-                        font-size: 9px;
+                        font-family: "Verdana";
+                        font-size: 14px;
                         
                     }
                 
-                    #knob_126 {
-                        left: 298px;
-                        top: 94px;
+                    #millisecond {
+                        left: 10px;
+                        top: 80px;
                     }
 
-                    #knob_126 div {
+                    #millisecond div {
                         color: #000000;
-                        font-family: "Comic Sans MS";
-                        font-size: 9px;
-                        
-                    }
-                
-                    #switch_429 {
-                        left: 128px;
-                        top: 123px;
-                    }
-
-                    #switch_429 div {
-                        color: #000000;
-                        font-family: "Comic Sans MS";
-                        font-size: 9px;
-                        
-                    }
-                
-                    #slider_295 {
-                        left: 125px;
-                        top: 323px;
-                    }
-
-                    #slider_295 div {
-                        color: #000000;
-                        font-family: "Comic Sans MS";
-                        font-size: 9px;
-                        
-                    }
-                
-                    #slider_382 {
-                        left: 125px;
-                        top: 377px;
-                    }
-
-                    #slider_382 div {
-                        color: #000000;
-                        font-family: "Comic Sans MS";
-                        font-size: 9px;
+                        font-family: "Verdana";
+                        font-size: 14px;
                         
                     }
                 
@@ -176,14 +153,26 @@
                         #knob1-label{
                             top: 84px;
                             left: 43px;
-                        }</style><div class="pedal">
+                        }</style><div class="pedal draggable" id="pedal">
 		<div id="resize"></div>
 
-		<img id="background-image" src="./img/background/2.jpg">
-
-	<div class="knob " id="knob_723"><webaudio-knob src="./img/knobs/Jambalaya.png" height="70" width="70" sprites="100" min="undefined" max="undefined" step="undefined" value="20" id="undefined" style="height: 70px;"></webaudio-knob><div style="text-align:center">knbo_723</div></div><div class="knob " id="knob_126"><webaudio-knob src="./img/knobs/boss_grey.png" height="70" width="70" sprites="100" min="undefined" max="undefined" step="undefined" value="20" id="undefined" style="height: 70px;"></webaudio-knob><div style="text-align:center">knbo_126</div></div><div class="slider " id="slider_295"><webaudio-slider value="undefined" height="40" width="150" max="undefined" min="undefined" step="undefined" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="undefined" style="height: 40px;"></webaudio-slider><div>slider_295</div></div><div class="slider " id="slider_382"><webaudio-slider value="undefined" height="40" width="150" max="undefined" min="undefined" step="undefined" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="undefined" style="height: 40px;"></webaudio-slider><div>slider_382</div></div><div class="switch  selected" id="switch_429"><webaudio-switch src="./img/switches/switch_2.png" height="75" width="130" id="switch1" style="height: 75px;"></webaudio-switch><div></div></div></div></template><script>
-        let toBeDefinedTemp = document.currentScript.ownerDocument.querySelector('template');
-        class toBeDefinedGui extends HTMLElement {
+    
+    <div class="container">
+      <img id="background-image">
+      <div class="text-block" id="textB">
+          <h4></h4>
+          <p id="test"></p>
+      </div>
+    </div>
+    <!-- <p id="labeldiv" style="border-style: dashed; top: 68px;">tototo</p> -->
+    <!-- <figure>
+        <img id="background-image" alt="tototo">
+        <figcaption>tototo</figcaption>
+    </figure> -->
+    <!-- <div class="text-block" id="froala-editor"></div> -->
+	<div class="slider" id="feedback"><webaudio-slider value="0" height="40" width="150" max="100" min="0" step="0.1" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/stereo_echo/echo__1000/feedback" style="height: 40px;"></webaudio-slider><div>feedback</div></div><div class="slider" id="millisecond"><webaudio-slider value="0" height="40" width="150" max="1000" min="0" step="0.1" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/stereo_echo/echo__1000/millisecond" style="height: 40px;"></webaudio-slider><div>millisecond</div></div></div></template><script>
+        let quadEcho7Temp = document.currentScript.ownerDocument.querySelector('template');
+        class quadEcho7Gui extends HTMLElement {
     
         
             constructor(plug) {
@@ -193,7 +182,7 @@
                 this._plug.gui = this;
                 console.log(this._plug);
                 this._root = this.attachShadow({ mode: 'open' });
-                this._root.appendChild(toBeDefinedTemp.content.cloneNode(true));
+                this._root.appendChild(quadEcho7Temp.content.cloneNode(true));
                 this.isOn;
                 this.state = new Object();
                 this.setKnobs();
@@ -207,7 +196,7 @@
                
             console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
-            let tmp = "/toBeDefined/bypass";
+            let tmp = "/quadEcho7/bypass";
             if (this.state[tmp] == 1) {
             this._root.querySelector("#switch1").value = 0;
             this.isOn = false;
@@ -229,11 +218,11 @@
             this.boundingRect = {
                 dataWidth: {
                 type: Number,
-                value: 400
+                value: 170
                 },
                 dataHeight: {
                 type: Number,
-                value: 500
+                value: 150
                 }
           };
           return this.boundingRect;
@@ -250,7 +239,7 @@
                
             // Sets the background image and style.
             var background = this._root.querySelector('img');
-            background.src = this._plug.URL + '/assets/2.jpg';
+            background.src = this._plug.URL + '/assets/undefined';
             background.style = 'border-radius : 10px;'
             this._root.querySelectorAll(".knob").forEach((knob) => {
 				knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
@@ -265,14 +254,12 @@
             }
         
             setKnobs() {
-               this._root.getElementById("undefined").addEventListener("input", (e) =>this._plug.setParam("undefined", e.target.value));
-this._root.getElementById("undefined").addEventListener("input", (e) =>this._plug.setParam("undefined", e.target.value));
-
+               
             }
         
             bypass() {
                
-            this._plug.setParam("/toBeDefined/bypass", 1);
+            this._plug.setParam("/quadEcho7/bypass", 1);
             console.log("disabled");
         
             }
@@ -292,13 +279,13 @@ this._root.getElementById("undefined").addEventListener("input", (e) =>this._plu
         
             reactivate() {
                
-            this._plug.setParam("/toBeDefined/bypass", 0);
+            this._plug.setParam("/quadEcho7/bypass", 0);
         
             }
         
             setSliders() {
-               this._root.getElementById("undefined").addEventListener("input", (e) =>this._plug.setParam("undefined", e.target.value));
-this._root.getElementById("undefined").addEventListener("input", (e) =>this._plug.setParam("undefined", e.target.value));
+               this._root.getElementById("/stereo_echo/echo__1000/feedback").addEventListener("input", (e) =>this._plug.setParam("/stereo_echo/echo__1000/feedback", e.target.value));
+this._root.getElementById("/stereo_echo/echo__1000/millisecond").addEventListener("input", (e) =>this._plug.setParam("/stereo_echo/echo__1000/millisecond", e.target.value));
 
             }
         
@@ -321,15 +308,15 @@ this._root.getElementById("undefined").addEventListener("input", (e) =>this._plu
             }
         }
                 try {
-                    customElements.define('wap-tobedefined', toBeDefinedGui);
+                    customElements.define('wap-quadecho7', quadEcho7Gui);
                     console.log("Element defined");
                 } catch(error){
                     console.log(error);
                     console.log("Element already defined");      
                 }
                 
-                createtoBeDefinedGUI = (plug) => {
-                    let elem = new toBeDefinedGui(plug);
+                createquadEcho7GUI = (plug) => {
+                    let elem = new quadEcho7Gui(plug);
                     return elem; 
                 }
         </script>
