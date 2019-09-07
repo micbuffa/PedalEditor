@@ -130,7 +130,7 @@
     let functionalPedalGenerator;
 
     var bt_buildIt = document.querySelector('#bt_buildIt');
-    let currentWapName;
+    let currentWapName, currentWapCode;
 
 
     window.onload = initialize;
@@ -213,6 +213,7 @@
         console.log("url = ", url)
         faustUI = searchParams.get('data');
         console.log("data = ", faustUI)
+        console.log("code = " + searchParams.get('code'))
     }
 
 
@@ -594,6 +595,7 @@
         let data = new FormData();
         data.append("generated", functionalPedalGenerator.generateFunctionalPedalCode());
         data.append("wapName", currentWapName);
+        data.append("wapCode", currentWapCode);
 
         fetch(url, {
                 method: "POST",
@@ -625,9 +627,16 @@
     // 2 - SENT BY FAUST IDE WHEN THE BINARY.ZIP FILE IS READY TO BE SENT TO BACK-END WAP SERVER
     window.addEventListener("message", (e) => {
         const data = e.data;
+
+        if (data.type === "build") {
+            console.log("CODE for name = " + currentWapName + "= " + data.code);
+            currentWapCode = data.code;
+        }
+
         if (data.type === "exported") {
             let wapBinaryDotZipFileURL = data.href
             console.log(wapBinaryDotZipFileURL);
+
 
             // Let's send a message to the backend server so that it gets
             // this file, and unzip it in the same dir the main.html GUI file + assets
@@ -655,7 +664,7 @@
     });
 
 
-    // Sends the binary.zip to the Back-End
+    // Sends the binary.zip to the Back-End OLD !!! DEPRECATED
     function publish(downPath, pedalName) {
         var http = new XMLHttpRequest();
         var url = 'http://localhost:3000/generated-wap';

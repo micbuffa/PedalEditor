@@ -15,14 +15,14 @@ class FunctionalPedalGenerator {
 
     // The complete content of the functional pedal file.
     let functionalPedalCode = `
-            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
+            <script src="https://mainline.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
             <script>
+            </script>
+            <script src="https://mainline.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
             WebAudioControlsOptions = {
                 useMidi: 1,
             };
-            </script>
-            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
-        `;
+            `;
 
     /* let functionalPedalCode = `
         <script>
@@ -44,15 +44,32 @@ class FunctionalPedalGenerator {
                 this._plug.gui = this;
                 console.log(this._plug);
                 this._root = this.attachShadow({ mode: 'open' });
-                this._root.appendChild(${
-                  this.editablePedal.name
-                }Temp.content.cloneNode(true));
+                this._root.appendChild(${this.editablePedal.name}Temp.content.cloneNode(true));
                 this.isOn;
                 this.state = new Object();
                 this.setKnobs();
                 this.setSliders();
-                this.setSwitchListener();
-                this.setActive(false);
+                this.setSwitches();
+                //this.setSwitchListener();
+                this.setInactive();
+
+                // Compute base URI of this main.html file. This is needed in order
+                // to fix all relative paths in CSS, as they are relative to
+                // the main document, not the plugin's main.html
+
+                //console.log("maindoc URI = " + ${this.editablePedal.name}Temp.baseURI);
+                let posOfLastSlash = ${this.editablePedal.name}Temp.baseURI.lastIndexOf("/");
+                //console.log("Base URI = " + ${this.editablePedal.name}Temp.baseURI.substring(0, posOfLastSlash))
+                this.basePath = ${this.editablePedal.name}Temp.baseURI.substring(0, posOfLastSlash);
+                //console.log("basePath = " + this.basePath)
+                //console.log("baseURI = " + this.baseURI)
+
+                // Fix relative path in WebAudio Controls elements
+                this.fixRelativeImagePathsInCSS();
+
+                // optionnal : set image background using a relative URI (relative
+                // to this main.html file)
+                //this.setImageBackground("/img/BigMuffBackground.png");
         `;
 
     // The content of the first function of the class.
@@ -66,23 +83,38 @@ class FunctionalPedalGenerator {
                     this.reactivate();
                     this._root.querySelector("#switch1").value = 1;
                 }
-        `;
+    `;
 
-    let funcSetActiveContent = `
-                // Where there is not swtich, no need to set activation logic. 
-                if(!this._root.querySelector("#switch1")) {
-                    return;
+    let funcFixRelativeImagePathsInCSSContent = `
+        // change webaudiocontrols relative paths for spritesheets to absolute
+            let webaudioControls = this._root.querySelectorAll("webaudio-knob, webaudio-slider, webaudio-switch");
+            webaudioControls.forEach(e => {
+                let currentImagePath = e.getAttribute("src");
+                if (currentImagePath !== undefined) {
+                    //console.log("Got wc src as " + e.getAttribute("src"));
+                    let imagePath = e.getAttribute("src");
+                    e.setAttribute("src", this.basePath + "/" + imagePath);
+                    //console.log("After fix : wc src as " + e.getAttribute("src"));
                 }
-                if (active == undefined || active == false) {
-                    this.isOn = false;
-                    this.bypass();
-                    this._root.querySelector("#switch1").value = 0;
-                } else if (active) {
-                    this.isOn = true;
-                    this.reactivate();
-                    this._root.querySelector("#switch1").value = 1;
-                }
-        `;
+            });
+            `;
+
+    let funcSetImageBackgroundContent = `
+           // check if the shadowroot host has a background image
+            let mainDiv = this._root.querySelector("#main");
+            mainDiv.style.backgroundImage = "url(" + this.basePath + "/" + imageRelativeURI + ")";
+
+            //console.log("background =" + mainDiv.style.backgroundImage);
+            //this._root.style.backgroundImage = "toto.png";
+    `;
+
+    let funcSetInactiveContent = `
+        let switches = this._root.querySelectorAll(".switch webaudio-switch");
+        switches.forEach(s => {
+          console.log("### SWITCH ID = " + s.id);
+          this._plug.setParam(s.id, 1);
+        });
+       `;
 
     let funcGetObservedAttributes = `
                 return ['state'];
@@ -125,6 +157,7 @@ class FunctionalPedalGenerator {
     let function1Content = this.generateSetKnobs();
 
     let funcSetSlidersContent = this.generateSetSliders();
+    let funcSetSwitchesContent = this.generateSetSwitches();
 
     let funcPropertiesContent = `
             this.boundingRect = {
@@ -140,7 +173,7 @@ class FunctionalPedalGenerator {
           return this.boundingRect;
         `;
 
-    let funcSwitchListenerContent = `
+    let funcSwitchListenerContentOld = `
             console.log("setswitch");
             if(this._root.querySelector("#switch1")) {
                 this._root.querySelector("#switch1").addEventListener('change', (e) => {
@@ -151,6 +184,18 @@ class FunctionalPedalGenerator {
             }
         `;
 
+    // Michel Buffa : new version does not do anything special, no hard coding of the
+    // bypass, as we now rely on faust code for that
+    let funcSwitchListenerContent = `
+            console.log("setswitch");
+            if(this._root.querySelector("#switch1")) {
+                this._root.querySelector("#switch1").addEventListener('change', (e) => {
+                    if (this.isOn) this.bypass()
+                    else this.reactivate();
+                    this.isOn = !this.isOn;
+                });
+            }
+        `;
     let funcBypassContent = `
             this._plug.setParam("/${this.editablePedal.getAttribute(
               "name"
@@ -191,6 +236,17 @@ class FunctionalPedalGenerator {
       constructorContent
     );
 
+    let funcFixRelativeImagePathsInCSS = this.generateFunction(
+      "fixRelativeImagePathsInCSS",
+      ["imageRelativeURI"],
+      funcFixRelativeImagePathsInCSSContent
+    );
+
+    let funcSetImageBackground = this.generateFunction(
+      "setImageBackground",
+      [],
+      funcSetImageBackgroundContent
+    );
     // Generating the functions of the pedal.
     let funcProperties = this.generateFunction(
       "get properties",
@@ -207,17 +263,18 @@ class FunctionalPedalGenerator {
       [],
       funcAttributeChangedCallbackContent
     );
-    let funcitonSetResources = this.generateFunction(
+    let functionSetResources = this.generateFunction(
       "setResources",
       [],
       funcSetResources
     );
-    let funcSetActive = this.generateFunction(
-      "setActive",
-      ["active"],
-      funcSetActiveContent
+    let funcSetInactive = this.generateFunction(
+      "setInactive",
+      [],
+      funcSetInactiveContent
     );
     let function1 = this.generateFunction("setKnobs", [], function1Content);
+    // STOP USING IT
     let function4 = this.generateFunction("bypass", [], funcBypassContent);
     let function5 = this.generateFunction(
       "reactivate",
@@ -235,26 +292,32 @@ class FunctionalPedalGenerator {
       funcSetSlidersContent
     );
 
-    // The class will contain the constructor and the two functions.
+    let funcSetSwitches = this.generateFunction(
+      "setSwitches",
+      [],
+      funcSetSwitchesContent
+    );
+    // The class will contain the constructor and th methods/functions.
     classContent +=
       constructor +
+      funcFixRelativeImagePathsInCSS +
+      funcSetImageBackground +
       functionAttributeChangedCallback +
       funcProperties +
       functionGetObservedAttributes +
-      funcitonSetResources +
+      functionSetResources +
       function1 +
-      function4 +
+      //function4 +
       function6 +
-      function5 +
+      //function5 +
       funcSetSliders +
-      funcSetActive;
+      funcSetSwitches +
+      funcSetInactive;
 
     functionalPedalCode += "<script>";
 
     functionalPedalCode += `
-        let ${
-          this.editablePedal.name
-        }Temp = document.currentScript.ownerDocument.querySelector('template');
+        let ${this.editablePedal.name}Temp = document.currentScript.ownerDocument.querySelector('template');
         `;
     // Generating and appending the class of the pedal.
     functionalPedalCode += this.generateClass(
@@ -353,6 +416,7 @@ class FunctionalPedalGenerator {
   }
   generateSetSliders() {
     let ret = "";
+
     for (let slider of this.editablePedal.sliders) {
       ret +=
         'this._root.getElementById("' +
@@ -361,6 +425,22 @@ class FunctionalPedalGenerator {
         'this._plug.setParam("' +
         slider.address +
         '", e.target.value));';
+      ret += "\n";
+    }
+    return ret;
+  }
+
+  generateSetSwitches() {
+    let ret = "";
+
+    for (let sw of this.editablePedal.switches) {
+      ret +=
+        'this._root.getElementById("' +
+        sw.address +
+        '").addEventListener("change", (e) =>' +
+        'this._plug.setParam("' +
+        sw.address +
+        '", 1-e.target.value));';
       ret += "\n";
     }
     return ret;
@@ -383,10 +463,21 @@ class FunctionalPedalGenerator {
       let waControlId = this.editablePedal.getElementById(id).address;
       slider.childNodes[0].setAttribute("id", waControlId);
     }
+
+    /*
     let waControl = this.editablePedal.shadowRoot.childNodes[3].querySelector(
       ".switch"
     );
     if (waControl) waControl.childNodes[0].setAttribute("id", "switch1");
     else console.log("functionalPedalGenerator waControl = null");
+    */
+
+    for (let sw of this.editablePedal.shadowRoot.childNodes[3].querySelectorAll(
+      ".switch"
+    )) {
+      let id = sw.getAttribute("id");
+      let waControlId = this.editablePedal.getElementById(id).address;
+      sw.childNodes[0].setAttribute("id", waControlId);
+    }
   }
 }
