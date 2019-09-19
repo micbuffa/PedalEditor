@@ -320,7 +320,7 @@ label {
     float:left;
     width:50%;
     margin-right:0.5em;
-    padding-top:1em;
+    /* padding-top:1em; */
     text-align:right;
     font-weight:bold;
 }

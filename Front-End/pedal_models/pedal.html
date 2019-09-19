@@ -166,6 +166,8 @@ interact('.draggable')
     var target = event.target
     var x = (parseFloat(target.getAttribute('data-x')) || 0)
     var y = (parseFloat(target.getAttribute('data-y')) || 0)
+    //var xx = (parseFloat(target.getAttribute('data-xx')) || 0)
+    //var yy = (parseFloat(target.getAttribute('data-yy')) || 0)
 
     // update the element's style
     target.style.width = event.rect.width + 'px'
@@ -176,19 +178,23 @@ interact('.draggable')
     // translate when resizing from top or left edges
     x += event.deltaRect.left
     y += event.deltaRect.top
+    //xx += event.deltaRect.right
+    //yy += event.deltaRect.bottom
 
     target.style.webkitTransform = target.style.transform =
-        'translate(' + x + 'px,' + y + 'px)'
+        'translate(' + x + 'px,' + y + 'px,' + xx + 'px,' + yy + 'px)'
 
     target.setAttribute('data-x', x)
     target.setAttribute('data-y', y)
+    target.setAttribute('data-xx', xx)
+    target.setAttribute('data-yy', yy)
     //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
   })
 
 function dragMoveListener (event) {
     //var targetclassname = pedal.shadowRoot.children[1].children[2].id;
       
-      if(pedal.shadowRoot.children[1].childElementCount <= 2){
+      if(pedal.shadowRoot.children[2].childElementCount <= 2){
         var target = event.target
             // keep the dragged position in the data-x/data-y attributes
             x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
@@ -204,7 +210,7 @@ function dragMoveListener (event) {
         target.setAttribute('data-y', y);
   }
 
-  if(pedal.shadowRoot.children[1].childElementCount > 2){
+  if(pedal.shadowRoot.children[2].childElementCount > 2){
     if(event.target.id.includes("knob")){
       var target = event.target,
       // keep the dragged position in the data-x/data-y attributes
