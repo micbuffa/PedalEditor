@@ -237,6 +237,7 @@
                             width: ${this.getAttribute('width')}px;
                             height: ${this.getAttribute('height')}px;
                             opacity: ${this.getAttribute('opacity')};
+                            //visibility: hidden;
                         }
 
                         /* #resize {
@@ -268,6 +269,21 @@
                             color: white;
                             padding-left: 20px;
                             padding-right: 20px;
+                        }
+
+                        /* .draggable {
+                            cursor:move;
+                            position:absolute; 
+                          }
+ */
+                          #canvas {
+                            width:100px;
+                            height:300px;
+                            border: 10px solid;
+                        }
+                        .rectangle {
+                            border: 1px solid #FF0000;
+                            position: absolute;
                         }
 
                         .selected {
@@ -587,6 +603,7 @@
                     switch_.label_fontsize = element.label_fontsize;
                     switch_.label_color = element.label_color;
                     switch_.type = element.type;
+                    switch_.address = element.address;
                 }
             }
 

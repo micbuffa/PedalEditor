@@ -122,6 +122,7 @@ app.post("/pedals", function(req, res) {
 app.post("/generate", multerData.fields([]), function(req, res) {
   //console.dir(req.body);
   let wapName = req.body.wapName;
+  let wapCode = req.body.wapCode;
 
   // Check if a working dir exists for this WAP name, if not create it
   let currentDir = process.cwd();
@@ -153,12 +154,17 @@ app.post("/generate", multerData.fields([]), function(req, res) {
     if (err) {
       res.error("An error occured saving the functional pedal.");
     } else {
-      res.json({
-        message:
-          "main.html generated successfully for wapName = " +
-          req.body.wapName +
-          " in directory " +
-          wapDir
+      fs.writeFile(wapDir + "/" + wapName + ".dsp", req.body.wapCode, err => {
+        if (err) {
+          res.error("An error occured saving the functional pedal.");
+        } else {
+          res.json({
+            message:
+              wapName +
+              ".dsp and main.html generated successfully in directory " +
+              wapDir
+          });
+        }
       });
     }
   });

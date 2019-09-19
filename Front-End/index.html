@@ -55,6 +55,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/TextPlugin.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!-- <script src="editor_components/editor-inspector.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 
     <script src="jscolor.js"></script>
 
@@ -65,69 +66,174 @@
 
     <title>Pedal Creator 0.1</title>
     <style>
-        .center{
-  text-align: center;
-}
-.menu {
-  width: 200px;
-  z-index: 1;
-  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  display: none;
-  transition: 0.2s display ease-in;
 
-  .menu-options {
-    list-style: none;
-    padding: 10px 0;
-    z-index: 1;
+        h2, h3 {margin: 0 0 6px;
+                font-size: 150%;
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+        #box {
+            width: 40%;
+            float: left;
+            padding: 16px;
+            margin: 25px
+        }
     
-    .menu-option {
-      font-weight: 500;
-      z-index: 1;
-      font-size: 14px;
-      padding: 10px 40px 10px 20px;
-      border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.2);
-      }
-    }
-  }
-}
-
-
-
-button{
-  background: grey;
-  border: none;
-  
-  .next{
-    color:green;
-  }
-  
-  &[disabled="false"]:hover{
-    .next{
-      color: red;
-      animation: move 0.5s;
-      animation-iteration-count: 2;
-    }
-  }
-}
-
-@keyframes move{
-  from{
-    transform: translate(0%);
-  }
-  50%{
-    transform: translate(-40%);
-  }
-  to{
-    transform: transform(0%);
-  }
-}
-
-
+        .boxshadow {
+            border-radius: 8px border: 1px solid #fff;
+            background: #ddd;
+        }
+    
+        a.button {
+            cursor: pointer
+        }
+    
+        .row0,
+        .row1 {
+            padding: 3px
+        }
+    
+        .row1 {
+            background: #222
+        }
+    
+        .minus,
+        .plus {
+            background: silver;
+            background-image: linear-gradient(to bottom, #eee 0%, #ddd 50%, #bbb 50%, #ddd 100%);
+            color: #111;
+            font-weight: bold;
+            padding: 2px 3px;
+            display: inline-block;
+            width: 15px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 2px
+        }
+    
+        #settings {
+            float: right;
+            width: 170px;
+            background: #EEE;
+            padding: 5px;
+            border: 1px solid white;
+            box-shadow: 0px 0px 5px #888;
+            font-size: 85%;
+            line-height: 1.1em
+        }
+    
+        #settings input {
+            margin: 0;
+            line-height: 1.1em
+        }
+    
+        #settings h4 {
+            font-weight: bold;
+            margin-bottom: 3px
+        }
+    
+        .codebox {
+            padding: 15px;
+            background: #ffc;
+            border: 1px dotted #ccc;
+        }
+    
+        #snippet {
+            font-style: italic
+        }
+    
+        .swatch {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            background: #e2001a;
+            margin-right: 20px;
+            cursor: pointer
+        }
+    
+        hr.dotted {
+            clear: both;
+            display: block;
+            height: 0;
+            border-bottom: 1px dotted #ccc
+        }
+    
+        .params {
+            width: 20%;
+            margin: 25px 10px 0;
+            border-radius: 12px;
+            border: 8px solid #04d3ff;
+            background-color: #111;
+            padding: 8px;
+            float: right;
+            color: #999;
+            font-size: 80%;
+        }
+    
+    
+    
+        .center {
+            text-align: center;
+        }
+    
+        .menu {
+            width: 200px;
+            z-index: 1;
+            box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            display: none;
+            transition: 0.2s display ease-in;
+    
+            .menu-options {
+                list-style: none;
+                padding: 10px 0;
+                z-index: 1;
+    
+                .menu-option {
+                    font-weight: 500;
+                    z-index: 1;
+                    font-size: 14px;
+                    padding: 10px 40px 10px 20px;
+                    border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+                    cursor: pointer;
+    
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.2);
+                    }
+                }
+            }
+        }
+    
+    
+    
+        button {
+            background: grey;
+            border: none;
+    
+            .next {
+                color: green;
+            }
+    
+            &[disabled="false"]:hover {
+                .next {
+                    color: red;
+                    animation: move 0.5s;
+                    animation-iteration-count: 2;
+                }
+            }
+        }
+    
+        @keyframes move {
+            from {
+                transform: translate(0%);
+            }
+    
+            50% {
+                transform: translate(-40%);
+            }
+    
+            to {
+                transform: transform(0%);
+            }
+        }
     </style>
 </head>
 
@@ -162,7 +268,7 @@ button{
         <ul style="direction: ltr;">
             
             <li>
-                <a data-toggle="modal" data-target="#myModal2" href="#myModal" >
+                <a  href="#" onclick="drawRectangle()">
                     <i class="fa fa-pencil fa-2x"></i>
                     <span class="nav-text">
                        Draw
@@ -197,6 +303,33 @@ button{
                         Pedal Parameters
                     </span>
                 </a>
+            </li>
+
+            <li class="has-subnav">
+                <a href="#" onclick="toggleLabelMenu()" id="LabelMenu">
+                    <i class="fa fa-font fa-2x"></i>
+                    <span class="nav-text">
+                        Label Parameters
+                    </span>
+                </a>
+            </li>
+
+            <li class="has-subnav">
+                    <a href="#" onclick="togglePreSetsFunction()" id="PresetsMenu">
+                        <i class="fa fa-toggle-on fa-2x"></i>
+                        <span class="nav-text">
+                            Toggle Presets
+                        </span>
+                    </a>
+            </li>
+
+            <li class="has-subnav">
+                    <a href="#" onclick="toggleShadowMenuFunction()" id="ShadowMenu">
+                        <i class="fa fa-tasks fa-2x"></i>
+                        <span class="nav-text">
+                            Toggle Shadow Menu
+                        </span>
+                    </a>
             </li>
         </ul>
 
@@ -541,12 +674,387 @@ button{
         </div> <!-- /#page-content-wrapper -->
     </div>
 
-
-
-
+    <div style="background: white; display: none; direction: ltr;" class="params draggables" id="presetsid">
+        <h3>pre sets</h3>
+        <div style="box-shadow: 5px 5px #333" class="swatch"></div>hard light
+        <hr class="dotted">
+        <div style="box-shadow: 5px 5px 3px #666" class="swatch"></div> soft
+        <hr class="dotted">
+        <div style="box-shadow: 0px 0px 5px #444" class="swatch"></div> from above
+        <hr class="dotted">
+        <div style="box-shadow: 0px 8px 6px -6px #666" class="swatch"></div> reduced
+        <hr class="dotted">
+        <div style="box-shadow: inset 0px 0px 10px #666" class="swatch"></div> inset
+        <hr class="dotted">
+        <div style="box-shadow: 0px 0px 10px -2px #FFF" class="swatch"></div> glow
+    </div>
+    
+    <div class="params draggables" id="shadowmenuid" style="display: none; direction: ltr;">
+        <h3>box-shadow parameters</h3>
+    
+        <div class="row0">
+            <div class="minus">-</div>
+            <input value="3" size="3" id="offX">
+            <div class="plus">+</div>
+            <label>Offset X</label>
+        </div>
+    
+        <div class="row1">
+            <div class="minus">-</div>
+            <input value="3" size="3" id="offY">
+            <div class="plus">+</div>
+            <label>Offset Y</label>
+        </div>
+    
+        <div class="row0">
+            <div class="minus">-</div>
+            <input value="3" size="3" id="blur">
+            <div class="plus">+</div>
+            <label>Blur</label>
+        </div>
+    
+        <div class="row1">
+            <div class="minus">-</div>
+            <input value="3" size="3" id="spread">
+            <div class="plus">+</div>
+            <label>Spread</label>
+        </div>
+    
+        <div class="row0">
+            &nbsp; #<input value="555555" size="6" id="color"> <label>Color (HEX)</label>
+        </div>
+    
+        <div class="row1">
+            <input type="checkbox" value="inset" id="inset"><label>inset</label>
+        </div>
+    
+        <br />
+        <button id="surprise" class="button">Surprise Me!</button>
+    </div>
+    <hr style="clear: both; display:block; visibility: hidden; height: 30px" />
 </body>
 <script>
 
+
+
+$('div.params input').blur(function(){
+  setShadow();
+})
+
+$('#inset').click(function(){
+   setShadow();
+})
+
+$('div.minus').click(function(){
+     var toChange = $(this).next();
+     toChange.val( parseInt(toChange.val()) -1 );
+     setShadow();
+})
+
+ $('div.plus').click(function(){
+     var toChange = $(this).prev();
+     toChange.val( parseInt(toChange.val()) +1 );
+     setShadow();
+})
+
+$('#surprise').click(function(){
+   setRandom();
+   setShadow();
+})        
+
+$('#variants').click(function(){
+   for (var c=0; c < 5; c++) {
+       // boxshadow     offsetX           offsety              blur                             spread
+       var shdw2 = rndnr('15') + 'px ' + rndnr('15') + 'px ' + Math.abs(rndnr('30')) + 'px ' + rndnr('10') + 'px ' + '#' + $('#color').val();           
+       var html = "<div class='box' style='box-shadow: "+shdw2+"'>"+shdw2+"</div>";
+       $('div.entry-content').append(html);
+   }
+})     
+
+
+$('div.swatch').click(function(){
+    $('#box').attr('style', $(this).attr('style'));
+    $('#snippet').html($(this).attr('style'));
+})
+
+
+function setShadow () {
+    var b = document.getElementById('my-pedal'); var shdw = '';
+    if(b.shadowRoot){
+        if (document.getElementById('inset').checked) {
+        shdw += 'inset ';
+      }           
+        shdw += document.getElementById('offX').value +'px ' + document.getElementById('offY').value + 'px '+ document.getElementById('blur').value + 'px ' + document.getElementById('spread').value + 'px #' + document.getElementById('color').value;
+      
+        pedal.shadowRoot.getElementById('pedal').style.boxShadow = shdw;
+        //$('#snippet').html('box-shadow: '+shdw);
+    }
+    
+}
+
+
+function setRandom() {
+    document.getElementById('offX').value = rndnr('15');
+    document.getElementById('offY').value = rndnr('15');
+    document.getElementById('blur').value = Math.abs(rndnr('30'));
+    document.getElementById('spread').value = rndnr('10');
+    
+    // inset
+    var rndInset = Math.random();
+    if (rndInset < .6) { document.getElementById('inset').checked = false; } else { document.getElementById('inset').checked = true; } ;
+}
+
+function rndnr(range) {
+    var randomNum = Math.ceil(Math.random()* range)
+    var vz = Math.random();
+    if (vz < .5) randomNum = -1 * randomNum;          
+    return randomNum;
+}
+
+setShadow();
+
+
+
+
+
+
+
+// target elements with the "draggable" class
+interact('.draggables')
+  .draggable({
+    onmove: window.dragMoveListener,
+  })
+  .resizable({
+    // resize from all edges and corners
+    edges: { left: true, right: true, bottom: true, top: true },
+
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent',
+        endOnly: true
+      }),
+
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 100, height: 50 }
+      })
+    ],
+
+    inertia: true
+  })
+  .on('resizemove', function (event) {
+    var target = event.target
+    var x = (parseFloat(target.getAttribute('data-x')) || 0)
+    var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+    // update the element's style
+    target.style.width = event.rect.width + 'px'
+    target.style.height = event.rect.height + 'px'
+    //pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
+    //pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
+
+    // translate when resizing from top or left edges
+    x += event.deltaRect.left
+    y += event.deltaRect.top
+
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)'
+
+    target.setAttribute('data-x', x)
+    target.setAttribute('data-y', y)
+    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+  })
+
+function dragMoveListener (event) {
+  var target = event.target
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+  // translate the element
+  target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)'
+
+  // update the posiion attributes
+  target.setAttribute('data-x', x)
+  target.setAttribute('data-y', y)
+}
+
+// this is used later in the resizing and gesture demos
+//window.dragMoveListener = dragMoveListener;
+
+
+function toggleShadowMenuFunction(){
+  var x = document.getElementById("shadowmenuid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
+function togglePreSetsFunction() {
+  var x = document.getElementById("presetsid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
+
+function toggleLabelMenu(){
+    var linkId = document.getElementById('LabelMenu');
+    var click = 0;
+    var pp = document.querySelector('my-pedal');
+
+    linkId.onclick = function(){
+        click ++;
+        if(pp.shadowRoot){
+            window.addEventListener("contextmenu", e => {
+                if((click % 2)==0){
+                    this.removeEventListener("contextmenu",e,false);
+                    console.log("number of clicks is:"+click);
+                }
+                else{
+                    e.preventDefault();
+                    const origin = {
+                        left: e.pageX + 10,
+                        top: e.pageY + 10
+                    };
+                    setPosition(origin);
+                    console.log("number of clicks is :"+click);
+                    return false;
+                }}); 
+        }
+    };
+}
+
+
+
+function drawRectangle(){
+    var pp = document.querySelector('my-pedal');
+    if(pp.shadowRoot){
+        initDraw(pedal.shadowRoot.getElementById('pedal'));
+    }
+    
+}
+
+function initDraw(canvas) {
+    function setMousePosition(e) {
+        var ev = e || window.event; //Moz || IE
+        if (ev.pageX) { //Moz
+            mouse.x = ev.pageX + window.pageXOffset;
+            mouse.y = ev.pageY + window.pageYOffset;
+        } else if (ev.clientX) { //IE
+            mouse.x = ev.clientX + document.body.scrollLeft;
+            mouse.y = ev.clientY + document.body.scrollTop;
+        }
+    };
+
+    var mouse = {
+        x: 0,
+        y: 0,
+        startX: 0,
+        startY: 0
+    };
+    var element = null;
+
+    canvas.onmousemove = function (e) {
+        setMousePosition(e);
+        if (element !== null) {
+            element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
+            element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
+            element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
+            element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+        }
+    }
+
+    canvas.onclick = function (e) {
+        if (element !== null) {
+            element = null;
+            canvas.style.cursor = "default";
+            console.log("finsihed.");
+        } else {
+            console.log("begun.");
+            mouse.startX = mouse.x;
+            mouse.startY = mouse.y;
+            element = document.createElement('div');
+            element.className = 'rectangle'
+            element.style.left = mouse.x + 'px';
+            element.style.top = mouse.y + 'px';
+            canvas.appendChild(element)
+            canvas.style.cursor = "crosshair";
+        }
+    }
+}
+
+
+
+
+window.onmousemove = moveElem;
+window.onmouseup = stopMovingElem;
+
+
+var selected = null; // element to be moved
+var oldMouseX, oldMouseY; // Stores x & y coordinates of the mouse pointer
+var elemX, elemY;
+var divs = [];
+
+  
+// Will be called when user starts dragging an element
+function dragInit(evt) {
+    // Store the elem
+    selected = evt.target;
+    elemX = selected.offsetLeft;
+    elemY = selected.offsetTop;
+  
+    oldMouseX = evt.clientX;
+    oldMouseY = evt.clientY;
+    //evt.stopPropagation();
+}
+
+// Will be called when user dragging an element
+function moveElem(e) {
+    // new mouse ps
+    var newMouseX = e.clientX;
+    var newMouseY = e.clientY;
+  
+    if(oldMouseX !== undefined) {
+        // how many pixels did we move the mouse?
+        var dx = newMouseX - oldMouseX;
+        var dy = newMouseY - oldMouseY;
+     }
+    
+    if (selected !== null) {  
+        // move the selected element dx, dy pixels hozontally/vertically
+        changePosOfSelectedElement(dx, dy);
+    }
+  
+    // update the old position of the mouse
+    oldMouseX = newMouseX;
+    oldMouseY = newMouseY;
+}
+
+function changePosOfSelectedElement(dx, dy) {
+  // update the old position of the selected element
+  elemX += dx;
+  elemY += dy;
+  
+  // change the pos on screen of the element
+  // by modifying its CSS left/top properties
+  selected.style.left = elemX + 'px';
+  selected.style.top = elemY + 'px';
+}
+
+// Destroy the object when we are done
+function stopMovingElem() {
+    selected = null;
+}
 
 function submitChange(){
     pedal.name = document.getElementById('nompedal').value;
@@ -795,6 +1303,8 @@ $('a[href$="#myModal5"]').on( "click", function() {
    $('#myModal5').modal('show');
 });
 
+
+
 /* $(".dropdown-toggle").on("mouseenter", function () {
     // make sure it is not shown:
     if (!$(this).parent().hasClass("show")) {
@@ -988,12 +1498,27 @@ function refreshModal(){
     let functionalPedalGenerator;
 
     var bt_buildIt = document.querySelector('#bt_buildIt');
-    let currentWapName;
+    let currentWapName, currentWapCode;
 
 
     window.onload = initialize;
+    //Mettre en commentaire la fonction ci-dessous avant d'utiliser faust, bug à régler
+    /* function init(){
+        var pp = document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            divs = pedal.shadowRoot.querySelectorAll('.draggable');
+            divs.forEach(e => {
+            e.onmousedown = function (evt) {
+                dragInit(evt);
+                //console.log('true');
+                e.stopPropagation();
+            };
+                      })
+        }
+    } */
 
     function initialize() {
+        
         var urlParams = new URLSearchParams(window.location.search);
 
         console.log(urlParams.has('data')); // true
@@ -1002,12 +1527,14 @@ function refreshModal(){
         console.log("name = " + urlParams.get('name'));
         console.log("### FAUSTUI JSON = ");
         console.log(urlParams.get('data'));
-        console.log("###")
+        console.log("###");
         faustUI = JSON.parse(urlParams.get('data'));
         let name = urlParams.get('name');
-        /* faustUI.WapName = name.substr(0, name.lastIndexOf("."));
-        document.querySelector("#wapName").innerHTML = faustUI.WapName; */
-
+        /* ####### Commenter la ligne de faustUI.WapName ci-dessous quand on n'utilise pas faust editor ######## */
+        //faustUI.WapName = name.substr(0, name.lastIndexOf("."));
+        //document.querySelector("#wapName").innerHTML = faustUI.WapName;
+        //Mettre en commentaire init() quand on utilise faust editor, bug à régler
+        //init();
         console.log("Initialize")
         console.log("faustUI = ", faustUI)
         //setFaustUIFromUrl();
@@ -1164,7 +1691,7 @@ function refreshModal(){
                 if (targetElement === flyoutElement) toggleMenu("hide");
             }); */
 
-            window.addEventListener("contextmenu", e => {
+            /* window.addEventListener("contextmenu", e => {
                 e.preventDefault();
                 const origin = {
                     left: e.pageX,
@@ -1172,7 +1699,7 @@ function refreshModal(){
                 };
                 setPosition(origin);
                 return false;
-            });
+            }); */
         }
     }
 
@@ -1237,7 +1764,7 @@ function refreshModal(){
         savedPedalsConfigs = pedalConfigs;
     }
 
-   /*  function displaySavedPedalsIds() {
+    /* function displaySavedPedalsIds() {
 
         // Uptates the list of pedal configurations by fetching then from the server. 
         refreshSavedPedalsConfigs();
@@ -1521,6 +2048,7 @@ function refreshModal(){
         let data = new FormData();
         data.append("generated", functionalPedalGenerator.generateFunctionalPedalCode());
         data.append("wapName", currentWapName);
+        data.append("wapCode", currentWapCode);
 
         fetch(url, {
                 method: "POST",
@@ -1552,6 +2080,12 @@ function refreshModal(){
     // 2 - SENT BY FAUST IDE WHEN THE BINARY.ZIP FILE IS READY TO BE SENT TO BACK-END WAP SERVER
     window.addEventListener("message", (e) => {
         const data = e.data;
+
+        if (data.type === "build") {
+            console.log("CODE for name = " + currentWapName + "= " + data.code);
+            currentWapCode = data.code;
+        }
+
         if (data.type === "exported") {
             let wapBinaryDotZipFileURL = data.href
             console.log(wapBinaryDotZipFileURL);
