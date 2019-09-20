@@ -339,7 +339,16 @@
                         Toggle Gradient Menu
                     </span>
                 </a>
-        </li>
+            </li>
+
+            <li class="has-subnav">
+                <a href="#" onclick="toggleTextureMenuFunction()" id="TextureMenu">
+                    <i class="fa fa-tint fa-2x"></i>
+                    <span class="nav-text">
+                        Toggle Texture Menu
+                    </span>
+                </a>
+            </li>
         </ul>
 
         
@@ -755,7 +764,7 @@
     </div>
 
     <div class="params draggables" id="gradientmenuid" style="display: none; direction: ltr;">
-        <h3>box-shadow parameters</h3>
+        <h3>gradient parameters</h3>
         <div id="left" style="float: left; width: 50%;">
             <div class="row0">
                 <div class="minus">-</div>
@@ -816,6 +825,73 @@
     
         <br />
         <button id="gradientgenerate" class="button" onclick="generateGradient()">Generate Gradient</button>
+    </div>
+
+
+    <div class="params draggables" id="texturemenuid" style="display: none; direction: ltr;">
+        <h3>texture parameters</h3>
+        <!-- <div id="left" style="float: left; width: 50%;">
+            <div class="row0">
+                <div class="minus">-</div>
+                <input value="3" size="3" id="tleftred">
+                <div class="plus">+</div>
+                <label>Red Color</label>
+            </div>
+        
+            <div class="row1">
+                <div class="minus">-</div>
+                <input value="3" size="3" id="tleftgreen">
+                <div class="plus">+</div>
+                <label>Green Color</label>
+            </div>
+        
+            <div class="row0">
+                <div class="minus">-</div>
+                <input value="3" size="3" id="tleftblue">
+                <div class="plus">+</div>
+                <label>Blue Color</label>
+            </div>
+        </div>
+        
+        <div id="right" style="float: right; width: 50%;">
+            <div class="row0">
+                <div class="minus">-</div>
+                <input value="3" size="3" id="trightred">
+                <div class="plus">+</div>
+                <label>Red Color</label>
+            </div>
+        
+            <div class="row1">
+                <div class="minus">-</div>
+                <input value="3" size="3" id="trightgreen">
+                <div class="plus">+</div>
+                <label>Green Color</label>
+            </div>
+        
+            <div class="row0">
+                <div class="minus">-</div>
+                <input value="3" size="3" id="trightblue">
+                <div class="plus">+</div>
+                <label>Blue Color</label>
+            </div>
+        </div> -->
+
+        <div class="row1">
+            <select id="selectTexture" style="direction: ltr;">
+                <option>Microbial</option>
+                <option>Carbon Fibre</option>
+                <option>CheckerBoard</option>
+            </select>
+            <label>Select Texture</label>
+        </div>
+
+        <!-- <div class="row0">
+            &nbsp; #<input value="555555" size="6" id="color"> <label>Color (HEX)</label>
+        </div> -->
+
+    
+        <br />
+        <button id="texturegenerate" class="button" onclick="generateTexture()">Generate Texture</button>
     </div>
     <hr style="clear: both; display:block; visibility: hidden; height: 30px" />
 </body>
@@ -982,7 +1058,16 @@ function toggleShadowMenuFunction(){
 }
 
 function toggleGradientMenuFunction(){
-    var x = document.getElementById("gradientmenuid");
+  var x = document.getElementById("gradientmenuid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function toggleTextureMenuFunction(){
+    var x = document.getElementById("texturemenuid");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -1006,7 +1091,33 @@ function generateGradient(){
 
     if(pp.shadowRoot){
         pedal.shadowRoot.getElementById('pedal').style.background = 'linear-gradient(rgb('+leftred+', '+leftgreen+', '+leftblue+'), '+'rgb('+rightred+', '+rightgreen+', '+rightblue+'))';
-        pedal.shadowRoot.getElementById('textB').style.background = 'linear-gradient(rgba('+leftred+', '+leftgreen+', '+leftblue+', '+opacity+'), '+'rgb('+rightred+', '+rightgreen+', '+rightblue+', '+opacity+'))';
+        pedal.shadowRoot.getElementById('textB').style.background = 'linear-gradient(rgba('+leftred+', '+leftgreen+', '+leftblue+', '+opacity+'), '+'rgba('+rightred+', '+rightgreen+', '+rightblue+', '+opacity+'))';
+    }
+}
+
+function generateTexture(){
+    var pp = document.querySelector('my-pedal');
+    var selector = document.getElementById('selectTexture');
+    if(pp.shadowRoot){
+        if(selector.options[0].selected){
+            pedal.shadowRoot.getElementById('pedal').style.background = "";
+            pedal.shadowRoot.getElementById('textB').style.background = "";
+            pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
+            pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
+            //pedal.shadowRoot.getElementById('textB').style.background = "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 8px 9px;";
+        }
+        if(selector.options[1].selected){
+            pedal.shadowRoot.getElementById('pedal').style.background = "";
+            pedal.shadowRoot.getElementById('textB').style.background = "";
+            pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
+            pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
+        }
+        if(selector.options[2].selected){
+            pedal.shadowRoot.getElementById('pedal').style.background = "";
+            pedal.shadowRoot.getElementById('textB').style.background = "";
+            pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
+            pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
+        }
     }
 }
 

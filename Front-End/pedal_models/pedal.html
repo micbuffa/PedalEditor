@@ -30,7 +30,6 @@ figcaption {
 	</style>
     <!-- Include Editor style. -->
   <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
-
   
 	<div class="pedal draggable" id="pedal">
 		<div id="resize"></div>
@@ -41,7 +40,7 @@ figcaption {
       <img id="background-image">
       <div class="text-block" id="textB">
           <h4></h4>
-          <p id="test"></p>
+          <p class="tititi" id="test"></p>
       </div>
     </div>
     <!-- <p id="labeldiv" style="border-style: dashed; top: 68px;">tototo</p> -->
@@ -134,114 +133,35 @@ function stopMovingElem() {
 } */
 
 
+const position = { x: 0, y: 0 }
 
+interact('.draggable').draggable({
+  ignoreFrom: 'webaudio-knob',
+  listeners: {
+    start (event) {
+      console.log(event.type, event.target)
+    },
+    move (event) {
+      position.x += event.dx
+      position.y += event.dy
 
+      event.target.style.transform =
+        `translate(${position.x}px, ${position.y}px)`
+    },
+  }});
+  
+/* 
+$('#pedal').resizable({
+    helper: "ui-resizable-helper",
+    grid: [10, 10]
+});
 
-
-interact('.draggable')
-  .draggable({
-    onmove: window.dragMoveListener,
-    ignoreFrom: 'webaudio-knob',
-  })
-  .resizable({
-    // resize from all edges and corners
-    edges: { left: true, right: true, bottom: true, top: true },
-
-    modifiers: [
-      // keep the edges inside the parent
-      interact.modifiers.restrictEdges({
-        outer: 'parent',
-        endOnly: true
-      }),
-
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 100, height: 50 }
-      })
-    ],
-
-    inertia: true
-  })
-  .on('resizemove', function (event) {
-    var target = event.target
-    var x = (parseFloat(target.getAttribute('data-x')) || 0)
-    var y = (parseFloat(target.getAttribute('data-y')) || 0)
-    //var xx = (parseFloat(target.getAttribute('data-xx')) || 0)
-    //var yy = (parseFloat(target.getAttribute('data-yy')) || 0)
-
-    // update the element's style
-    target.style.width = event.rect.width + 'px'
-    target.style.height = event.rect.height + 'px'
-    pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
-    pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
-
-    // translate when resizing from top or left edges
-    x += event.deltaRect.left
-    y += event.deltaRect.top
-    //xx += event.deltaRect.right
-    //yy += event.deltaRect.bottom
-
-    target.style.webkitTransform = target.style.transform =
-        'translate(' + x + 'px,' + y + 'px,' + xx + 'px,' + yy + 'px)'
-
-    target.setAttribute('data-x', x)
-    target.setAttribute('data-y', y)
-    target.setAttribute('data-xx', xx)
-    target.setAttribute('data-yy', yy)
-    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
-  })
-
-function dragMoveListener (event) {
-    //var targetclassname = pedal.shadowRoot.children[1].children[2].id;
-      
-      if(pedal.shadowRoot.children[2].childElementCount <= 2){
-        var target = event.target
-            // keep the dragged position in the data-x/data-y attributes
-            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-        // translate the element
-        target.style.webkitTransform =
-        target.style.transform =
-          'translate(' + x + 'px, ' + y + 'px)';
-
-        // update the posiion attributes
-        target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);
-  }
-
-  if(pedal.shadowRoot.children[2].childElementCount > 2){
-    if(event.target.id.includes("knob")){
-      var target = event.target,
-      // keep the dragged position in the data-x/data-y attributes
-      x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-      //alert(event.target.id);
-      // translate the element
-      target.style.webkitTransform =
-      target.style.transform =
-        'translate(' + x + 'px, ' + y + 'px)';
-
-      // update the posiion attributes
-      target.setAttribute('data-x', x);
-      target.setAttribute('data-y', y);
-    }
-    if(event.target.id.includes("pedal")){
-          var target = event.target,
-          // keep the dragged position in the data-x/data-y attributes
-          x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-          y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-          //alert(event.target.id);
-          // translate the element
-          target.style.webkitTransform =
-          target.style.transform =
-            'translate(' + x + 'px, ' + y + 'px)';
-
-          // update the posiion attributes
-          target.setAttribute('data-x', x);
-          target.setAttribute('data-y', y);
-    }
-
-  }
-}
+$('#background-img').resizable({
+    helper: "ui-resizable-helper",
+    grid: [10, 10]
+});
+$('#textB').resizable({
+    helper: "ui-resizable-helper",
+    grid: [10, 10]
+}); */
 </script>

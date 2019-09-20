@@ -271,11 +271,15 @@
                             padding-right: 20px;
                         }
 
-                        /* .draggable {
-                            cursor:move;
-                            position:absolute; 
-                          }
- */
+                        /* .text-block :not(.tititi) {
+                            opacity : 0;
+                        } */
+
+                        .draggable {
+                            touch-action: none;
+                            user-select: none;
+                        }
+
                           #canvas {
                             width:100px;
                             height:300px;
