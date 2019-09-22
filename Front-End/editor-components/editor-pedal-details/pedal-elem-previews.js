@@ -15,7 +15,7 @@
         constructor() {
             super();
             
-            this.root = this.attachShadow({mode: 'closed'});
+            this.root = this.attachShadow({mode: 'open'});
             
             const temp = document.importNode(template.content, true);
 

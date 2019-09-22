@@ -160,7 +160,7 @@ class PedalElementManager {
             x: 43,
             y: 30,
             label: name,
-            label_fontfamily: 'Comic Sans MS',
+            label_fontfamily: window.getComputedStyle(this.pedal.shadowRoot.querySelector('#test')).getPropertyValue('font-family'),
             label_fontsize: '14',
             label_color: 'ffffff',
             type: 'label'

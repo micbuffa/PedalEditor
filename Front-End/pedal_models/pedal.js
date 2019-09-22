@@ -213,7 +213,7 @@
                             top: 50%;
                             left: 50%;
                             /* bring your own prefixes */
-                            transform: translate(-50%, -50%);
+                            /* transform: translate(-50%, -50%); */
                         }`;
 
             let functionalPedalStyle = `
@@ -225,6 +225,7 @@
                             border-radius: ${this.getAttribute('radius')}px;
                             position: relative;
                             /* bring your own prefixes */
+                            /* transform: translate(-50%, -50%); */
                         }
             `;
 
@@ -237,8 +238,13 @@
                             width: ${this.getAttribute('width')}px;
                             height: ${this.getAttribute('height')}px;
                             opacity: ${this.getAttribute('opacity')};
+                            /* display: none; */
                             //visibility: hidden;
                         }
+
+                        /* .img-bck img[src=""] {
+                            display: none;
+                        } */
 
                         /* #resize {
                             position: absolute;
@@ -258,7 +264,7 @@
 
                         .container {
                             position: relative;
-                            font-family: Arial;
+                            /* font-family: Arial; */
                           }
                           
                         .text-block {
@@ -291,12 +297,12 @@
                         }
 
                         .selected {
-                            border: 1px dashed black;
+                            /* border: 1px dashed black; */
                             cursor: move;
                         }
 
                         .selected:hover {
-                            border: 1px dashed black;
+                            /* border: 1px dashed black; */
                             cursor: move;
                         }
 
@@ -341,9 +347,9 @@
                         
                         .pedalLabel{
                             position: absolute;
-                            top: 225px;
-                            font-size: 25px;
-                            font-family: Sansita;/*{font}*/
+                            /* top: 225px; */
+                            font-size: ${window.getComputedStyle(this.shadowRoot.getElementById('test')).getPropertyValue('font-size')}px;
+                            font-family: ${window.getComputedStyle(this.shadowRoot.getElementById('test')).getPropertyValue('font-family')};/*Sansita;*//*{font}*/
                             text-align: center;
                             line-height: 30px;/*{pedalfontsize}*/
                             width: 150px;

@@ -32,6 +32,7 @@
 
     <link rel="import" href="pedal_models/pedal.html">
     <link rel="import" href="editor-components/editor-pedal-details/editor-pedal-details.html">
+    <link rel="import" href="editor-components/editor-pedal-details/pedal-elem-previews.html">
     <link rel="import" href="editor-components/editor-element-list.html">
     <link rel="import" href="editor-components/editor-inspector.html">
     <link rel="import" href="editor-components/editor-faust/editor-faust.html">
@@ -305,8 +306,17 @@
                 </a>
             </li>
 
-            <li class="has-subnav">
+            <!-- <li class="has-subnav">
                 <a href="#" onclick="toggleLabelMenu()" id="LabelMenu">
+                    <i class="fa fa-font fa-2x"></i>
+                    <span class="nav-text">
+                        Label Parameters
+                    </span>
+                </a>
+            </li> -->
+
+            <li class="has-subnav">
+                <a href="#" onclick="toggleLabelMenuFunction()" id="LabelMenu">
                     <i class="fa fa-font fa-2x"></i>
                     <span class="nav-text">
                         Label Parameters
@@ -349,10 +359,111 @@
                     </span>
                 </a>
             </li>
+
+            <li class="has-subnav">
+                <a href="#" onclick="toggleImageMenuFunction()" id="ImageMenu">
+                    <i class="fa fa-image fa-2x"></i>
+                    <span class="nav-text">
+                        Toggle Image Menu
+                    </span>
+                </a>
+            </li>
+
+            <li class="has-subnav">
+                    <a href="#" onclick="toggleKnobMenuFunction()" id="KnobMenu">
+                        <i class="fa fa-circle-notch fa-2x"></i>
+                        <span class="nav-text">
+                            Toggle Knob Menu
+                        </span>
+                    </a>
+            </li>
+
+            <li class="has-subnav">
+                    <a href="#" onclick="toggleDivMenuFunction()" id="DivMenu">
+                        <i class="fa fa-square fa-2x"></i>
+                        <span class="nav-text">
+                            Toggle Div Menu
+                        </span>
+                    </a>
+            </li>
         </ul>
 
         
     </nav>
+
+
+    <div class="params draggables" id="labelmenuid" style="display: none; direction: ltr;">
+        <h3>Label parameters</h3>
+    
+        <div class="row0">
+                <select id='select' onChange="changeLabelFont(this);" style="direction: ltr; width: 80px; position: relative;">
+                </select>
+                <label>Select Label Font</label>
+        </div>
+        <div class="row1">
+            <select id="sel1" onchange="changeSize(this);" style="direction: ltr; width: 35px; position: relative;">
+                <option>4</option>
+                <option>8</option>
+                <option>12</option>
+                <option>16</option>
+                <option>20</option>
+                <option>24</option>
+                <option>28</option>
+                <option>32</option>
+                <option>36</option>
+                <option>40</option>
+                <option>44</option>
+                <option>48</option>
+                <option>52</option>
+                <option>56</option>
+                <option>58</option>
+            </select>
+            <label>Select Label Size</label>
+        </div>
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <a href="#" onclick="fontSizeX()" id="fontSizeX"><i class="fas fa-plus" style="color: white;"></i></a>
+            <label>Increase Label Size</label>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <a href="#" onclick="fontSizeY()" id="fontSizeY"><i class="fas fa-minus" style="color: white;"></i></a>
+            <label>Decrease Label Size</label>
+        </div>
+        <div class="row1" id="left" style="float: left; width: 50%;">
+            <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold" style="color: white; width: 20px;"></i></a>
+            <label>Bold Label Style</label>
+        </div>
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <a href="#" id="underlineid" onclick="UnderlineStyle()"><i
+                class="fa fa-underline" style="color: white; width: 20px;"></i></a>
+            <label>Underline Label Style</label>
+        </div>
+         
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines" style="color: white; width: 20px;"></i></a>
+            <label>GripLine Label Style</label>
+        </div>
+               
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorpick" onchange="changeColor(this);">
+            <label>Label Color</label>
+        </div>    
+        <div class="row1" id="left" style="float: left; width: 50%;">
+            <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelXLeft()" id="moveLabelXLeft">&larr;</a>
+            <label>Move Label Left</label>
+        </div>
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelYDown()" id="moveLabelYDown">&darr;</a>
+            <label>Move Label Down</label>
+        </div>
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelXRight()" id="moveLabelXRight">&rarr;</a>
+            <label>Move Label Right</label>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelYUp()" id="moveLabelYUp">&uarr;</a>
+            <label>Move Label Up</label>
+        </div>       
+    </div>
 
     
     <div class="menu" id="menu">
@@ -707,17 +818,19 @@
 
     <div style="background: white; display: none; direction: ltr;" class="params draggables" id="presetsid">
         <h3>pre sets</h3>
-        <div style="box-shadow: 5px 5px #333" class="swatch"></div>hard light
+        <div style="box-shadow: 5px 5px #333" class="swatch" id="hardlight"></div>hard light
         <hr class="dotted">
-        <div style="box-shadow: 5px 5px 3px #666" class="swatch"></div> soft
+        <div style="box-shadow: 5px 5px 3px #666" class="swatch" id="soft"></div> soft
         <hr class="dotted">
-        <div style="box-shadow: 0px 0px 5px #444" class="swatch"></div> from above
+        <div style="box-shadow: 0px 0px 5px #444" class="swatch" id="fromabove"></div> from above
         <hr class="dotted">
-        <div style="box-shadow: 0px 8px 6px -6px #666" class="swatch"></div> reduced
+        <div style="box-shadow: 0px 8px 6px -6px #666" class="swatch" id="reduced"></div> reduced
         <hr class="dotted">
-        <div style="box-shadow: inset 0px 0px 10px #666" class="swatch"></div> inset
+        <div style="box-shadow: inset 0px 0px 10px #666" class="swatch" id="inset"></div> inset
         <hr class="dotted">
-        <div style="box-shadow: 0px 0px 10px -2px #FFF" class="swatch"></div> glow
+        <div style="box-shadow: 0px 0px 10px -2px #FFF" class="swatch" id="glow"></div> glow
+        <hr class="dotted">
+        <div style="box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.7), inset -2px -2px 5px 0px rgba(0, 0, 0, 0.2), inset 3px 1px 1px 4px rgba(255, 255, 255, 0.2), 1px 0px 1px 0px rgba(0, 0, 0, 0.9), 0 2px 1px 0 rgba(0, 0, 0, 0.9), 1px 1px 1px 0px rgba(0, 0, 0, 0.9);background: linear-gradient(rgb(21, 83, 141), rgb(16, 67, 114));" class="swatch" id="disto"></div> Disto
     </div>
     
     <div class="params draggables" id="shadowmenuid" style="display: none; direction: ltr;">
@@ -751,16 +864,30 @@
             <label>Spread</label>
         </div>
     
-        <div class="row0">
-            &nbsp; #<input value="555555" size="6" id="color"> <label>Color (HEX)</label>
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            &nbsp; #<input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorshadowpick"> <label>Color (HEX)</label>
         </div>
-    
+
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <a href="#" class="btn btn-primary" onclick="changeShadowColor();" id="shadowcolorid">Set Shadow Color</a>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <div class="row1">
-            <input type="checkbox" value="inset" id="inset"><label>inset</label>
+            <input type="checkbox" value="inset" id="insett"><label>inset</label>
         </div>
     
         <br />
-        <button id="surprise" class="button">Surprise Me!</button>
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <button id="surprise" class="button">Surprise Me!</button>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <button id="setshadow" class="button" onclick="setShadow();">Apply Shadow</button>
+        </div>
+        
     </div>
 
     <div class="params draggables" id="gradientmenuid" style="display: none; direction: ltr;">
@@ -893,35 +1020,327 @@
         <br />
         <button id="texturegenerate" class="button" onclick="generateTexture()">Generate Texture</button>
     </div>
+
+    <div class="params draggables" id="imagemenuid" style="display: none; direction: ltr; width: 680px;">
+        <h3>texture parameters</h3>
+        <div class="row1" id="left" style="float: left; width: 50%;">
+            <select id="selectImage" style="direction: ltr;">
+                <option>Blue</option>
+                <option>Metal</option>
+                <option>Design</option>
+                <option>Tattoo</option>
+            </select>
+            <label>Background Image</label>
+        </div>
+
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <a href="#" class="btn btn-primary" onclick="showImage()">Preview</a>
+            <a href="#" class="btn btn-primary" onclick="selectImage()">Select</a>
+        </div>
+
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <label>Select From Folder</label>
+        </div>
+        
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <input type='file' onchange="readURL(this);" />
+            <a href="#" class="btn btn-primary" onclick="defineImage()">Select</a>
+        </div>
+
+        <div class="row1"  id="left" style="float: left; width: 50%;">
+            <label>No Image Option</label>
+        </div>
+
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <input type="checkbox" onchange='handleChange(this);'/>
+        </div>
+        
+        <br />
+        <br />
+        <br />
+        <br /><br />
+        <br />
+        <div class="row1" style="background-color: white;">
+            <img id="blah" src="#" alt="your image" />
+        </div>
+    
+        <br />
+    
+    </div>
+
+    <div class="params draggables" id="knobmenuid" style="display: none; direction: ltr; width: 680px; overflow: scroll;">
+            <h3>Knob Selection</h3>
+                <pedal-elem-previews url="http://localhost:3000/previewss/knobs" pedal-element-type="knob">
+                </pedal-elem-previews>
+    </div>
+
+    <div class="params draggables" id="divmenuid" style="display: none; direction: ltr; width: 680px; overflow: scroll;">
+            <h3>Geomtry Creation</h3>
+
+            <div class="row0" id="left" style="float: left;width: 50%;">
+                <label>Class Name:</label>
+            </div>
+            <div class="row0" id="right" style="float: right; width: 50%;">
+                <input type="text" id="classnameid" />
+            </div>
+            <br />
+            <br />
+            <div class="row1" id="left" style="float: left; width: 50%;">
+                <label>Id Value:</label>
+            </div>
+            <div class="row1" id="right" style="float: right; width: 50%;">
+                <input type="text" id="idvalueid"/>
+            </div>
+            <br />
+            <br />
+            <div class="row0" id="left" style="float: left; width: 50%;">
+                <label>Width :</label>
+            </div>
+            <div class="row0" id="right" style="float: right; width: 50%;">
+                <input type="text" id="widthid"/>
+            </div>
+            <br />
+            <br />
+            <div class="row1" id="left" style="float: left; width: 50%;">
+                <label>Height :</label>
+            </div>
+            <div class="row1" id="right" style="float: right; width: 50%;">
+                <input type="text" id="heightid" />
+            </div>
+            <br />
+            <br />
+            <div class="row0" id="left" style="float: left; width: 50%;">
+                <label>Top :</label>
+            </div>
+            <div class="row0" id="right" style="float: right; width: 50%;">
+                <input type="text" id="topid" />
+            </div>
+            <br />
+            <br />
+            <div class="row1" id="left" style="float: left; width: 50%;">
+                <label>Left :</label>
+            </div>
+            <div class="row1" id="right" style="float: right; width: 50%;">
+                <input type="text" id="leftid" />
+            </div>
+            <br />
+            <br />
+            <div class="row0" id="left" style="float: left; width: 50%;">
+                <label>Border Style:</label>
+            </div>
+            <div class="row0" id="right" style="float: right; width: 50%;">
+                <input type="text" id="borderstyleid" />
+            </div>
+            <br />
+            <br />
+            <a class="btn btn-primary" onclick="createDiv()" style="float: right; color: black;">Create !</a>
+    </div>
     <hr style="clear: both; display:block; visibility: hidden; height: 30px" />
 </body>
 <script>
 
+function createDiv(){
+    var pp= document.querySelector('my-pedal');
+    var classname = document.getElementById('classnameid').value;
+    var idvalue = document.getElementById('idvalueid').value;
+    var width = document.getElementById('widthid').value;
+    var height = document.getElementById('heightid').value;
+    var top = document.getElementById('topid').value;
+    var left = document.getElementById('leftid').value;
+    var borderstyle = document.getElementById('borderstyleid').value;
 
+    var mydiv = document.createElement('div');
+    mydiv.className = classname;
+    mydiv.id = idvalue;
+    mydiv.style.width = width.concat('px');
+    mydiv.style.height = height.concat('px');
+    mydiv.style.top = top.concat('%');
+    mydiv.style.left = left.concat('%');
+    mydiv.style.borderStyle = borderstyle;
+    mydiv.style.position = 'absolute';
+
+    if(pp.shadowRoot){
+        pedal.shadowRoot.getElementById('txtcontainer').appendChild(mydiv);
+    }
+}
+
+
+
+
+document.querySelector("#knobmenuid > pedal-elem-previews").previews = [];
+
+fetch(document.querySelector("#knobmenuid > pedal-elem-previews").getAttribute('url'))
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    document.querySelector("#knobmenuid > pedal-elem-previews").previews = data;
+                    document.querySelector("#knobmenuid > pedal-elem-previews").setUpPreviews();
+                })
+                .catch(err => {
+                    console.error('Error fetching preview image names: ' + err);
+                });
+
+function setUpPreviews() {
+            for(let previewFile of document.querySelector("#knobmenuid > pedal-elem-previews").previews.files) {
+                let previewElem = document.createElement('img');
+                previewElem.className = 'menu-img';
+                previewElem.id = 'preview';
+                previewElem.src = document.querySelector("#knobmenuid > pedal-elem-previews").previews.filesUrl + previewFile
+                previewElem.alt = previewFile;
+                
+                previewElem.onclick = (e) => {
+                    let detail = {
+                        type: document.querySelector("#knobmenuid > pedal-elem-previews").getAttribute('pedal-element-type'),
+                        fileName: e.target.alt
+                    };
+
+                    let event = new CustomEvent('preview-selected', {detail: detail});
+                    document.querySelector("#knobmenuid > pedal-elem-previews").dispatchEvent(event);
+                }
+
+                document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.appendChild(previewElem);
+            }
+        }
+
+/* var divs = [];
+divs = document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.querySelectorAll("#preview");
+    divs.forEach(e => {
+        e.onclick = function(){
+            var knobContainer = document.createElement("div");
+            knobContainer.setAttribute('class', 'knob');
+            knobContainer.setAttribute('id', 'knob');
+
+            var knobElem = document.createElement("webaudio-knob");
+
+            
+            knobElem.setAttribute('sprites', 100);
+            knobElem.setAttribute('value', 0);
+            knobElem.setAttribute('step', 1);
+            knobElem.setAttribute('height', '70px;');
+            knobElem.setAttribute('width', '70px;');
+            knobElem.setAttribute('src', '.'.concat(document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.querySelector("#preview").getAttribute('src').substr(21)));
+
+            knobContainer.appendChild(knobElem);
+
+            this.pedal.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
+        }
+    }); */
+
+
+function handleChange(checkbox) {
+    var pp=document.querySelector('my-pedal');
+    if(pp.shadowRoot){
+        if(checkbox.checked == true){
+            /* pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/blue.jpg"); */
+            pedal.shadowRoot.getElementById('background-image').style.display = "none";
+        }
+        else{
+            //pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+            pedal.shadowRoot.getElementById('background-image').style.display = "";
+        }
+    }
+    
+}
+
+function defineImage(){
+    var img = document.getElementById('blah');
+    var pp=document.querySelector('my-pedal');
+
+    if(pp.shadowRoot){
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src",img.getAttribute('src'));
+    }
+}
+
+function showImage(){
+    var img = document.getElementById('blah');
+    var selector = document.getElementById('selectImage');
+    if(selector.options[0].selected){
+        img.setAttribute("src","");
+        img.setAttribute("src","./img/background/blue.jpg");
+        img.style.width = "150px";
+        img.style.height= "200px";
+    }
+    if(selector.options[1].selected){
+        img.setAttribute("src","");
+        img.setAttribute("src","./img/background/2.jpg");
+        img.style.width = "150px";
+        img.style.height= "200px";
+    }
+    if(selector.options[2].selected){
+        img.setAttribute("src","");
+        img.setAttribute("src","./img/background/1.png");
+        img.style.width = "150px";
+        img.style.height= "200px";
+    }
+    if(selector.options[3].selected){
+        img.setAttribute("src","");
+        img.setAttribute("src","./img/background/image2.png");
+        img.style.width = "150px";
+        img.style.height= "200px";
+    }
+}
+
+
+function selectImage(){
+    var selector = document.getElementById('selectImage');
+    if(selector.options[0].selected){
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/blue.jpg");
+    }
+    if(selector.options[1].selected){
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/2.jpg");
+    }
+    if(selector.options[2].selected){
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/1.png");
+    }
+    if(selector.options[3].selected){
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/image2.png");
+    }
+}
+
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
 $('div.params input').blur(function(){
-  setShadow();
+  //setShadow();
 })
 
 $('#inset').click(function(){
-   setShadow();
+   //setShadow();
 })
 
 $('div.minus').click(function(){
      var toChange = $(this).next();
      toChange.val( parseInt(toChange.val()) -1 );
-     setShadow();
+     //setShadow();
 })
 
  $('div.plus').click(function(){
      var toChange = $(this).prev();
      toChange.val( parseInt(toChange.val()) +1 );
-     setShadow();
+     //setShadow();
 })
 
 $('#surprise').click(function(){
    setRandom();
-   setShadow();
+   //setShadow();
 })        
 
 $('#variants').click(function(){
@@ -934,22 +1353,136 @@ $('#variants').click(function(){
 })     
 
 
-$('div.swatch').click(function(){
+/* $('div.swatch').click(function(){
     $('#box').attr('style', $(this).attr('style'));
     $('#snippet').html($(this).attr('style'));
-})
+}) */
+
+
+
+    var swatchclick = 0;
+    document.getElementById('hardlight').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('hardlight').style.boxShadow;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            }
+        }
+    };
+    swatchclick = 0;
+    document.getElementById('soft').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('soft').style.boxShadow;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            }
+        }
+    };
+    swatchclick = 0;
+    document.getElementById('fromabove').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('fromabove').style.boxShadow;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            }
+        }
+    };
+    swatchclick = 0;
+    document.getElementById('reduced').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('reduced').style.boxShadow;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            }
+        }
+    };
+    swatchclick = 0;
+    document.getElementById('inset').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('inset').style.boxShadow;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            }
+        }
+    };
+    swatchclick = 0;
+    document.getElementById('glow').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('glow').style.boxShadow;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            }
+        }
+    };
+    swatchclick = 0;
+    document.getElementById('disto').onclick = function(){
+        swatchclick++;
+        var pp=document.querySelector('my-pedal');
+        if(pp.shadowRoot){
+            var toto= pedal.shadowRoot.getElementById('pedal').style.background;
+            if((swatchclick%2)==0){
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.background = document.getElementById('color').value;
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('disto').style.boxShadow;
+                pedal.shadowRoot.getElementById('pedal').style.background =document.getElementById('disto').style.background;
+            }
+            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+                pedal.shadowRoot.getElementById('pedal').style.background = document.getElementById('color').value;
+
+            }
+        }
+    };
+    swatchclick = 0;
+
+
 
 
 function setShadow () {
-    var b = document.getElementById('my-pedal'); var shdw = '';
-    if(b.shadowRoot){
-        if (document.getElementById('inset').checked) {
-        shdw += 'inset ';
-      }           
-        shdw += document.getElementById('offX').value +'px ' + document.getElementById('offY').value + 'px '+ document.getElementById('blur').value + 'px ' + document.getElementById('spread').value + 'px #' + document.getElementById('color').value;
-      
+    var b = document.querySelector('my-pedal'); var shdw = '';
+    var offsetx = document.getElementById('offX').value;
+    var offsety = document.getElementById('offY').value;
+    var blur = document.getElementById('blur').value;
+    var spread = document.getElementById('spread').value;
+    
+    if(b.shadowRoot){          
+        shdw += offsetx+'px'+' '+offsety+'px'+' '+blur+'px'+' '+spread+'px';
+        if (document.getElementById('insett').checked) {
+            shdw += ' inset';
+            pedal.shadowRoot.getElementById('pedal').style.boxShadow = shdw;
+        }
         pedal.shadowRoot.getElementById('pedal').style.boxShadow = shdw;
-        //$('#snippet').html('box-shadow: '+shdw);
+
     }
     
 }
@@ -963,7 +1496,7 @@ function setRandom() {
     
     // inset
     var rndInset = Math.random();
-    if (rndInset < .6) { document.getElementById('inset').checked = false; } else { document.getElementById('inset').checked = true; } ;
+    if (rndInset < .6) { document.getElementById('insett').checked = false; } else { document.getElementById('insett').checked = true; } ;
 }
 
 function rndnr(range) {
@@ -1047,9 +1580,35 @@ function dragMoveListener (event) {
 // this is used later in the resizing and gesture demos
 //window.dragMoveListener = dragMoveListener;
 
+function toggleLabelMenuFunction(){
+  var x = document.getElementById("labelmenuid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function toggleKnobMenuFunction(){
+  var x = document.getElementById("knobmenuid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 function toggleShadowMenuFunction(){
   var x = document.getElementById("shadowmenuid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function toggleDivMenuFunction(){
+  var x = document.getElementById("divmenuid");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -1067,7 +1626,16 @@ function toggleGradientMenuFunction(){
 }
 
 function toggleTextureMenuFunction(){
-    var x = document.getElementById("texturemenuid");
+  var x = document.getElementById("texturemenuid");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function toggleImageMenuFunction(){
+    var x = document.getElementById("imagemenuid");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -1101,22 +1669,22 @@ function generateTexture(){
     if(pp.shadowRoot){
         if(selector.options[0].selected){
             pedal.shadowRoot.getElementById('pedal').style.background = "";
-            pedal.shadowRoot.getElementById('textB').style.background = "";
+            //pedal.shadowRoot.getElementById('textB').style.background = "";
             pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
-            pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
+            //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
             //pedal.shadowRoot.getElementById('textB').style.background = "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 8px 9px;";
         }
         if(selector.options[1].selected){
             pedal.shadowRoot.getElementById('pedal').style.background = "";
-            pedal.shadowRoot.getElementById('textB').style.background = "";
+            //pedal.shadowRoot.getElementById('textB').style.background = "";
             pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
-            pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
+            //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
         }
         if(selector.options[2].selected){
             pedal.shadowRoot.getElementById('pedal').style.background = "";
-            pedal.shadowRoot.getElementById('textB').style.background = "";
+            //pedal.shadowRoot.getElementById('textB').style.background = "";
             pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
-            pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
+            //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
         }
     }
 }
@@ -1369,7 +1937,7 @@ function moveLabelXLeft(){
     //var link = document.getElementById('moveLabelXLeft');
     totalClicksX += 10;
     if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('textB').style.right = String(totalClicksX).concat("px");
+        pedal.shadowRoot.getElementById('test').style.right = String(totalClicksX).concat("px");
     }    
 }
 
@@ -1381,7 +1949,7 @@ function moveLabelXRight(){
     //var link = document.getElementById('moveLabelXRight');
     totalClicksX -= 10;
     if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('textB').style.right = String(totalClicksX).concat("px");
+        pedal.shadowRoot.getElementById('test').style.right = String(totalClicksX).concat("px");
     }  
 }
 
@@ -1394,7 +1962,7 @@ function moveLabelYUp(){
     //var link = document.getElementById('moveLabelXRight');
     totalClicksY += 10;
     if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('textB').style.bottom = String(totalClicksY).concat("px");
+        pedal.shadowRoot.getElementById('test').style.bottom = String(totalClicksY).concat("px");
     }  
 }
 
@@ -1405,7 +1973,7 @@ function moveLabelYDown(){
     //var link = document.getElementById('moveLabelXRight');
     totalClicksY -= 10;
     if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('textB').style.bottom = String(totalClicksY).concat("px");
+        pedal.shadowRoot.getElementById('test').style.bottom = String(totalClicksY).concat("px");
     }  
 }
 
@@ -1483,6 +2051,57 @@ function changeLabelFont(n){
 
     if(pp.shadowRoot){
         pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-family');
+    }
+}
+
+
+function HEX2RGB (hex) {
+        "use strict";
+        if (hex.charAt(0) === '#') {
+            hex = hex.substr(1);
+        }
+        if ((hex.length < 2) || (hex.length > 6)) {
+            return false;
+        }
+        var values = hex.split(''),
+            r,
+            g,
+            b;
+
+        if (hex.length === 2) {
+            r = parseInt(values[0].toString() + values[1].toString(), 16);
+            g = r;
+            b = r;
+        } else if (hex.length === 3) {
+            r = parseInt(values[0].toString() + values[0].toString(), 16);
+            g = parseInt(values[1].toString() + values[1].toString(), 16);
+            b = parseInt(values[2].toString() + values[2].toString(), 16);
+        } else if (hex.length === 6) {
+            r = parseInt(values[0].toString() + values[1].toString(), 16);
+            g = parseInt(values[2].toString() + values[3].toString(), 16);
+            b = parseInt(values[4].toString() + values[5].toString(), 16);
+        } else {
+            return false;
+        }
+        return [r, g, b];
+    }
+
+
+function changeShadowColor(){
+    var pp=document.querySelector('my-pedal');
+    var col = document.getElementById('jscolorshadowpick').value;
+    var ca = "#";
+
+    var color = ca.concat(col);
+    var finalcolor = HEX2RGB(color);
+
+    var r = finalcolor[0];
+    var g = finalcolor[1];
+    var b = finalcolor[2];
+
+    if(pp.shadowRoot){
+        //pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+        pedal.shadowRoot.getElementById('pedal').style.boxShadow += ' rgb('+r+', '+g+', '+b+') ';
     }
 }
 

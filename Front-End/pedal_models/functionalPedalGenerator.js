@@ -15,6 +15,7 @@ class FunctionalPedalGenerator {
 
     // The complete content of the functional pedal file.
     let functionalPedalCode = `
+    <link href='https://fonts.googleapis.com/css?family=Montez|Lobster|Roboto|Lexend+Zetta|Josefin+Sans|Shadows+Into+Light|Pacifico|Amatic+SC:700|Orbitron:400,900|Rokkitt|Righteous|Dancing+Script:700|Bangers|Chewy|Sigmar+One|Architects+Daughter|Abril+Fatface|Covered+By+Your+Grace|Kaushan+Script|Gloria+Hallelujah|Satisfy|Lobster+Two:700|Comfortaa:700|Cinzel|Courgette' rel='stylesheet' type='text/css'>
             <script src="https://mainline.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
             <script>
             </script>
@@ -52,6 +53,8 @@ class FunctionalPedalGenerator {
                 this.setSwitches();
                 //this.setSwitchListener();
                 this.setInactive();
+                this._root.querySelector("#pedal").style.transform = 'none';
+                //this._root.querySelector("#test").style.fontFamily = window.getComputedStyle(this._root.querySelector("#test")).getPropertyValue('font-family');
 
                 // Compute base URI of this main.html file. This is needed in order
                 // to fix all relative paths in CSS, as they are relative to

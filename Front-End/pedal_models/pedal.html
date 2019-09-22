@@ -37,11 +37,11 @@ figcaption {
     
     
     <div class="container" id="txtcontainer">
-      <img id="background-image">
-      <div class="text-block" id="textB">
+      <img id="background-image" >
+      
           <h4></h4>
-          <p class="tititi" id="test"></p>
-      </div>
+          <p class="pedalLabel" id="test"></p>
+      
     </div>
     <!-- <p id="labeldiv" style="border-style: dashed; top: 68px;">tototo</p> -->
     <!-- <figure>
@@ -133,22 +133,100 @@ function stopMovingElem() {
 } */
 
 
-const position = { x: 0, y: 0 }
 
+// target elements with the "draggable" class
+interact('.draggable')
+  .draggable({
+    ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
+    onmove: window.dragMoveListener,
+  })
+  .resizable({
+    // resize from all edges and corners
+    ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
+    edges: { left: true, right: false, bottom: false, top: true },
+
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent',
+        endOnly: true
+      }),
+
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 100, height: 50 }
+      })
+    ],
+
+    inertia: true
+  })
+  .on('resizemove', function (event) {
+    var target = event.target
+    var x = (parseFloat(target.getAttribute('data-x')) || 0)
+    var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+    // update the element's style
+    target.style.width = event.rect.width + 'px'
+    target.style.height = event.rect.height + 'px'
+    pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
+    pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
+
+    // translate when resizing from top or left edges
+    x += event.deltaRect.left
+    y += event.deltaRect.top
+
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)'
+
+    target.setAttribute('data-x', x)
+    target.setAttribute('data-y', y)
+    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+  })
+
+function dragMoveListener (event) {
+  var target = event.target
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+  // translate the element
+  target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)'
+
+  // update the posiion attributes
+  target.setAttribute('data-x', x)
+  target.setAttribute('data-y', y)
+}
+
+
+
+/* const position = { x: 0, y: 0 }
+var top,left,right,bottom;
 interact('.draggable').draggable({
-  ignoreFrom: 'webaudio-knob',
+  ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
   listeners: {
     start (event) {
-      console.log(event.type, event.target)
+      console.log(event.type, event.target);
     },
     move (event) {
+      var rect = event.target.getBoundingClientRect();
       position.x += event.dx
       position.y += event.dy
+      
 
       event.target.style.transform =
-        `translate(${position.x}px, ${position.y}px)`
+        `translate(${position.x}px, ${position.y}px)`;
+
+      
+      
     },
-  }});
+  }}); */
+ /*  pedal.shadowRoot.getElementById('pedal').style.transform = "none"; */
+
+ /*  if(timer = 0){
+    pedal.shadowRoot.getElementById('pedal').removeAttribute('style','transform');
+  }; */
   
 /* 
 $('#pedal').resizable({
@@ -164,4 +242,5 @@ $('#textB').resizable({
     helper: "ui-resizable-helper",
     grid: [10, 10]
 }); */
+
 </script>

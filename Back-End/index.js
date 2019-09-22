@@ -49,6 +49,19 @@ app.get("/previews/knobs", function(req, res) {
   });
 });
 
+app.get("/previewss/knobs", function(req, res) {
+  fs.readdir("../Back-End/img/knobs2", (err, files) => {
+    let filesUrl = "http://localhost:3000/img/knobs2/";
+
+    response = {
+      filesUrl,
+      files
+    };
+
+    res.json(response);
+  });
+});
+
 app.get("/previews/sliders", (req, res) => {
   fs.readdir("../Back-End/img/sliders", (err, files) => {
     let filesUrl = "http://localhost:3000/img/sliders/";
