@@ -145,66 +145,7 @@
         console.log("### FAUSTUI JSON = ");
         console.log(urlParams.get('data'));
         console.log("###")
-        faustUI = JSON.parse(urlParams.get('data'));
-        let name = urlParams.get('name');
-        faustUI.WapName = name.substr(0, name.lastIndexOf("."));
-        document.querySelector("#wapName").innerHTML = faustUI.WapName;
 
-        console.log("Initialize")
-        console.log("faustUI = ", faustUI)
-        //setFaustUIFromUrl();
-        //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
-
-
-        displaySavedPedalsIds();
-
-        bt_buildIt.addEventListener('click', () => {
-
-            checkMetadata(document.querySelector("#urlPlugin").value);
-        });
-
-        let faust = document.querySelector('#editor-faust'),
-            faustClone = faust.cloneNode(true);
-        faust.parentNode.replaceChild(faustClone, faust);
-
-        faust = document.querySelector('#editor-faust');
-        /*faust.addEventListener('create-pedal', (e) => {
-            newPedal();
-            let pedalConfig = {
-                name: "First",
-                color: "#7caeff",
-                width: e.detail.width,
-                height: e.detail.height,
-                radius: "10",
-                opacity: "1",
-                elements: e.detail.elements
-            };
-            //console.log(e.detail);
-            pedal.loadConfig(pedalConfig);
-        });*/
-        if (window.faustUI) {
-            console.log("### faustUI present ! ####")
-            console.log(window.faustUI);
-            newPedal(null, true);
-
-            let detail = faust.pedalConfigFromUI(window.faustUI);
-
-            let pedalConfig = {
-                name: window.faustUI.WapName,
-                color: "#7caeff",
-                width: detail.width,
-                height: detail.height,
-                radius: "10",
-                opacity: "1",
-                elements: detail.elements
-            };
-            console.log(detail);
-            console.log("PEDALCONFIG = ", pedalConfig);
-
-            pedal.loadConfig(pedalConfig);
-            currentWapName = pedalConfig.name;
-
-        }
     }
 
     function setFaustUIFromUrl() {
@@ -629,8 +570,73 @@
         const data = e.data;
 
         if (data.type === "build") {
+            // called by faust editor after run and after the GUI Builder tab is opened
             console.log("CODE for name = " + currentWapName + "= " + data.code);
             currentWapCode = data.code;
+            console.log("data.name = " + data.name)
+            console.dir("data.ui = " + JSON.stringify(data.ui))
+
+            // HERE WE SHOULD START DOING THINGS WITH data.ui... not at the end of initialize....
+            faustUI = data.ui;
+            let name = data.name;
+            faustUI.WapName = name.substr(0, name.lastIndexOf("."));
+            document.querySelector("#wapName").innerHTML = faustUI.WapName;
+
+            console.log("Initialize2")
+            console.log("faustUI = ", faustUI)
+            //setFaustUIFromUrl();
+            //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
+
+
+            displaySavedPedalsIds();
+
+            bt_buildIt.addEventListener('click', () => {
+
+                checkMetadata(document.querySelector("#urlPlugin").value);
+            });
+
+            let faust = document.querySelector('#editor-faust'),
+                faustClone = faust.cloneNode(true);
+            faust.parentNode.replaceChild(faustClone, faust);
+
+            faust = document.querySelector('#editor-faust');
+            /*faust.addEventListener('create-pedal', (e) => {
+            newPedal();
+            let pedalConfig = {
+            name: "First",
+            color: "#7caeff",
+            width: e.detail.width,
+            height: e.detail.height,
+            radius: "10",
+            opacity: "1",
+            elements: e.detail.elements
+            };
+            //console.log(e.detail);
+            pedal.loadConfig(pedalConfig);
+            });*/
+            if (window.faustUI) {
+                console.log("### faustUI present ! ####")
+                console.log(window.faustUI);
+                newPedal(null, true);
+
+                let detail = faust.pedalConfigFromUI(window.faustUI);
+
+                let pedalConfig = {
+                    name: window.faustUI.WapName,
+                    color: "#7caeff",
+                    width: detail.width,
+                    height: detail.height,
+                    radius: "10",
+                    opacity: "1",
+                    elements: detail.elements
+                };
+                console.log(detail);
+                console.log("PEDALCONFIG = ", pedalConfig);
+
+                pedal.loadConfig(pedalConfig);
+                currentWapName = pedalConfig.name;
+
+            }
         }
 
         if (data.type === "exported") {

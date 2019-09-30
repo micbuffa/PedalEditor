@@ -10,7 +10,7 @@
                         .pedal{
                             display: block;
                             background-color: #7caeff;
-                            width: 170px;
+                            width: 130px;
                             height: 370px;
                             border-radius: 10px;
                             position: relative;
@@ -20,7 +20,7 @@
                         
                         #background-image {
                             //border: solid 2px black;
-                            width: 170px;
+                            width: 130px;
                             height: 370px;
                             opacity: 1;
                         }
@@ -30,7 +30,7 @@
                             cursor: nwse-resize;
                             width: 10px;
                             height: 10px;
-                            left: 162px;
+                            left: 122px;
                             top: 362px;
                             border: 1px solid black;
                         }
@@ -91,60 +91,24 @@
                             right: 0px;
                         }
                         
-                    #bypass {
+                    #Dead Zone {
                         left: 45px;
-                        top: 290px;
-                    }
-
-                    #bypass div {
-                        color: #000000;
-                        font-family: "Verdana";
-                        font-size: 14px;
-                        
-                    }
-                
-                    #BasePitch {
-                        left: 10px;
                         top: 10px;
                     }
 
-                    #BasePitch div {
+                    #Dead Zone div {
                         color: #000000;
                         font-family: "Verdana";
                         font-size: 14px;
                         
                     }
                 
-                    #Mix {
-                        left: 10px;
-                        top: 80px;
+                    #Noise Gate {
+                        left: 45px;
+                        top: 190px;
                     }
 
-                    #Mix div {
-                        color: #000000;
-                        font-family: "Verdana";
-                        font-size: 14px;
-                        
-                    }
-                
-                    #PitchMod {
-                        left: 10px;
-                        top: 150px;
-                    }
-
-                    #PitchMod div {
-                        color: #000000;
-                        font-family: "Verdana";
-                        font-size: 14px;
-                        
-                    }
-                
-                    #Release {
-                        left: 10px;
-                        top: 220px;
-                    }
-
-                    #Release div {
+                    #Noise Gate div {
                         color: #000000;
                         font-family: "Verdana";
                         font-size: 14px;
@@ -181,9 +145,9 @@
 
 		<img id="background-image">
 
-	<div class="switch" id="bypass"><webaudio-switch src="./img/switches/switch_2.png" height="50" width="80" id="switch1" style="height: 50px;"></webaudio-switch><div>bypass</div></div><div class="slider" id="BasePitch"><webaudio-slider value="60" height="40" width="150" max="96" min="24" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/blipper3/BasePitch" style="height: 40px;"></webaudio-slider><div>BasePitch</div></div><div class="slider" id="Mix"><webaudio-slider value="0.5" height="40" width="150" max="1" min="0" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/blipper3/Mix" style="height: 40px;"></webaudio-slider><div>Mix</div></div><div class="slider" id="PitchMod"><webaudio-slider value="24" height="40" width="150" max="64" min="-64" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/blipper3/PitchMod" style="height: 40px;"></webaudio-slider><div>PitchMod</div></div><div class="slider" id="Release"><webaudio-slider value="20" height="40" width="150" max="100" min="2" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/blipper3/Release" style="height: 40px;"></webaudio-slider><div>Release</div></div></div></template><script>
-        let blipper3Temp = document.currentScript.ownerDocument.querySelector('template');
-        class blipper3Gui extends HTMLElement {
+	<div class="slider" id="Dead Zone"><webaudio-slider value="-120" height="150" width="40" max="0" min="-120" step="0.001" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/deadgate/Dead Zone" style="height: 150px;"></webaudio-slider><div>Dead Zone</div></div><div class="slider" id="Noise Gate"><webaudio-slider value="-120" height="150" width="40" max="0" min="-120" step="0.001" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/deadgate/Noise Gate" style="height: 150px;"></webaudio-slider><div>Noise Gate</div></div></div></template><script>
+        let deadgateTemp = document.currentScript.ownerDocument.querySelector('template');
+        class deadgateGui extends HTMLElement {
     
         
             constructor(plug) {
@@ -193,7 +157,7 @@
                 this._plug.gui = this;
                 console.log(this._plug);
                 this._root = this.attachShadow({ mode: 'open' });
-                this._root.appendChild(blipper3Temp.content.cloneNode(true));
+                this._root.appendChild(deadgateTemp.content.cloneNode(true));
                 this.isOn;
                 this.state = new Object();
                 this.setKnobs();
@@ -207,7 +171,7 @@
                
             console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
-            let tmp = "/blipper3/bypass";
+            let tmp = "/deadgate/bypass";
             if (this.state[tmp] == 1) {
             this._root.querySelector("#switch1").value = 0;
             this.isOn = false;
@@ -229,7 +193,7 @@
             this.boundingRect = {
                 dataWidth: {
                 type: Number,
-                value: 170
+                value: 130
                 },
                 dataHeight: {
                 type: Number,
@@ -271,7 +235,7 @@
         
             bypass() {
                
-            this._plug.setParam("/blipper3/bypass", 1);
+            this._plug.setParam("/deadgate/bypass", 1);
             console.log("disabled");
         
             }
@@ -289,15 +253,13 @@
         
             reactivate() {
                
-            this._plug.setParam("/blipper3/bypass", 0);
+            this._plug.setParam("/deadgate/bypass", 0);
         
             }
         
             setSliders() {
-               this._root.getElementById("/blipper3/BasePitch").addEventListener("input", (e) =>this._plug.setParam("/blipper3/BasePitch", e.target.value));
-this._root.getElementById("/blipper3/Mix").addEventListener("input", (e) =>this._plug.setParam("/blipper3/Mix", e.target.value));
-this._root.getElementById("/blipper3/PitchMod").addEventListener("input", (e) =>this._plug.setParam("/blipper3/PitchMod", e.target.value));
-this._root.getElementById("/blipper3/Release").addEventListener("input", (e) =>this._plug.setParam("/blipper3/Release", e.target.value));
+               this._root.getElementById("/deadgate/Dead Zone").addEventListener("input", (e) =>this._plug.setParam("/deadgate/Dead Zone", e.target.value));
+this._root.getElementById("/deadgate/Noise Gate").addEventListener("input", (e) =>this._plug.setParam("/deadgate/Noise Gate", e.target.value));
 
             }
         
@@ -316,15 +278,15 @@ this._root.getElementById("/blipper3/Release").addEventListener("input", (e) =>t
             }
         }
                 try {
-                    customElements.define('wap-blipper3', blipper3Gui);
+                    customElements.define('wap-deadgate', deadgateGui);
                     console.log("Element defined");
                 } catch(error){
                     console.log(error);
                     console.log("Element already defined");      
                 }
                 
-                createblipper3GUI = (plug) => {
-                    let elem = new blipper3Gui(plug);
+                createdeadgateGUI = (plug) => {
+                    let elem = new deadgateGui(plug);
                     return elem; 
                 }
         </script>

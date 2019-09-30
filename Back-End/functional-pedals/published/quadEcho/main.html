@@ -1,12 +1,12 @@
 
-            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
+            <script src="https://mainline.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webcomponents-lite.js"></script>
             <script>
+            </script>
+            <script src="https://mainline.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
             WebAudioControlsOptions = {
                 useMidi: 1,
             };
-            </script>
-            <script src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/bower_components/webaudio-controls2/webaudio-controls.js"></script>
-        <template><style>	
+            <template><style>	
                         .pedal{
                             display: block;
                             background-color: #7caeff;
@@ -145,7 +145,7 @@
 
 		<img id="background-image">
 
-	<div class="slider" id="feedback"><webaudio-slider value="0" height="40" width="150" max="100" min="0" step="0.1" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/quadEcho/feedback" style="height: 40px;"></webaudio-slider><div>feedback</div></div><div class="slider" id="millisecond"><webaudio-slider value="0" height="40" width="150" max="1000" min="0" step="0.1" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/quadEcho/millisecond" style="height: 40px;"></webaudio-slider><div>millisecond</div></div></div></template><script>
+	<div class="slider" id="feedback"><webaudio-slider value="0" height="40" width="150" max="100" min="0" step="0.100000001" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/stereo_echo/echo__1000/feedback" style="height: 40px;"></webaudio-slider><div>feedback</div></div><div class="slider" id="millisecond"><webaudio-slider value="0" height="40" width="150" max="1000" min="0" step="0.100000001" src="./img/sliders/slider1.png" knobsrc="./img/sliders/sliderKnob.png" id="/stereo_echo/echo__1000/millisecond" style="height: 40px;"></webaudio-slider><div>millisecond</div></div></div></template><script>
         let quadEchoTemp = document.currentScript.ownerDocument.querySelector('template');
         class quadEchoGui extends HTMLElement {
     
@@ -162,26 +162,68 @@
                 this.state = new Object();
                 this.setKnobs();
                 this.setSliders();
-                this.setSwitchListener();
-                this.setActive(false);
+                this.setSwitches();
+                //this.setSwitchListener();
+                this.setInactive();
+
+                // Compute base URI of this main.html file. This is needed in order
+                // to fix all relative paths in CSS, as they are relative to
+                // the main document, not the plugin's main.html
+
+                //console.log("maindoc URI = " + quadEchoTemp.baseURI);
+                let posOfLastSlash = quadEchoTemp.baseURI.lastIndexOf("/");
+                //console.log("Base URI = " + quadEchoTemp.baseURI.substring(0, posOfLastSlash))
+                this.basePath = quadEchoTemp.baseURI.substring(0, posOfLastSlash);
+                //console.log("basePath = " + this.basePath)
+                //console.log("baseURI = " + this.baseURI)
+
+                // Fix relative path in WebAudio Controls elements
+                this.fixRelativeImagePathsInCSS();
+
+                // optionnal : set image background using a relative URI (relative
+                // to this main.html file)
+                //this.setImageBackground("/img/BigMuffBackground.png");
         
+            }
+        
+            fixRelativeImagePathsInCSS(imageRelativeURI) {
+               
+        // change webaudiocontrols relative paths for spritesheets to absolute
+            let webaudioControls = this._root.querySelectorAll("webaudio-knob, webaudio-slider, webaudio-switch");
+            webaudioControls.forEach(e => {
+                let currentImagePath = e.getAttribute("src");
+                if (currentImagePath !== undefined) {
+                    //console.log("Got wc src as " + e.getAttribute("src"));
+                    let imagePath = e.getAttribute("src");
+                    e.setAttribute("src", this.basePath + "/" + imagePath);
+                    //console.log("After fix : wc src as " + e.getAttribute("src"));
+                }
+            });
+            
+            }
+        
+            setImageBackground() {
+               
+           // check if the shadowroot host has a background image
+            let mainDiv = this._root.querySelector("#main");
+            mainDiv.style.backgroundImage = "url(" + this.basePath + "/" + imageRelativeURI + ")";
+
+            //console.log("background =" + mainDiv.style.backgroundImage);
+            //this._root.style.backgroundImage = "toto.png";
+    
             }
         
             attributeChangedCallback() {
                
             console.log("Custom element attributes changed.");
             this.state = JSON.parse(this.getAttribute('state'));
-            let bypassSwitch = this._root.querySelector("#switch1");
-
-            if(bypassSwitch !== undefined) {
-                let tmp = "/quadEcho/bypass";
-                if (this.state[tmp] == 1) {
-                    this._root.querySelector("#switch1").value = 0;
-                    this.isOn = false;
-                } else if (this.state[tmp] == 0) {
-                    this._root.querySelector("#switch1").value = 1;
-                    this.isOn = true;
-                }
+            let tmp = "/quadEcho/bypass";
+            if (this.state[tmp] == 1) {
+            this._root.querySelector("#switch1").value = 0;
+            this.isOn = false;
+            } else if (this.state[tmp] == 0) {
+            this._root.querySelector("#switch1").value = 1;
+            this.isOn = true;
             }
             this.knobs = this._root.querySelectorAll(".knob");
             console.log(this.state);
@@ -220,7 +262,6 @@
             var background = this._root.querySelector('img');
             background.src = this._plug.URL + '/assets/undefined';
             background.style = 'border-radius : 10px;'
-
             this._root.querySelectorAll(".knob").forEach((knob) => {
 				knob.querySelector("webaudio-knob").setAttribute('src', this._plug.URL + '/assets/MiniMoog_Main.png');
             });
@@ -237,55 +278,37 @@
                
             }
         
-            bypass() {
-               
-            this._plug.setParam("/quadEcho/bypass", 1);
-            console.log("disabled");
-        
-            }
-        
             setSwitchListener() {
                
             console.log("setswitch");
-            let bypassSwitch = this._root.querySelector("#switch1");
-            if(bypassSwitch !== undefined) {
+            if(this._root.querySelector("#switch1")) {
                 this._root.querySelector("#switch1").addEventListener('change', (e) => {
                     if (this.isOn) this.bypass()
                     else this.reactivate();
                     this.isOn = !this.isOn;
-            });
+                });
             }
-        
-            }
-        
-            reactivate() {
-               
-            this._plug.setParam("/quadEcho/bypass", 0);
         
             }
         
             setSliders() {
-               this._root.getElementById("/quadEcho/feedback").addEventListener("input", (e) =>this._plug.setParam("/quadEcho/feedback", e.target.value));
-this._root.getElementById("/quadEcho/millisecond").addEventListener("input", (e) =>this._plug.setParam("/quadEcho/millisecond", e.target.value));
+               this._root.getElementById("/stereo_echo/echo__1000/feedback").addEventListener("input", (e) =>this._plug.setParam("/stereo_echo/echo__1000/feedback", e.target.value));
+this._root.getElementById("/stereo_echo/echo__1000/millisecond").addEventListener("input", (e) =>this._plug.setParam("/stereo_echo/echo__1000/millisecond", e.target.value));
 
             }
         
-            setActive(active) {
+            setSwitches() {
                
-            let bypassSwitch = this._root.querySelector("#switch1");
-            if(bypassSwitch !== undefined) {
- 
-                if (active == undefined || active == false) {
-                    this.isOn = false;
-                    this.bypass();
-                    this._root.querySelector("#switch1").value = 0;
-                } else if (active) {
-                    this.isOn = true;
-                    this.reactivate();
-                    this._root.querySelector("#switch1").value = 1;
-                }
             }
         
+            setInactive() {
+               
+        let switches = this._root.querySelectorAll(".switch webaudio-switch");
+        switches.forEach(s => {
+          console.log("### SWITCH ID = " + s.id);
+          this._plug.setParam(s.id, 1);
+        });
+       
             }
         }
                 try {
