@@ -316,8 +316,7 @@
                         }
 
                         .selected {
-                            /* MICHEL BUFFA : TO FIX, this border should not be saved*/
-                            /*border: 1px dashed black; */
+                            border: 1px dashed black;
                             cursor: move;
                         }
 

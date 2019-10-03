@@ -2627,7 +2627,28 @@
         });
     } */
 
+    // Remove the selected CSS class from all selected elements
+    // other wise the saved pedal will display dashed borders
+    // for saved elements
+    function deselectEverything() {
+        let elems = pedal.shadowRoot.querySelectorAll(".selected");
+        elems.forEach((e) => {
+            e.classList.toggle("selected");
+            //e.style.border = "2px solid red";
+        });
+
+        // remove background image is it has no src
+        let img = pedal.shadowRoot.querySelector("#background-image");
+        console.log("### img.src = " + img.src);
+        if ((img.src === undefined) || (img.src === "")) {
+            // remove the elem
+            img.parentNode.removeChild(img);
+        }
+    }
+
     function savePedal() {
+
+        deselectEverything();
 
         let pedalName = pedal.getAttribute('name');
         if (pedalName == '') {
