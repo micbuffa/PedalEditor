@@ -9,10 +9,17 @@
     <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="./bower_components/webaudio-controls/webaudio-controls.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -41,7 +48,9 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
 
-    <link href='https://fonts.googleapis.com/css?family=Montez|Lobster|Roboto|Lexend+Zetta|Josefin+Sans|Shadows+Into+Light|Pacifico|Amatic+SC:700|Orbitron:400,900|Rokkitt|Righteous|Dancing+Script:700|Bangers|Chewy|Sigmar+One|Architects+Daughter|Abril+Fatface|Covered+By+Your+Grace|Kaushan+Script|Gloria+Hallelujah|Satisfy|Lobster+Two:700|Comfortaa:700|Cinzel|Courgette' rel='stylesheet' type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Montez|Lobster|Roboto|Lexend+Zetta|Josefin+Sans|Shadows+Into+Light|Pacifico|Amatic+SC:700|Orbitron:400,900|Rokkitt|Righteous|Dancing+Script:700|Bangers|Chewy|Sigmar+One|Architects+Daughter|Abril+Fatface|Covered+By+Your+Grace|Kaushan+Script|Gloria+Hallelujah|Satisfy|Lobster+Two:700|Comfortaa:700|Cinzel|Courgette'
+        rel='stylesheet' type='text/css'>
 
 
     <!-- jQuery library -->
@@ -67,35 +76,38 @@
 
     <title>Pedal Creator 0.1</title>
     <style>
+        h2,
+        h3 {
+            margin: 0 0 6px;
+            font-size: 150%;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
 
-        h2, h3 {margin: 0 0 6px;
-                font-size: 150%;
-                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
         #box {
             width: 40%;
             float: left;
             padding: 16px;
             margin: 25px
         }
-    
+
         .boxshadow {
             border-radius: 8px border: 1px solid #fff;
             background: #ddd;
         }
-    
+
         a.button {
             cursor: pointer
         }
-    
+
         .row0,
         .row1 {
             padding: 3px
         }
-    
+
         .row1 {
             background: #222
         }
-    
+
         .minus,
         .plus {
             background: silver;
@@ -109,7 +121,7 @@
             text-align: center;
             border-radius: 2px
         }
-    
+
         #settings {
             float: right;
             width: 170px;
@@ -120,27 +132,27 @@
             font-size: 85%;
             line-height: 1.1em
         }
-    
+
         #settings input {
             margin: 0;
             line-height: 1.1em
         }
-    
+
         #settings h4 {
             font-weight: bold;
             margin-bottom: 3px
         }
-    
+
         .codebox {
             padding: 15px;
             background: #ffc;
             border: 1px dotted #ccc;
         }
-    
+
         #snippet {
             font-style: italic
         }
-    
+
         .swatch {
             width: 30px;
             height: 30px;
@@ -149,14 +161,14 @@
             margin-right: 20px;
             cursor: pointer
         }
-    
+
         hr.dotted {
             clear: both;
             display: block;
             height: 0;
             border-bottom: 1px dotted #ccc
         }
-    
+
         .params {
             width: 40%;
             margin: 25px 10px 0;
@@ -168,13 +180,13 @@
             color: #999;
             font-size: 80%;
         }
-    
-    
-    
+
+
+
         .center {
             text-align: center;
         }
-    
+
         .menu {
             width: 200px;
             z-index: 1;
@@ -182,12 +194,12 @@
             position: fixed;
             display: none;
             transition: 0.2s display ease-in;
-    
+
             .menu-options {
                 list-style: none;
                 padding: 10px 0;
                 z-index: 1;
-    
+
                 .menu-option {
                     font-weight: 500;
                     z-index: 1;
@@ -195,24 +207,24 @@
                     padding: 10px 40px 10px 20px;
                     border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
                     cursor: pointer;
-    
+
                     &:hover {
                         background: rgba(0, 0, 0, 0.2);
                     }
                 }
             }
         }
-    
-    
-    
+
+
+
         button {
             background: grey;
             border: none;
-    
+
             .next {
                 color: green;
             }
-    
+
             &[disabled="false"]:hover {
                 .next {
                     color: red;
@@ -221,16 +233,16 @@
                 }
             }
         }
-    
+
         @keyframes move {
             from {
                 transform: translate(0%);
             }
-    
+
             50% {
                 transform: translate(-40%);
             }
-    
+
             to {
                 transform: transform(0%);
             }
@@ -239,22 +251,32 @@
 </head>
 
 <body>
-        
+
 
     <!-- Pedal section -->
     <main class="pedalSection"></main>
     <div class="container"></div>
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark"> <a href="#menu-toggle" id="menu-toggle" class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <nav class="navbar navbar-expand navbar-dark bg-dark"> <a href="#menu-toggle" id="menu-toggle"
+            class="navbar-brand"><span class="navbar-toggler-icon"></span></a> <button class="navbar-toggler"
+            type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02"
+            aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse" id="navbarsExample02">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"> <a class="nav-link" href="#" id="removeLink" onclick="removeDOMElement()"><i class="fa fa-trash"></i></a> </li>
-                <li class="nav-item active"> <a class="nav-link" href="#" onclick="toggleFullScreen()"><i class="fa fa-arrows-alt"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" id="removeLink"
+                        onclick="removeDOMElement()"><i class="fa fa-trash"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="toggleFullScreen()"><i
+                            class="fa fa-arrows-alt"></i></a> </li>
                 <li class="nav-item active"> <a class="nav-link" href="#"><i class="fa fa-download"></i></a> </li>
-                <li class="nav-item active"> <a class="nav-link" href="#" onclick="savePedal()"><i class="fa fa-save"></i></a> </li>
-                <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.open('faust-editor','popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');"><i class="fa fa-pencil"></i></a> </li>
-                <li class="nav-item active"> <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus-circle"></i></a></li>
-                <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.location.reload();"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="savePedal()"><i
+                            class="fa fa-save"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="#"
+                        onclick="window.open('faust-editor','popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');"><i
+                            class="fa fa-pencil"></i></a> </li>
+                <li class="nav-item active"> <a class="nav-link" data-toggle="modal" data-target="#myModal"
+                        href="#myModal"><i class="fa fa-plus-circle"></i></a></li>
+                <li class="nav-item active"> <a class="nav-link" href="#" onclick="window.location.reload();"><i
+                            class="fa fa-home"></i> <span class="sr-only">(current)</span></a> </li>
             </ul>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"> <a class="nav-link" href="#"></a> </li>
@@ -265,27 +287,28 @@
     </nav>
 
 
-    <div class="area"></div><nav class="main-menu">
+    <div class="area"></div>
+    <nav class="main-menu">
         <ul style="direction: ltr;">
-            
+
             <li>
-                <a  href="#" onclick="drawRectangle()">
+                <a href="#" onclick="drawRectangle()">
                     <i class="fa fa-pencil fa-2x"></i>
                     <span class="nav-text">
-                       Draw
+                        Draw
                     </span>
                 </a>
-            
+
             </li>
-            
+
             <li class="has-subnav">
                 <a data-toggle="modal" data-target="#myModal3" href="#myModal">
                     <i class="fa fa-mouse-pointer fa-2x"></i>
                     <span class="nav-text">
-                       Items Positioning
+                        Items Positioning
                     </span>
                 </a>
-            
+
             </li>
 
             <li class="has-subnav">
@@ -325,21 +348,21 @@
             </li>
 
             <li class="has-subnav">
-                    <a href="#" onclick="togglePreSetsFunction()" id="PresetsMenu">
-                        <i class="fa fa-toggle-on fa-2x"></i>
-                        <span class="nav-text">
-                            Toggle Presets
-                        </span>
-                    </a>
+                <a href="#" onclick="togglePreSetsFunction()" id="PresetsMenu">
+                    <i class="fa fa-toggle-on fa-2x"></i>
+                    <span class="nav-text">
+                        Toggle Presets
+                    </span>
+                </a>
             </li>
 
             <li class="has-subnav">
-                    <a href="#" onclick="toggleShadowMenuFunction()" id="ShadowMenu">
-                        <i class="fa fa-tasks fa-2x"></i>
-                        <span class="nav-text">
-                            Toggle Shadow Menu
-                        </span>
-                    </a>
+                <a href="#" onclick="toggleShadowMenuFunction()" id="ShadowMenu">
+                    <i class="fa fa-tasks fa-2x"></i>
+                    <span class="nav-text">
+                        Toggle Shadow Menu
+                    </span>
+                </a>
             </li>
 
             <li class="has-subnav">
@@ -370,35 +393,36 @@
             </li>
 
             <li class="has-subnav">
-                    <a href="#" onclick="toggleKnobMenuFunction()" id="KnobMenu">
-                        <i class="fa fa-circle-notch fa-2x"></i>
-                        <span class="nav-text">
-                            Toggle Knob Menu
-                        </span>
-                    </a>
+                <a href="#" onclick="toggleKnobMenuFunction()" id="KnobMenu">
+                    <i class="fa fa-circle-notch fa-2x"></i>
+                    <span class="nav-text">
+                        Toggle Knob Menu
+                    </span>
+                </a>
             </li>
 
             <li class="has-subnav">
-                    <a href="#" onclick="toggleDivMenuFunction()" id="DivMenu">
-                        <i class="fa fa-square fa-2x"></i>
-                        <span class="nav-text">
-                            Toggle Div Menu
-                        </span>
-                    </a>
+                <a href="#" onclick="toggleDivMenuFunction()" id="DivMenu">
+                    <i class="fa fa-square fa-2x"></i>
+                    <span class="nav-text">
+                        Toggle Div Menu
+                    </span>
+                </a>
             </li>
         </ul>
 
-        
+
     </nav>
 
 
     <div class="params draggables" id="labelmenuid" style="display: none; direction: ltr;">
         <h3>Label parameters</h3>
-    
+
         <div class="row0">
-                <select id='select' onChange="changeLabelFont(this);" style="direction: ltr; width: 80px; position: relative;">
-                </select>
-                <label>Select Label Font</label>
+            <select id='select' onChange="changeLabelFont(this);"
+                style="direction: ltr; width: 80px; position: relative;">
+            </select>
+            <label>Select Label Font</label>
         </div>
         <div class="row1">
             <select id="sel1" onchange="changeSize(this);" style="direction: ltr; width: 35px; position: relative;">
@@ -429,24 +453,27 @@
             <label>Decrease Label Size</label>
         </div>
         <div class="row1" id="left" style="float: left; width: 50%;">
-            <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold" style="color: white; width: 20px;"></i></a>
+            <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold"
+                    style="color: white; width: 20px;"></i></a>
             <label>Bold Label Style</label>
         </div>
         <div class="row1" id="right" style="float: right; width: 50%;">
-            <a href="#" id="underlineid" onclick="UnderlineStyle()"><i
-                class="fa fa-underline" style="color: white; width: 20px;"></i></a>
+            <a href="#" id="underlineid" onclick="UnderlineStyle()"><i class="fa fa-underline"
+                    style="color: white; width: 20px;"></i></a>
             <label>Underline Label Style</label>
         </div>
-         
+
         <div class="row0" id="left" style="float: left; width: 50%;">
-            <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines" style="color: white; width: 20px;"></i></a>
+            <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines"
+                    style="color: white; width: 20px;"></i></a>
             <label>GripLine Label Style</label>
         </div>
-               
+
         <div class="row0" id="right" style="float: right; width: 50%;">
-            <input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorpick" onchange="changeColor(this);">
+            <input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorpick"
+                onchange="changeColor(this);">
             <label>Label Color</label>
-        </div>    
+        </div>
         <div class="row1" id="left" style="float: left; width: 50%;">
             <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelXLeft()" id="moveLabelXLeft">&larr;</a>
             <label>Move Label Left</label>
@@ -456,234 +483,250 @@
             <label>Move Label Down</label>
         </div>
         <div class="row0" id="left" style="float: left; width: 50%;">
-            <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelXRight()" id="moveLabelXRight">&rarr;</a>
+            <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelXRight()"
+                id="moveLabelXRight">&rarr;</a>
             <label>Move Label Right</label>
         </div>
         <div class="row0" id="right" style="float: right; width: 50%;">
             <a href="#" type="submit" class="btn btn-primary" onclick="moveLabelYUp()" id="moveLabelYUp">&uarr;</a>
             <label>Move Label Up</label>
-        </div>       
+        </div>
     </div>
 
-    
+
     <div class="menu" id="menu">
-            <a href="#" id="closeLink" onclick="closeMenu()"><i class="fas fa-times fa-2x" style="float: right; color: red; position: absolute; top: -15px;
+        <a href="#" id="closeLink" onclick="closeMenu()"><i class="fas fa-times fa-2x" style="float: right; color: red; position: absolute; top: -15px;
                 right: -10px;"></i></a>
         <ul class="menu-options">
-          <li class="menu-option" style="list-style-type: none;">
-            <div style="display: inline-block; direction: ltr;">
-                <select id='select' onChange="changeLabelFont(this);" style="direction: ltr; width: 80px; position: relative;">
-                </select>
-                <select id="sel1" onchange="changeSize(this);" style="direction: ltr; width: 35px; position: relative;">
-                    <option>4</option>
-                    <option>8</option>
-                    <option>12</option>
-                    <option>16</option>
-                    <option>20</option>
-                    <option>24</option>
-                    <option>28</option>
-                    <option>32</option>
-                    <option>36</option>
-                    <option>40</option>
-                    <option>44</option>
-                    <option>48</option>
-                    <option>52</option>
-                    <option>56</option>
-                    <option>58</option>
-                </select>
-                <a href="#" onclick="fontSizeX()" id="fontSizeX"><i class="fas fa-plus" style="color: black;"></i></a>
-                <a href="#" onclick="fontSizeY()" id="fontSizeY"><i class="fas fa-minus" style="color: black;"></i></a>
-            </div>
-            
-            <div style="display: inline-block; direction: ltr;">
-                <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold" style="color: black; float: left; width: 20px;"></i></a>
-                <a href="#" id="underlineid" onclick="UnderlineStyle()"><i
-                    class="fa fa-underline" style="color: black; float: left; width: 20px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines" style="color: black; float: left; width: 20px;"></i></a>
-            </div>
-            <div style="display: inline-block; direction: ltr;">
-                <input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorpick" onchange="changeColor(this);">
-            </div>
-            <br>
-            <br>
-            <div style="display: inline-block; direction: ltr;">
-                <a href="#" type="submit" class="btn btn-default" onclick="moveLabelXLeft()" id="moveLabelXLeft">&larr;</a>
-                <a href="#" type="submit" class="btn btn-default" onclick="moveLabelYDown()" id="moveLabelYDown">&darr;</a>
-                <a href="#" type="submit" class="btn btn-default" onclick="moveLabelXRight()" id="moveLabelXRight">&rarr;</a>
-                <a href="#" type="submit" class="btn btn-default" onclick="moveLabelYUp()" id="moveLabelYUp">&uarr;</a>
-            </div>
-          </li>
+            <li class="menu-option" style="list-style-type: none;">
+                <div style="display: inline-block; direction: ltr;">
+                    <select id='select' onChange="changeLabelFont(this);"
+                        style="direction: ltr; width: 80px; position: relative;">
+                    </select>
+                    <select id="sel1" onchange="changeSize(this);"
+                        style="direction: ltr; width: 35px; position: relative;">
+                        <option>4</option>
+                        <option>8</option>
+                        <option>12</option>
+                        <option>16</option>
+                        <option>20</option>
+                        <option>24</option>
+                        <option>28</option>
+                        <option>32</option>
+                        <option>36</option>
+                        <option>40</option>
+                        <option>44</option>
+                        <option>48</option>
+                        <option>52</option>
+                        <option>56</option>
+                        <option>58</option>
+                    </select>
+                    <a href="#" onclick="fontSizeX()" id="fontSizeX"><i class="fas fa-plus"
+                            style="color: black;"></i></a>
+                    <a href="#" onclick="fontSizeY()" id="fontSizeY"><i class="fas fa-minus"
+                            style="color: black;"></i></a>
+                </div>
+
+                <div style="display: inline-block; direction: ltr;">
+                    <a href="#" id="boldid" onclick="BoldStyle()"><i class="fa fa-bold"
+                            style="color: black; float: left; width: 20px;"></i></a>
+                    <a href="#" id="underlineid" onclick="UnderlineStyle()"><i class="fa fa-underline"
+                            style="color: black; float: left; width: 20px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" id="griplinesid" onclick="GripLinesStyle()"><i class="fas fa-grip-lines"
+                            style="color: black; float: left; width: 20px;"></i></a>
+                </div>
+                <div style="display: inline-block; direction: ltr;">
+                    <input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorpick"
+                        onchange="changeColor(this);">
+                </div>
+                <br>
+                <br>
+                <div style="display: inline-block; direction: ltr;">
+                    <a href="#" type="submit" class="btn btn-default" onclick="moveLabelXLeft()"
+                        id="moveLabelXLeft">&larr;</a>
+                    <a href="#" type="submit" class="btn btn-default" onclick="moveLabelYDown()"
+                        id="moveLabelYDown">&darr;</a>
+                    <a href="#" type="submit" class="btn btn-default" onclick="moveLabelXRight()"
+                        id="moveLabelXRight">&rarr;</a>
+                    <a href="#" type="submit" class="btn btn-default" onclick="moveLabelYUp()"
+                        id="moveLabelYUp">&uarr;</a>
+                </div>
+            </li>
         </ul>
     </div>
 
 
-      
+
 
 
 
     <div id="myModal5" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
-      
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #333;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="color: blanchedalmond;">Pedal Parameters</h4>
-        </div>
-        <div class="modal-body" style="background-color: #333;">
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
-                <div class="col-sm-7" style="float: left;">
-                  <input type="text" placeholder="Input Name" id="nompedal" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary" onclick="submitChangeName()" id="submitlink">Submit</button>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="textinput" style="color: white;">Label</label>
-                <div class="col-sm-7" style="float: left;">
-                  <input type="text" placeholder="Input Name" id="labelpedal" class="form-control">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #333;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color: blanchedalmond;">Pedal Parameters</h4>
                 </div>
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary" onclick="submitChangeLabel()" id="submitlink">Submit</button>
-                </div>
-            </div>
+                <div class="modal-body" style="background-color: #333;">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
+                        <div class="col-sm-7" style="float: left;">
+                            <input type="text" placeholder="Input Name" id="nompedal" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary" onclick="submitChangeName()"
+                                id="submitlink">Submit</button>
+                        </div>
+                    </div>
 
-            <!-- <div class="form-group" style="direction: ltr; float: right;">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Label</label>
+                        <div class="col-sm-7" style="float: left;">
+                            <input type="text" placeholder="Input Name" id="labelpedal" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary" onclick="submitChangeLabel()"
+                                id="submitlink">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group" style="direction: ltr; float: right;">
                 <button type="submit" class="btn btn-primary" onclick="submitChange()" id="submitlink">Submit</button>
             </div> -->
-        </div>
+                </div>
 
-        </div>
-       <!--  <div class="modal-footer" style="background-color: #333;" style="direction: ltr; float: right;">
+            </div>
+            <!--  <div class="modal-footer" style="background-color: #333;" style="direction: ltr; float: right;">
             <button type="submit" class="btn btn-primary" onclick="submitChange()" id="submitlink">Submit</button>
         </div> -->
-      </div>
-      
         </div>
-      </div>
-      
-      
+
+    </div>
+    </div>
+
+
 
     <div id="myModal4" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
-      
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #333;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="color: blanchedalmond;">Pedal Templates</h4>
-        </div>
-        <div class="modal-body" style="background-color: #333;">
-          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
-          
 
-            <div class="container" style="direction: ltr;">
-                <iframe src="pedal_templates/distorder/testDistorder.html" width="285" height="320" id="template1"></iframe>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #333;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color: blanchedalmond;">Pedal Templates</h4>
+                </div>
+                <div class="modal-body" style="background-color: #333;">
+                    <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+
+
+                    <div class="container" style="direction: ltr;">
+                        <iframe src="pedal_templates/distorder/testDistorder.html" width="285" height="320"
+                            id="template1"></iframe>
+                    </div>
+                    <a href="#selectTemplate" onclick="LoadTemplateConfig()" id="selectTemplate">Select Template</a>
+
+
+                </div>
+
             </div>
-            <a href="#selectTemplate" onclick="LoadTemplateConfig()" id="selectTemplate">Select Template</a>
-
-        
-        </div>
-
-        </div>
-        <div class="modal-footer" style="background-color: #333;">
-            <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
-            <!-- <div class="form-group">
+            <div class="modal-footer" style="background-color: #333;">
+                <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
+                <!-- <div class="form-group">
                 <a class="btn btn-primary" onclick="removeDOMElement()">Delete</a>
             </div> -->
+            </div>
         </div>
-      </div>
-      
-        </div>
-      </div>
 
-      
+    </div>
+    </div>
+
+
 
     <div id="myModal3" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
-      
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #333;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="color: blanchedalmond;">Draw Menu</h4>
-        </div>
-        <div class="modal-body" style="background-color: #333;">
-          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
-          
 
-            <div class="editor-collapsible-content" >
-                    <editor-inspector id="editor-inspector" ></editor-inspector>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #333;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color: blanchedalmond;">Draw Menu</h4>
+                </div>
+                <div class="modal-body" style="background-color: #333;">
+                    <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+
+
+                    <div class="editor-collapsible-content">
+                        <editor-inspector id="editor-inspector"></editor-inspector>
+                    </div>
+
+
+
+                </div>
+
             </div>
-          
-
-        
-        </div>
-
-        </div>
-        <div class="modal-footer" style="background-color: #333;">
-            <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
-            <!-- <div class="form-group">
+            <div class="modal-footer" style="background-color: #333;">
+                <!-- <button class="mainbtn" onclick="deleteSelectedElement()">Delete</button> -->
+                <!-- <div class="form-group">
                 <a class="btn btn-primary" onclick="removeDOMElement()">Delete</a>
             </div> -->
+            </div>
         </div>
-      </div>
-      
-        </div>
-      </div>
+
+    </div>
+    </div>
 
 
 
 
     <div id="myModal2" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
-      
-      <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header" style="background-color: #333;">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" style="color: blanchedalmond;">Draw Menu</h4>
-        </div>
-        <div class="modal-body" style="background-color: #333;">
-            <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="select" style="color: white;"></label>&nbsp;&nbsp;&nbsp;
-                <div class="col-sm-9">
-                    
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-sm-9" style="direction: ltr;">
-                    
-                </div>
-            </div>
-    
-    
-            <div class="form-group">
-                <div class="col-sm-9" style="direction: ltr;">
-                    
-                </div>
-            </div>
 
-        </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #333;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color: blanchedalmond;">Draw Menu</h4>
+                </div>
+                <div class="modal-body" style="background-color: #333;">
+                    <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="select"
+                            style="color: white;"></label>&nbsp;&nbsp;&nbsp;
+                        <div class="col-sm-9">
 
-        
+                        </div>
+                    </div>
 
-        <div class="modal-footer" style="background-color: #333;">
-                <div id = "text">
-                        <p id = "h3"  style="color: white; direction: ltr; visibility: hidden;">
-                            
+                    <div class="form-group">
+                        <div class="col-sm-9" style="direction: ltr;">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-9" style="direction: ltr;">
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="modal-footer" style="background-color: #333;">
+                    <div id="text">
+                        <p id="h3" style="color: white; direction: ltr; visibility: hidden;">
+
                         </p>
+                    </div>
                 </div>
+            </div>
+
         </div>
-      </div>
-      
-        </div>
-      </div>
+    </div>
 
 
 
@@ -691,72 +734,73 @@
 
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog" style="background-color: #333;">
-      
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #333;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="color: blanchedalmond;">New Pedal</h4>
-        </div>
-        <div class="modal-body" style="background-color: #333;">
-          <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Width</label>
-            <div class="col-sm-10">
-              <input type="text" placeholder="Input Width" id="width" class="form-control">
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Color</label>
-            <div class="col-sm-10">
-              <input type="text" style="width: 100%;" placeholder="Select Color" id="color" class="color" >
-            </div>
-          </div>
-          <br>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Height</label>
-            <div class="col-sm-10">
-              <input type="text" placeholder="Input Height" id="height" class="form-control">
-            </div>
-          </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #333;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color: blanchedalmond;">New Pedal</h4>
+                </div>
+                <div class="modal-body" style="background-color: #333;">
+                    <!-- <editor-pedal-new-1 width="400" height="400"></editor-pedal-new-1> -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Width</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Input Width" id="width" class="form-control">
+                        </div>
+                    </div>
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Radius</label>
-            <div class="col-sm-10">
-              <input type="text" placeholder="Input Radius" id="radius" class="form-control">
-            </div>
-          </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Color</label>
+                        <div class="col-sm-10">
+                            <input type="text" style="width: 100%;" placeholder="Select Color" id="color" class="color">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Height</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Input Height" id="height" class="form-control">
+                        </div>
+                    </div>
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
-            <div class="col-sm-10">
-              <input type="text" placeholder="Input Name" id="name" name="name" class="form-control">
-            </div>
-          </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Radius</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Input Radius" id="radius" class="form-control">
+                        </div>
+                    </div>
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput" style="color: white;">Label</label>
-            <div class="col-sm-10">
-              <input type="text" placeholder="Input Label" id="label" class="form-control">
-            </div>
-          </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Input Name" id="name" name="name" class="form-control">
+                        </div>
+                    </div>
 
-        </div>
-        <div class="modal-footer" style="background-color: #333;">
-            <div class="form-group">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-default" style="color: black; background-color: white;" onclick="refreshModal()">Refresh</button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-primary" onclick="newPedal()">Create</button>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput" style="color: white;">Label</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Input Label" id="label" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="background-color: #333;">
+                    <div class="form-group">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-default" style="color: black; background-color: white;"
+                                onclick="refreshModal()">Refresh</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary" onclick="newPedal()">Create</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
-      </div>
-      
-        </div>
-      </div>
+    </div>
 
     <div id="wrapper">
         <!-- Sidebar -->
@@ -764,25 +808,27 @@
             <ul class="sidebar-nav">
                 <div id="accordion">
                     <div style="direction: ltr;">
-                            <details class="editor-collapsible">
-        
-                                    <summary style="color: #999;"><a href="#editor-pedal-details">Pedal configuration</a></summary>
-                        
-                                    <div class="editor-collapsible-content">
-                                            <editor-pedal-details id="editor-pedal-details" class="accordion" style="background-color: #333;"></editor-pedal-details>
-                                    </div>
-                            </details>   
+                        <details class="editor-collapsible">
 
-                            <details class="editor-collapsible">
-        
-                                    <summary style="color: #999;">Elements </summary>
-                        
-                                    <div class="editor-collapsible-content" >
-                                            <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
-                                    </div>
-                            </details>
-                            
-                            <!-- <details class="editor-collapsible">
+                            <summary style="color: #999;"><a href="#editor-pedal-details">Pedal configuration</a>
+                            </summary>
+
+                            <div class="editor-collapsible-content">
+                                <editor-pedal-details id="editor-pedal-details" class="accordion"
+                                    style="background-color: #333;"></editor-pedal-details>
+                            </div>
+                        </details>
+
+                        <details class="editor-collapsible">
+
+                            <summary style="color: #999;">Elements </summary>
+
+                            <div class="editor-collapsible-content">
+                                <editor-element-list id="editor-element-list" class="accordion"></editor-element-list>
+                            </div>
+                        </details>
+
+                        <!-- <details class="editor-collapsible">
         
                                     <summary><a href="#editor-inspector">Inspector </a></summary>
                         
@@ -791,29 +837,29 @@
                                     </div>
                             </details> -->
 
-                            <details class="editor-collapsible">
-        
-                                    <summary style="color: #999;">Faust</summary>
-                        
-                                    <div class="editor-collapsible-content" >
-                                            <editor-faust id="editor-faust" class="accordion"></editor-faust>
-                                    </div>
-                            </details>
-                    </div>
-                    
-                </div>
-            </div>
-                    
-            </ul>
-        </div> 
+                        <details class="editor-collapsible">
 
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                
-            </div>
-        </div> <!-- /#page-content-wrapper -->
+                            <summary style="color: #999;">Faust</summary>
+
+                            <div class="editor-collapsible-content">
+                                <editor-faust id="editor-faust" class="accordion"></editor-faust>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+        </div>
+
+        </ul>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+        </div>
+    </div> <!-- /#page-content-wrapper -->
     </div>
 
     <div style="background: white; display: none; direction: ltr;" class="params draggables" id="presetsid">
@@ -830,42 +876,44 @@
         <hr class="dotted">
         <div style="box-shadow: 0px 0px 10px -2px #FFF" class="swatch" id="glow"></div> glow
         <hr class="dotted">
-        <div style="box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.7), inset -2px -2px 5px 0px rgba(0, 0, 0, 0.2), inset 3px 1px 1px 4px rgba(255, 255, 255, 0.2), 1px 0px 1px 0px rgba(0, 0, 0, 0.9), 0 2px 1px 0 rgba(0, 0, 0, 0.9), 1px 1px 1px 0px rgba(0, 0, 0, 0.9);background: linear-gradient(rgb(21, 83, 141), rgb(16, 67, 114));" class="swatch" id="disto"></div> Disto
+        <div style="box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.7), inset -2px -2px 5px 0px rgba(0, 0, 0, 0.2), inset 3px 1px 1px 4px rgba(255, 255, 255, 0.2), 1px 0px 1px 0px rgba(0, 0, 0, 0.9), 0 2px 1px 0 rgba(0, 0, 0, 0.9), 1px 1px 1px 0px rgba(0, 0, 0, 0.9);background: linear-gradient(rgb(21, 83, 141), rgb(16, 67, 114));"
+            class="swatch" id="disto"></div> Disto
     </div>
-    
+
     <div class="params draggables" id="shadowmenuid" style="display: none; direction: ltr;">
         <h3>box-shadow parameters</h3>
-    
+
         <div class="row0">
             <div class="minus">-</div>
             <input value="3" size="3" id="offX">
             <div class="plus">+</div>
             <label>Offset X</label>
         </div>
-    
+
         <div class="row1">
             <div class="minus">-</div>
             <input value="3" size="3" id="offY">
             <div class="plus">+</div>
             <label>Offset Y</label>
         </div>
-    
+
         <div class="row0">
             <div class="minus">-</div>
             <input value="3" size="3" id="blur">
             <div class="plus">+</div>
             <label>Blur</label>
         </div>
-    
+
         <div class="row1">
             <div class="minus">-</div>
             <input value="3" size="3" id="spread">
             <div class="plus">+</div>
             <label>Spread</label>
         </div>
-    
+
         <div class="row0" id="left" style="float: left; width: 50%;">
-            &nbsp; #<input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorshadowpick"> <label>Color (HEX)</label>
+            &nbsp; #<input type="submit" class="jscolor" style="direction: ltr; width: 80px;" id="jscolorshadowpick">
+            <label>Color (HEX)</label>
         </div>
 
         <div class="row0" id="right" style="float: right; width: 50%;">
@@ -879,7 +927,7 @@
         <div class="row1">
             <input type="checkbox" value="inset" id="insett"><label>inset</label>
         </div>
-    
+
         <br />
         <div class="row0" id="left" style="float: left; width: 50%;">
             <button id="surprise" class="button">Surprise Me!</button>
@@ -887,7 +935,7 @@
         <div class="row0" id="right" style="float: right; width: 50%;">
             <button id="setshadow" class="button" onclick="setShadow();">Apply Shadow</button>
         </div>
-        
+
     </div>
 
     <div class="params draggables" id="gradientmenuid" style="display: none; direction: ltr;">
@@ -899,14 +947,14 @@
                 <div class="plus">+</div>
                 <label>Red Color</label>
             </div>
-        
+
             <div class="row1">
                 <div class="minus">-</div>
                 <input value="3" size="3" id="leftgreen">
                 <div class="plus">+</div>
                 <label>Green Color</label>
             </div>
-        
+
             <div class="row0">
                 <div class="minus">-</div>
                 <input value="3" size="3" id="leftblue">
@@ -914,7 +962,7 @@
                 <label>Blue Color</label>
             </div>
         </div>
-        
+
         <div id="right" style="float: right; width: 50%;">
             <div class="row0">
                 <div class="minus">-</div>
@@ -922,14 +970,14 @@
                 <div class="plus">+</div>
                 <label>Red Color</label>
             </div>
-        
+
             <div class="row1">
                 <div class="minus">-</div>
                 <input value="3" size="3" id="rightgreen">
                 <div class="plus">+</div>
                 <label>Green Color</label>
             </div>
-        
+
             <div class="row0">
                 <div class="minus">-</div>
                 <input value="3" size="3" id="rightblue">
@@ -949,7 +997,7 @@
             &nbsp; #<input value="555555" size="6" id="color"> <label>Color (HEX)</label>
         </div>
 
-    
+
         <br />
         <button id="gradientgenerate" class="button" onclick="generateGradient()">Generate Gradient</button>
     </div>
@@ -1016,7 +1064,7 @@
             &nbsp; #<input value="555555" size="6" id="color"> <label>Color (HEX)</label>
         </div> -->
 
-    
+
         <br />
         <button id="texturegenerate" class="button" onclick="generateTexture()">Generate Texture</button>
     </div>
@@ -1041,20 +1089,20 @@
         <div class="row0" id="left" style="float: left; width: 50%;">
             <label>Select From Folder</label>
         </div>
-        
+
         <div class="row0" id="right" style="float: right; width: 50%;">
             <input type='file' onchange="readURL(this);" />
             <a href="#" class="btn btn-primary" onclick="defineImage()">Select</a>
         </div>
 
-        <div class="row1"  id="left" style="float: left; width: 50%;">
+        <div class="row1" id="left" style="float: left; width: 50%;">
             <label>No Image Option</label>
         </div>
 
         <div class="row1" id="right" style="float: right; width: 50%;">
-            <input type="checkbox" onchange='handleChange(this);'/>
+            <input type="checkbox" onchange='handleChange(this);' />
         </div>
-        
+
         <br />
         <br />
         <br />
@@ -1063,400 +1111,406 @@
         <div class="row1" style="background-color: white;">
             <img id="blah" src="#" alt="your image" />
         </div>
-    
+
         <br />
-    
+
     </div>
 
-    <div class="params draggables" id="knobmenuid" style="display: none; direction: ltr; width: 680px; overflow: scroll;">
-            <h3>Knob Selection</h3>
-                <pedal-elem-previews url="http://localhost:3000/previewss/knobs" pedal-element-type="knob">
-                </pedal-elem-previews>
+    <div class="params draggables" id="knobmenuid"
+        style="display: none; direction: ltr; width: 680px; overflow: scroll;">
+        <h3>Knob Selection</h3>
+        <pedal-elem-previews url="http://localhost:3000/previewss/knobs" pedal-element-type="knob">
+        </pedal-elem-previews>
     </div>
 
-    <div class="params draggables" id="divmenuid" style="display: none; direction: ltr; width: 680px; overflow: scroll;">
-            <h3>Geomtry Creation</h3>
+    <div class="params draggables" id="divmenuid"
+        style="display: none; direction: ltr; width: 680px; overflow: scroll;">
+        <h3>Geomtry Creation</h3>
 
-            <div class="row0" id="left" style="float: left;width: 50%;">
-                <label>Class Name:</label>
-            </div>
-            <div class="row0" id="right" style="float: right; width: 50%;">
-                <input type="text" id="classnameid" />
-            </div>
-            <br />
-            <br />
-            <div class="row1" id="left" style="float: left; width: 50%;">
-                <label>Id Value:</label>
-            </div>
-            <div class="row1" id="right" style="float: right; width: 50%;">
-                <input type="text" id="idvalueid"/>
-            </div>
-            <br />
-            <br />
-            <div class="row0" id="left" style="float: left; width: 50%;">
-                <label>Width :</label>
-            </div>
-            <div class="row0" id="right" style="float: right; width: 50%;">
-                <input type="text" id="widthid"/>
-            </div>
-            <br />
-            <br />
-            <div class="row1" id="left" style="float: left; width: 50%;">
-                <label>Height :</label>
-            </div>
-            <div class="row1" id="right" style="float: right; width: 50%;">
-                <input type="text" id="heightid" />
-            </div>
-            <br />
-            <br />
-            <div class="row0" id="left" style="float: left; width: 50%;">
-                <label>Top :</label>
-            </div>
-            <div class="row0" id="right" style="float: right; width: 50%;">
-                <input type="text" id="topid" />
-            </div>
-            <br />
-            <br />
-            <div class="row1" id="left" style="float: left; width: 50%;">
-                <label>Left :</label>
-            </div>
-            <div class="row1" id="right" style="float: right; width: 50%;">
-                <input type="text" id="leftid" />
-            </div>
-            <br />
-            <br />
-            <div class="row0" id="left" style="float: left; width: 50%;">
-                <label>Border Style:</label>
-            </div>
-            <div class="row0" id="right" style="float: right; width: 50%;">
-                <input type="text" id="borderstyleid" />
-            </div>
-            <br />
-            <br />
-            <a class="btn btn-primary" onclick="createDiv()" style="float: right; color: black;">Create !</a>
+        <div class="row0" id="left" style="float: left;width: 50%;">
+            <label>Class Name:</label>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <input type="text" id="classnameid" />
+        </div>
+        <br />
+        <br />
+        <div class="row1" id="left" style="float: left; width: 50%;">
+            <label>Id Value:</label>
+        </div>
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <input type="text" id="idvalueid" />
+        </div>
+        <br />
+        <br />
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <label>Width :</label>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <input type="text" id="widthid" />
+        </div>
+        <br />
+        <br />
+        <div class="row1" id="left" style="float: left; width: 50%;">
+            <label>Height :</label>
+        </div>
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <input type="text" id="heightid" />
+        </div>
+        <br />
+        <br />
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <label>Top :</label>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <input type="text" id="topid" />
+        </div>
+        <br />
+        <br />
+        <div class="row1" id="left" style="float: left; width: 50%;">
+            <label>Left :</label>
+        </div>
+        <div class="row1" id="right" style="float: right; width: 50%;">
+            <input type="text" id="leftid" />
+        </div>
+        <br />
+        <br />
+        <div class="row0" id="left" style="float: left; width: 50%;">
+            <label>Border Style:</label>
+        </div>
+        <div class="row0" id="right" style="float: right; width: 50%;">
+            <input type="text" id="borderstyleid" />
+        </div>
+        <br />
+        <br />
+        <a class="btn btn-primary" onclick="createDiv()" style="float: right; color: black;">Create !</a>
     </div>
     <hr style="clear: both; display:block; visibility: hidden; height: 30px" />
 </body>
 <script>
+    function createDiv() {
+        var pp = document.querySelector('my-pedal');
+        var classname = document.getElementById('classnameid').value;
+        var idvalue = document.getElementById('idvalueid').value;
+        var width = document.getElementById('widthid').value;
+        var height = document.getElementById('heightid').value;
+        var top = document.getElementById('topid').value;
+        var left = document.getElementById('leftid').value;
+        var borderstyle = document.getElementById('borderstyleid').value;
 
-function createDiv(){
-    var pp= document.querySelector('my-pedal');
-    var classname = document.getElementById('classnameid').value;
-    var idvalue = document.getElementById('idvalueid').value;
-    var width = document.getElementById('widthid').value;
-    var height = document.getElementById('heightid').value;
-    var top = document.getElementById('topid').value;
-    var left = document.getElementById('leftid').value;
-    var borderstyle = document.getElementById('borderstyleid').value;
+        var mydiv = document.createElement('div');
+        mydiv.className = classname;
+        mydiv.id = idvalue;
+        mydiv.style.width = width.concat('px');
+        mydiv.style.height = height.concat('px');
+        mydiv.style.top = top.concat('%');
+        mydiv.style.left = left.concat('%');
+        mydiv.style.borderStyle = borderstyle;
+        mydiv.style.position = 'absolute';
 
-    var mydiv = document.createElement('div');
-    mydiv.className = classname;
-    mydiv.id = idvalue;
-    mydiv.style.width = width.concat('px');
-    mydiv.style.height = height.concat('px');
-    mydiv.style.top = top.concat('%');
-    mydiv.style.left = left.concat('%');
-    mydiv.style.borderStyle = borderstyle;
-    mydiv.style.position = 'absolute';
-
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('txtcontainer').appendChild(mydiv);
-    }
-}
-
-
-
-
-document.querySelector("#knobmenuid > pedal-elem-previews").previews = [];
-
-fetch(document.querySelector("#knobmenuid > pedal-elem-previews").getAttribute('url'))
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    document.querySelector("#knobmenuid > pedal-elem-previews").previews = data;
-                    document.querySelector("#knobmenuid > pedal-elem-previews").setUpPreviews();
-                })
-                .catch(err => {
-                    console.error('Error fetching preview image names: ' + err);
-                });
-
-function setUpPreviews() {
-            for(let previewFile of document.querySelector("#knobmenuid > pedal-elem-previews").previews.files) {
-                let previewElem = document.createElement('img');
-                previewElem.className = 'menu-img';
-                previewElem.id = 'preview';
-                previewElem.src = document.querySelector("#knobmenuid > pedal-elem-previews").previews.filesUrl + previewFile
-                previewElem.alt = previewFile;
-                
-                previewElem.onclick = (e) => {
-                    let detail = {
-                        type: document.querySelector("#knobmenuid > pedal-elem-previews").getAttribute('pedal-element-type'),
-                        fileName: e.target.alt
-                    };
-
-                    let event = new CustomEvent('preview-selected', {detail: detail});
-                    document.querySelector("#knobmenuid > pedal-elem-previews").dispatchEvent(event);
-                }
-
-                document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.appendChild(previewElem);
-            }
-        }
-
-/* var divs = [];
-divs = document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.querySelectorAll("#preview");
-    divs.forEach(e => {
-        e.onclick = function(){
-            var knobContainer = document.createElement("div");
-            knobContainer.setAttribute('class', 'knob');
-            knobContainer.setAttribute('id', 'knob');
-
-            var knobElem = document.createElement("webaudio-knob");
-
-            
-            knobElem.setAttribute('sprites', 100);
-            knobElem.setAttribute('value', 0);
-            knobElem.setAttribute('step', 1);
-            knobElem.setAttribute('height', '70px;');
-            knobElem.setAttribute('width', '70px;');
-            knobElem.setAttribute('src', '.'.concat(document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.querySelector("#preview").getAttribute('src').substr(21)));
-
-            knobContainer.appendChild(knobElem);
-
-            this.pedal.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
-        }
-    }); */
-
-
-function handleChange(checkbox) {
-    var pp=document.querySelector('my-pedal');
-    if(pp.shadowRoot){
-        if(checkbox.checked == true){
-            /* pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
-            pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/blue.jpg"); */
-            pedal.shadowRoot.getElementById('background-image').style.display = "none";
-        }
-        else{
-            //pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
-            pedal.shadowRoot.getElementById('background-image').style.display = "";
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('txtcontainer').appendChild(mydiv);
         }
     }
-    
-}
-
-function defineImage(){
-    var img = document.getElementById('blah');
-    var pp=document.querySelector('my-pedal');
-
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src",img.getAttribute('src'));
-    }
-}
-
-function showImage(){
-    var img = document.getElementById('blah');
-    var selector = document.getElementById('selectImage');
-    if(selector.options[0].selected){
-        img.setAttribute("src","");
-        img.setAttribute("src","./img/background/blue.jpg");
-        img.style.width = "150px";
-        img.style.height= "200px";
-    }
-    if(selector.options[1].selected){
-        img.setAttribute("src","");
-        img.setAttribute("src","./img/background/2.jpg");
-        img.style.width = "150px";
-        img.style.height= "200px";
-    }
-    if(selector.options[2].selected){
-        img.setAttribute("src","");
-        img.setAttribute("src","./img/background/1.png");
-        img.style.width = "150px";
-        img.style.height= "200px";
-    }
-    if(selector.options[3].selected){
-        img.setAttribute("src","");
-        img.setAttribute("src","./img/background/image2.png");
-        img.style.width = "150px";
-        img.style.height= "200px";
-    }
-}
 
 
-function selectImage(){
-    var selector = document.getElementById('selectImage');
-    if(selector.options[0].selected){
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/blue.jpg");
-    }
-    if(selector.options[1].selected){
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/2.jpg");
-    }
-    if(selector.options[2].selected){
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/1.png");
-    }
-    if(selector.options[3].selected){
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
-        pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/image2.png");
-    }
-}
 
-function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#blah')
-                        .attr('src', e.target.result)
-                        .width(150)
-                        .height(200);
+    document.querySelector("#knobmenuid > pedal-elem-previews").previews = [];
+
+    fetch(document.querySelector("#knobmenuid > pedal-elem-previews").getAttribute('url'))
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            document.querySelector("#knobmenuid > pedal-elem-previews").previews = data;
+            document.querySelector("#knobmenuid > pedal-elem-previews").setUpPreviews();
+        })
+        .catch(err => {
+            console.error('Error fetching preview image names: ' + err);
+        });
+
+    function setUpPreviews() {
+        for (let previewFile of document.querySelector("#knobmenuid > pedal-elem-previews").previews.files) {
+            let previewElem = document.createElement('img');
+            previewElem.className = 'menu-img';
+            previewElem.id = 'preview';
+            previewElem.src = document.querySelector("#knobmenuid > pedal-elem-previews").previews.filesUrl +
+                previewFile
+            previewElem.alt = previewFile;
+
+            previewElem.onclick = (e) => {
+                let detail = {
+                    type: document.querySelector("#knobmenuid > pedal-elem-previews").getAttribute(
+                        'pedal-element-type'),
+                    fileName: e.target.alt
                 };
 
-                reader.readAsDataURL(input.files[0]);
+                let event = new CustomEvent('preview-selected', {
+                    detail: detail
+                });
+                document.querySelector("#knobmenuid > pedal-elem-previews").dispatchEvent(event);
+            }
+
+            document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.appendChild(previewElem);
+        }
+    }
+
+    /* var divs = [];
+    divs = document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.querySelectorAll("#preview");
+        divs.forEach(e => {
+            e.onclick = function(){
+                var knobContainer = document.createElement("div");
+                knobContainer.setAttribute('class', 'knob');
+                knobContainer.setAttribute('id', 'knob');
+
+                var knobElem = document.createElement("webaudio-knob");
+
+                
+                knobElem.setAttribute('sprites', 100);
+                knobElem.setAttribute('value', 0);
+                knobElem.setAttribute('step', 1);
+                knobElem.setAttribute('height', '70px;');
+                knobElem.setAttribute('width', '70px;');
+                knobElem.setAttribute('src', '.'.concat(document.querySelector("#knobmenuid > pedal-elem-previews").shadowRoot.querySelector("#preview").getAttribute('src').substr(21)));
+
+                knobContainer.appendChild(knobElem);
+
+                this.pedal.shadowRoot.querySelector('.pedal').appendChild(knobContainer);
+            }
+        }); */
+
+
+    function handleChange(checkbox) {
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if (checkbox.checked == true) {
+                /* pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+                pedal.shadowRoot.getElementById('background-image').setAttribute("src","./img/background/blue.jpg"); */
+                pedal.shadowRoot.getElementById('background-image').style.display = "none";
+            } else {
+                //pedal.shadowRoot.getElementById('background-image').setAttribute("src","");
+                pedal.shadowRoot.getElementById('background-image').style.display = "";
             }
         }
 
-$('div.params input').blur(function(){
-  //setShadow();
-})
+    }
 
-$('#inset').click(function(){
-   //setShadow();
-})
+    function defineImage() {
+        var img = document.getElementById('blah');
+        var pp = document.querySelector('my-pedal');
 
-$('div.minus').click(function(){
-     var toChange = $(this).next();
-     toChange.val( parseInt(toChange.val()) -1 );
-     //setShadow();
-})
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", img.getAttribute('src'));
+        }
+    }
 
- $('div.plus').click(function(){
-     var toChange = $(this).prev();
-     toChange.val( parseInt(toChange.val()) +1 );
-     //setShadow();
-})
+    function showImage() {
+        var img = document.getElementById('blah');
+        var selector = document.getElementById('selectImage');
+        if (selector.options[0].selected) {
+            img.setAttribute("src", "");
+            img.setAttribute("src", "./img/background/blue.jpg");
+            img.style.width = "150px";
+            img.style.height = "200px";
+        }
+        if (selector.options[1].selected) {
+            img.setAttribute("src", "");
+            img.setAttribute("src", "./img/background/2.jpg");
+            img.style.width = "150px";
+            img.style.height = "200px";
+        }
+        if (selector.options[2].selected) {
+            img.setAttribute("src", "");
+            img.setAttribute("src", "./img/background/1.png");
+            img.style.width = "150px";
+            img.style.height = "200px";
+        }
+        if (selector.options[3].selected) {
+            img.setAttribute("src", "");
+            img.setAttribute("src", "./img/background/image2.png");
+            img.style.width = "150px";
+            img.style.height = "200px";
+        }
+    }
 
-$('#surprise').click(function(){
-   setRandom();
-   //setShadow();
-})        
 
-$('#variants').click(function(){
-   for (var c=0; c < 5; c++) {
-       // boxshadow     offsetX           offsety              blur                             spread
-       var shdw2 = rndnr('15') + 'px ' + rndnr('15') + 'px ' + Math.abs(rndnr('30')) + 'px ' + rndnr('10') + 'px ' + '#' + $('#color').val();           
-       var html = "<div class='box' style='box-shadow: "+shdw2+"'>"+shdw2+"</div>";
-       $('div.entry-content').append(html);
-   }
-})     
+    function selectImage() {
+        var selector = document.getElementById('selectImage');
+        if (selector.options[0].selected) {
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "");
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "./img/background/blue.jpg");
+        }
+        if (selector.options[1].selected) {
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "");
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "./img/background/2.jpg");
+        }
+        if (selector.options[2].selected) {
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "");
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "./img/background/1.png");
+        }
+        if (selector.options[3].selected) {
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "");
+            pedal.shadowRoot.getElementById('background-image').setAttribute("src", "./img/background/image2.png");
+        }
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('div.params input').blur(function () {
+        //setShadow();
+    })
+
+    $('#inset').click(function () {
+        //setShadow();
+    })
+
+    $('div.minus').click(function () {
+        var toChange = $(this).next();
+        toChange.val(parseInt(toChange.val()) - 1);
+        //setShadow();
+    })
+
+    $('div.plus').click(function () {
+        var toChange = $(this).prev();
+        toChange.val(parseInt(toChange.val()) + 1);
+        //setShadow();
+    })
+
+    $('#surprise').click(function () {
+        setRandom();
+        //setShadow();
+    })
+
+    $('#variants').click(function () {
+        for (var c = 0; c < 5; c++) {
+            // boxshadow     offsetX           offsety              blur                             spread
+            var shdw2 = rndnr('15') + 'px ' + rndnr('15') + 'px ' + Math.abs(rndnr('30')) + 'px ' + rndnr(
+                '10') + 'px ' + '#' + $('#color').val();
+            var html = "<div class='box' style='box-shadow: " + shdw2 + "'>" + shdw2 + "</div>";
+            $('div.entry-content').append(html);
+        }
+    })
 
 
-/* $('div.swatch').click(function(){
-    $('#box').attr('style', $(this).attr('style'));
-    $('#snippet').html($(this).attr('style'));
-}) */
+    /* $('div.swatch').click(function(){
+        $('#box').attr('style', $(this).attr('style'));
+        $('#snippet').html($(this).attr('style'));
+    }) */
 
 
 
     var swatchclick = 0;
-    document.getElementById('hardlight').onclick = function(){
+    document.getElementById('hardlight').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('hardlight').style.boxShadow;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('hardlight')
+                    .style.boxShadow;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
             }
         }
     };
     swatchclick = 0;
-    document.getElementById('soft').onclick = function(){
+    document.getElementById('soft').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('soft').style.boxShadow;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('soft').style
+                    .boxShadow;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
             }
         }
     };
     swatchclick = 0;
-    document.getElementById('fromabove').onclick = function(){
+    document.getElementById('fromabove').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('fromabove').style.boxShadow;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('fromabove')
+                    .style.boxShadow;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
             }
         }
     };
     swatchclick = 0;
-    document.getElementById('reduced').onclick = function(){
+    document.getElementById('reduced').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('reduced').style.boxShadow;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('reduced').style
+                    .boxShadow;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
             }
         }
     };
     swatchclick = 0;
-    document.getElementById('inset').onclick = function(){
+    document.getElementById('inset').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('inset').style.boxShadow;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('inset').style
+                    .boxShadow;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
             }
         }
     };
     swatchclick = 0;
-    document.getElementById('glow').onclick = function(){
+    document.getElementById('glow').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('glow').style.boxShadow;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('glow').style
+                    .boxShadow;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
             }
         }
     };
     swatchclick = 0;
-    document.getElementById('disto').onclick = function(){
+    document.getElementById('disto').onclick = function () {
         swatchclick++;
-        var pp=document.querySelector('my-pedal');
-        if(pp.shadowRoot){
-            var toto= pedal.shadowRoot.getElementById('pedal').style.background;
-            if((swatchclick%2)==0){
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            var toto = pedal.shadowRoot.getElementById('pedal').style.background;
+            if ((swatchclick % 2) == 0) {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
                 pedal.shadowRoot.getElementById('pedal').style.background = document.getElementById('color').value;
-                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('disto').style.boxShadow;
-                pedal.shadowRoot.getElementById('pedal').style.background =document.getElementById('disto').style.background;
-            }
-            else{
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = document.getElementById('disto').style
+                    .boxShadow;
+                pedal.shadowRoot.getElementById('pedal').style.background = document.getElementById('disto').style
+                    .background;
+            } else {
                 pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
                 pedal.shadowRoot.getElementById('pedal').style.background = document.getElementById('color').value;
 
@@ -1468,400 +1522,419 @@ $('#variants').click(function(){
 
 
 
-function setShadow () {
-    var b = document.querySelector('my-pedal'); var shdw = '';
-    var offsetx = document.getElementById('offX').value;
-    var offsety = document.getElementById('offY').value;
-    var blur = document.getElementById('blur').value;
-    var spread = document.getElementById('spread').value;
-    
-    if(b.shadowRoot){          
-        shdw += offsetx+'px'+' '+offsety+'px'+' '+blur+'px'+' '+spread+'px';
-        if (document.getElementById('insett').checked) {
-            shdw += ' inset';
+    function setShadow() {
+        var b = document.querySelector('my-pedal');
+        var shdw = '';
+        var offsetx = document.getElementById('offX').value;
+        var offsety = document.getElementById('offY').value;
+        var blur = document.getElementById('blur').value;
+        var spread = document.getElementById('spread').value;
+
+        if (b.shadowRoot) {
+            shdw += offsetx + 'px' + ' ' + offsety + 'px' + ' ' + blur + 'px' + ' ' + spread + 'px';
+            if (document.getElementById('insett').checked) {
+                shdw += ' inset';
+                pedal.shadowRoot.getElementById('pedal').style.boxShadow = shdw;
+            }
             pedal.shadowRoot.getElementById('pedal').style.boxShadow = shdw;
+
         }
-        pedal.shadowRoot.getElementById('pedal').style.boxShadow = shdw;
 
     }
-    
-}
 
 
-function setRandom() {
-    document.getElementById('offX').value = rndnr('15');
-    document.getElementById('offY').value = rndnr('15');
-    document.getElementById('blur').value = Math.abs(rndnr('30'));
-    document.getElementById('spread').value = rndnr('10');
-    
-    // inset
-    var rndInset = Math.random();
-    if (rndInset < .6) { document.getElementById('insett').checked = false; } else { document.getElementById('insett').checked = true; } ;
-}
+    function setRandom() {
+        document.getElementById('offX').value = rndnr('15');
+        document.getElementById('offY').value = rndnr('15');
+        document.getElementById('blur').value = Math.abs(rndnr('30'));
+        document.getElementById('spread').value = rndnr('10');
 
-function rndnr(range) {
-    var randomNum = Math.ceil(Math.random()* range)
-    var vz = Math.random();
-    if (vz < .5) randomNum = -1 * randomNum;          
-    return randomNum;
-}
-
-//setShadow();
-
-
-
-
-
-
-
-// target elements with the "draggable" class
-interact('.draggables')
-  .draggable({
-    onmove: window.dragMoveListener,
-  })
-  .resizable({
-    // resize from all edges and corners
-    edges: { left: true, right: true, bottom: true, top: true },
-
-    modifiers: [
-      // keep the edges inside the parent
-      interact.modifiers.restrictEdges({
-        outer: 'parent',
-        endOnly: true
-      }),
-
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 100, height: 50 }
-      })
-    ],
-
-    inertia: true
-  })
-  .on('resizemove', function (event) {
-    var target = event.target
-    var x = (parseFloat(target.getAttribute('data-x')) || 0)
-    var y = (parseFloat(target.getAttribute('data-y')) || 0)
-
-    // update the element's style
-    target.style.width = event.rect.width + 'px'
-    target.style.height = event.rect.height + 'px'
-    //pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
-    //pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
-
-    // translate when resizing from top or left edges
-    x += event.deltaRect.left
-    y += event.deltaRect.top
-
-    target.style.webkitTransform = target.style.transform =
-        'translate(' + x + 'px,' + y + 'px)'
-
-    target.setAttribute('data-x', x)
-    target.setAttribute('data-y', y)
-    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
-  })
-
-function dragMoveListener (event) {
-  var target = event.target
-  // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-
-  // translate the element
-  target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)'
-
-  // update the posiion attributes
-  target.setAttribute('data-x', x)
-  target.setAttribute('data-y', y)
-}
-
-// this is used later in the resizing and gesture demos
-//window.dragMoveListener = dragMoveListener;
-
-function toggleLabelMenuFunction(){
-  var x = document.getElementById("labelmenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function toggleKnobMenuFunction(){
-  var x = document.getElementById("knobmenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function toggleShadowMenuFunction(){
-  var x = document.getElementById("shadowmenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function toggleDivMenuFunction(){
-  var x = document.getElementById("divmenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function toggleGradientMenuFunction(){
-  var x = document.getElementById("gradientmenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function toggleTextureMenuFunction(){
-  var x = document.getElementById("texturemenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function toggleImageMenuFunction(){
-    var x = document.getElementById("imagemenuid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-
-function generateGradient(){
-    var pp=document.querySelector('my-pedal');
-
-    var leftred = Number(document.getElementById('leftred').value);
-    var leftgreen = Number(document.getElementById('leftgreen').value);
-    var leftblue = Number(document.getElementById('leftblue').value);
-    
-    var rightred = Number(document.getElementById('rightred').value);
-    var rightgreen = Number(document.getElementById('rightgreen').value);
-    var rightblue = Number(document.getElementById('rightblue').value);
-
-    var opacity = Number(document.getElementById('opacityid').value);
-
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('pedal').style.background = 'linear-gradient(rgb('+leftred+', '+leftgreen+', '+leftblue+'), '+'rgb('+rightred+', '+rightgreen+', '+rightblue+'))';
-        pedal.shadowRoot.getElementById('textB').style.background = 'linear-gradient(rgba('+leftred+', '+leftgreen+', '+leftblue+', '+opacity+'), '+'rgba('+rightred+', '+rightgreen+', '+rightblue+', '+opacity+'))';
-    }
-}
-
-function generateTexture(){
-    var pp = document.querySelector('my-pedal');
-    var selector = document.getElementById('selectTexture');
-    if(pp.shadowRoot){
-        if(selector.options[0].selected){
-            pedal.shadowRoot.getElementById('pedal').style.background = "";
-            //pedal.shadowRoot.getElementById('textB').style.background = "";
-            pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
-            //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
-            //pedal.shadowRoot.getElementById('textB').style.background = "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 8px 9px;";
-        }
-        if(selector.options[1].selected){
-            pedal.shadowRoot.getElementById('pedal').style.background = "";
-            //pedal.shadowRoot.getElementById('textB').style.background = "";
-            pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
-            //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
-        }
-        if(selector.options[2].selected){
-            pedal.shadowRoot.getElementById('pedal').style.background = "";
-            //pedal.shadowRoot.getElementById('textB').style.background = "";
-            pedal.shadowRoot.querySelector('.pedal').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
-            //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
-        }
-    }
-}
-
-function togglePreSetsFunction() {
-  var x = document.getElementById("presetsid");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-
-
-function toggleLabelMenu(){
-    var linkId = document.getElementById('LabelMenu');
-    var click = 0;
-    var pp = document.querySelector('my-pedal');
-
-    linkId.onclick = function(){
-        click ++;
-        if(pp.shadowRoot){
-            window.addEventListener("contextmenu", e => {
-                if((click % 2)==0){
-                    this.removeEventListener("contextmenu",e,false);
-                    console.log("number of clicks is:"+click);
-                }
-                else{
-                    e.preventDefault();
-                    const origin = {
-                        left: e.pageX + 10,
-                        top: e.pageY + 10
-                    };
-                    setPosition(origin);
-                    console.log("number of clicks is :"+click);
-                    return false;
-                }}); 
-        }
-    };
-}
-
-
-
-function drawRectangle(){
-    var pp = document.querySelector('my-pedal');
-    if(pp.shadowRoot){
-        initDraw(pedal.shadowRoot.getElementById('pedal'));
-    }
-    
-}
-
-function initDraw(canvas) {
-    function setMousePosition(e) {
-        var ev = e || window.event; //Moz || IE
-        if (ev.pageX) { //Moz
-            mouse.x = ev.pageX + window.pageXOffset;
-            mouse.y = ev.pageY + window.pageYOffset;
-        } else if (ev.clientX) { //IE
-            mouse.x = ev.clientX + document.body.scrollLeft;
-            mouse.y = ev.clientY + document.body.scrollTop;
-        }
-    };
-
-    var mouse = {
-        x: 0,
-        y: 0,
-        startX: 0,
-        startY: 0
-    };
-    var element = null;
-
-    canvas.onmousemove = function (e) {
-        setMousePosition(e);
-        if (element !== null) {
-            element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
-            element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
-            element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
-            element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
-        }
-    }
-
-    canvas.onclick = function (e) {
-        if (element !== null) {
-            element = null;
-            canvas.style.cursor = "default";
-            console.log("finsihed.");
+        // inset
+        var rndInset = Math.random();
+        if (rndInset < .6) {
+            document.getElementById('insett').checked = false;
         } else {
-            console.log("begun.");
-            mouse.startX = mouse.x;
-            mouse.startY = mouse.y;
-            element = document.createElement('div');
-            element.className = 'rectangle'
-            element.style.left = mouse.x + 'px';
-            element.style.top = mouse.y + 'px';
-            canvas.appendChild(element)
-            canvas.style.cursor = "crosshair";
+            document.getElementById('insett').checked = true;
+        };
+    }
+
+    function rndnr(range) {
+        var randomNum = Math.ceil(Math.random() * range)
+        var vz = Math.random();
+        if (vz < .5) randomNum = -1 * randomNum;
+        return randomNum;
+    }
+
+    //setShadow();
+
+
+
+
+
+
+
+    // target elements with the "draggable" class
+    interact('.draggables')
+        .draggable({
+            onmove: window.dragMoveListener,
+        })
+        .resizable({
+            // resize from all edges and corners
+            edges: {
+                left: true,
+                right: true,
+                bottom: true,
+                top: true
+            },
+
+            modifiers: [
+                // keep the edges inside the parent
+                interact.modifiers.restrictEdges({
+                    outer: 'parent',
+                    endOnly: true
+                }),
+
+                // minimum size
+                interact.modifiers.restrictSize({
+                    min: {
+                        width: 100,
+                        height: 50
+                    }
+                })
+            ],
+
+            inertia: true
+        })
+        .on('resizemove', function (event) {
+            var target = event.target
+            var x = (parseFloat(target.getAttribute('data-x')) || 0)
+            var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+            // update the element's style
+            target.style.width = event.rect.width + 'px'
+            target.style.height = event.rect.height + 'px'
+            //pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
+            //pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
+
+            // translate when resizing from top or left edges
+            x += event.deltaRect.left
+            y += event.deltaRect.top
+
+            target.style.webkitTransform = target.style.transform =
+                'translate(' + x + 'px,' + y + 'px)'
+
+            target.setAttribute('data-x', x)
+            target.setAttribute('data-y', y)
+            //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+        })
+
+    function dragMoveListener(event) {
+        var target = event.target
+        // keep the dragged position in the data-x/data-y attributes
+        var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+        var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+        // translate the element
+        target.style.webkitTransform =
+            target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)'
+
+        // update the posiion attributes
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
+    }
+
+    // this is used later in the resizing and gesture demos
+    //window.dragMoveListener = dragMoveListener;
+
+    function toggleLabelMenuFunction() {
+        var x = document.getElementById("labelmenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
         }
     }
-}
 
-
-
-
-window.onmousemove = moveElem;
-window.onmouseup = stopMovingElem;
-
-
-var selected = null; // element to be moved
-var oldMouseX, oldMouseY; // Stores x & y coordinates of the mouse pointer
-var elemX, elemY;
-var divs = [];
-
-  
-// Will be called when user starts dragging an element
-function dragInit(evt) {
-    // Store the elem
-    selected = evt.target;
-    elemX = selected.offsetLeft;
-    elemY = selected.offsetTop;
-  
-    oldMouseX = evt.clientX;
-    oldMouseY = evt.clientY;
-    //evt.stopPropagation();
-}
-
-// Will be called when user dragging an element
-function moveElem(e) {
-    // new mouse ps
-    var newMouseX = e.clientX;
-    var newMouseY = e.clientY;
-  
-    if(oldMouseX !== undefined) {
-        // how many pixels did we move the mouse?
-        var dx = newMouseX - oldMouseX;
-        var dy = newMouseY - oldMouseY;
-     }
-    
-    if (selected !== null) {  
-        // move the selected element dx, dy pixels hozontally/vertically
-        changePosOfSelectedElement(dx, dy);
+    function toggleKnobMenuFunction() {
+        var x = document.getElementById("knobmenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
     }
-  
-    // update the old position of the mouse
-    oldMouseX = newMouseX;
-    oldMouseY = newMouseY;
-}
 
-function changePosOfSelectedElement(dx, dy) {
-  // update the old position of the selected element
-  elemX += dx;
-  elemY += dy;
-  
-  // change the pos on screen of the element
-  // by modifying its CSS left/top properties
-  selected.style.left = elemX + 'px';
-  selected.style.top = elemY + 'px';
-}
-
-// Destroy the object when we are done
-function stopMovingElem() {
-    selected = null;
-}
-
-function submitChangeName(){
-    pedal.name = document.getElementById('nompedal').value;
-}
-
-function submitChangeLabel(){
-    var pp = document.querySelector('my-pedal');
-
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').innerHTML = document.getElementById('labelpedal').value;
+    function toggleShadowMenuFunction() {
+        var x = document.getElementById("shadowmenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
     }
-}
 
-const menu = document.querySelector(".menu");
+    function toggleDivMenuFunction() {
+        var x = document.getElementById("divmenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function toggleGradientMenuFunction() {
+        var x = document.getElementById("gradientmenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function toggleTextureMenuFunction() {
+        var x = document.getElementById("texturemenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function toggleImageMenuFunction() {
+        var x = document.getElementById("imagemenuid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+
+    function generateGradient() {
+        var pp = document.querySelector('my-pedal');
+
+        var leftred = Number(document.getElementById('leftred').value);
+        var leftgreen = Number(document.getElementById('leftgreen').value);
+        var leftblue = Number(document.getElementById('leftblue').value);
+
+        var rightred = Number(document.getElementById('rightred').value);
+        var rightgreen = Number(document.getElementById('rightgreen').value);
+        var rightblue = Number(document.getElementById('rightblue').value);
+
+        var opacity = Number(document.getElementById('opacityid').value);
+
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('pedal').style.background = 'linear-gradient(rgb(' + leftred + ', ' +
+                leftgreen + ', ' + leftblue + '), ' + 'rgb(' + rightred + ', ' + rightgreen + ', ' + rightblue + '))';
+            pedal.shadowRoot.getElementById('textB').style.background = 'linear-gradient(rgba(' + leftred + ', ' +
+                leftgreen + ', ' + leftblue + ', ' + opacity + '), ' + 'rgba(' + rightred + ', ' + rightgreen + ', ' +
+                rightblue + ', ' + opacity + '))';
+        }
+    }
+
+    function generateTexture() {
+        var pp = document.querySelector('my-pedal');
+        var selector = document.getElementById('selectTexture');
+        if (pp.shadowRoot) {
+            if (selector.options[0].selected) {
+                pedal.shadowRoot.getElementById('pedal').style.background = "";
+                //pedal.shadowRoot.getElementById('textB').style.background = "";
+                pedal.shadowRoot.querySelector('.pedal').style.cssText =
+                    'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
+                //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px, radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px), #8a3; background-size: 20px 20px;';
+                //pedal.shadowRoot.getElementById('textB').style.background = "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,0) 15%, transparent 20%) 8px 9px;";
+            }
+            if (selector.options[1].selected) {
+                pedal.shadowRoot.getElementById('pedal').style.background = "";
+                //pedal.shadowRoot.getElementById('textB').style.background = "";
+                pedal.shadowRoot.querySelector('.pedal').style.cssText =
+                    'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
+                //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px; background-color:#282828; background-size:16px 16px;';
+            }
+            if (selector.options[2].selected) {
+                pedal.shadowRoot.getElementById('pedal').style.background = "";
+                //pedal.shadowRoot.getElementById('textB').style.background = "";
+                pedal.shadowRoot.querySelector('.pedal').style.cssText =
+                    'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
+                //pedal.shadowRoot.querySelector('.text-block').style.cssText = 'background-color: #eee; background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black); background-size: 60px 60px; background-position: 0 0, 30px 30px;';
+            }
+        }
+    }
+
+    function togglePreSetsFunction() {
+        var x = document.getElementById("presetsid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+
+
+    function toggleLabelMenu() {
+        var linkId = document.getElementById('LabelMenu');
+        var click = 0;
+        var pp = document.querySelector('my-pedal');
+
+        linkId.onclick = function () {
+            click++;
+            if (pp.shadowRoot) {
+                window.addEventListener("contextmenu", e => {
+                    if ((click % 2) == 0) {
+                        this.removeEventListener("contextmenu", e, false);
+                        console.log("number of clicks is:" + click);
+                    } else {
+                        e.preventDefault();
+                        const origin = {
+                            left: e.pageX + 10,
+                            top: e.pageY + 10
+                        };
+                        setPosition(origin);
+                        console.log("number of clicks is :" + click);
+                        return false;
+                    }
+                });
+            }
+        };
+    }
+
+
+
+    function drawRectangle() {
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            initDraw(pedal.shadowRoot.getElementById('pedal'));
+        }
+
+    }
+
+    function initDraw(canvas) {
+        function setMousePosition(e) {
+            var ev = e || window.event; //Moz || IE
+            if (ev.pageX) { //Moz
+                mouse.x = ev.pageX + window.pageXOffset;
+                mouse.y = ev.pageY + window.pageYOffset;
+            } else if (ev.clientX) { //IE
+                mouse.x = ev.clientX + document.body.scrollLeft;
+                mouse.y = ev.clientY + document.body.scrollTop;
+            }
+        };
+
+        var mouse = {
+            x: 0,
+            y: 0,
+            startX: 0,
+            startY: 0
+        };
+        var element = null;
+
+        canvas.onmousemove = function (e) {
+            setMousePosition(e);
+            if (element !== null) {
+                element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
+                element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
+                element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
+                element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+            }
+        }
+
+        canvas.onclick = function (e) {
+            if (element !== null) {
+                element = null;
+                canvas.style.cursor = "default";
+                console.log("finsihed.");
+            } else {
+                console.log("begun.");
+                mouse.startX = mouse.x;
+                mouse.startY = mouse.y;
+                element = document.createElement('div');
+                element.className = 'rectangle'
+                element.style.left = mouse.x + 'px';
+                element.style.top = mouse.y + 'px';
+                canvas.appendChild(element)
+                canvas.style.cursor = "crosshair";
+            }
+        }
+    }
+
+
+
+
+    window.onmousemove = moveElem;
+    window.onmouseup = stopMovingElem;
+
+
+    var selected = null; // element to be moved
+    var oldMouseX, oldMouseY; // Stores x & y coordinates of the mouse pointer
+    var elemX, elemY;
+    var divs = [];
+
+
+    // Will be called when user starts dragging an element
+    function dragInit(evt) {
+        // Store the elem
+        selected = evt.target;
+        elemX = selected.offsetLeft;
+        elemY = selected.offsetTop;
+
+        oldMouseX = evt.clientX;
+        oldMouseY = evt.clientY;
+        //evt.stopPropagation();
+    }
+
+    // Will be called when user dragging an element
+    function moveElem(e) {
+        // new mouse ps
+        var newMouseX = e.clientX;
+        var newMouseY = e.clientY;
+
+        if (oldMouseX !== undefined) {
+            // how many pixels did we move the mouse?
+            var dx = newMouseX - oldMouseX;
+            var dy = newMouseY - oldMouseY;
+        }
+
+        if (selected !== null) {
+            // move the selected element dx, dy pixels hozontally/vertically
+            changePosOfSelectedElement(dx, dy);
+        }
+
+        // update the old position of the mouse
+        oldMouseX = newMouseX;
+        oldMouseY = newMouseY;
+    }
+
+    function changePosOfSelectedElement(dx, dy) {
+        // update the old position of the selected element
+        elemX += dx;
+        elemY += dy;
+
+        // change the pos on screen of the element
+        // by modifying its CSS left/top properties
+        selected.style.left = elemX + 'px';
+        selected.style.top = elemY + 'px';
+    }
+
+    // Destroy the object when we are done
+    function stopMovingElem() {
+        selected = null;
+    }
+
+    function submitChangeName() {
+        pedal.name = document.getElementById('nompedal').value;
+    }
+
+    function submitChangeLabel() {
+        var pp = document.querySelector('my-pedal');
+
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').innerHTML = document.getElementById('labelpedal').value;
+        }
+    }
+
+    const menu = document.querySelector(".menu");
     let menuVisible = false;
 
     const toggleMenu = command => {
@@ -1869,7 +1942,10 @@ const menu = document.querySelector(".menu");
         menuVisible = !menuVisible;
     };
 
-    const setPosition = ({ top, left }) => {
+    const setPosition = ({
+        top,
+        left
+    }) => {
         menu.style.left = `${left}px`;
         menu.style.top = `${top}px`;
         toggleMenu("show");
@@ -1891,171 +1967,193 @@ const menu = document.querySelector(".menu");
         });
     } */
 
-var fonts = ["Montez","Lobster","Roboto","Lexend Zetta","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface","Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
-var string = "";
-var select = document.getElementById("select")
-for(var a = 0; a < fonts.length ; a++){
-	var opt = document.createElement('option');
-	opt.value = opt.innerHTML = fonts[a];
-	opt.style.fontFamily = fonts[a];
-	select.add(opt);
-}
-function fontChange(){
-	var x = document.getElementById("select").selectedIndex;
-    var y = document.getElementById("select").options;
-	document.body.insertAdjacentHTML("beforeend", "<style> #text{ font-family:'"+y[x].text+"';}"+
-																	 "#select{font-family:'"+y[x].text+"';</style>");
-                                                                     
-	var t3 = new TimelineLite, 
-	mySplitText3 = new SplitText("#h3", {type:"words,chars"}), 
-	chars = mySplitText3.chars; //an array of all the divs that wrap each character
-	TweenLite.set("#h3", {perspective:400});
-	t3.staggerFrom(chars, 0.2, {opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 150% -50",  ease:Back.easeOut}, 0.01, "+=0");
-    var pp = document.querySelector('my-pedal');
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-family');
+    var fonts = ["Montez", "Lobster", "Roboto", "Lexend Zetta", "Josefin Sans", "Shadows Into Light", "Pacifico",
+        "Amatic SC", "Orbitron", "Rokkitt", "Righteous", "Dancing Script", "Bangers", "Chewy", "Sigmar One",
+        "Architects Daughter", "Abril Fatface", "Covered By Your Grace", "Kaushan Script", "Gloria Hallelujah",
+        "Satisfy", "Lobster Two", "Comfortaa", "Cinzel", "Courgette"
+    ];
+    var string = "";
+    var select = document.getElementById("select")
+    for (var a = 0; a < fonts.length; a++) {
+        var opt = document.createElement('option');
+        opt.value = opt.innerHTML = fonts[a];
+        opt.style.fontFamily = fonts[a];
+        select.add(opt);
     }
-}
-/* TweenLite.to(page, 0, {top:"-100vh", ease:Bounce.easeOut, delay:0});
-TweenLite.to(page, 1, {top:"0vh", ease:Elastic.easeOut, delay:1}); */
-//fontChange();
 
-function labelPedalChange(){
+    function fontChange() {
+        var x = document.getElementById("select").selectedIndex;
+        var y = document.getElementById("select").options;
+        document.body.insertAdjacentHTML("beforeend", "<style> #text{ font-family:'" + y[x].text + "';}" +
+            "#select{font-family:'" + y[x].text + "';</style>");
 
-    var pp=document.querySelector('my-pedal');
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-family');
+        var t3 = new TimelineLite,
+            mySplitText3 = new SplitText("#h3", {
+                type: "words,chars"
+            }),
+            chars = mySplitText3.chars; //an array of all the divs that wrap each character
+        TweenLite.set("#h3", {
+            perspective: 400
+        });
+        t3.staggerFrom(chars, 0.2, {
+            opacity: 0,
+            scale: 0,
+            y: 80,
+            rotationX: 180,
+            transformOrigin: "0% 150% -50",
+            ease: Back.easeOut
+        }, 0.01, "+=0");
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById(
+                'h3')).getPropertyValue('font-family');
+        }
     }
-}
+    /* TweenLite.to(page, 0, {top:"-100vh", ease:Bounce.easeOut, delay:0});
+    TweenLite.to(page, 1, {top:"0vh", ease:Elastic.easeOut, delay:1}); */
+    //fontChange();
 
-var totalClicksX= 0;
+    function labelPedalChange() {
 
-function moveLabelXLeft(){
-    var pp=document.querySelector('my-pedal');
-    //var t='10';
-    //var click=0;
-    //var link = document.getElementById('moveLabelXLeft');
-    totalClicksX += 10;
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.right = String(totalClicksX).concat("px");
-    }    
-}
-
-
-function moveLabelXRight(){
-    var pp=document.querySelector('my-pedal');
-    //var t='10';
-    //var click=0;
-    //var link = document.getElementById('moveLabelXRight');
-    totalClicksX -= 10;
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.right = String(totalClicksX).concat("px");
-    }  
-}
-
-var totalClicksY = 0;
-
-function moveLabelYUp(){
-    var pp=document.querySelector('my-pedal');
-    //var t='10';
-    //var click=0;
-    //var link = document.getElementById('moveLabelXRight');
-    totalClicksY += 10;
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.bottom = String(totalClicksY).concat("px");
-    }  
-}
-
-function moveLabelYDown(){
-    var pp=document.querySelector('my-pedal');
-    //var t='10';
-    //var click=0;
-    //var link = document.getElementById('moveLabelXRight');
-    totalClicksY -= 10;
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.bottom = String(totalClicksY).concat("px");
-    }  
-}
-
-
-function changeSize(n) {
-    var s = document.getElementById('h3');
-    var pp=document.querySelector('my-pedal');
-    s.style.fontSize = n.value + 'px'
-
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.fontSize = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size');
+        var pp = document.querySelector('my-pedal');
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById(
+                'h3')).getPropertyValue('font-family');
+        }
     }
-}
 
+    var totalClicksX = 0;
 
-function fontSizeX(){
-    var s = document.getElementById('h3');
-    var pp = document.querySelector('my-pedal');
-    //var click = Number(window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size').slice(0,2));
-    
-    //var click = Number(document.getElementById('sel1').value);
-    var sel = document.getElementById('sel1');
-
-    var link = document.getElementById('fontSizeX');
-    link.onclick = function(){
-        
-        if(pp.shadowRoot){
-            var toto = Number(window.getComputedStyle(pedal.shadowRoot.getElementById('test')).getPropertyValue('font-size').slice(0,2));
+    function moveLabelXLeft() {
+        var pp = document.querySelector('my-pedal');
+        //var t='10';
+        //var click=0;
+        //var link = document.getElementById('moveLabelXLeft');
+        totalClicksX += 10;
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.right = String(totalClicksX).concat("px");
         }
-        click = toto + 1;
-
-        if(pp.shadowRoot){
-            pedal.shadowRoot.getElementById('test').style.fontSize = String(click).concat("px");
-        }
-        //s.style.fontSize = click + 'px';
-        //document.getElementById('sel1').value = click;
-    };
-    
-}
-
-
-function fontSizeY(){
-    var s = document.getElementById('h3');
-    var pp = document.querySelector('my-pedal');
-    //var click = Number(window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size').slice(0,2));
-    
-    //var click = Number(document.getElementById('sel1').value);
-    var sel = document.getElementById('sel1');
-
-    var link = document.getElementById('fontSizeY');
-    link.onclick = function(){
-        
-        if(pp.shadowRoot){
-            var toto = Number(window.getComputedStyle(pedal.shadowRoot.getElementById('test')).getPropertyValue('font-size').slice(0,2));
-        }
-        if(toto > 0){
-            click = toto - 1;
-        }
-        
-
-        if(pp.shadowRoot){
-            pedal.shadowRoot.getElementById('test').style.fontSize = String(click).concat("px");
-        }
-        //s.style.fontSize = click + 'px';
-        //document.getElementById('sel1').value = click;
-    };
-    
-}
-
-
-function changeLabelFont(n){
-    var s = document.getElementById('h3');
-    var pp=document.querySelector('my-pedal');
-    s.style.fontFamily = n.value;
-
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-family');
     }
-}
 
 
-function HEX2RGB (hex) {
+    function moveLabelXRight() {
+        var pp = document.querySelector('my-pedal');
+        //var t='10';
+        //var click=0;
+        //var link = document.getElementById('moveLabelXRight');
+        totalClicksX -= 10;
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.right = String(totalClicksX).concat("px");
+        }
+    }
+
+    var totalClicksY = 0;
+
+    function moveLabelYUp() {
+        var pp = document.querySelector('my-pedal');
+        //var t='10';
+        //var click=0;
+        //var link = document.getElementById('moveLabelXRight');
+        totalClicksY += 10;
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.bottom = String(totalClicksY).concat("px");
+        }
+    }
+
+    function moveLabelYDown() {
+        var pp = document.querySelector('my-pedal');
+        //var t='10';
+        //var click=0;
+        //var link = document.getElementById('moveLabelXRight');
+        totalClicksY -= 10;
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.bottom = String(totalClicksY).concat("px");
+        }
+    }
+
+
+    function changeSize(n) {
+        var s = document.getElementById('h3');
+        var pp = document.querySelector('my-pedal');
+        s.style.fontSize = n.value + 'px'
+
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.fontSize = window.getComputedStyle(document.getElementById(
+                'h3')).getPropertyValue('font-size');
+        }
+    }
+
+
+    function fontSizeX() {
+        var s = document.getElementById('h3');
+        var pp = document.querySelector('my-pedal');
+        //var click = Number(window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size').slice(0,2));
+
+        //var click = Number(document.getElementById('sel1').value);
+        var sel = document.getElementById('sel1');
+
+        var link = document.getElementById('fontSizeX');
+        link.onclick = function () {
+
+            if (pp.shadowRoot) {
+                var toto = Number(window.getComputedStyle(pedal.shadowRoot.getElementById('test')).getPropertyValue(
+                    'font-size').slice(0, 2));
+            }
+            click = toto + 1;
+
+            if (pp.shadowRoot) {
+                pedal.shadowRoot.getElementById('test').style.fontSize = String(click).concat("px");
+            }
+            //s.style.fontSize = click + 'px';
+            //document.getElementById('sel1').value = click;
+        };
+
+    }
+
+
+    function fontSizeY() {
+        var s = document.getElementById('h3');
+        var pp = document.querySelector('my-pedal');
+        //var click = Number(window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-size').slice(0,2));
+
+        //var click = Number(document.getElementById('sel1').value);
+        var sel = document.getElementById('sel1');
+
+        var link = document.getElementById('fontSizeY');
+        link.onclick = function () {
+
+            if (pp.shadowRoot) {
+                var toto = Number(window.getComputedStyle(pedal.shadowRoot.getElementById('test')).getPropertyValue(
+                    'font-size').slice(0, 2));
+            }
+            if (toto > 0) {
+                click = toto - 1;
+            }
+
+
+            if (pp.shadowRoot) {
+                pedal.shadowRoot.getElementById('test').style.fontSize = String(click).concat("px");
+            }
+            //s.style.fontSize = click + 'px';
+            //document.getElementById('sel1').value = click;
+        };
+
+    }
+
+
+    function changeLabelFont(n) {
+        var s = document.getElementById('h3');
+        var pp = document.querySelector('my-pedal');
+        s.style.fontFamily = n.value;
+
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.fontFamily = window.getComputedStyle(document.getElementById(
+                'h3')).getPropertyValue('font-family');
+        }
+    }
+
+
+    function HEX2RGB(hex) {
         "use strict";
         if (hex.charAt(0) === '#') {
             hex = hex.substr(1);
@@ -2087,252 +2185,253 @@ function HEX2RGB (hex) {
     }
 
 
-function changeShadowColor(){
-    var pp=document.querySelector('my-pedal');
-    var col = document.getElementById('jscolorshadowpick').value;
-    var ca = "#";
+    function changeShadowColor() {
+        var pp = document.querySelector('my-pedal');
+        var col = document.getElementById('jscolorshadowpick').value;
+        var ca = "#";
 
-    var color = ca.concat(col);
-    var finalcolor = HEX2RGB(color);
+        var color = ca.concat(col);
+        var finalcolor = HEX2RGB(color);
 
-    var r = finalcolor[0];
-    var g = finalcolor[1];
-    var b = finalcolor[2];
+        var r = finalcolor[0];
+        var g = finalcolor[1];
+        var b = finalcolor[2];
 
-    if(pp.shadowRoot){
-        //pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
-        pedal.shadowRoot.getElementById('pedal').style.boxShadow += ' rgb('+r+', '+g+', '+b+') ';
+        if (pp.shadowRoot) {
+            //pedal.shadowRoot.getElementById('pedal').style.boxShadow = 'none';
+            pedal.shadowRoot.getElementById('pedal').style.boxShadow += ' rgb(' + r + ', ' + g + ', ' + b + ') ';
+        }
     }
-}
 
-function changeColor(n){
-    var s = document.getElementById('h3');
-    var pp=document.querySelector('my-pedal');
-    var ca = "#";
+    function changeColor(n) {
+        var s = document.getElementById('h3');
+        var pp = document.querySelector('my-pedal');
+        var ca = "#";
 
-    s.style.color = ca.concat(n.value);
+        s.style.color = ca.concat(n.value);
 
-    if(pp.shadowRoot){
-        pedal.shadowRoot.getElementById('test').style.color = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('color');
+        if (pp.shadowRoot) {
+            pedal.shadowRoot.getElementById('test').style.color = window.getComputedStyle(document.getElementById('h3'))
+                .getPropertyValue('color');
+        }
     }
-}
 
 
-function pedalitemslist(){
-    var length = pedal.shadowRoot.getElementById('pedal').children.length;
-    //var i=2;
-    var sel = document.getElementById('selectliste');
-    
-    
+    function pedalitemslist() {
+        var length = pedal.shadowRoot.getElementById('pedal').children.length;
+        //var i=2;
+        var sel = document.getElementById('selectliste');
 
-    for(var i = 2; i<=length-1; i++){
-        var opt = document.createElement('option');
-        opt.text = pedal.shadowRoot.getElementById('pedal').children[i].id;
-        sel.appendChild(opt);
+
+
+        for (var i = 2; i <= length - 1; i++) {
+            var opt = document.createElement('option');
+            opt.text = pedal.shadowRoot.getElementById('pedal').children[i].id;
+            sel.appendChild(opt);
+        }
+
     }
-    
-}
 
 
-$('a[href$="#myModal"]').on( "click", function() {
-   $('#myModal').modal('show');
-});
+    $('a[href$="#myModal"]').on("click", function () {
+        $('#myModal').modal('show');
+    });
 
 
-$('a[href$="#myModal2"]').on( "click", function() {
-   $('#myModal2').modal('show');
-});
+    $('a[href$="#myModal2"]').on("click", function () {
+        $('#myModal2').modal('show');
+    });
 
-$('a[href$="#myModal3"]').on( "click", function() {
-   $('#myModal3').modal('show');
-});
+    $('a[href$="#myModal3"]').on("click", function () {
+        $('#myModal3').modal('show');
+    });
 
-$('a[href$="#myModal4"]').on( "click", function() {
-   $('#myModal4').modal('show');
-});
+    $('a[href$="#myModal4"]').on("click", function () {
+        $('#myModal4').modal('show');
+    });
 
-$('a[href$="#myModal5"]').on( "click", function() {
-   $('#myModal5').modal('show');
-});
+    $('a[href$="#myModal5"]').on("click", function () {
+        $('#myModal5').modal('show');
+    });
 
 
 
-/* $(".dropdown-toggle").on("mouseenter", function () {
-    // make sure it is not shown:
-    if (!$(this).parent().hasClass("show")) {
-        $(this).click();
-    }
-});
+    /* $(".dropdown-toggle").on("mouseenter", function () {
+        // make sure it is not shown:
+        if (!$(this).parent().hasClass("show")) {
+            $(this).click();
+        }
+    });
 
 
-$(".btn-group, .dropdown").on("mouseleave", function () {
-    // make sure it is shown:
-    if ($(this).hasClass("show")){
-        $(this).children('.dropdown-toggle').first().click();
-    }
-}); */
+    $(".btn-group, .dropdown").on("mouseleave", function () {
+        // make sure it is shown:
+        if ($(this).hasClass("show")){
+            $(this).children('.dropdown-toggle').first().click();
+        }
+    }); */
 
 
-$(function(){
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
+    $(function () {
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
 
-            $(window).resize(function(e) {
-              if($(window).width()<=768){
+        $(window).resize(function (e) {
+            if ($(window).width() <= 768) {
                 $("#wrapper").removeClass("toggled");
-              }else{
+            } else {
                 $("#wrapper").addClass("toggled");
-              }
-            });
-          });
+            }
+        });
+    });
 
 
-function toggleFullScreen() {
-  if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen(); 
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
     }
-  }
-}
 
 
-function closeMenu(){
-   var mn = document.getElementById("closeLink");
-    mn.onclick =  function() {
-        toggleMenu("hide");
-    };
-}
+    function closeMenu() {
+        var mn = document.getElementById("closeLink");
+        mn.onclick = function () {
+            toggleMenu("hide");
+        };
+    }
 
-function RGBAToHexA(r,g,b,a) {
-  r = r.toString(16);
-  g = g.toString(16);
-  b = b.toString(16);
-  a = Math.round(a * 255).toString(16);
+    function RGBAToHexA(r, g, b, a) {
+        r = r.toString(16);
+        g = g.toString(16);
+        b = b.toString(16);
+        a = Math.round(a * 255).toString(16);
 
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
-  if (a.length == 1)
-    a = "0" + a;
+        if (r.length == 1)
+            r = "0" + r;
+        if (g.length == 1)
+            g = "0" + g;
+        if (b.length == 1)
+            b = "0" + b;
+        if (a.length == 1)
+            a = "0" + a;
 
-  return "#" + r + g + b + a;
-}
+        return "#" + r + g + b + a;
+    }
 
-var nbliensclick = 0;
+    var nbliensclick = 0;
 
-function BoldStyle(){
-    var click = 0;
-    var link = document.getElementById('boldid');
-    var pp=document.querySelector('my-pedal');
-    document.getElementById("h3").style.fontWeight = "900";
-    link.onclick = function(){
-        click++;
-        nbliensclick++;
-        if((click % 2) == 0){
-            document.getElementById("h3").style.fontWeight = "";
-        }
-        else{
-            document.getElementById("h3").style.fontWeight = "900";
-        }
+    function BoldStyle() {
+        var click = 0;
+        var link = document.getElementById('boldid');
+        var pp = document.querySelector('my-pedal');
+        document.getElementById("h3").style.fontWeight = "900";
+        link.onclick = function () {
+            click++;
+            nbliensclick++;
+            if ((click % 2) == 0) {
+                document.getElementById("h3").style.fontWeight = "";
+            } else {
+                document.getElementById("h3").style.fontWeight = "900";
+            }
 
-        if(pp.shadowRoot){
-            pedal.shadowRoot.getElementById('test').style.fontWeight = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('font-weight');
-        }
-    };
-}
+            if (pp.shadowRoot) {
+                pedal.shadowRoot.getElementById('test').style.fontWeight = window.getComputedStyle(document
+                    .getElementById('h3')).getPropertyValue('font-weight');
+            }
+        };
+    }
 
-function UnderlineStyle(){
-    var click = 0;
-    var link = document.getElementById('underlineid');
-    var pp=document.querySelector('my-pedal');
-    document.getElementById("h3").style.textDecoration = "underline";
-    link.onclick = function(){
-        click++;
-        nbliensclick++;
-        if((click%2) == 0){
-            document.getElementById("h3").style.textDecoration = "";
-        }
-        else{
-            document.getElementById("h3").style.textDecoration = "underline";
-        }
-        if(pp.shadowRoot){
-            pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('text-decoration');
-        }
-    };
-}
+    function UnderlineStyle() {
+        var click = 0;
+        var link = document.getElementById('underlineid');
+        var pp = document.querySelector('my-pedal');
+        document.getElementById("h3").style.textDecoration = "underline";
+        link.onclick = function () {
+            click++;
+            nbliensclick++;
+            if ((click % 2) == 0) {
+                document.getElementById("h3").style.textDecoration = "";
+            } else {
+                document.getElementById("h3").style.textDecoration = "underline";
+            }
+            if (pp.shadowRoot) {
+                pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document
+                    .getElementById('h3')).getPropertyValue('text-decoration');
+            }
+        };
+    }
 
-function OverlineStyle(){
-    var click = 0;
-    var link = document.getElementById('overlineid');
-    var pp=document.querySelector('my-pedal');
-    document.getElementById("h3").style.textDecoration = "overline";
-    link.onclick = function(){
-        click++;
-        nbliensclick++;
-        if((click%2) == 0){
-            document.getElementById("h3").style.textDecoration = "";
-        }
-        else{
-            document.getElementById("h3").style.textDecoration = "overline";
-        }
-        if(pp.shadowRoot){
-            pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('text-decoration');
-        }
-    };
-}
+    function OverlineStyle() {
+        var click = 0;
+        var link = document.getElementById('overlineid');
+        var pp = document.querySelector('my-pedal');
+        document.getElementById("h3").style.textDecoration = "overline";
+        link.onclick = function () {
+            click++;
+            nbliensclick++;
+            if ((click % 2) == 0) {
+                document.getElementById("h3").style.textDecoration = "";
+            } else {
+                document.getElementById("h3").style.textDecoration = "overline";
+            }
+            if (pp.shadowRoot) {
+                pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document
+                    .getElementById('h3')).getPropertyValue('text-decoration');
+            }
+        };
+    }
 
 
-function GripLinesStyle(){
-    var click = 0;
-    var link = document.getElementById('griplinesid');
-    var pp=document.querySelector('my-pedal');
-    document.getElementById("h3").style.textDecoration = "underline overline";
-    link.onclick = function(){
-        click++;
-        nbliensclick++;
-        if((click%2) == 0){
-            document.getElementById("h3").style.textDecoration = "";
-        }
-        else{
-            document.getElementById("h3").style.textDecoration = "underline overline";
-        }
-        if(pp.shadowRoot){
-            pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document.getElementById('h3')).getPropertyValue('text-decoration');
-        }
-    };
-}
+    function GripLinesStyle() {
+        var click = 0;
+        var link = document.getElementById('griplinesid');
+        var pp = document.querySelector('my-pedal');
+        document.getElementById("h3").style.textDecoration = "underline overline";
+        link.onclick = function () {
+            click++;
+            nbliensclick++;
+            if ((click % 2) == 0) {
+                document.getElementById("h3").style.textDecoration = "";
+            } else {
+                document.getElementById("h3").style.textDecoration = "underline overline";
+            }
+            if (pp.shadowRoot) {
+                pedal.shadowRoot.getElementById('test').style.textDecoration = window.getComputedStyle(document
+                    .getElementById('h3')).getPropertyValue('text-decoration');
+            }
+        };
+    }
 
 
 
-function LoadTemplateConfig(){
-    var frame = document.getElementById('template1');
-    var linkframe = document.getElementById('selectTemplate');
-
-    
-    
-}
+    function LoadTemplateConfig() {
+        var frame = document.getElementById('template1');
+        var linkframe = document.getElementById('selectTemplate');
 
 
-function LabelColorStyle(){
-    
-}
+
+    }
 
 
-function refreshModal(){
-    
-    document.getElementById('width').value = '';
-    document.getElementById('color').value = '';
-    document.getElementById('height').value = '';
-    document.getElementById('radius').value = '';
-    document.getElementById('name').value = '';
-}
+    function LabelColorStyle() {
+
+    }
+
+
+    function refreshModal() {
+
+        document.getElementById('width').value = '';
+        document.getElementById('color').value = '';
+        document.getElementById('height').value = '';
+        document.getElementById('radius').value = '';
+        document.getElementById('name').value = '';
+    }
 
     var url = "http://localhost:8085";
     let serverUrl = 'http://localhost:3000';
@@ -2368,80 +2467,21 @@ function refreshModal(){
                       })
         }
     } */
+    var faustUI = {};
 
     function initialize() {
-        
+
         var urlParams = new URLSearchParams(window.location.search);
 
         console.log(urlParams.has('data')); // true
         console.log(urlParams.get('data'));
-        console.log("name present : " + urlParams.has('name')); // true
-        console.log("name = " + urlParams.get('name'));
+        //console.log("name present : " + urlParams.has('name')); // true
+        //console.log("name = " + urlParams.get('name'));
         console.log("### FAUSTUI JSON = ");
-        console.log(urlParams.get('data'));
+        //console.log(urlParams.get('data'));
         console.log("###");
-        faustUI = JSON.parse(urlParams.get('data'));
-        let name = urlParams.get('name');
-        /* ####### Commenter la ligne de faustUI.WapName ci-dessous quand on n'utilise pas faust editor ######## */
-        //faustUI.WapName = name.substr(0, name.lastIndexOf("."));
-        //document.querySelector("#wapName").innerHTML = faustUI.WapName;
-        //Mettre en commentaire init() quand on utilise faust editor, bug à régler
-        //init();
-        console.log("Initialize")
-        console.log("faustUI = ", faustUI)
-        //setFaustUIFromUrl();
-        //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
+        //faustUI = JSON.parse(urlParams.get('data'));
 
-
-        //displaySavedPedalsIds();
-
-        /* bt_buildIt.addEventListener('click', () => {
-
-            checkMetadata(document.querySelector("#urlPlugin").value);
-        }); */
-
-        let faust = document.querySelector('#editor-faust'),
-            faustClone = faust.cloneNode(true);
-        faust.parentNode.replaceChild(faustClone, faust);
-
-        faust = document.querySelector('#editor-faust');
-        /*faust.addEventListener('create-pedal', (e) => {
-            newPedal();
-            let pedalConfig = {
-                name: "First",
-                color: "#7caeff",
-                width: e.detail.width,
-                height: e.detail.height,
-                radius: "10",
-                opacity: "1",
-                elements: e.detail.elements
-            };
-            //console.log(e.detail);
-            pedal.loadConfig(pedalConfig);
-        });*/
-        if (window.faustUI) {
-            console.log("### faustUI present ! ####")
-            console.log(window.faustUI);
-            newPedal(null, true);
-
-            let detail = faust.pedalConfigFromUI(window.faustUI);
-
-            let pedalConfig = {
-                name: window.faustUI.WapName,
-                color: "#7caeff",
-                width: detail.width,
-                height: detail.height,
-                radius: "10",
-                opacity: "1",
-                elements: detail.elements
-            };
-            console.log(detail);
-            console.log("PEDALCONFIG = ", pedalConfig);
-
-            pedal.loadConfig(pedalConfig);
-            currentWapName = pedalConfig.name;
-
-        }
     }
 
     function setFaustUIFromUrl() {
@@ -2473,7 +2513,7 @@ function refreshModal(){
         //pedalElem.className = "draggable";
         section.appendChild(pedalElem);
         pedal = pedalElem;
-        
+
 
         pedal.addEventListener('select-knob', function (e) {
             selectKnob(e.detail);
@@ -2481,13 +2521,13 @@ function refreshModal(){
         });
 
         if (!withoutInit) {
-            initialize();
+            defaultPedalConfig.name = currentWapName;
         }
 
-        var r = Number(document.getElementById("color").value.slice(5,8));
-        var g = Number(document.getElementById("color").value.slice(9,12));
-        var b = Number(document.getElementById("color").value.slice(13,16));
-        var a = Number(document.getElementById("color").value.slice(17,20));
+        var r = Number(document.getElementById("color").value.slice(5, 8));
+        var g = Number(document.getElementById("color").value.slice(9, 12));
+        var b = Number(document.getElementById("color").value.slice(13, 16));
+        var a = Number(document.getElementById("color").value.slice(17, 20));
         //RGBAToHexA(r,g,b,a)
 
         let defaultPedalConfig = {
@@ -2499,13 +2539,19 @@ function refreshModal(){
             name: document.getElementById('name').value
         };
 
-        
+
         let modifiedPedalConfig = {
-            color : RGBAToHexA(r,g,b,a),
-            width : window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width').slice(0,window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width').lastIndexOf("p")),
-            height : window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('height').slice(0,window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width').lastIndexOf("p")),
-            radius : window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('radius').slice(0,window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width').lastIndexOf("p")),
-            elements:[],
+            color: RGBAToHexA(r, g, b, a),
+            width: window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('width')
+                .slice(0, window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue(
+                    'width').lastIndexOf("p")),
+            height: window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('height')
+                .slice(0, window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue(
+                    'width').lastIndexOf("p")),
+            radius: window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue('radius')
+                .slice(0, window.getComputedStyle(pedal.shadowRoot.getElementById('pedal')).getPropertyValue(
+                    'width').lastIndexOf("p")),
+            elements: [],
             name: document.getElementById('name').value
         }
 
@@ -2555,17 +2601,18 @@ function refreshModal(){
         }
     }
 
-    function removeDOMElement(){
+    function removeDOMElement() {
         var p = document.querySelector('my-pedal');
 
-        if(p.shadowRoot){
+        if (p.shadowRoot) {
             //pedal.shadowRoot.getElementById('pedal').removeChild(pedal.shadowRoot.getElementById('pedal').children[2]);
 
-            for(var i=2; i<pedal.shadowRoot.getElementById('pedal').childElementCount; i++){
-                pedal.shadowRoot.getElementById('pedal').removeChild(pedal.shadowRoot.getElementById('pedal').children[i]);
+            for (var i = 2; i < pedal.shadowRoot.getElementById('pedal').childElementCount; i++) {
+                pedal.shadowRoot.getElementById('pedal').removeChild(pedal.shadowRoot.getElementById('pedal').children[
+                    i]);
             }
         }
-        
+
     }
 
 
@@ -2898,7 +2945,7 @@ function refreshModal(){
         let url = serverUrl + '/generate';
 
         let data = new FormData();
-        data.append("generated", functionalPedalGenerator.generateFunctionalPedalCode());
+        data.append("generated", functionalPedalGenerator.generateFunctionalPedalCode(currentWapName));
         data.append("wapName", currentWapName);
         data.append("wapCode", currentWapCode);
 
@@ -2929,13 +2976,86 @@ function refreshModal(){
 
     }
 
+    function initializeFromMessagePostedByFaustIDE(data) {
+        console.log("initializeFromMessagePostedByFaustIDE")
+
+        let name = data.name;
+        console.log("initializeFromMessagePostedByFaustIDE: name = " + name)
+        currentWapCode = data.code;
+
+        /* ####### Commenter la ligne de faustUI.WapName ci-dessous quand on n'utilise pas faust editor ########
+         */
+        faustUI.WapName = name.substr(0, name.lastIndexOf("."));
+        console.log("initializeFromMessagePostedByFaustIDE: faustUI.WapName = " + faustUI.WapName)
+
+        currentWapName = faustUI.WapName;
+        console.log("initializeFromMessagePostedByFaustIDE: currentWapName = " + currentWapName)
+        console.log("code = " + data.code);
+        //Mettre en commentaire init() quand on utilise faust editor, bug à régler
+        //init();
+        faustUI = data.ui;
+        console.log("FaustUI = " + JSON.stringify(data.ui))
+        //console.log("faustUI = ", faustUI)
+        //setFaustUIFromUrl();
+        //console.log("faustUi après setFaustUIFromUrl= ", faustUI)
+
+
+        //displaySavedPedalsIds();
+
+        /* bt_buildIt.addEventListener('click', () => {
+
+        checkMetadata(document.querySelector("#urlPlugin").value);
+        }); */
+
+        let faust = document.querySelector('#editor-faust'),
+            faustClone = faust.cloneNode(true);
+        faust.parentNode.replaceChild(faustClone, faust);
+
+        faust = document.querySelector('#editor-faust');
+        /*faust.addEventListener('create-pedal', (e) => {
+        newPedal();
+        let pedalConfig = {
+        name: "First",
+        color: "#7caeff",
+        width: e.detail.width,
+        height: e.detail.height,
+        radius: "10",
+        opacity: "1",
+        elements: e.detail.elements
+        };
+        //console.log(e.detail);
+        pedal.loadConfig(pedalConfig);
+        });*/
+        if (window.faustUI) {
+            console.log("### faustUI present ! ####")
+            console.log(window.faustUI);
+            newPedal(null, true);
+
+            let detail = faust.pedalConfigFromUI(window.faustUI);
+
+            let pedalConfig = {
+                name: window.faustUI.WapName,
+                color: "#7caeff",
+                width: detail.width,
+                height: detail.height,
+                radius: "10",
+                opacity: "1",
+                elements: detail.elements
+            };
+            console.log(detail);
+            console.log("PEDALCONFIG = ", pedalConfig);
+
+            //currentWapName = pedalConfig.name;
+            pedal.loadConfig(pedalConfig);
+
+        }
+    }
     // 2 - SENT BY FAUST IDE WHEN THE BINARY.ZIP FILE IS READY TO BE SENT TO BACK-END WAP SERVER
     window.addEventListener("message", (e) => {
         const data = e.data;
 
         if (data.type === "build") {
-            console.log("CODE for name = " + currentWapName + "= " + data.code);
-            currentWapCode = data.code;
+            initializeFromMessagePostedByFaustIDE(data);
         }
 
         if (data.type === "exported") {

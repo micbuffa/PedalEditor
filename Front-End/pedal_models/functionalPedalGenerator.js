@@ -9,9 +9,11 @@ class FunctionalPedalGenerator {
   /**
    * Generates the code of the functional pedal which will be used on the pedal board.
    */
-  generateFunctionalPedalCode() {
+  generateFunctionalPedalCode(pedalName) {
     // this.editablePedal.name = 'untitled';
     // this.editablePedal.setAttribute('name', 'untitled');
+    // MB
+    this.editablePedal.name = pedalName;
 
     // The complete content of the functional pedal file.
     let functionalPedalCode = `
@@ -448,9 +450,7 @@ class FunctionalPedalGenerator {
     }
     return ret;
   }
-  /**
-   * Currently, works only for a single switch !!
-   */
+  
   setWebAudioControlsIds() {
     for (let knob of this.editablePedal.shadowRoot.childNodes[7].querySelectorAll(
       ".knob"

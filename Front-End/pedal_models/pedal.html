@@ -1,8 +1,7 @@
 <!-- Defines element markup -->
 <template>
-	<style>
-
-/* figure {
+  <style>
+    /* figure {
     border: thin #c0c0c0 solid;
     display: flex;
     flex-flow: column;
@@ -26,22 +25,22 @@ figcaption {
     top: 50px;
     right: 40px;
 } */
+  </style>
+  <!-- Include Editor style. -->
+  <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet'
+    type='text/css' />
 
-	</style>
-    <!-- Include Editor style. -->
-  <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
-  
-	<div class="pedal draggable" id="pedal">
-		<div id="resize"></div>
+  <div class="pedal draggable" id="pedal">
+    <div id="resize"></div>
 
-    
-    
+
+
     <div class="container" id="txtcontainer">
-      <img id="background-image" >
-      
-          <h4></h4>
-          <p class="pedalLabel" id="test"></p>
-      
+      <img id="background-image">
+
+      <h4></h4>
+      <p class="pedalLabel" id="test"></p>
+
     </div>
     <!-- <p id="labeldiv" style="border-style: dashed; top: 68px;">tototo</p> -->
     <!-- <figure>
@@ -49,7 +48,7 @@ figcaption {
         <figcaption>tototo</figcaption>
     </figure> -->
     <!-- <div class="text-block" id="froala-editor"></div> -->
-	</div>
+  </div>
 
 
 </template>
@@ -57,190 +56,194 @@ figcaption {
 <script src="pedalElementManager.js"></script>
 <script src="pedal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js'>
+</script>
 
 <script>
- /* new FroalaEditor('div#froala-editor', {
+  /* new FroalaEditor('div#froala-editor', {
    editInPopup: true
  }) */
 
 
-/* window.onmousemove = moveElem;
-window.onmouseup = stopMovingElem;
-window.onload = init;
+  /* window.onmousemove = moveElem;
+  window.onmouseup = stopMovingElem;
+  window.onload = init;
 
-var selected = null; // element to be moved
-var oldMouseX, oldMouseY; // Stores x & y coordinates of the mouse pointer
-var elemX, elemY;
-var divs = [];
-function init() {
-    divs = pedal.shadowRoot.querySelectorAll('.draggable');
-    divs.forEach(e => {
-      e.onmousedown = function (evt) {
-        dragInit(evt);
-        //console.log('true');
-    };
-                      })
-}
-  
-// Will be called when user starts dragging an element
-function dragInit(evt) {
-    // Store the elem
-    selected = evt.target;
-    elemX = selected.offsetLeft;
-    elemY = selected.offsetTop;
-  
-    oldMouseX = evt.clientX;
-    oldMouseY = evt.clientY;
-}
-
-// Will be called when user dragging an element
-function moveElem(e) {
-    // new mouse ps
-    var newMouseX = e.clientX;
-    var newMouseY = e.clientY;
-  
-    if(oldMouseX !== undefined) {
-        // how many pixels did we move the mouse?
-        var dx = newMouseX - oldMouseX;
-        var dy = newMouseY - oldMouseY;
-     }
+  var selected = null; // element to be moved
+  var oldMouseX, oldMouseY; // Stores x & y coordinates of the mouse pointer
+  var elemX, elemY;
+  var divs = [];
+  function init() {
+      divs = pedal.shadowRoot.querySelectorAll('.draggable');
+      divs.forEach(e => {
+        e.onmousedown = function (evt) {
+          dragInit(evt);
+          //console.log('true');
+      };
+                        })
+  }
     
-    if (selected !== null) {  
-        // move the selected element dx, dy pixels hozontally/vertically
-        changePosOfSelectedElement(dx, dy);
-    }
-  
-    // update the old position of the mouse
-    oldMouseX = newMouseX;
-    oldMouseY = newMouseY;
-}
+  // Will be called when user starts dragging an element
+  function dragInit(evt) {
+      // Store the elem
+      selected = evt.target;
+      elemX = selected.offsetLeft;
+      elemY = selected.offsetTop;
+    
+      oldMouseX = evt.clientX;
+      oldMouseY = evt.clientY;
+  }
 
-function changePosOfSelectedElement(dx, dy) {
-  // update the old position of the selected element
-  elemX += dx;
-  elemY += dy;
-  
-  // change the pos on screen of the element
-  // by modifying its CSS left/top properties
-  selected.style.left = elemX + 'px';
-  selected.style.top = elemY + 'px';
-}
+  // Will be called when user dragging an element
+  function moveElem(e) {
+      // new mouse ps
+      var newMouseX = e.clientX;
+      var newMouseY = e.clientY;
+    
+      if(oldMouseX !== undefined) {
+          // how many pixels did we move the mouse?
+          var dx = newMouseX - oldMouseX;
+          var dy = newMouseY - oldMouseY;
+       }
+      
+      if (selected !== null) {  
+          // move the selected element dx, dy pixels hozontally/vertically
+          changePosOfSelectedElement(dx, dy);
+      }
+    
+      // update the old position of the mouse
+      oldMouseX = newMouseX;
+      oldMouseY = newMouseY;
+  }
 
-// Destroy the object when we are done
-function stopMovingElem() {
-    selected = null;
-} */
+  function changePosOfSelectedElement(dx, dy) {
+    // update the old position of the selected element
+    elemX += dx;
+    elemY += dy;
+    
+    // change the pos on screen of the element
+    // by modifying its CSS left/top properties
+    selected.style.left = elemX + 'px';
+    selected.style.top = elemY + 'px';
+  }
+
+  // Destroy the object when we are done
+  function stopMovingElem() {
+      selected = null;
+  } */
 
 
 
-// target elements with the "draggable" class
-interact('.draggable')
-  .draggable({
-    ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
-    onmove: window.dragMoveListener,
-  })
-  .resizable({
-    // resize from all edges and corners
-    ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
-    edges: { left: true, right: false, bottom: false, top: true },
+  // target elements with the "draggable" class
+  interact('.draggable')
+    .draggable({
+      ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
+      onmove: window.dragMoveListener,
+    })
+    .resizable({
+      // resize from all edges and corners
+      ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
+      edges: {
+        left: true,
+        right: true,
+        bottom: true,
+        top: true
+      },
 
-    modifiers: [
-      // keep the edges inside the parent
-      interact.modifiers.restrictEdges({
-        outer: 'parent',
-        endOnly: true
-      }),
+      modifiers: [
 
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 100, height: 50 }
-      })
-    ],
+        // minimum size
+        interact.modifiers.restrictSize({
+          min: {
+            width: 100,
+            height: 50
+          }
+        })
+      ],
 
-    inertia: true
-  })
-  .on('resizemove', function (event) {
-    var target = event.target
-    var x = (parseFloat(target.getAttribute('data-x')) || 0)
-    var y = (parseFloat(target.getAttribute('data-y')) || 0)
+      inertia: true
+    })
+    .on('resizemove', function (event) {
+      var target = event.target
+      var x = (parseFloat(target.getAttribute('data-x')) || 0)
+      var y = (parseFloat(target.getAttribute('data-y')) || 0)
 
-    // update the element's style
-    target.style.width = event.rect.width + 'px'
-    target.style.height = event.rect.height + 'px'
-    pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
-    pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
+      // update the element's style
+      target.style.width = event.rect.width + 'px'
+      target.style.height = event.rect.height + 'px'
+      pedal.shadowRoot.getElementById('background-image').style.width = target.style.width
+      pedal.shadowRoot.getElementById('background-image').style.height = target.style.height
 
-    // translate when resizing from top or left edges
-    x += event.deltaRect.left
-    y += event.deltaRect.top
+      // translate when resizing from top or left edges
+      x += event.deltaRect.left
+      y += event.deltaRect.top
 
-    target.style.webkitTransform = target.style.transform =
+      target.style.webkitTransform = target.style.transform =
         'translate(' + x + 'px,' + y + 'px)'
 
-    target.setAttribute('data-x', x)
-    target.setAttribute('data-y', y)
-    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
-  })
+      target.setAttribute('data-x', x)
+      target.setAttribute('data-y', y)
+      //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+    })
 
-function dragMoveListener (event) {
-  var target = event.target
-  // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+  function dragMoveListener(event) {
+    console.log("drag move listener pedal.js");
+    var target = event.target
+    // keep the dragged position in the data-x/data-y attributes
+    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
-  // translate the element
-  target.style.webkitTransform =
-    target.style.transform =
+    // translate the element
+    target.style.webkitTransform =
+      target.style.transform =
       'translate(' + x + 'px, ' + y + 'px)'
 
-  // update the posiion attributes
-  target.setAttribute('data-x', x)
-  target.setAttribute('data-y', y)
-}
+    // update the posiion attributes
+    target.setAttribute('data-x', x)
+    target.setAttribute('data-y', y)
+  }
 
 
 
-/* const position = { x: 0, y: 0 }
-var top,left,right,bottom;
-interact('.draggable').draggable({
-  ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
-  listeners: {
-    start (event) {
-      console.log(event.type, event.target);
-    },
-    move (event) {
-      var rect = event.target.getBoundingClientRect();
-      position.x += event.dx
-      position.y += event.dy
-      
+  /* const position = { x: 0, y: 0 }
+  var top,left,right,bottom;
+  interact('.draggable').draggable({
+    ignoreFrom: 'webaudio-knob, webaudio-switch, webaudio-slider',
+    listeners: {
+      start (event) {
+        console.log(event.type, event.target);
+      },
+      move (event) {
+        var rect = event.target.getBoundingClientRect();
+        position.x += event.dx
+        position.y += event.dy
+        
 
-      event.target.style.transform =
-        `translate(${position.x}px, ${position.y}px)`;
+        event.target.style.transform =
+          `translate(${position.x}px, ${position.y}px)`;
 
-      
-      
-    },
-  }}); */
- /*  pedal.shadowRoot.getElementById('pedal').style.transform = "none"; */
+        
+        
+      },
+    }}); */
+  /*  pedal.shadowRoot.getElementById('pedal').style.transform = "none"; */
 
- /*  if(timer = 0){
-    pedal.shadowRoot.getElementById('pedal').removeAttribute('style','transform');
-  }; */
-  
-/* 
-$('#pedal').resizable({
-    helper: "ui-resizable-helper",
-    grid: [10, 10]
-});
+  /*  if(timer = 0){
+     pedal.shadowRoot.getElementById('pedal').removeAttribute('style','transform');
+   }; */
 
-$('#background-img').resizable({
-    helper: "ui-resizable-helper",
-    grid: [10, 10]
-});
-$('#textB').resizable({
-    helper: "ui-resizable-helper",
-    grid: [10, 10]
-}); */
+  /* 
+  $('#pedal').resizable({
+      helper: "ui-resizable-helper",
+      grid: [10, 10]
+  });
 
+  $('#background-img').resizable({
+      helper: "ui-resizable-helper",
+      grid: [10, 10]
+  });
+  $('#textB').resizable({
+      helper: "ui-resizable-helper",
+      grid: [10, 10]
+  }); */
 </script>
