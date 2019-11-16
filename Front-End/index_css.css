@@ -1442,3 +1442,179 @@ body {
     margin-right: 0;
   }
 }
+
+
+
+
+
+h2,
+h3 {
+    margin: 0 0 6px;
+    font-size: 150%;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#box {
+    width: 40%;
+    float: left;
+    padding: 16px;
+    margin: 25px
+}
+
+.boxshadow {
+    border-radius: 8px border: 1px solid #fff;
+    background: #ddd;
+}
+
+a.button {
+    cursor: pointer
+}
+
+.row0,
+.row1 {
+    padding: 3px
+}
+
+.row1 {
+    background: #222
+}
+
+.minus,
+.plus {
+    background: silver;
+    background-image: linear-gradient(to bottom, #eee 0%, #ddd 50%, #bbb 50%, #ddd 100%);
+    color: #111;
+    font-weight: bold;
+    padding: 2px 3px;
+    display: inline-block;
+    width: 15px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 2px
+}
+
+#settings {
+    float: right;
+    width: 170px;
+    background: #EEE;
+    padding: 5px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 5px #888;
+    font-size: 85%;
+    line-height: 1.1em
+}
+
+#settings input {
+    margin: 0;
+    line-height: 1.1em
+}
+
+#settings h4 {
+    font-weight: bold;
+    margin-bottom: 3px
+}
+
+.codebox {
+    padding: 15px;
+    background: #ffc;
+    border: 1px dotted #ccc;
+}
+
+#snippet {
+    font-style: italic
+}
+
+.swatch {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background: #e2001a;
+    margin-right: 20px;
+    cursor: pointer
+}
+
+hr.dotted {
+    clear: both;
+    display: block;
+    height: 0;
+    border-bottom: 1px dotted #ccc
+}
+
+.params {
+    width: 40%;
+    margin: 25px 10px 0;
+    border-radius: 12px;
+    border: 8px solid #04d3ff;
+    background-color: #111;
+    padding: 8px;
+    float: right;
+    color: #999;
+    font-size: 80%;
+}
+
+
+
+.center {
+    text-align: center;
+}
+
+.menu {
+    width: 200px;
+    z-index: 1;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: none;
+    transition: 0.2s display ease-in;
+
+    .menu-options {
+        list-style: none;
+        padding: 10px 0;
+        z-index: 1;
+
+        .menu-option {
+            font-weight: 500;
+            z-index: 1;
+            font-size: 14px;
+            padding: 10px 40px 10px 20px;
+            border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+}
+
+
+
+button {
+    background: grey;
+    border: none;
+
+    .next {
+        color: green;
+    }
+
+    &[disabled="false"]:hover {
+        .next {
+            color: red;
+            animation: move 0.5s;
+            animation-iteration-count: 2;
+        }
+    }
+}
+
+@keyframes move {
+    from {
+        transform: translate(0%);
+    }
+
+    50% {
+        transform: translate(-40%);
+    }
+
+    to {
+        transform: transform(0%);
+    }
+}
